@@ -281,3 +281,51 @@ Verified by rendering the PDF: 8 recipients, 8 pages, correct salutation, addres
 block and DRE line.
 
 **Phase 3 is now complete.**
+
+---
+
+## 2026-09-04 — the letter, and the CRMLS refresh
+
+### Master letter written
+
+`magic_buyer_letter_master.md` — the voice for everything. Lauren asked me to
+write it since the Letter screen never appeared in the screenshots I received;
+the recipient list, criteria, describe and email screens did, so the letter is
+built from the email's structure (which derives from it) rather than transcribed.
+**It is mine, not his, and it is hers to edit.**
+
+The generator reads everything above the `---` as the voice: with an API key it
+is handed to Claude as the style to match; without one its `{placeholders}` are
+filled directly. Re-read on every call, so edits take effect with no restart.
+Below the `---` are notes on why each paragraph is there, so editing is informed
+rather than guesswork.
+
+One test had to change with it. `letter has the ask` asserted the literal phrase
+"thought about selling" — my template's wording, now living in a file Lauren
+owns. Replaced with assertions on behaviour that survive her edits: the letter
+asks a question, leaves no unfilled placeholders, gives an easy no, and carries
+no pressure language.
+
+### CRMLS export is a recurring job, not an import
+
+Lauren: *"that will need to be done on a regular basis."* Correct — listings
+change weekly. Rebuilt accordingly:
+
+- **Re-read on change.** The file's mtime is checked per request; a replaced
+  export is picked up mid-session. Overwrite the file, that is the whole workflow.
+- **Status-aware, by legal meaning.** Active, Pending, Backup, Hold, Coming Soon
+  and **Withdrawn** are excluded — all still under an agency agreement. Expired,
+  Cancelled and Sold are left in: the agency ended, and expireds are ordinary
+  listing leads. An unrecognized status is excluded (the safe direction) and
+  *reported*, so an unfamiliar CRMLS code gets added rather than silently guessed.
+- **Column-name tolerant.** Address / Street Address / Property Address /
+  UnparsedAddress, Zip / Postal Code / ZipCode, Status / Standard Status /
+  MLS Status — a CRMLS export can be dropped in unedited.
+- **Freshness on screen.** Age of the export in the corner, flagged after 7 days,
+  with a tooltip breaking down excluded vs skipped. Polled every 30s.
+
+Verified live: 78 Torrance parcels → 69 after dropping an export in mid-session,
+9 excluded (Active + Pending + Withdrawn), the 3 Expired correctly kept, no
+restart.
+
+**138 assertions, 6 suites.**

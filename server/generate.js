@@ -10,7 +10,30 @@
 // Both paths go through the same fair housing screen before anything is saved.
 
 import Anthropic from '@anthropic-ai/sdk';
+import { readFileSync, existsSync, statSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
 import { screen, isBlocking, report } from './fairhousing.js';
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
+const MASTER_FILE = join(ROOT, 'magic_buyer_letter_master.md');
+
+/**
+ * The voice. Everything above the first `---` in magic_buyer_letter_master.md is
+ * the letter Lauren approved; the notes below it are for her, not the model.
+ * Re-read on each call so edits take effect without a restart.
+ */
+export function loadMaster() {
+  if (!existsSync(MASTER_FILE)) return null;
+  const text = readFileSync(MASTER_FILE, 'utf8');
+  const body = text.split(/^---$/m)[0];
+  // Drop the leading "# Master letter" heading and its explanatory preamble.
+  const start = body.search(/^Dear /m);
+  return {
+    letter: (start >= 0 ? body.slice(start) : body).trim(),
+    updated: statSync(MASTER_FILE).mtime,
+  };
+}
 
 const MODEL = 'claude-opus-5';
 
@@ -29,6 +52,14 @@ const range = (lo, hi) =>
   lo && hi ? `${money(lo)} and ${money(hi)}` : hi ? `up to ${money(hi)}` : lo ? `${money(lo)} and up` : '';
 
 const place = (b) => [b.city, b.state].filter(Boolean).join(', ');
+
+/** Reads correctly after "Their budget is …". */
+const budgetPhrase = (b) => {
+  if (b.budget_min && b.budget_max) return `between ${money(b.budget_min)} and ${money(b.budget_max)}`;
+  if (b.budget_max) return `up to ${money(b.budget_max)}`;
+  if (b.budget_min) return `${money(b.budget_min)} and up`;
+  return 'flexible';
+};
 
 /**
  * The three bullets, in the order the source tool uses them:
@@ -75,6 +106,29 @@ function motivationLine(b) {
 }
 
 // ---------------------------------------------------------------- templates
+
+/** Fill {placeholders} in the master letter. Unknown ones are dropped cleanly. */
+export function fillMaster(master, b) {
+  const three = bullets(b);
+  const values = {
+    owner_name: 'Neighbor',            // the mail merge replaces this per recipient
+    city: place(b) || 'the neighborhood',
+    buyer_nickname: b.nickname || 'a client of mine',
+    readiness: three[0] || '',
+    condition_tolerance: three[1] || '',
+    motivation: three[2] || three[1] || '',
+    budget_range: budgetPhrase(b),
+    why_area: (b.why_area || '').trim(),
+    agent_cell: b.agent_cell || '[your cell]',
+    agent_name: b.agent_name || 'Lauren Cotner',
+    agent_brokerage: b.agent_brokerage || 'eXp Realty',
+    agent_dre: b.agent_dre || '01242185',
+  };
+  let out = master.replace(/\{(\w+)\}/g, (m, key) => (key in values ? values[key] : m));
+  // A dropped bullet must not leave a stray "  • " line behind.
+  out = out.replace(/^\s*[•-]\s*$/gm, '').replace(/\n{3,}/g, '\n\n');
+  return out.trim();
+}
 
 function letterTemplate(b) {
   const where = place(b) || 'the neighborhood';
@@ -224,8 +278,13 @@ export async function generateAll(buyer, { force = false } = {}) {
 
   let letter, email, text, call;
 
+  const master = loadMaster();
+
   if (useApi) {
     letter = await callClaude(
+      (master
+        ? `Here is the agent's own master letter. Match its voice, structure and length closely — this is how she writes.\n\n---\n${master.letter}\n---\n\n`
+        : '') +
       `Write a one-page letter from the agent to a homeowner whose house matches this buyer.\n\n${brief}\n\n` +
       `The homeowner has not listed their home. Make one small ask: a short conversation. Sign off with the agent's name, brokerage and DRE number.`,
       { maxTokens: 1600 },
@@ -246,7 +305,7 @@ export async function generateAll(buyer, { force = false } = {}) {
     const m = email.match(/^Subject:\s*(.+)\n+([\s\S]+)$/);
     email = m ? { subject: m[1].trim(), body: m[2].trim() } : { subject: `Buyer looking in ${place(buyer)} — know anyone?`, body: email };
   } else {
-    letter = letterTemplate(buyer);
+    letter = master ? fillMaster(master.letter, buyer) : letterTemplate(buyer);
     email = emailTemplate(buyer);
     text = textTemplate(buyer);
     call = callTemplate(buyer);

@@ -4,13 +4,14 @@
 import express from 'express';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
-import { existsSync } from 'node:fs';
+import { existsSync, statSync } from 'node:fs';
 
 import { parseBuyer, describe } from './parse-buyer.js';
 import { applyFilters, normalizeAddress, deriveOwnerType } from './filter.js';
 import { generateAll, hasApiKey } from './generate.js';
 import { screen, isBlocking } from './fairhousing.js';
 import { buildPdf, buildLabels, mailingAddress } from './mailmerge.js';
+import { loadOnMarket, ageInDays, STALE_AFTER_DAYS } from './onmarket.js';
 import { readCsv, writeCsv, listFiles, slug, listPath, toCsvString } from './csv.js';
 import { RECIPIENT_FIELDS, LIST_COLUMNS, BUYER_FIELDS, CHANNELS, STATUS_VALUES,
          recipientHeader, skipTraceExportHeader } from './schema.js';
@@ -26,16 +27,22 @@ const PARCEL_FILE = existsSync(join(DATA, 'parcels.csv'))
 const parcels = readCsv(PARCEL_FILE);
 const usingSampleData = PARCEL_FILE.endsWith('sample-parcels.csv');
 
-// On-market exclusions from a CRMLS export. Actives, pendings AND withdrawn —
-// a withdrawn listing is still under an agency agreement.
-let onMarket = new Set();
-function loadOnMarket() {
-  const file = join(DATA, 'on-market.csv');
-  if (!existsSync(file)) return new Set();
-  const rows = readCsv(file);
-  return new Set(rows.map((r) => normalizeAddress(r.address ?? r.Address, r.zip ?? r.Zip ?? r.postal_code)));
+// On-market exclusions from a CRMLS export. This file gets replaced regularly —
+// listings change weekly — so it is re-read whenever it changes on disk rather
+// than at boot. No restart, no import step.
+const ON_MARKET_FILE = join(DATA, 'on-market.csv');
+let onMarketState = loadOnMarket(ON_MARKET_FILE);
+let onMarketMtime = existsSync(ON_MARKET_FILE) ? statSync(ON_MARKET_FILE).mtimeMs : 0;
+
+function currentOnMarket() {
+  const mtime = existsSync(ON_MARKET_FILE) ? statSync(ON_MARKET_FILE).mtimeMs : 0;
+  if (mtime !== onMarketMtime) {
+    onMarketMtime = mtime;
+    onMarketState = loadOnMarket(ON_MARKET_FILE);
+    console.log(`  on-market list refreshed: ${onMarketState.excluded} addresses excluded`);
+  }
+  return onMarketState;
 }
-onMarket = loadOnMarket();
 
 const app = express();
 app.use(express.json({ limit: '5mb' }));
@@ -44,10 +51,22 @@ app.use('/vendor/leaflet', express.static(join(ROOT, 'node_modules/leaflet/dist'
 app.use('/vendor/leaflet-draw', express.static(join(ROOT, 'node_modules/leaflet-draw/dist')));
 
 app.get('/api/meta', (_req, res) => {
+  const om = currentOnMarket();
+  const days = ageInDays(om.updated);
   res.json({
     parcels: parcels.length,
     usingSampleData,
-    onMarketExcluded: onMarket.size,
+    onMarket: {
+      present: om.updated != null,
+      excluded: om.excluded,
+      skipped: om.skipped,
+      rows: om.total,
+      updated: om.updated,
+      ageDays: days,
+      stale: days != null && days > STALE_AFTER_DAYS,
+      statusColumn: om.statusColumn,
+      unknownStatuses: om.unknownStatuses,
+    },
     generator: hasApiKey() ? 'claude' : 'template',
     fields: { recipient: RECIPIENT_FIELDS, buyer: BUYER_FIELDS, listColumns: LIST_COLUMNS },
     channels: CHANNELS,
@@ -67,7 +86,7 @@ app.post('/api/parse', (req, res) => {
 /** Criteria (+ optional drawn area) → matching parcels and a live count. */
 app.post('/api/search', (req, res) => {
   const criteria = req.body?.criteria ?? {};
-  const result = applyFilters(parcels, criteria, { excludeAddresses: onMarket });
+  const result = applyFilters(parcels, criteria, { excludeAddresses: currentOnMarket().addresses });
   const cap = Number(req.body?.limit) || 500;
   res.json({
     count: result.count,
@@ -196,6 +215,12 @@ app.post('/api/generate', async (req, res) => {
 app.listen(PORT, () => {
   console.log(`\n  Magic Buyer → http://localhost:${PORT}`);
   console.log(`  ${parcels.length} parcels loaded from ${usingSampleData ? 'SAMPLE data' : 'data/parcels.csv'}`);
-  if (onMarket.size) console.log(`  ${onMarket.size} on-market/withdrawn addresses excluded`);
+  const om = currentOnMarket();
+  if (om.updated) {
+    console.log(`  ${om.excluded} on-market/withdrawn addresses excluded (export ${ageInDays(om.updated)} days old)`);
+    if (om.unknownStatuses.length) console.log(`  unrecognized statuses, excluded to be safe: ${om.unknownStatuses.join(', ')}`);
+  } else {
+    console.log('  no CRMLS export at data/on-market.csv — nothing excluded');
+  }
   console.log(`  generator: ${hasApiKey() ? 'Claude API' : 'templates (no API key set)'}\n`);
 });

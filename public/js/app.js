@@ -453,14 +453,42 @@ function renderFlags(el, result, lead) {
     `<li><b>${esc(f.category)}</b> — “${esc(f.phrase)}”. ${esc(f.why)}</li>`).join('')}</ul>`;
 }
 
+function renderMeta(meta) {
+  const om = meta.onMarket;
+  let listing;
+  if (!om.present) {
+    listing = '<span class="sample">NO CRMLS EXPORT</span>';
+  } else if (om.stale) {
+    listing = `<span class="sample">CRMLS ${om.ageDays}d OLD</span>`;
+  } else {
+    listing = `${om.excluded.toLocaleString()} listed excluded · ${om.ageDays}d old`;
+  }
+  $('#meta').innerHTML =
+    `${meta.parcels.toLocaleString()} parcels` +
+    (meta.usingSampleData ? ' <span class="sample">SAMPLE DATA</span>' : '') +
+    `<br>${listing}`;
+  $('#meta').title = om.present
+    ? `CRMLS export: ${om.rows} rows, ${om.excluded} excluded as still listed, ` +
+      `${om.skipped} skipped as expired/cancelled/sold.` +
+      (om.unknownStatuses.length ? ` Unrecognized statuses excluded to be safe: ${om.unknownStatuses.join(', ')}` : '')
+    : 'Drop a CRMLS export at data/on-market.csv to exclude listed properties.';
+}
+
+/** The export gets replaced weekly — pick the new one up without a reload. */
+async function refreshMeta() {
+  try {
+    const meta = await api('/api/meta');
+    state.meta = meta;
+    renderMeta(meta);
+  } catch { /* server restarting; try again next tick */ }
+}
+setInterval(refreshMeta, 30_000);
+
 /* ── boot ───────────────────────────────────────────── */
 (async function boot() {
   initMap();
   state.meta = await api('/api/meta');
-  $('#meta').innerHTML =
-    `${state.meta.parcels.toLocaleString()} parcels` +
-    (state.meta.usingSampleData ? ' <span class="sample">SAMPLE DATA</span>' : '') +
-    `<br>generator: ${state.meta.generator}`;
+  renderMeta(state.meta);
   go(1);
   $('#sentence').focus();
 })();

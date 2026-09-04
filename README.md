@@ -40,9 +40,22 @@ Drop these in `data/` and restart:
 - **`parcels.csv`** — LA County parcels. Same columns as `sample-parcels.csv`;
   owner names come from your title rep. Sample data is used only when this
   file is absent.
-- **`on-market.csv`** — a CRMLS export with `address` and `zip`. Every address in
-  it is excluded from results. Include **withdrawn** listings, not just actives
-  and pendings — a withdrawn listing is still under an agency agreement.
+- **`on-market.csv`** — a CRMLS export. **Refresh this weekly**; the app re-reads
+  it whenever the file changes, so just overwrite it — no restart, no import step.
+  The header row can use whatever your export calls things (`Address` / `Street
+  Address` / `Property Address`, `Zip` / `Postal Code`, `Status` / `Standard
+  Status`).
+
+  Statuses are handled by what they mean legally, not by name:
+
+  | Status | Treated as |
+  |---|---|
+  | Active, Pending, Backup, Hold, Coming Soon, **Withdrawn** | still under an agency agreement — **excluded** |
+  | Expired, Cancelled, Sold | agency ended — left in the list |
+  | anything unrecognized | excluded, and reported so it can be added |
+
+  Withdrawn matters: the home is off the market but still listed with the agent.
+  The top-right corner shows how old the export is and warns after a week.
 
 ## Phases
 

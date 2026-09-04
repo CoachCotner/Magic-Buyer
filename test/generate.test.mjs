@@ -38,7 +38,11 @@ const all = [r.channels.letter, r.channels.email.subject, r.channels.email.body,
 ok('no charm pricing',      !/\$\s?\d[\d,]*(97|99|95)\b/.test(all));
 ok('no exclamation marks',  !all.includes('!'));
 ok('letter names the buyer', r.channels.letter.includes('The Kims'));
-ok('letter has the ask',     /thought about selling/i.test(r.channels.letter));
+// The master letter is Lauren's to edit, so assert on behaviour, not wording.
+ok('letter makes an ask',    r.channels.letter.includes('?'));
+ok('no leftover placeholders', !/\{\w+\}/.test(r.channels.letter));
+ok('letter gives an easy no', /\bfine answer\b|\bno obligation\b|\bunderstand\b/i.test(r.channels.letter));
+ok('no pressure language',   !/\bact now\b|\blast chance\b|\blimited time\b|\bdon'?t miss\b/i.test(r.channels.letter));
 ok('letter carries DRE',     r.channels.letter.includes('01242185'));
 ok('email asks for forward', /forward this email/i.test(r.channels.email.body));
 ok('email has 3 bullets',    (r.channels.email.body.match(/^- /gm) || []).length === 3);
