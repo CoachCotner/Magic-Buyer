@@ -91,3 +91,49 @@ called. Per the brief, none will be without explicit approval.
 1. Repo name and destination for this project.
 2. How to get the recording in (Drive is the easy answer).
 3. Whether to open the network policy, or hand over transcript + parcel CSV by hand.
+
+---
+
+## 2026-09-04 — Session 1, continued: connector findings
+
+Three decisions taken: Google Drive for file transfer, open the network policy,
+create a private `magic-buyer` repo. Results of acting on them:
+
+### Repo creation — FAILED, needs a manual step
+`POST /user/repos` → **403 "Resource not accessible by integration"**. The GitHub
+App connected to this session can read and write repos it has been granted, but
+is not permitted to create new ones under the `CoachCotner` account.
+
+Manual fix (about 30 seconds): create an empty **private** repo named
+`magic-buyer` at https://github.com/new — no README, no .gitignore, no license,
+so the first push is clean. Then this session can be pointed at it and push.
+
+### Source media — NOT in Drive
+Searched Drive for video, for recent images, and for anything titled or
+containing "magic", "buyer", "listing", or "ListingLeads".
+
+- The only video folder is **"Walkthrough"** — ~18 screen recordings from
+  Aug 30 – Sep 2, all auto-named `screen-YYYYMMDD-HHMMSS-*.mp4`, 19 MB to 228 MB.
+  Nothing identifies which, if any, is the ListingLeads webinar.
+- Recent images in Drive are all CommLocker / CommChecker branding assets — a
+  different project. **No recipient-list screenshot found.**
+
+Conclusion: the webinar recording and the screenshot are still on the Mac. They
+have not been uploaded anywhere this session can reach.
+
+### Note on how to move the video
+
+The Drive connector returns file content **inline as base64**. For a 200 MB+
+screen recording that is not workable — it would flood the session before a
+single frame was extracted. Two better routes:
+
+1. **Preferred:** once the network policy is opened, set the Drive file to
+   "anyone with the link", and the file can be pulled straight to disk with
+   `curl`. No size problem, nothing passes through the conversation.
+2. Trim the recording on the Mac to just the tool demo, or export audio only,
+   and upload the smaller file.
+
+The screenshot is small — pasting it directly into chat is the fastest path and
+needs no Drive step at all.
+
+### Still $0 spent.
