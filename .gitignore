@@ -10,6 +10,7 @@ phase1/audio.wav
 # Working lists may contain owner PII — keep out of git
 lists/*.csv
 data/*.csv
+!data/sample-parcels.csv
 !data/README.md
 
 # Secrets

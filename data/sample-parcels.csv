@@ -1,0 +1,601 @@
+apn,address,city,state,zip,owner,phone,email,value,type,dnc,status,mail_addr,mail_zip,beds,baths,sqft,lot_sqft,year_built,years_owned,property_type,lat,lon
+7938-033-029,6612 Highland Ave,Manhattan Beach,CA,90266,D. Placeholder,,,3832000,Owner,,new,6612 Highland Ave,90266,4,3,3120,16000,1986,15,Single Family,33.873221,-118.42393
+7943-005-003,3011 Palos Verdes Dr,Rolling Hills Estates,CA,90274,A. Demoworth,,,2849000,Owner,,new,3011 Palos Verdes Dr,90274,5,4,4300,16400,2014,27,Single Family,33.80242,-118.36805
+7849-015-023,1601 Prospect Ave,Rolling Hills Estates,CA,90274,E. Sample,,,1350000,Owner,,new,1601 Prospect Ave,90274,2,2,1540,2900,2017,14,Single Family,33.797404,-118.341253
+7373-039-065,936 Camino Real,Palos Verdes Estates,CA,90274,L. Testerman,,,2524000,Owner,,new,936 Camino Real,90274,4,4,2580,6700,1987,40,Single Family,33.768562,-118.408885
+7935-020-078,986 Via Campesina,Rancho Palos Verdes,CA,90275,A. Stubbs,,,1139000,Owner,,new,986 Via Campesina,90275,3,2,1700,3500,2006,4,Single Family,33.754241,-118.371405
+7765-001-017,3242 Silver Spur Rd,Manhattan Beach,CA,90266,C. Example,,,3772000,Absentee,,new,7832 Wilshire Blvd,89109,5,4,4360,11300,1992,18,Single Family,33.878377,-118.396643
+7842-038-044,4421 Crenshaw Blvd,Palos Verdes Estates,CA,90274,L. Testerman,,,2066000,Owner,,new,4421 Crenshaw Blvd,90274,3,3,1990,9000,1971,25,Single Family,33.779424,-118.381424
+7827-020-081,1902 Prospect Ave,Rolling Hills Estates,CA,90274,B. Stubbs,,,2496000,Owner,,new,1902 Prospect Ave,90274,5,4,3770,14500,2017,12,Single Family,33.77634,-118.370768
+7685-018-029,3413 Deep Valley Dr,Redondo Beach,CA,90277,F. Dummett,,,2292000,Owner,,new,3413 Deep Valley Dr,90277,5,4,4130,10300,2003,38,Single Family,33.845828,-118.385702
+7300-034-088,588 Granvia Altamira,Manhattan Beach,CA,90266,A. Fixture,,,3432000,Owner,,new,588 Granvia Altamira,90266,5,4,3810,16700,2017,5,Single Family,33.875936,-118.402775
+7690-004-077,1064 Hawthorne Blvd,Palos Verdes Estates,CA,90274,L. Placeholder,,,2423000,Owner,,new,1064 Hawthorne Blvd,90274,4,3,2870,6000,2006,31,Single Family,33.778722,-118.395529
+7312-015-056,940 Rolling Hills Rd,Rancho Palos Verdes,CA,90275,H. Fixture,,,1493000,Owner,,new,940 Rolling Hills Rd,90275,2,1,1420,5900,1977,34,Condo,33.729134,-118.386053
+7902-004-045,169 Camino Real,Rancho Palos Verdes,CA,90275,M. Sample,,,1767000,Owner,,new,169 Camino Real,90275,4,3,3080,11900,1985,23,Single Family,33.729027,-118.38215
+7428-025-005,4950 Vista Del Mar,Rolling Hills Estates,CA,90274,D. Example,,,2492000,Owner,,new,4950 Vista Del Mar,90274,5,4,4480,23500,2009,22,Single Family,33.771897,-118.365329
+7341-008-070,2589 Aviation Blvd,Manhattan Beach,CA,90266,A. Placeholder,,,3735000,Owner,,new,2589 Aviation Blvd,90266,5,5,4450,8800,2007,34,Condo,33.872953,-118.394801
+7145-014-070,4051 Rolling Hills Rd,Rolling Hills Estates,CA,90274,L. Placeholder,,,2094000,Owner,,new,4051 Rolling Hills Rd,90274,4,3,2480,5900,2003,10,Single Family,33.790708,-118.360254
+7845-032-021,2182 Granvia Altamira,Palos Verdes Estates,CA,90274,M. Example,,,2502000,Owner,,new,2182 Granvia Altamira,90274,5,4,3400,10200,1973,14,Single Family,33.782273,-118.41129
+7543-009-015,1243 Prospect Ave,Palos Verdes Estates,CA,90274,L. Dummett,,,2009000,Owner,,new,1243 Prospect Ave,90274,3,2,1970,7000,1949,16,Single Family,33.76414,-118.397234
+7301-028-038,5837 Granvia Altamira,Manhattan Beach,CA,90266,G. Dummett,,,3929000,Owner,,new,5837 Granvia Altamira,90266,5,4,4510,17600,1964,37,Condo,33.877718,-118.4008
+7406-039-025,4938 Highland Ave,Manhattan Beach,CA,90266,J. Demoworth,,,3280000,Absentee,,new,5130 Ventura Blvd,90210,5,4,3280,7200,1974,25,Single Family,33.886798,-118.396318
+7526-038-087,6714 Prospect Ave,Redondo Beach,CA,90277,H. Stubbs,,,2721000,Owner,,new,6714 Prospect Ave,90277,5,5,3890,14700,1955,18,Single Family,33.857673,-118.397596
+7622-026-033,280 Aviation Blvd,Rancho Palos Verdes,CA,90275,G. Demoworth,,,1615000,Owner,,new,280 Aviation Blvd,90275,3,3,2020,5700,2004,26,Single Family,33.755256,-118.391933
+7233-014-044,1338 Aviation Blvd,Rancho Palos Verdes,CA,90275,C. Fixture,,,2391000,Owner,,new,1338 Aviation Blvd,90275,5,4,3880,7700,1955,1,Single Family,33.742776,-118.394296
+7222-002-043,5869 Camino Real,Palos Verdes Estates,CA,90274,J. Sample,,,1923000,Owner,,new,5869 Camino Real,90274,3,2,1640,5800,1999,37,Single Family,33.790725,-118.38478
+7348-036-088,3426 Calle Mayor,Redondo Beach,CA,90277,K. Dummett,,,2671000,Owner,,new,3426 Calle Mayor,90277,5,4,4410,14200,2013,22,Single Family,33.838888,-118.383724
+7750-010-041,5709 Crenshaw Blvd,Rolling Hills Estates,CA,90274,D. Sample,,,2610000,Owner,,new,5709 Crenshaw Blvd,90274,5,5,4200,21900,2017,14,Single Family,33.77894,-118.366786
+7132-026-042,3290 Granvia Altamira,Torrance,CA,90503,G. Placeholder,,,1928000,Owner,,new,3290 Granvia Altamira,90503,5,4,3610,14600,1962,24,Single Family,33.819945,-118.355421
+7209-019-068,3313 Camino Real,Rolling Hills Estates,CA,90274,G. Sampleton,,,1995000,Absentee,,new,6713 Ventura Blvd,89109,4,4,2450,6300,1998,15,Single Family,33.79158,-118.34076
+7339-026-065,1952 Calle Mayor,Rolling Hills Estates,CA,90274,L. Fixture,,,2093000,Owner,,new,1952 Calle Mayor,90274,4,3,2440,13400,2012,9,Single Family,33.8016,-118.342837
+7287-012-062,6657 Aviation Blvd,Palos Verdes Estates,CA,90274,L. Placeholder,,,1689000,Owner,,new,6657 Aviation Blvd,90274,2,2,1270,5800,2017,38,Condo,33.771784,-118.386667
+7407-020-055,3078 Crenshaw Blvd,Rolling Hills Estates,CA,90274,F. Dummett,,,2017000,Owner,,new,3078 Crenshaw Blvd,90274,4,3,2330,10000,1997,24,Single Family,33.798282,-118.363603
+7577-035-064,2374 Rolling Hills Rd,Manhattan Beach,CA,90266,A. Fixture,,,2408000,Owner,,new,2374 Rolling Hills Rd,90266,2,1,1550,7500,1954,4,Single Family,33.869429,-118.420643
+7327-016-098,3338 Hawthorne Blvd,Manhattan Beach,CA,90266,J. Dummett,,,4524000,Owner,,new,3338 Hawthorne Blvd,90266,5,5,4540,21400,1993,4,Single Family,33.893673,-118.399669
+7548-001-041,5717 Deep Valley Dr,Torrance,CA,90503,L. Sampleton,,,1555000,Owner,,new,5717 Deep Valley Dr,90503,5,4,3860,14700,2008,26,Single Family,33.82663,-118.334951
+7687-006-040,3476 Crenshaw Blvd,Torrance,CA,90503,H. Example,,,824000,Owner,,new,3476 Crenshaw Blvd,90503,2,1,1460,7600,2004,17,Single Family,33.822854,-118.329723
+7371-011-069,6708 Aviation Blvd,Rancho Palos Verdes,CA,90275,D. Sampleton,,,1976000,Owner,,new,6708 Aviation Blvd,90275,4,3,2730,5900,2016,3,Single Family,33.732246,-118.374931
+7554-011-062,6150 Silver Spur Rd,Rancho Palos Verdes,CA,90275,E. Dummett,,,1783000,Owner,,new,6150 Silver Spur Rd,90275,3,3,1850,6700,1985,27,Single Family,33.744572,-118.39953
+7278-032-006,2113 Calle Mayor,Manhattan Beach,CA,90266,K. Example,,,3869000,Absentee,,new,5453 Wilshire Blvd,94105,5,4,3250,15600,2017,37,Single Family,33.882349,-118.416416
+7488-027-032,6253 Hawthorne Blvd,Rancho Palos Verdes,CA,90275,A. Stubbs,,,2123000,Owner,,new,6253 Hawthorne Blvd,90275,5,5,3340,8200,2010,41,Single Family,33.735774,-118.37016
+7840-022-042,488 Esplanade,Palos Verdes Estates,CA,90274,J. Dummett,,,3405000,Absentee,,new,1311 Ventura Blvd,91403,5,4,4110,16100,1970,0,Single Family,33.761155,-118.390192
+7699-038-010,706 Rolling Hills Rd,Rancho Palos Verdes,CA,90275,F. Sampleton,,,1518000,Owner,,new,706 Rolling Hills Rd,90275,3,3,1710,5600,1958,2,Single Family,33.730685,-118.381145
+7347-008-057,4689 Granvia Altamira,Rolling Hills Estates,CA,90274,L. Dummett,,,2108000,Absentee,,new,2656 Main St,91403,4,3,2820,10900,2015,36,Condo,33.784763,-118.343731
+7667-020-055,4123 Hawthorne Blvd,Palos Verdes Estates,CA,90274,A. Example,,,3306000,Owner,,new,4123 Hawthorne Blvd,90274,5,4,4010,11300,1979,38,Single Family,33.768864,-118.404873
+7219-023-041,4552 Rolling Hills Rd,Torrance,CA,90503,L. Mockton,,,1982000,Absentee,,new,2044 Main St,91403,5,4,4090,20900,1992,34,Single Family,33.848532,-118.331867
+7418-028-023,2439 Esplanade,Palos Verdes Estates,CA,90274,D. Mockton,,,2838000,Absentee,,new,5403 Ventura Blvd,91403,5,4,4410,14200,2002,6,Single Family,33.769956,-118.377694
+7990-035-081,2164 Anza Ave,Redondo Beach,CA,90277,C. Mockton,,,1589000,Absentee,,new,4256 Ventura Blvd,89109,4,4,2380,12800,1996,30,Condo,33.831632,-118.371859
+7751-008-034,4355 Camino Real,Palos Verdes Estates,CA,90274,J. Stubbs,,,2851000,Owner,,new,4355 Camino Real,90274,5,4,3580,14500,2010,12,Single Family,33.776124,-118.379226
+7918-036-025,1011 Highland Ave,Manhattan Beach,CA,90266,K. Sampleton,,,4137000,Owner,,new,1011 Highland Ave,90266,5,4,3840,7100,1959,19,Single Family,33.887592,-118.407146
+7862-005-063,467 Camino Real,Rolling Hills Estates,CA,90274,M. Sampleton,,,1512000,Owner,,new,467 Camino Real,90274,2,1,1520,7100,1979,22,Single Family,33.782039,-118.361327
+7584-038-087,3751 Rolling Hills Rd,Rolling Hills Estates,CA,90274,E. Placeholder,,,2079000,Owner,,new,3751 Rolling Hills Rd,90274,4,3,2730,5300,1956,37,Single Family,33.77456,-118.346804
+7532-009-003,1553 Highland Ave,Rancho Palos Verdes,CA,90275,M. Sampleton,,,2555000,Owner,,new,1553 Highland Ave,90275,5,5,3800,17900,1994,24,Single Family,33.759387,-118.374714
+7542-002-054,113 Anza Ave,Manhattan Beach,CA,90266,C. Testerman,,,4120000,Absentee,,new,7202 Wilshire Blvd,89109,5,4,3820,7800,2011,37,Single Family,33.880772,-118.423008
+7328-024-059,3746 Hawthorne Blvd,Rolling Hills Estates,CA,90274,F. Example,,,2505000,Owner,,new,3746 Hawthorne Blvd,90274,5,5,3770,10000,1963,21,Single Family,33.790959,-118.343489
+7349-003-087,6239 Palos Verdes Dr,Palos Verdes Estates,CA,90274,A. Example,,,2464000,Absentee,,new,6142 Wilshire Blvd,94105,5,4,3360,15600,1986,21,Single Family,33.785578,-118.379135
+7408-033-018,1006 Via Campesina,Palos Verdes Estates,CA,90274,G. Sampleton,,,2638000,Owner,,new,1006 Via Campesina,90274,4,3,2880,12200,1949,35,Single Family,33.787502,-118.379532
+7110-003-009,5000 Via Campesina,Torrance,CA,90503,G. Demoworth,,,704000,Absentee,,new,6659 Main St,91403,2,1,1320,5600,1956,19,Single Family,33.820307,-118.332109
+7526-008-042,2092 Esplanade,Rancho Palos Verdes,CA,90275,H. Dummett,,,1603000,Absentee,,new,3692 Main St,91403,3,3,2280,8500,2004,3,Single Family,33.731718,-118.38937
+7285-023-038,2049 Camino Real,Rolling Hills Estates,CA,90274,H. Testerman,,,1712000,Owner,,new,2049 Camino Real,90274,2,1,1370,5700,2011,41,Single Family,33.777001,-118.369015
+7960-033-064,1091 Rolling Hills Rd,Palos Verdes Estates,CA,90274,C. Mockton,,,3059000,Absentee,,new,4110 Main St,94105,4,4,2850,4800,2014,13,Single Family,33.789665,-118.39055
+7926-024-040,5178 Highland Ave,Rolling Hills Estates,CA,90274,A. Testerman,,,2478000,Absentee,,new,1688 Wilshire Blvd,90210,5,5,4540,16700,1969,32,Single Family,33.78194,-118.348286
+7864-001-005,6002 Crenshaw Blvd,Rancho Palos Verdes,CA,90275,L. Mockton,,,2037000,Absentee,,new,3843 Wilshire Blvd,89109,5,4,3580,16600,1961,21,Condo,33.761054,-118.383749
+7351-037-015,648 Aviation Blvd,Manhattan Beach,CA,90266,G. Mockton,,,3543000,Owner,,new,648 Aviation Blvd,90266,5,4,3870,16900,2003,11,Condo,33.89885,-118.417289
+7140-030-021,2739 Highland Ave,Rolling Hills Estates,CA,90274,M. Stubbs,,,2338000,Absentee,,new,5677 Wilshire Blvd,89109,4,3,2560,13500,1989,17,Single Family,33.789073,-118.35206
+7571-027-061,1379 Highland Ave,Torrance,CA,90503,F. Sampleton,,,1032000,Owner,,new,1379 Highland Ave,90503,4,3,2540,10600,1983,8,Single Family,33.84105,-118.334346
+7521-002-060,2571 Deep Valley Dr,Rolling Hills Estates,CA,90274,A. Fixture,,,2270000,Absentee,,new,8230 Main St,91403,4,3,2670,6800,1992,2,Single Family,33.800455,-118.351188
+7415-009-093,616 Esplanade,Torrance,CA,90503,G. Placeholder,,,1541000,Owner,,new,616 Esplanade,90503,4,3,3070,9400,1993,23,Single Family,33.837812,-118.338152
+7198-015-089,1832 Silver Spur Rd,Rancho Palos Verdes,CA,90275,G. Placeholder,,,2172000,Owner,,new,1832 Silver Spur Rd,90275,4,3,3070,4900,1991,24,Condo,33.738456,-118.403937
+7472-008-084,4034 Camino Real,Manhattan Beach,CA,90266,F. Mockton,,,3140000,Owner,,new,4034 Camino Real,90266,5,4,3500,14700,2012,22,Single Family,33.870587,-118.425597
+7175-015-007,119 Prospect Ave,Rancho Palos Verdes,CA,90275,B. Fixture,,,2702000,Owner,,new,119 Prospect Ave,90275,5,5,4200,22500,2009,18,Single Family,33.736769,-118.380937
+7300-015-061,1601 Crenshaw Blvd,Palos Verdes Estates,CA,90274,M. Placeholder,,,2995000,Owner,,new,1601 Crenshaw Blvd,90274,4,3,3160,17000,1968,3,Condo,33.79304,-118.39581
+7493-029-029,1270 Palos Verdes Dr,Rancho Palos Verdes,CA,90275,J. Dummett,,,2715000,Owner,,new,1270 Palos Verdes Dr,90275,5,4,3880,7000,1986,32,Single Family,33.743159,-118.375871
+7372-019-040,3974 Granvia Altamira,Manhattan Beach,CA,90266,M. Sampleton,,,3312000,Owner,,new,3974 Granvia Altamira,90266,4,4,3190,10200,1976,27,Single Family,33.87301,-118.41296
+7707-013-010,6195 Rolling Hills Rd,Palos Verdes Estates,CA,90274,D. Stubbs,,,3693000,Owner,,new,6195 Rolling Hills Rd,90274,5,4,4320,10800,1953,38,Single Family,33.779682,-118.406256
+7770-022-009,6525 Vista Del Mar,Rancho Palos Verdes,CA,90275,A. Sample,,,2309000,Owner,,new,6525 Vista Del Mar,90275,5,4,4450,8500,2006,22,Single Family,33.741646,-118.377367
+7949-028-074,1733 Calle Mayor,Palos Verdes Estates,CA,90274,D. Example,,,3421000,Absentee,,new,503 Ventura Blvd,94105,5,5,3620,9900,1991,26,Condo,33.767186,-118.401921
+7820-013-062,618 Esplanade,Rolling Hills Estates,CA,90274,A. Fixture,,,2251000,Owner,,new,618 Esplanade,90274,4,3,2880,7300,1955,22,Condo,33.76997,-118.352623
+7949-008-041,4483 Deep Valley Dr,Manhattan Beach,CA,90266,G. Sampleton,,,3503000,Owner,,new,4483 Deep Valley Dr,90266,3,2,2160,6000,1991,10,Single Family,33.889112,-118.401729
+7268-022-089,5679 Hawthorne Blvd,Rolling Hills Estates,CA,90274,K. Dummett,,,2073000,Owner,,new,5679 Hawthorne Blvd,90274,3,2,1980,6200,1950,28,Single Family,33.776421,-118.373721
+7294-035-077,4987 Deep Valley Dr,Palos Verdes Estates,CA,90274,A. Sampleton,,,1582000,Absentee,,new,1401 Wilshire Blvd,94105,2,1,1330,2200,1959,0,Single Family,33.773461,-118.409323
+7495-017-056,3649 Calle Mayor,Manhattan Beach,CA,90266,A. Testerman,,,3276000,Owner,,new,3649 Calle Mayor,90266,2,1,1330,4600,1961,36,Single Family,33.871117,-118.421377
+7321-033-030,5728 Vista Del Mar,Rolling Hills Estates,CA,90274,K. Testerman,,,2090000,Absentee,,new,380 Main St,89109,4,4,2940,10900,1982,35,Condo,33.799724,-118.359708
+7970-029-096,1917 Vista Del Mar,Rancho Palos Verdes,CA,90275,J. Sampleton,,,1194000,Owner,,new,1917 Vista Del Mar,90275,3,2,1760,5100,2008,41,Single Family,33.760642,-118.400717
+7473-004-063,2305 Aviation Blvd,Torrance,CA,90503,E. Fixture,,,974000,Owner,,new,2305 Aviation Blvd,90503,3,2,1780,5600,1979,4,Single Family,33.832777,-118.348384
+7172-008-093,904 Deep Valley Dr,Torrance,CA,90503,C. Demoworth,,,2294000,Owner,,new,904 Deep Valley Dr,90503,5,5,4660,23600,1958,41,Single Family,33.81998,-118.328936
+7720-034-036,1224 Rolling Hills Rd,Palos Verdes Estates,CA,90274,F. Sample,,,2006000,Owner,,new,1224 Rolling Hills Rd,90274,3,2,1600,7100,1997,8,Single Family,33.788881,-118.410043
+7434-019-069,4862 Camino Real,Redondo Beach,CA,90277,A. Testerman,,,2170000,Owner,,new,4862 Camino Real,90277,5,4,3580,15500,1976,34,Single Family,33.853556,-118.382038
+7769-033-043,2108 Rolling Hills Rd,Torrance,CA,90503,C. Placeholder,,,1612000,Owner,,new,2108 Rolling Hills Rd,90503,4,3,3020,15500,1972,32,Single Family,33.853614,-118.338184
+7422-030-048,6433 Camino Real,Redondo Beach,CA,90277,D. Sample,,,1349000,Owner,,new,6433 Camino Real,90277,2,1,1280,3600,2006,2,Single Family,33.847155,-118.396856
+7162-027-064,2297 Anza Ave,Rancho Palos Verdes,CA,90275,H. Example,,,2305000,Owner,,new,2297 Anza Ave,90275,5,4,3790,18300,2005,21,Condo,33.762311,-118.375822
+7610-016-029,3807 Highland Ave,Redondo Beach,CA,90277,L. Example,,,2212000,Owner,,new,3807 Highland Ave,90277,5,4,3760,19200,1977,26,Single Family,33.859853,-118.380751
+7645-019-025,1021 Camino Real,Rolling Hills Estates,CA,90274,E. Stubbs,,,1472000,Owner,,new,1021 Camino Real,90274,2,2,1220,3200,1960,29,Single Family,33.788964,-118.363453
+7332-009-017,4327 Calle Mayor,Redondo Beach,CA,90277,K. Placeholder,,,1609000,Absentee,,new,5103 Main St,91403,4,3,2570,13700,1948,27,Single Family,33.845284,-118.382343
+7889-013-011,1496 Anza Ave,Rancho Palos Verdes,CA,90275,A. Stubbs,,,2149000,Owner,,new,1496 Anza Ave,90275,5,4,4140,11600,1955,16,Condo,33.75786,-118.393692
+7152-006-083,786 Crenshaw Blvd,Redondo Beach,CA,90277,K. Demoworth,,,1247000,Absentee,,new,3361 Wilshire Blvd,89109,3,2,1780,5500,1978,31,Single Family,33.855332,-118.402334
+7337-022-038,370 Aviation Blvd,Manhattan Beach,CA,90266,L. Demoworth,,,2562000,Owner,,new,370 Aviation Blvd,90266,4,4,2330,9100,2002,31,Single Family,33.883092,-118.397551
+7256-028-064,4765 Via Campesina,Manhattan Beach,CA,90266,L. Sampleton,,,2396000,Owner,,new,4765 Via Campesina,90266,2,2,1470,2400,1958,11,Single Family,33.90231,-118.413718
+7994-025-046,3053 Hawthorne Blvd,Redondo Beach,CA,90277,D. Demoworth,,,1927000,Owner,,new,3053 Hawthorne Blvd,90277,5,4,3780,18200,1994,12,Single Family,33.854653,-118.382181
+7394-001-092,2432 Anza Ave,Redondo Beach,CA,90277,K. Sample,,,1401000,Owner,,new,2432 Anza Ave,90277,2,2,1580,6800,1956,31,Single Family,33.852887,-118.371643
+7807-033-012,1688 Hawthorne Blvd,Manhattan Beach,CA,90266,H. Sample,,,2811000,Absentee,,new,7784 Ventura Blvd,91403,4,4,2940,15800,1979,31,Single Family,33.871725,-118.402956
+7649-029-034,158 Hawthorne Blvd,Rolling Hills Estates,CA,90274,B. Sample,,,2075000,Owner,,new,158 Hawthorne Blvd,90274,4,3,2930,15100,1961,40,Single Family,33.788684,-118.375143
+7756-033-064,1136 Calle Mayor,Rolling Hills Estates,CA,90274,M. Testerman,,,2070000,Owner,,new,1136 Calle Mayor,90274,4,4,2470,10300,2010,16,Single Family,33.789761,-118.34137
+7441-020-070,3411 Calle Mayor,Torrance,CA,90503,D. Testerman,,,2526000,Owner,,new,3411 Calle Mayor,90503,5,5,4560,21800,2016,4,Single Family,33.852773,-118.336393
+7707-031-056,2439 Via Campesina,Palos Verdes Estates,CA,90274,B. Testerman,,,3272000,Owner,,new,2439 Via Campesina,90274,5,4,3790,10600,1967,11,Single Family,33.76218,-118.395295
+7138-037-048,4587 Granvia Altamira,Manhattan Beach,CA,90266,E. Testerman,,,3148000,Owner,,new,4587 Granvia Altamira,90266,3,2,1680,4400,1991,39,Single Family,33.886553,-118.408548
+7650-007-052,3370 Camino Real,Manhattan Beach,CA,90266,E. Sample,,,3576000,Absentee,,new,1519 Ventura Blvd,89109,5,5,4300,10900,2017,15,Single Family,33.876977,-118.402794
+7168-020-002,1606 Granvia Altamira,Manhattan Beach,CA,90266,H. Fixture,,,2927000,Owner,,new,1606 Granvia Altamira,90266,4,3,2860,9200,1987,3,Single Family,33.877242,-118.411807
+7944-024-071,1486 Calle Mayor,Rancho Palos Verdes,CA,90275,M. Sampleton,,,1550000,Owner,,new,1486 Calle Mayor,90275,3,2,2290,9300,2014,12,Single Family,33.759642,-118.374033
+7921-032-020,3898 Vista Del Mar,Palos Verdes Estates,CA,90274,J. Mockton,,,1936000,Owner,,new,3898 Vista Del Mar,90274,2,1,1520,7500,2008,22,Single Family,33.777556,-118.392442
+7605-007-024,3717 Prospect Ave,Torrance,CA,90503,B. Example,,,1203000,Owner,,new,3717 Prospect Ave,90503,4,3,3030,14700,2006,31,Single Family,33.840711,-118.329441
+7351-016-088,3021 Palos Verdes Dr,Manhattan Beach,CA,90266,L. Placeholder,,,3262000,Owner,,new,3021 Palos Verdes Dr,90266,4,3,2900,14600,1989,37,Condo,33.896013,-118.42828
+7838-021-005,5171 Rolling Hills Rd,Torrance,CA,90503,A. Dummett,,,1092000,Owner,,new,5171 Rolling Hills Rd,90503,4,3,2400,6700,1953,21,Single Family,33.837362,-118.357987
+7760-019-051,786 Palos Verdes Dr,Redondo Beach,CA,90277,E. Fixture,,,1699000,Owner,,new,786 Palos Verdes Dr,90277,4,3,2560,7400,1964,15,Single Family,33.85757,-118.403489
+7301-023-017,1898 Vista Del Mar,Torrance,CA,90503,F. Stubbs,,,1168000,Owner,,new,1898 Vista Del Mar,90503,4,4,2750,13900,1955,34,Single Family,33.828335,-118.349126
+7161-018-083,383 Hawthorne Blvd,Rancho Palos Verdes,CA,90275,J. Testerman,,,2030000,Owner,,new,383 Hawthorne Blvd,90275,4,3,2670,12200,2014,38,Single Family,33.746033,-118.397205
+7705-026-045,1855 Via Campesina,Manhattan Beach,CA,90266,E. Mockton,,,2353000,Absentee,,new,1544 Ventura Blvd,94105,2,1,1510,4700,2018,36,Condo,33.892127,-118.424558
+7694-017-068,6024 Esplanade,Redondo Beach,CA,90277,G. Demoworth,,,2139000,Owner,,new,6024 Esplanade,90277,5,4,4180,19500,1948,29,Single Family,33.857471,-118.385637
+7215-024-002,2574 Aviation Blvd,Redondo Beach,CA,90277,H. Sampleton,,,1486000,Owner,,new,2574 Aviation Blvd,90277,3,2,1990,6300,2009,23,Single Family,33.843207,-118.395613
+7202-010-060,888 Crenshaw Blvd,Palos Verdes Estates,CA,90274,B. Fixture,,,2440000,Owner,,new,888 Crenshaw Blvd,90274,4,4,3160,15200,1985,3,Single Family,33.76467,-118.406993
+7456-019-036,1127 Aviation Blvd,Rancho Palos Verdes,CA,90275,K. Stubbs,,,1659000,Absentee,,new,7526 Ventura Blvd,91403,3,2,2100,9400,1954,31,Single Family,33.730622,-118.37365
+7815-002-096,5870 Aviation Blvd,Rolling Hills Estates,CA,90274,K. Sampleton,,,2639000,Absentee,,new,7598 Wilshire Blvd,94105,5,5,4170,18900,2008,40,Single Family,33.789367,-118.339607
+7260-004-037,2746 Rolling Hills Rd,Torrance,CA,90503,K. Sample,,,1569000,Owner,,new,2746 Rolling Hills Rd,90503,5,4,3740,13400,1988,4,Single Family,33.8321,-118.340067
+7712-001-046,6374 Calle Mayor,Manhattan Beach,CA,90266,E. Mockton,,,3506000,Owner,,new,6374 Calle Mayor,90266,4,4,3110,14700,1951,7,Condo,33.887471,-118.406587
+7748-030-032,5044 Rolling Hills Rd,Palos Verdes Estates,CA,90274,J. Sample,,,2818000,Owner,,new,5044 Rolling Hills Rd,90274,5,5,3510,13000,2008,32,Condo,33.768262,-118.393683
+7584-020-096,122 Crenshaw Blvd,Torrance,CA,90503,H. Mockton,,,1915000,Absentee,,new,1387 Wilshire Blvd,90210,5,4,3500,9600,1997,32,Single Family,33.850553,-118.338159
+7477-033-018,6531 Deep Valley Dr,Palos Verdes Estates,CA,90274,A. Sample,,,1820000,Absentee,,new,6563 Main St,90210,2,2,1500,6500,1979,15,Single Family,33.768292,-118.399635
+7843-005-085,835 Aviation Blvd,Rancho Palos Verdes,CA,90275,J. Example,,,2785000,Owner,,new,835 Aviation Blvd,90275,5,5,4180,17600,2008,4,Condo,33.729193,-118.397608
+7954-033-054,857 Camino Real,Rolling Hills Estates,CA,90274,D. Sample,,,3125000,Owner,,new,857 Camino Real,90274,5,4,4620,23100,2014,12,Single Family,33.771709,-118.347987
+7582-035-044,5440 Rolling Hills Rd,Rolling Hills Estates,CA,90274,M. Example,,,3296000,Absentee,,new,1921 Main St,90210,5,5,4400,18200,1950,39,Single Family,33.789213,-118.368588
+7471-036-033,5990 Granvia Altamira,Manhattan Beach,CA,90266,C. Fixture,,,3784000,Owner,,new,5990 Granvia Altamira,90266,4,3,3140,8500,1985,12,Single Family,33.878769,-118.427804
+7801-031-078,4550 Calle Mayor,Rolling Hills Estates,CA,90274,K. Dummett,,,1810000,Owner,,new,4550 Calle Mayor,90274,2,1,1370,2400,1956,3,Condo,33.773629,-118.369583
+7138-024-016,4597 Rolling Hills Rd,Redondo Beach,CA,90277,M. Demoworth,,,1123000,Owner,,new,4597 Rolling Hills Rd,90277,2,2,1430,6900,1998,3,Single Family,33.865626,-118.372073
+7650-029-086,671 Palos Verdes Dr,Redondo Beach,CA,90277,K. Sampleton,,,1887000,Owner,,new,671 Palos Verdes Dr,90277,5,4,3490,7300,1975,5,Single Family,33.843715,-118.374513
+7547-010-035,5876 Prospect Ave,Redondo Beach,CA,90277,H. Sample,,,2188000,Owner,,new,5876 Prospect Ave,90277,5,4,3640,19000,2015,40,Single Family,33.85135,-118.387273
+7979-001-030,2512 Rolling Hills Rd,Palos Verdes Estates,CA,90274,C. Dummett,,,2633000,Owner,,new,2512 Rolling Hills Rd,90274,5,4,4070,7200,2004,40,Condo,33.765621,-118.407154
+7819-010-095,2305 Silver Spur Rd,Manhattan Beach,CA,90266,J. Example,,,2001000,Owner,,new,2305 Silver Spur Rd,90266,2,2,1510,3200,2016,30,Single Family,33.88217,-118.397471
+7178-022-049,3816 Palos Verdes Dr,Manhattan Beach,CA,90266,C. Dummett,,,3991000,Owner,,new,3816 Palos Verdes Dr,90266,4,3,3030,13900,1959,22,Single Family,33.895217,-118.401824
+7359-007-097,5823 Granvia Altamira,Rolling Hills Estates,CA,90274,F. Example,,,2376000,Absentee,,new,1248 Ventura Blvd,94105,4,3,3170,17400,1963,40,Single Family,33.787821,-118.352573
+7974-019-013,1759 Silver Spur Rd,Redondo Beach,CA,90277,G. Dummett,,,1229000,Owner,,new,1759 Silver Spur Rd,90277,2,1,1450,7500,1987,18,Single Family,33.839882,-118.388566
+7978-020-097,3370 Vista Del Mar,Torrance,CA,90503,D. Stubbs,,,1809000,Owner,,new,3370 Vista Del Mar,90503,5,5,4690,11800,2006,24,Single Family,33.817904,-118.326786
+7861-029-069,5694 Vista Del Mar,Rancho Palos Verdes,CA,90275,M. Fixture,,,2122000,Owner,,new,5694 Vista Del Mar,90275,3,3,2160,10000,1994,14,Single Family,33.744541,-118.373137
+7941-011-096,4008 Camino Real,Manhattan Beach,CA,90266,E. Dummett,,,3510000,Owner,,new,4008 Camino Real,90266,4,3,2420,5000,1981,36,Single Family,33.893374,-118.401465
+7358-038-055,1268 Prospect Ave,Palos Verdes Estates,CA,90274,E. Sampleton,,,2860000,Owner,,new,1268 Prospect Ave,90274,4,3,2590,12200,1979,6,Single Family,33.791066,-118.409369
+7180-027-093,2246 Silver Spur Rd,Rancho Palos Verdes,CA,90275,C. Mockton,,,1618000,Owner,,new,2246 Silver Spur Rd,90275,4,4,2320,4500,1954,15,Single Family,33.749179,-118.373769
+7247-037-064,3824 Anza Ave,Manhattan Beach,CA,90266,A. Dummett,,,2765000,Owner,,new,3824 Anza Ave,90266,2,1,1560,5500,2005,18,Single Family,33.884932,-118.415606
+7902-036-007,3496 Silver Spur Rd,Manhattan Beach,CA,90266,E. Example,,,3720000,Owner,,new,3496 Silver Spur Rd,90266,4,3,2800,8400,1954,27,Single Family,33.888925,-118.414995
+7584-010-042,3045 Vista Del Mar,Palos Verdes Estates,CA,90274,G. Sampleton,,,3813000,Owner,,new,3045 Vista Del Mar,90274,5,4,4110,22300,1980,11,Single Family,33.762053,-118.378759
+7172-028-094,5842 Prospect Ave,Redondo Beach,CA,90277,M. Dummett,,,1960000,Owner,,new,5842 Prospect Ave,90277,4,4,2970,6400,1961,36,Single Family,33.834929,-118.388757
+7596-003-013,4304 Crenshaw Blvd,Rancho Palos Verdes,CA,90275,J. Mockton,,,2694000,Absentee,,new,3356 Wilshire Blvd,91403,5,4,3330,11900,1966,38,Single Family,33.750586,-118.394587
+7916-015-064,208 Vista Del Mar,Rancho Palos Verdes,CA,90275,F. Fixture,,,2587000,Owner,,new,208 Vista Del Mar,90275,5,4,4380,14000,1995,15,Single Family,33.734991,-118.373725
+7805-028-002,4764 Anza Ave,Rancho Palos Verdes,CA,90275,F. Stubbs,,,3053000,Owner,,new,4764 Anza Ave,90275,5,5,4210,8200,1998,35,Single Family,33.743706,-118.375364
+7149-012-094,5389 Vista Del Mar,Rancho Palos Verdes,CA,90275,J. Sample,,,2675000,Owner,,new,5389 Vista Del Mar,90275,5,4,3640,15300,1996,3,Single Family,33.739621,-118.378032
+7525-028-047,2230 Granvia Altamira,Torrance,CA,90503,F. Testerman,,,953000,Owner,,new,2230 Granvia Altamira,90503,3,3,1850,7100,1972,7,Single Family,33.827655,-118.348491
+7347-006-090,5150 Aviation Blvd,Manhattan Beach,CA,90266,L. Placeholder,,,3804000,Absentee,,new,1078 Main St,89109,4,4,3140,16100,2016,14,Condo,33.866858,-118.420586
+7330-021-014,5879 Via Campesina,Torrance,CA,90503,J. Testerman,,,1784000,Owner,,new,5879 Via Campesina,90503,5,4,3360,11000,1949,33,Condo,33.845819,-118.331615
+7974-001-012,146 Calle Mayor,Manhattan Beach,CA,90266,L. Mockton,,,4375000,Owner,,new,146 Calle Mayor,90266,5,4,4580,21500,1973,22,Condo,33.872215,-118.394405
+7786-025-080,6734 Deep Valley Dr,Palos Verdes Estates,CA,90274,D. Stubbs,,,2688000,Absentee,,new,4874 Ventura Blvd,91403,5,4,3200,17200,1966,7,Single Family,33.795446,-118.403028
+7234-034-082,5977 Vista Del Mar,Redondo Beach,CA,90277,E. Example,,,2160000,Owner,,new,5977 Vista Del Mar,90277,5,4,3660,18000,1953,27,Single Family,33.860453,-118.388361
+7284-025-062,3831 Highland Ave,Torrance,CA,90503,J. Mockton,,,650000,Owner,,new,3831 Highland Ave,90503,2,1,1370,7200,1957,28,Single Family,33.835391,-118.33586
+7643-017-049,3707 Aviation Blvd,Redondo Beach,CA,90277,C. Demoworth,,,1998000,Owner,,new,3707 Aviation Blvd,90277,5,5,3250,7300,1958,37,Single Family,33.859908,-118.378119
+7118-017-027,1973 Palos Verdes Dr,Torrance,CA,90503,E. Stubbs,,,1703000,Owner,,new,1973 Palos Verdes Dr,90503,5,5,3490,5700,1955,17,Single Family,33.832886,-118.324664
+7103-025-070,488 Camino Real,Rancho Palos Verdes,CA,90275,E. Fixture,,,2581000,Absentee,,new,1545 Ventura Blvd,91403,5,5,4520,15600,1979,25,Single Family,33.753338,-118.402666
+7566-015-011,5900 Via Campesina,Redondo Beach,CA,90277,M. Placeholder,,,1538000,Owner,,new,5900 Via Campesina,90277,3,2,2160,8300,1989,22,Condo,33.837329,-118.392396
+7675-039-024,4434 Anza Ave,Palos Verdes Estates,CA,90274,E. Stubbs,,,2567000,Owner,,new,4434 Anza Ave,90274,4,3,2700,12000,2006,34,Condo,33.793519,-118.3984
+7717-021-075,6767 Prospect Ave,Rolling Hills Estates,CA,90274,B. Mockton,,,2319000,Absentee,,new,1707 Ventura Blvd,94105,4,3,3000,10800,1969,20,Single Family,33.79171,-118.363124
+7766-021-006,2440 Hawthorne Blvd,Palos Verdes Estates,CA,90274,C. Testerman,,,2147000,Owner,,new,2440 Hawthorne Blvd,90274,4,3,2670,11200,1989,37,Single Family,33.79575,-118.394748
+7371-008-034,3600 Prospect Ave,Manhattan Beach,CA,90266,K. Fixture,,,2915000,Owner,,new,3600 Prospect Ave,90266,4,4,2540,4200,1957,16,Single Family,33.869943,-118.419068
+7430-018-072,2870 Highland Ave,Redondo Beach,CA,90277,H. Stubbs,,,2022000,Owner,,new,2870 Highland Ave,90277,4,3,3060,13800,1987,0,Single Family,33.866447,-118.394036
+7775-037-051,5459 Granvia Altamira,Redondo Beach,CA,90277,A. Demoworth,,,2016000,Owner,,new,5459 Granvia Altamira,90277,4,3,3090,8900,2000,39,Single Family,33.838662,-118.398753
+7183-005-067,3993 Anza Ave,Rancho Palos Verdes,CA,90275,G. Sampleton,,,2429000,Owner,,new,3993 Anza Ave,90275,4,4,2890,9100,1969,38,Single Family,33.751445,-118.400845
+7326-030-091,4445 Anza Ave,Palos Verdes Estates,CA,90274,C. Placeholder,,,2790000,Owner,,new,4445 Anza Ave,90274,5,4,4490,20500,2003,39,Single Family,33.790826,-118.408092
+7208-021-039,5804 Via Campesina,Manhattan Beach,CA,90266,L. Demoworth,,,1931000,Absentee,,new,2748 Main St,90210,2,1,1380,3700,1979,27,Single Family,33.898471,-118.424455
+7114-031-016,2301 Via Campesina,Rancho Palos Verdes,CA,90275,B. Testerman,,,2301000,Owner,,new,2301 Via Campesina,90275,4,3,2870,14300,1960,2,Condo,33.733694,-118.396532
+7359-039-058,1207 Hawthorne Blvd,Redondo Beach,CA,90277,C. Mockton,,,1709000,Owner,,new,1207 Hawthorne Blvd,90277,3,2,2200,8100,1963,33,Condo,33.838245,-118.388048
+7215-023-013,2416 Palos Verdes Dr,Manhattan Beach,CA,90266,D. Example,,,4074000,Absentee,,new,4587 Main St,89109,5,4,3480,8600,1961,21,Single Family,33.890211,-118.396322
+7131-007-054,6456 Prospect Ave,Redondo Beach,CA,90277,G. Dummett,,,1696000,Owner,,new,6456 Prospect Ave,90277,3,2,2110,11400,1998,37,Single Family,33.835845,-118.37468
+7384-006-071,2600 Esplanade,Rancho Palos Verdes,CA,90275,E. Sample,,,2313000,Owner,,new,2600 Esplanade,90275,4,3,3020,12000,1985,6,Single Family,33.755314,-118.39966
+7948-019-036,4081 Palos Verdes Dr,Rancho Palos Verdes,CA,90275,G. Testerman,,,1562000,Absentee,,new,4375 Main St,90210,3,2,2180,4800,2008,32,Condo,33.746441,-118.401278
+7257-013-048,133 Crenshaw Blvd,Rancho Palos Verdes,CA,90275,H. Dummett,,,1338000,Owner,,new,133 Crenshaw Blvd,90275,3,3,1990,5900,1958,39,Single Family,33.743387,-118.403304
+7578-029-019,1210 Calle Mayor,Rolling Hills Estates,CA,90274,M. Mockton,,,3258000,Owner,,new,1210 Calle Mayor,90274,5,5,4180,17400,1950,17,Single Family,33.796753,-118.361614
+7325-002-061,3040 Anza Ave,Manhattan Beach,CA,90266,D. Placeholder,,,4082000,Owner,,new,3040 Anza Ave,90266,5,4,3820,17200,2004,11,Single Family,33.900744,-118.414807
+7725-008-008,6392 Esplanade,Palos Verdes Estates,CA,90274,L. Stubbs,,,2130000,Absentee,,new,1760 Wilshire Blvd,91403,3,3,1680,6700,1988,25,Single Family,33.770343,-118.392949
+7686-037-020,2541 Via Campesina,Rolling Hills Estates,CA,90274,C. Sampleton,,,3253000,Absentee,,new,4146 Wilshire Blvd,89109,5,5,4150,8600,2011,29,Condo,33.788156,-118.362854
+7917-036-052,572 Aviation Blvd,Rolling Hills Estates,CA,90274,M. Mockton,,,2483000,Owner,,new,572 Aviation Blvd,90274,5,5,4240,14600,1977,17,Condo,33.799457,-118.357587
+7524-022-058,4602 Rolling Hills Rd,Rancho Palos Verdes,CA,90275,B. Testerman,,,823000,Owner,,new,4602 Rolling Hills Rd,90275,2,1,1210,3300,1995,13,Condo,33.748687,-118.380775
+7760-024-095,2366 Deep Valley Dr,Palos Verdes Estates,CA,90274,D. Stubbs,,,2580000,Owner,,new,2366 Deep Valley Dr,90274,4,4,3070,15200,1953,14,Single Family,33.765894,-118.384264
+7367-023-004,2414 Highland Ave,Rancho Palos Verdes,CA,90275,K. Mockton,,,1661000,Owner,,new,2414 Highland Ave,90275,3,2,1820,4800,1996,12,Condo,33.730403,-118.403373
+7220-006-048,720 Anza Ave,Palos Verdes Estates,CA,90274,M. Demoworth,,,2908000,Owner,,new,720 Anza Ave,90274,4,3,2890,11100,2016,26,Condo,33.765404,-118.397206
+7684-021-065,6608 Vista Del Mar,Rancho Palos Verdes,CA,90275,K. Dummett,,,1590000,Owner,,new,6608 Vista Del Mar,90275,3,2,1890,9200,1963,8,Single Family,33.748762,-118.399433
+7622-007-056,4892 Camino Real,Rancho Palos Verdes,CA,90275,M. Stubbs,,,1544000,Absentee,,new,6236 Ventura Blvd,90210,4,3,2380,10300,1981,18,Condo,33.72992,-118.369913
+7822-039-048,2218 Palos Verdes Dr,Torrance,CA,90503,G. Placeholder,,,1403000,Owner,,new,2218 Palos Verdes Dr,90503,5,4,3300,16200,1951,41,Single Family,33.821614,-118.353865
+7569-012-043,2086 Deep Valley Dr,Redondo Beach,CA,90277,M. Sample,,,1006000,Absentee,,new,8873 Ventura Blvd,89109,2,2,1210,5800,1957,30,Single Family,33.853842,-118.371609
+7104-021-016,3123 Silver Spur Rd,Torrance,CA,90503,G. Mockton,,,1804000,Owner,,new,3123 Silver Spur Rd,90503,5,4,3790,11600,2005,25,Single Family,33.827786,-118.328386
+7461-009-006,4247 Hawthorne Blvd,Palos Verdes Estates,CA,90274,H. Placeholder,,,3172000,Owner,,new,4247 Hawthorne Blvd,90274,4,4,3020,15700,2002,36,Single Family,33.796372,-118.37948
+7321-027-036,441 Highland Ave,Redondo Beach,CA,90277,C. Placeholder,,,1752000,Absentee,,new,8308 Ventura Blvd,89109,5,4,3580,14800,1953,29,Single Family,33.86567,-118.376665
+7196-016-054,4532 Anza Ave,Rolling Hills Estates,CA,90274,M. Testerman,,,2029000,Owner,,new,4532 Anza Ave,90274,4,3,3050,15500,1970,38,Single Family,33.778805,-118.343881
+7716-003-006,1986 Granvia Altamira,Manhattan Beach,CA,90266,A. Fixture,,,2829000,Owner,,new,1986 Granvia Altamira,90266,4,3,2780,8900,1979,34,Single Family,33.88921,-118.397806
+7124-036-098,5512 Aviation Blvd,Rancho Palos Verdes,CA,90275,K. Sampleton,,,1313000,Owner,,new,5512 Aviation Blvd,90275,3,2,1620,5700,1956,8,Single Family,33.737948,-118.38535
+7176-013-062,5213 Hawthorne Blvd,Rolling Hills Estates,CA,90274,K. Sample,,,2157000,Absentee,,new,2841 Main St,89109,3,2,1930,10600,1983,34,Single Family,33.778661,-118.355874
+7604-002-030,6177 Rolling Hills Rd,Torrance,CA,90503,D. Stubbs,,,650000,Absentee,,new,2604 Main St,91403,2,1,1380,5300,1981,18,Condo,33.841663,-118.348673
+7908-026-047,4976 Aviation Blvd,Rolling Hills Estates,CA,90274,J. Testerman,,,2878000,Owner,,new,4976 Aviation Blvd,90274,5,4,3920,9800,1989,29,Single Family,33.793329,-118.374383
+7669-017-097,5916 Calle Mayor,Rancho Palos Verdes,CA,90275,A. Mockton,,,2059000,Absentee,,new,8358 Ventura Blvd,91403,5,4,3400,8800,1985,35,Single Family,33.761501,-118.374979
+7547-033-038,4553 Camino Real,Manhattan Beach,CA,90266,G. Example,,,2768000,Owner,,new,4553 Camino Real,90266,4,4,2480,11100,2011,24,Condo,33.868887,-118.408995
+7238-036-005,6483 Calle Mayor,Rancho Palos Verdes,CA,90275,B. Example,,,2421000,Absentee,,new,7261 Wilshire Blvd,94105,5,4,3380,7900,1980,31,Single Family,33.741314,-118.388684
+7290-032-010,1451 Hawthorne Blvd,Manhattan Beach,CA,90266,M. Example,,,3145000,Owner,,new,1451 Hawthorne Blvd,90266,2,1,1330,4000,1961,15,Single Family,33.889209,-118.404164
+7142-003-084,6474 Esplanade,Rancho Palos Verdes,CA,90275,C. Fixture,,,1810000,Owner,,new,6474 Esplanade,90275,4,3,2300,11800,1950,18,Single Family,33.741012,-118.398702
+7209-007-034,3867 Via Campesina,Torrance,CA,90503,E. Dummett,,,982000,Owner,,new,3867 Via Campesina,90503,3,2,1790,5400,2014,28,Single Family,33.826603,-118.345329
+7100-038-036,979 Aviation Blvd,Torrance,CA,90503,A. Mockton,,,2343000,Owner,,new,979 Aviation Blvd,90503,5,4,4520,10100,1976,35,Single Family,33.828296,-118.326566
+7763-027-080,4488 Hawthorne Blvd,Palos Verdes Estates,CA,90274,G. Fixture,,,2732000,Owner,,new,4488 Hawthorne Blvd,90274,4,4,2360,4700,1994,31,Single Family,33.780201,-118.407487
+7480-001-036,2845 Crenshaw Blvd,Torrance,CA,90503,C. Dummett,,,1194000,Owner,,new,2845 Crenshaw Blvd,90503,4,3,2560,4700,2003,22,Condo,33.835744,-118.334277
+7211-008-014,2618 Silver Spur Rd,Redondo Beach,CA,90277,E. Sample,,,1706000,Owner,,new,2618 Silver Spur Rd,90277,3,2,1990,6400,1963,5,Single Family,33.859197,-118.390052
+7199-038-013,808 Prospect Ave,Rolling Hills Estates,CA,90274,E. Dummett,,,2797000,Owner,,new,808 Prospect Ave,90274,5,5,4420,16900,1972,22,Single Family,33.791145,-118.342604
+7195-009-007,4384 Highland Ave,Palos Verdes Estates,CA,90274,B. Fixture,,,2569000,Owner,,new,4384 Highland Ave,90274,3,3,2000,4800,1982,29,Single Family,33.786359,-118.387495
+7102-007-034,6774 Palos Verdes Dr,Rancho Palos Verdes,CA,90275,J. Example,,,1460000,Owner,,new,6774 Palos Verdes Dr,90275,3,3,1850,3000,1959,0,Condo,33.733996,-118.376154
+7723-009-015,6747 Crenshaw Blvd,Rolling Hills Estates,CA,90274,D. Mockton,,,2991000,Owner,,new,6747 Crenshaw Blvd,90274,5,4,3700,11000,1968,38,Condo,33.788878,-118.348824
+7122-025-094,1852 Deep Valley Dr,Redondo Beach,CA,90277,K. Dummett,,,1543000,Owner,,new,1852 Deep Valley Dr,90277,4,3,2340,3800,1949,2,Single Family,33.86432,-118.404878
+7990-028-089,3031 Prospect Ave,Palos Verdes Estates,CA,90274,L. Sampleton,,,2364000,Absentee,,new,2740 Wilshire Blvd,90210,3,2,1760,3100,1969,17,Single Family,33.781632,-118.405778
+7726-031-061,247 Calle Mayor,Rolling Hills Estates,CA,90274,H. Fixture,,,1908000,Owner,,new,247 Calle Mayor,90274,3,2,1660,3100,2006,27,Single Family,33.789307,-118.354043
+7691-005-023,1534 Granvia Altamira,Redondo Beach,CA,90277,G. Mockton,,,1726000,Owner,,new,1534 Granvia Altamira,90277,4,3,2350,10800,1991,12,Single Family,33.864297,-118.377673
+7817-037-059,2407 Camino Real,Manhattan Beach,CA,90266,M. Stubbs,,,2476000,Owner,,new,2407 Camino Real,90266,2,2,1410,4900,1994,12,Single Family,33.881979,-118.408369
+7688-004-074,2556 Via Campesina,Torrance,CA,90503,E. Demoworth,,,1516000,Owner,,new,2556 Via Campesina,90503,5,5,3440,18500,1948,28,Single Family,33.823928,-118.333744
+7302-009-044,6526 Silver Spur Rd,Palos Verdes Estates,CA,90274,F. Placeholder,,,1595000,Owner,,new,6526 Silver Spur Rd,90274,2,2,1470,5100,2002,29,Single Family,33.795641,-118.405702
+7271-015-071,6170 Via Campesina,Redondo Beach,CA,90277,H. Sample,,,2661000,Owner,,new,6170 Via Campesina,90277,5,4,4270,18300,1994,27,Single Family,33.852333,-118.37456
+7991-023-082,263 Hawthorne Blvd,Palos Verdes Estates,CA,90274,C. Demoworth,,,3884000,Owner,,new,263 Hawthorne Blvd,90274,5,4,4510,14600,1954,9,Single Family,33.761804,-118.401002
+7129-035-026,386 Crenshaw Blvd,Rancho Palos Verdes,CA,90275,E. Testerman,,,1899000,Owner,,new,386 Crenshaw Blvd,90275,3,2,1930,9900,1983,13,Single Family,33.738253,-118.380055
+7192-007-029,575 Crenshaw Blvd,Palos Verdes Estates,CA,90274,G. Example,,,2560000,Owner,,new,575 Crenshaw Blvd,90274,4,3,2880,11900,1987,30,Single Family,33.772821,-118.401984
+7195-019-020,1416 Vista Del Mar,Rolling Hills Estates,CA,90274,K. Demoworth,,,2628000,Owner,,new,1416 Vista Del Mar,90274,5,4,4290,15300,1964,5,Condo,33.782131,-118.34083
+7899-028-002,4630 Granvia Altamira,Manhattan Beach,CA,90266,C. Placeholder,,,4014000,Absentee,,new,6383 Wilshire Blvd,91403,5,5,3860,18900,1956,23,Single Family,33.90053,-118.412057
+7905-022-069,1612 Hawthorne Blvd,Redondo Beach,CA,90277,L. Stubbs,,,1108000,Owner,,new,1612 Hawthorne Blvd,90277,3,2,1720,9000,1986,24,Single Family,33.836237,-118.383715
+7770-035-081,4531 Granvia Altamira,Rolling Hills Estates,CA,90274,L. Sampleton,,,1581000,Absentee,,new,7092 Wilshire Blvd,89109,3,3,1830,4200,1966,37,Single Family,33.791762,-118.369063
+7750-001-068,591 Esplanade,Palos Verdes Estates,CA,90274,E. Demoworth,,,3700000,Owner,,new,591 Esplanade,90274,5,4,4380,7300,1965,2,Single Family,33.785824,-118.400744
+7500-003-023,4634 Highland Ave,Manhattan Beach,CA,90266,F. Mockton,,,2974000,Absentee,,new,6611 Ventura Blvd,89109,5,4,3300,14700,1953,40,Single Family,33.873095,-118.425798
+7727-010-019,6416 Prospect Ave,Rolling Hills Estates,CA,90274,E. Example,,,2785000,Owner,,new,6416 Prospect Ave,90274,4,4,3110,5500,2012,13,Single Family,33.783195,-118.370144
+7666-031-005,1419 Palos Verdes Dr,Manhattan Beach,CA,90266,A. Fixture,,,4328000,Owner,,new,1419 Palos Verdes Dr,90266,5,5,3600,8700,1998,21,Single Family,33.884931,-118.418486
+7273-026-086,2724 Camino Real,Torrance,CA,90503,B. Fixture,,,1219000,Owner,,new,2724 Camino Real,90503,4,4,2440,9600,1979,39,Single Family,33.822098,-118.352062
+7812-033-042,3417 Deep Valley Dr,Rancho Palos Verdes,CA,90275,D. Sample,,,1906000,Absentee,,new,1455 Main St,91403,4,4,3160,5900,1961,14,Single Family,33.755911,-118.400527
+7373-011-071,5552 Aviation Blvd,Torrance,CA,90503,J. Demoworth,,,713000,Owner,,new,5552 Aviation Blvd,90503,2,1,1520,6700,1976,10,Single Family,33.844008,-118.327549
+7955-007-092,1928 Granvia Altamira,Redondo Beach,CA,90277,D. Dummett,,,1365000,Owner,,new,1928 Granvia Altamira,90277,3,3,1970,9100,1948,5,Single Family,33.832526,-118.379606
+7118-006-007,3123 Aviation Blvd,Redondo Beach,CA,90277,H. Mockton,,,2316000,Absentee,,new,3120 Wilshire Blvd,89109,5,5,3930,15700,1966,36,Condo,33.851386,-118.403232
+7837-019-086,4172 Crenshaw Blvd,Rolling Hills Estates,CA,90274,E. Placeholder,,,1536000,Absentee,,new,1725 Wilshire Blvd,94105,2,1,1330,4400,1963,19,Single Family,33.786028,-118.350147
+7477-033-063,1984 Granvia Altamira,Rolling Hills Estates,CA,90274,A. Stubbs,,,2360000,Absentee,,new,6706 Main St,90210,4,3,3160,14500,1987,38,Single Family,33.77807,-118.357778
+7946-012-052,4974 Esplanade,Torrance,CA,90503,D. Testerman,,,992000,Owner,,new,4974 Esplanade,90503,3,2,2090,7900,2010,4,Single Family,33.830271,-118.326336
+7945-028-033,4445 Hawthorne Blvd,Rancho Palos Verdes,CA,90275,L. Dummett,,,2454000,Absentee,,new,5031 Wilshire Blvd,90210,5,4,4710,17200,1992,16,Single Family,33.729994,-118.391082
+7355-002-085,6526 Aviation Blvd,Redondo Beach,CA,90277,H. Sampleton,,,1933000,Owner,,new,6526 Aviation Blvd,90277,4,3,2820,5400,1968,3,Single Family,33.837882,-118.39329
+7955-010-053,5600 Highland Ave,Rolling Hills Estates,CA,90274,J. Fixture,,,2108000,Owner,,new,5600 Highland Ave,90274,4,3,2780,15100,2010,31,Single Family,33.771786,-118.361568
+7894-013-003,6560 Camino Real,Rolling Hills Estates,CA,90274,A. Testerman,,,3369000,Owner,,new,6560 Camino Real,90274,5,5,4450,18200,1988,18,Single Family,33.786215,-118.356555
+7719-017-015,5804 Aviation Blvd,Rolling Hills Estates,CA,90274,L. Dummett,,,2309000,Owner,,new,5804 Aviation Blvd,90274,5,4,3530,15100,1985,32,Single Family,33.780559,-118.353197
+7951-001-082,2842 Aviation Blvd,Palos Verdes Estates,CA,90274,F. Fixture,,,1835000,Owner,,new,2842 Aviation Blvd,90274,3,2,1940,5000,1989,41,Single Family,33.791045,-118.39291
+7748-034-097,537 Crenshaw Blvd,Manhattan Beach,CA,90266,F. Fixture,,,3445000,Owner,,new,537 Crenshaw Blvd,90266,4,3,2550,5000,2015,33,Single Family,33.884761,-118.420381
+7144-019-086,1783 Hawthorne Blvd,Torrance,CA,90503,J. Stubbs,,,868000,Owner,,new,1783 Hawthorne Blvd,90503,2,1,1590,3800,1952,39,Single Family,33.851234,-118.353832
+7795-010-069,2929 Calle Mayor,Redondo Beach,CA,90277,E. Sample,,,2573000,Owner,,new,2929 Calle Mayor,90277,5,5,3980,17300,2002,16,Single Family,33.85625,-118.394489
+7387-004-074,529 Deep Valley Dr,Redondo Beach,CA,90277,B. Stubbs,,,1837000,Absentee,,new,874 Wilshire Blvd,91403,5,4,3620,14400,1984,29,Condo,33.837248,-118.406143
+7120-001-094,5747 Anza Ave,Manhattan Beach,CA,90266,G. Dummett,,,2701000,Owner,,new,5747 Anza Ave,90266,3,2,1840,3300,1991,11,Single Family,33.878324,-118.418345
+7943-028-072,583 Deep Valley Dr,Redondo Beach,CA,90277,A. Demoworth,,,715000,Owner,,new,583 Deep Valley Dr,90277,2,1,1330,4600,2016,33,Single Family,33.838903,-118.395902
+7681-015-043,1726 Calle Mayor,Rancho Palos Verdes,CA,90275,M. Sample,,,1866000,Owner,,new,1726 Calle Mayor,90275,2,2,1510,3300,2005,39,Single Family,33.752724,-118.38725
+7781-012-055,4560 Esplanade,Torrance,CA,90503,K. Sample,,,1331000,Owner,,new,4560 Esplanade,90503,4,3,3000,10100,1990,34,Condo,33.834132,-118.337396
+7666-031-054,2276 Hawthorne Blvd,Rolling Hills Estates,CA,90274,M. Testerman,,,2241000,Owner,,new,2276 Hawthorne Blvd,90274,4,3,2540,13900,1998,18,Single Family,33.782327,-118.371355
+7801-034-036,6381 Hawthorne Blvd,Rolling Hills Estates,CA,90274,C. Placeholder,,,1564000,Absentee,,new,1564 Main St,94105,3,2,2050,8000,2010,10,Single Family,33.802085,-118.371519
+7524-039-087,4584 Aviation Blvd,Redondo Beach,CA,90277,L. Placeholder,,,1553000,Owner,,new,4584 Aviation Blvd,90277,4,4,2340,11200,1976,40,Condo,33.832251,-118.395964
+7279-020-050,1994 Palos Verdes Dr,Manhattan Beach,CA,90266,D. Demoworth,,,3461000,Owner,,new,1994 Palos Verdes Dr,90266,3,3,1850,3000,1973,24,Condo,33.901104,-118.403139
+7340-013-004,3817 Crenshaw Blvd,Rolling Hills Estates,CA,90274,C. Demoworth,,,2494000,Owner,,new,3817 Crenshaw Blvd,90274,4,4,3050,15500,1970,18,Single Family,33.785816,-118.371226
+7747-023-039,225 Via Campesina,Manhattan Beach,CA,90266,H. Sampleton,,,3485000,Owner,,new,225 Via Campesina,90266,4,3,2870,15100,1954,12,Single Family,33.875717,-118.416132
+7461-022-091,5559 Anza Ave,Manhattan Beach,CA,90266,J. Sample,,,4141000,Absentee,,new,4760 Ventura Blvd,89109,5,5,4220,15500,1975,7,Single Family,33.901377,-118.395563
+7376-024-042,5112 Deep Valley Dr,Torrance,CA,90503,M. Example,,,1472000,Owner,,new,5112 Deep Valley Dr,90503,5,4,3200,6300,1991,32,Condo,33.849774,-118.351556
+7454-036-006,2881 Aviation Blvd,Torrance,CA,90503,A. Stubbs,,,2508000,Owner,,new,2881 Aviation Blvd,90503,5,4,4540,16700,2002,0,Single Family,33.849816,-118.357361
+7841-026-051,5337 Vista Del Mar,Manhattan Beach,CA,90266,L. Sampleton,,,3505000,Absentee,,new,605 Ventura Blvd,94105,3,2,2150,4400,1975,31,Single Family,33.868625,-118.409576
+7618-038-073,2781 Silver Spur Rd,Redondo Beach,CA,90277,K. Mockton,,,1592000,Owner,,new,2781 Silver Spur Rd,90277,4,3,2320,7300,1960,5,Single Family,33.852464,-118.372145
+7480-004-074,2629 Granvia Altamira,Rolling Hills Estates,CA,90274,J. Dummett,,,2805000,Absentee,,new,5965 Ventura Blvd,90210,5,4,3820,10200,1957,35,Single Family,33.777877,-118.373823
+7833-011-097,3928 Aviation Blvd,Rolling Hills Estates,CA,90274,D. Testerman,,,2229000,Owner,,new,3928 Aviation Blvd,90274,5,4,3620,15800,2015,23,Single Family,33.780972,-118.353702
+7274-023-012,6791 Aviation Blvd,Redondo Beach,CA,90277,F. Example,,,1721000,Owner,,new,6791 Aviation Blvd,90277,4,4,2750,10900,1997,11,Single Family,33.838708,-118.37983
+7420-021-065,3488 Camino Real,Redondo Beach,CA,90277,D. Fixture,,,2541000,Absentee,,new,6337 Main St,91403,5,5,4230,19800,1986,40,Single Family,33.837163,-118.393691
+7892-021-017,3636 Vista Del Mar,Torrance,CA,90503,B. Sample,,,1831000,Absentee,,new,6251 Main St,91403,5,5,4010,20100,1951,13,Single Family,33.818671,-118.323196
+7335-001-085,912 Deep Valley Dr,Palos Verdes Estates,CA,90274,A. Testerman,,,3298000,Owner,,new,912 Deep Valley Dr,90274,5,5,3580,7200,2017,15,Single Family,33.787894,-118.384283
+7934-001-059,2102 Anza Ave,Rancho Palos Verdes,CA,90275,D. Fixture,,,2878000,Owner,,new,2102 Anza Ave,90275,5,5,4030,10600,1979,32,Single Family,33.757571,-118.387264
+7567-008-027,2911 Via Campesina,Manhattan Beach,CA,90266,D. Sample,,,2867000,Absentee,,new,4371 Main St,94105,3,2,2140,5600,1995,33,Single Family,33.881975,-118.420207
+7649-028-015,4064 Rolling Hills Rd,Palos Verdes Estates,CA,90274,F. Mockton,,,2827000,Owner,,new,4064 Rolling Hills Rd,90274,4,4,3070,6700,1970,30,Condo,33.778542,-118.386928
+7968-006-023,6610 Prospect Ave,Manhattan Beach,CA,90266,A. Demoworth,,,3149000,Absentee,,new,4523 Main St,89109,5,4,3930,11400,1950,6,Single Family,33.895032,-118.416623
+7904-037-039,2410 Deep Valley Dr,Redondo Beach,CA,90277,H. Mockton,,,2254000,Absentee,,new,6698 Main St,91403,5,4,4150,20200,1960,41,Single Family,33.847439,-118.378017
+7898-001-093,264 Prospect Ave,Palos Verdes Estates,CA,90274,G. Sample,,,2127000,Owner,,new,264 Prospect Ave,90274,4,4,2430,5100,1975,10,Single Family,33.76831,-118.402188
+7504-028-068,2590 Anza Ave,Rolling Hills Estates,CA,90274,M. Mockton,,,2824000,Owner,,new,2590 Anza Ave,90274,5,4,4200,21500,1949,7,Single Family,33.778671,-118.354587
+7906-023-039,1569 Esplanade,Redondo Beach,CA,90277,H. Sample,,,1980000,Owner,,new,1569 Esplanade,90277,5,5,3370,12900,2000,6,Single Family,33.853919,-118.398448
+7208-036-017,340 Hawthorne Blvd,Torrance,CA,90503,M. Mockton,,,1047000,Owner,,new,340 Hawthorne Blvd,90503,3,3,1930,3400,2000,40,Single Family,33.826203,-118.324814
+7911-034-093,621 Anza Ave,Rolling Hills Estates,CA,90274,H. Example,,,2891000,Owner,,new,621 Anza Ave,90274,5,5,3940,18300,1975,27,Single Family,33.799773,-118.357115
+7414-028-001,5722 Rolling Hills Rd,Rolling Hills Estates,CA,90274,H. Dummett,,,1895000,Owner,,new,5722 Rolling Hills Rd,90274,4,3,2430,11700,2004,6,Condo,33.79888,-118.373883
+7751-001-007,6237 Via Campesina,Rancho Palos Verdes,CA,90275,B. Sampleton,,,2260000,Absentee,,new,7201 Ventura Blvd,90210,5,4,3680,7300,2014,27,Single Family,33.742851,-118.399308
+7987-002-027,2032 Prospect Ave,Rancho Palos Verdes,CA,90275,G. Placeholder,,,1500000,Owner,,new,2032 Prospect Ave,90275,3,3,1880,4900,1975,25,Single Family,33.761948,-118.400821
+7727-017-065,3150 Granvia Altamira,Manhattan Beach,CA,90266,L. Dummett,,,3376000,Owner,,new,3150 Granvia Altamira,90266,4,3,2630,5900,2008,11,Single Family,33.866834,-118.406551
+7985-014-098,1996 Camino Real,Rancho Palos Verdes,CA,90275,K. Dummett,,,2094000,Owner,,new,1996 Camino Real,90275,4,4,2620,8700,1951,5,Single Family,33.741399,-118.370159
+7943-016-077,2471 Anza Ave,Torrance,CA,90503,B. Stubbs,,,976000,Owner,,new,2471 Anza Ave,90503,3,2,1660,4300,1959,31,Single Family,33.840841,-118.32276
+7339-022-097,463 Anza Ave,Palos Verdes Estates,CA,90274,H. Placeholder,,,2903000,Owner,,new,463 Anza Ave,90274,5,4,3610,9500,1967,18,Single Family,33.795864,-118.383001
+7419-030-095,4559 Palos Verdes Dr,Palos Verdes Estates,CA,90274,D. Sampleton,,,2538000,Owner,,new,4559 Palos Verdes Dr,90274,4,4,2360,10700,1948,36,Single Family,33.775152,-118.40714
+7658-003-045,1484 Rolling Hills Rd,Torrance,CA,90503,M. Example,,,1112000,Owner,,new,1484 Rolling Hills Rd,90503,3,3,2140,5800,1960,37,Single Family,33.831313,-118.341141
+7928-032-001,4681 Hawthorne Blvd,Rolling Hills Estates,CA,90274,C. Mockton,,,2403000,Absentee,,new,1581 Wilshire Blvd,89109,4,4,3020,16100,1973,40,Single Family,33.798769,-118.340215
+7492-026-028,2277 Aviation Blvd,Rolling Hills Estates,CA,90274,A. Testerman,,,1826000,Owner,,new,2277 Aviation Blvd,90274,3,3,1630,8700,2002,26,Single Family,33.800679,-118.35618
+7510-003-050,131 Anza Ave,Palos Verdes Estates,CA,90274,G. Fixture,,,2007000,Owner,,new,131 Anza Ave,90274,4,4,2440,4000,1986,38,Single Family,33.770597,-118.376815
+7599-010-023,1850 Camino Real,Rancho Palos Verdes,CA,90275,C. Mockton,,,1897000,Owner,,new,1850 Camino Real,90275,4,4,3040,9000,2018,13,Single Family,33.761185,-118.390237
+7190-027-013,5858 Palos Verdes Dr,Rancho Palos Verdes,CA,90275,C. Placeholder,,,1911000,Owner,,new,5858 Palos Verdes Dr,90275,4,4,3180,6100,1952,12,Single Family,33.73932,-118.389963
+7567-010-027,269 Vista Del Mar,Redondo Beach,CA,90277,A. Fixture,,,2257000,Owner,,new,269 Vista Del Mar,90277,5,4,4680,16400,2016,15,Single Family,33.842342,-118.371006
+7601-005-018,5329 Palos Verdes Dr,Palos Verdes Estates,CA,90274,A. Mockton,,,3074000,Absentee,,new,267 Wilshire Blvd,94105,5,4,4740,8800,1994,23,Single Family,33.791198,-118.404372
+7958-003-078,5781 Granvia Altamira,Palos Verdes Estates,CA,90274,E. Example,,,3425000,Owner,,new,5781 Granvia Altamira,90274,5,4,4630,18700,2003,1,Single Family,33.766579,-118.386976
+7843-039-060,683 Palos Verdes Dr,Rolling Hills Estates,CA,90274,J. Fixture,,,3150000,Owner,,new,683 Palos Verdes Dr,90274,5,4,4540,11600,2012,14,Single Family,33.797418,-118.346179
+7521-024-046,3376 Anza Ave,Rancho Palos Verdes,CA,90275,H. Sampleton,,,1572000,Owner,,new,3376 Anza Ave,90275,4,4,2350,6600,2018,15,Single Family,33.760738,-118.391386
+7268-024-059,139 Silver Spur Rd,Manhattan Beach,CA,90266,J. Fixture,,,3158000,Owner,,new,139 Silver Spur Rd,90266,3,3,1990,10900,1996,24,Single Family,33.874673,-118.415025
+7880-037-044,3317 Prospect Ave,Palos Verdes Estates,CA,90274,A. Example,,,3103000,Owner,,new,3317 Prospect Ave,90274,5,4,4330,12500,1969,22,Single Family,33.786428,-118.408738
+7104-018-034,1321 Granvia Altamira,Rancho Palos Verdes,CA,90275,A. Testerman,,,1909000,Owner,,new,1321 Granvia Altamira,90275,4,3,3170,14400,1993,0,Single Family,33.739414,-118.375751
+7378-033-030,6272 Camino Real,Palos Verdes Estates,CA,90274,F. Mockton,,,2446000,Absentee,,new,2405 Ventura Blvd,90210,5,5,3380,17700,2006,23,Single Family,33.781787,-118.384224
+7237-034-092,569 Calle Mayor,Torrance,CA,90503,L. Dummett,,,1911000,Owner,,new,569 Calle Mayor,90503,5,4,4390,13600,1972,41,Single Family,33.833887,-118.348537
+7405-035-079,4801 Deep Valley Dr,Rolling Hills Estates,CA,90274,E. Stubbs,,,3289000,Owner,,new,4801 Deep Valley Dr,90274,5,5,4630,22600,1981,37,Single Family,33.786688,-118.346147
+7308-004-010,6713 Aviation Blvd,Rolling Hills Estates,CA,90274,C. Testerman,,,2046000,Owner,,new,6713 Aviation Blvd,90274,4,3,2750,13100,1955,22,Single Family,33.77973,-118.340458
+7334-028-069,3799 Via Campesina,Redondo Beach,CA,90277,G. Demoworth,,,2940000,Owner,,new,3799 Via Campesina,90277,5,4,4690,19400,1992,11,Single Family,33.850954,-118.371269
+7494-031-079,5986 Crenshaw Blvd,Redondo Beach,CA,90277,F. Fixture,,,2249000,Owner,,new,5986 Crenshaw Blvd,90277,5,4,4490,23000,1994,0,Single Family,33.839392,-118.37787
+7931-016-060,6275 Highland Ave,Torrance,CA,90503,G. Sampleton,,,1465000,Absentee,,new,2162 Ventura Blvd,89109,4,4,3090,13600,1993,12,Single Family,33.830833,-118.33539
+7611-012-096,5187 Anza Ave,Manhattan Beach,CA,90266,M. Stubbs,,,3319000,Owner,,new,5187 Anza Ave,90266,5,5,4340,20700,1975,31,Condo,33.896564,-118.417445
+7264-015-076,1595 Anza Ave,Rolling Hills Estates,CA,90274,F. Sampleton,,,2889000,Owner,,new,1595 Anza Ave,90274,5,5,4320,15600,1962,31,Condo,33.79353,-118.360687
+7223-034-091,2368 Vista Del Mar,Palos Verdes Estates,CA,90274,E. Placeholder,,,1883000,Owner,,new,2368 Vista Del Mar,90274,3,3,1980,8800,1972,22,Single Family,33.771053,-118.401615
+7683-035-073,4185 Via Campesina,Palos Verdes Estates,CA,90274,J. Sampleton,,,2800000,Owner,,new,4185 Via Campesina,90274,5,5,4380,23900,2016,29,Single Family,33.763097,-118.393037
+7841-018-092,292 Esplanade,Redondo Beach,CA,90277,F. Sample,,,1370000,Owner,,new,292 Esplanade,90277,3,2,1780,5000,1954,31,Single Family,33.847155,-118.396318
+7878-023-030,4081 Palos Verdes Dr,Rolling Hills Estates,CA,90274,D. Placeholder,,,1868000,Owner,,new,4081 Palos Verdes Dr,90274,3,3,2090,3600,1952,35,Single Family,33.792693,-118.35229
+7938-008-092,3735 Via Campesina,Redondo Beach,CA,90277,D. Sample,,,1543000,Owner,,new,3735 Via Campesina,90277,3,2,1660,7500,2010,15,Single Family,33.86364,-118.383831
+7974-023-016,6400 Rolling Hills Rd,Palos Verdes Estates,CA,90274,A. Placeholder,,,3014000,Owner,,new,6400 Rolling Hills Rd,90274,5,4,4160,8300,1953,7,Single Family,33.769107,-118.406921
+7737-038-007,835 Crenshaw Blvd,Rancho Palos Verdes,CA,90275,G. Dummett,,,3412000,Absentee,,new,2367 Wilshire Blvd,91403,5,4,4580,10200,1957,10,Single Family,33.751368,-118.394429
+7652-010-002,1998 Esplanade,Palos Verdes Estates,CA,90274,E. Sample,,,3402000,Absentee,,new,8446 Wilshire Blvd,94105,5,4,4190,9500,1949,1,Condo,33.783874,-118.402768
+7957-010-035,6737 Prospect Ave,Redondo Beach,CA,90277,E. Demoworth,,,2652000,Absentee,,new,2214 Main St,90210,5,4,4610,18400,2003,40,Single Family,33.843588,-118.39396
+7170-033-042,4915 Prospect Ave,Rancho Palos Verdes,CA,90275,A. Fixture,,,1700000,Owner,,new,4915 Prospect Ave,90275,3,2,2220,6300,2016,6,Single Family,33.754418,-118.378216
+7110-030-068,5938 Palos Verdes Dr,Palos Verdes Estates,CA,90274,B. Placeholder,,,2666000,Owner,,new,5938 Palos Verdes Dr,90274,3,3,1930,6900,1989,21,Single Family,33.785597,-118.398283
+7941-001-024,4557 Hawthorne Blvd,Palos Verdes Estates,CA,90274,G. Testerman,,,3166000,Owner,,new,4557 Hawthorne Blvd,90274,5,5,4560,16800,1973,30,Single Family,33.774812,-118.407135
+7641-005-084,906 Granvia Altamira,Redondo Beach,CA,90277,B. Testerman,,,1410000,Absentee,,new,3873 Main St,90210,4,3,2320,11700,2014,37,Single Family,33.840285,-118.394082
+7937-033-095,6717 Aviation Blvd,Redondo Beach,CA,90277,B. Sample,,,1489000,Owner,,new,6717 Aviation Blvd,90277,3,2,2080,7800,1974,18,Single Family,33.847089,-118.37851
+7457-003-041,5945 Highland Ave,Palos Verdes Estates,CA,90274,J. Dummett,,,3430000,Owner,,new,5945 Highland Ave,90274,5,4,4690,25700,2007,4,Single Family,33.777693,-118.387899
+7741-018-015,297 Rolling Hills Rd,Torrance,CA,90503,G. Stubbs,,,2344000,Owner,,new,297 Rolling Hills Rd,90503,5,4,4560,19300,2012,1,Single Family,33.8385,-118.347411
+7789-011-031,5765 Aviation Blvd,Redondo Beach,CA,90277,A. Demoworth,,,2436000,Owner,,new,5765 Aviation Blvd,90277,5,5,4170,8600,1979,1,Single Family,33.856082,-118.393784
+7490-006-094,5539 Aviation Blvd,Manhattan Beach,CA,90266,E. Dummett,,,3631000,Owner,,new,5539 Aviation Blvd,90266,5,5,3460,13500,1953,26,Condo,33.88394,-118.393904
+7603-012-012,423 Anza Ave,Redondo Beach,CA,90277,M. Testerman,,,1906000,Owner,,new,423 Anza Ave,90277,4,4,3020,16400,1973,38,Single Family,33.841589,-118.398771
+7117-026-094,6190 Anza Ave,Redondo Beach,CA,90277,M. Placeholder,,,1407000,Absentee,,new,4951 Wilshire Blvd,90210,3,2,1690,8800,2001,9,Single Family,33.842375,-118.393483
+7795-013-083,2219 Prospect Ave,Manhattan Beach,CA,90266,K. Example,,,3038000,Owner,,new,2219 Prospect Ave,90266,2,2,1570,8400,1960,5,Single Family,33.874141,-118.415278
+7480-010-068,908 Granvia Altamira,Rancho Palos Verdes,CA,90275,E. Dummett,,,2137000,Absentee,,new,1469 Main St,91403,5,4,3780,14500,1952,6,Single Family,33.727039,-118.384309
+7537-036-037,4933 Prospect Ave,Rancho Palos Verdes,CA,90275,K. Dummett,,,2705000,Owner,,new,4933 Prospect Ave,90275,5,5,4610,9000,1954,11,Single Family,33.74937,-118.386648
+7641-033-098,3158 Calle Mayor,Rolling Hills Estates,CA,90274,K. Demoworth,,,2013000,Owner,,new,3158 Calle Mayor,90274,4,3,2460,8100,1987,10,Single Family,33.781741,-118.34154
+7929-009-003,6041 Via Campesina,Rancho Palos Verdes,CA,90275,L. Fixture,,,2980000,Owner,,new,6041 Via Campesina,90275,5,5,4550,11900,1977,41,Single Family,33.728444,-118.372879
+7403-010-094,5624 Highland Ave,Palos Verdes Estates,CA,90274,L. Placeholder,,,2918000,Owner,,new,5624 Highland Ave,90274,5,5,3730,9100,2000,29,Single Family,33.777923,-118.381578
+7922-038-051,4715 Highland Ave,Rancho Palos Verdes,CA,90275,J. Fixture,,,1820000,Owner,,new,4715 Highland Ave,90275,2,2,1410,5800,2005,27,Single Family,33.737765,-118.384829
+7678-035-085,5546 Silver Spur Rd,Redondo Beach,CA,90277,L. Demoworth,,,1701000,Owner,,new,5546 Silver Spur Rd,90277,4,4,2790,6200,1965,20,Single Family,33.837684,-118.398467
+7819-022-071,2370 Crenshaw Blvd,Torrance,CA,90503,K. Sample,,,2227000,Owner,,new,2370 Crenshaw Blvd,90503,5,4,4330,20500,1953,4,Single Family,33.841683,-118.337984
+7755-005-069,5133 Hawthorne Blvd,Rancho Palos Verdes,CA,90275,H. Mockton,,,3044000,Owner,,new,5133 Hawthorne Blvd,90275,5,4,3850,7100,1965,31,Single Family,33.75767,-118.398794
+7324-011-016,263 Palos Verdes Dr,Manhattan Beach,CA,90266,H. Sample,,,4151000,Owner,,new,263 Palos Verdes Dr,90266,5,4,3780,12400,1975,5,Single Family,33.892776,-118.416122
+7785-023-019,3789 Anza Ave,Rolling Hills Estates,CA,90274,F. Example,,,2930000,Owner,,new,3789 Anza Ave,90274,5,5,4470,13000,1999,35,Condo,33.805107,-118.352619
+7864-029-008,2228 Hawthorne Blvd,Palos Verdes Estates,CA,90274,M. Fixture,,,2414000,Owner,,new,2228 Hawthorne Blvd,90274,4,4,3170,8900,1956,32,Single Family,33.780092,-118.378332
+7503-014-055,3839 Granvia Altamira,Rancho Palos Verdes,CA,90275,C. Dummett,,,1513000,Absentee,,new,5988 Main St,91403,3,3,1780,9200,1966,3,Single Family,33.753608,-118.392089
+7362-012-058,302 Granvia Altamira,Rancho Palos Verdes,CA,90275,H. Mockton,,,2712000,Owner,,new,302 Granvia Altamira,90275,5,4,4460,7100,1981,20,Single Family,33.730849,-118.391302
+7182-014-070,451 Calle Mayor,Rancho Palos Verdes,CA,90275,B. Example,,,2545000,Absentee,,new,3053 Wilshire Blvd,91403,5,4,4580,14900,1966,3,Single Family,33.73091,-118.399701
+7317-019-061,4334 Aviation Blvd,Rolling Hills Estates,CA,90274,B. Stubbs,,,2731000,Absentee,,new,2187 Ventura Blvd,89109,5,5,4450,11500,1977,15,Single Family,33.779009,-118.373945
+7287-014-071,1659 Anza Ave,Rancho Palos Verdes,CA,90275,H. Stubbs,,,2553000,Absentee,,new,7495 Main St,89109,5,5,4760,12200,2000,12,Single Family,33.74328,-118.401647
+7108-011-049,1271 Silver Spur Rd,Rolling Hills Estates,CA,90274,A. Demoworth,,,2004000,Owner,,new,1271 Silver Spur Rd,90274,3,2,2250,5000,1954,13,Single Family,33.792416,-118.345908
+7771-027-056,4357 Vista Del Mar,Torrance,CA,90503,H. Testerman,,,650000,Owner,,new,4357 Vista Del Mar,90503,2,1,1400,3800,1976,15,Single Family,33.818735,-118.350886
+7912-015-004,1691 Calle Mayor,Manhattan Beach,CA,90266,B. Dummett,,,3023000,Absentee,,new,2072 Main St,91403,4,3,3160,8000,2005,21,Single Family,33.881486,-118.397042
+7944-006-063,6313 Aviation Blvd,Manhattan Beach,CA,90266,H. Testerman,,,3426000,Absentee,,new,4042 Ventura Blvd,94105,4,3,2910,9900,1995,0,Single Family,33.868791,-118.395654
+7482-028-064,4054 Granvia Altamira,Manhattan Beach,CA,90266,L. Dummett,,,3840000,Owner,,new,4054 Granvia Altamira,90266,5,4,4690,24300,1953,4,Single Family,33.900523,-118.398346
+7773-014-092,292 Anza Ave,Torrance,CA,90503,L. Sample,,,1688000,Owner,,new,292 Anza Ave,90503,5,5,3730,14800,1951,28,Single Family,33.81791,-118.329031
+7314-013-069,5441 Camino Real,Rolling Hills Estates,CA,90274,C. Sample,,,2152000,Owner,,new,5441 Camino Real,90274,3,2,2000,7000,2003,29,Single Family,33.772458,-118.365411
+7748-007-027,2659 Highland Ave,Rancho Palos Verdes,CA,90275,G. Sample,,,1217000,Absentee,,new,2187 Ventura Blvd,89109,2,1,1400,4400,1962,8,Single Family,33.745689,-118.376972
+7435-007-034,1546 Camino Real,Manhattan Beach,CA,90266,G. Demoworth,,,3753000,Owner,,new,1546 Camino Real,90266,4,3,2820,6100,2015,4,Single Family,33.874016,-118.417022
+7486-039-005,2670 Crenshaw Blvd,Rolling Hills Estates,CA,90274,J. Testerman,,,2659000,Absentee,,new,2896 Ventura Blvd,91403,5,5,3580,14000,1963,7,Single Family,33.780549,-118.34574
+7397-004-003,2553 Rolling Hills Rd,Torrance,CA,90503,C. Fixture,,,1816000,Owner,,new,2553 Rolling Hills Rd,90503,5,4,4430,14300,1962,21,Single Family,33.822552,-118.344376
+7276-039-049,3747 Palos Verdes Dr,Rolling Hills Estates,CA,90274,D. Mockton,,,3197000,Owner,,new,3747 Palos Verdes Dr,90274,5,5,4320,9300,1949,33,Single Family,33.792534,-118.344116
+7530-005-043,554 Calle Mayor,Torrance,CA,90503,E. Sampleton,,,1118000,Absentee,,new,7823 Main St,90210,4,3,2530,5400,2016,21,Single Family,33.828186,-118.346863
+7284-006-038,3865 Calle Mayor,Redondo Beach,CA,90277,L. Placeholder,,,1244000,Owner,,new,3865 Calle Mayor,90277,3,3,2120,5100,2002,10,Single Family,33.854915,-118.378053
+7343-028-037,2530 Silver Spur Rd,Redondo Beach,CA,90277,L. Sample,,,1590000,Owner,,new,2530 Silver Spur Rd,90277,4,4,2520,7000,1950,12,Single Family,33.846154,-118.385223
+7893-024-071,2893 Highland Ave,Rancho Palos Verdes,CA,90275,D. Dummett,,,1946000,Owner,,new,2893 Highland Ave,90275,4,4,2960,11400,1956,34,Single Family,33.748891,-118.374365
+7970-039-016,453 Rolling Hills Rd,Redondo Beach,CA,90277,H. Sampleton,,,2167000,Owner,,new,453 Rolling Hills Rd,90277,4,4,3100,10300,1986,17,Single Family,33.850186,-118.387995
+7960-025-012,4220 Via Campesina,Rolling Hills Estates,CA,90274,E. Fixture,,,2278000,Absentee,,new,863 Main St,94105,4,3,2320,5600,2008,39,Condo,33.804167,-118.367519
+7475-010-044,1920 Calle Mayor,Redondo Beach,CA,90277,D. Example,,,2525000,Owner,,new,1920 Calle Mayor,90277,5,4,4330,17400,1999,19,Single Family,33.854641,-118.391197
+7820-014-029,1798 Via Campesina,Palos Verdes Estates,CA,90274,L. Stubbs,,,2268000,Owner,,new,1798 Via Campesina,90274,4,3,2810,8600,1955,8,Single Family,33.782792,-118.395645
+7517-021-077,3400 Via Campesina,Palos Verdes Estates,CA,90274,K. Sample,,,3010000,Owner,,new,3400 Via Campesina,90274,5,4,3940,14900,1949,37,Single Family,33.776516,-118.383062
+7700-036-069,3166 Prospect Ave,Rancho Palos Verdes,CA,90275,B. Fixture,,,2353000,Absentee,,new,1270 Wilshire Blvd,90210,5,5,3660,13800,2011,22,Single Family,33.73911,-118.393005
+7186-033-098,4254 Silver Spur Rd,Manhattan Beach,CA,90266,K. Demoworth,,,3927000,Owner,,new,4254 Silver Spur Rd,90266,5,5,4680,15600,2016,5,Single Family,33.89745,-118.421474
+7319-012-077,6235 Rolling Hills Rd,Manhattan Beach,CA,90266,D. Dummett,,,3205000,Owner,,new,6235 Rolling Hills Rd,90266,4,4,2680,9100,1951,30,Single Family,33.887989,-118.397984
+7538-039-021,5698 Granvia Altamira,Rancho Palos Verdes,CA,90275,B. Placeholder,,,2208000,Owner,,new,5698 Granvia Altamira,90275,5,5,3210,10000,1962,32,Single Family,33.735416,-118.385883
+7941-021-014,5744 Deep Valley Dr,Palos Verdes Estates,CA,90274,B. Fixture,,,2468000,Owner,,new,5744 Deep Valley Dr,90274,4,4,2750,7700,2015,19,Single Family,33.780749,-118.396619
+7384-005-024,1602 Esplanade,Rancho Palos Verdes,CA,90275,A. Mockton,,,1899000,Owner,,new,1602 Esplanade,90275,4,3,2960,4900,1985,9,Single Family,33.729858,-118.387709
+7977-017-029,5371 Aviation Blvd,Manhattan Beach,CA,90266,J. Fixture,,,3135000,Absentee,,new,736 Main St,91403,4,3,2610,6200,1972,15,Condo,33.872741,-118.407854
+7231-033-075,4199 Hawthorne Blvd,Rancho Palos Verdes,CA,90275,M. Fixture,,,2337000,Owner,,new,4199 Hawthorne Blvd,90275,5,4,3930,9000,1953,15,Single Family,33.73262,-118.399466
+7159-006-008,3026 Granvia Altamira,Rolling Hills Estates,CA,90274,A. Placeholder,,,1941000,Owner,,new,3026 Granvia Altamira,90274,3,2,1950,8400,2012,24,Condo,33.798869,-118.354607
+7104-034-050,121 Anza Ave,Torrance,CA,90503,L. Fixture,,,1326000,Owner,,new,121 Anza Ave,90503,4,3,2500,9000,2015,27,Single Family,33.841846,-118.325259
+7473-021-006,2804 Aviation Blvd,Redondo Beach,CA,90277,K. Sample,,,1738000,Absentee,,new,3561 Wilshire Blvd,89109,4,3,2350,4300,1961,12,Single Family,33.860228,-118.398998
+7489-023-002,5359 Crenshaw Blvd,Redondo Beach,CA,90277,E. Sampleton,,,2636000,Owner,,new,5359 Crenshaw Blvd,90277,5,4,3720,19600,1969,24,Single Family,33.840846,-118.395954
+7182-035-047,4503 Rolling Hills Rd,Manhattan Beach,CA,90266,F. Example,,,3330000,Owner,,new,4503 Rolling Hills Rd,90266,5,4,3260,10600,2007,12,Single Family,33.887527,-118.421427
+7467-033-021,1468 Rolling Hills Rd,Torrance,CA,90503,F. Example,,,1801000,Owner,,new,1468 Rolling Hills Rd,90503,5,4,4500,10300,1963,34,Condo,33.85078,-118.351859
+7408-014-079,2907 Vista Del Mar,Manhattan Beach,CA,90266,E. Example,,,3072000,Owner,,new,2907 Vista Del Mar,90266,3,2,1620,2700,1993,28,Single Family,33.891674,-118.40822
+7156-030-085,1072 Rolling Hills Rd,Torrance,CA,90503,F. Sampleton,,,930000,Owner,,new,1072 Rolling Hills Rd,90503,3,2,2000,10400,1956,33,Single Family,33.81992,-118.350221
+7959-026-051,1513 Via Campesina,Rolling Hills Estates,CA,90274,K. Example,,,2002000,Owner,,new,1513 Via Campesina,90274,4,3,2470,11700,1993,15,Single Family,33.794718,-118.361548
+7908-028-045,3912 Highland Ave,Palos Verdes Estates,CA,90274,H. Demoworth,,,2397000,Owner,,new,3912 Highland Ave,90274,5,5,3350,17600,2010,13,Single Family,33.779548,-118.396153
+7784-008-026,1252 Anza Ave,Palos Verdes Estates,CA,90274,J. Mockton,,,3141000,Absentee,,new,4458 Wilshire Blvd,89109,5,4,3450,11400,1993,23,Single Family,33.780331,-118.400736
+7595-024-024,4712 Highland Ave,Torrance,CA,90503,M. Fixture,,,1104000,Owner,,new,4712 Highland Ave,90503,4,3,2610,6200,1995,10,Single Family,33.851437,-118.332906
+7508-029-084,2855 Prospect Ave,Torrance,CA,90503,M. Stubbs,,,1256000,Owner,,new,2855 Prospect Ave,90503,4,4,2780,14600,1994,22,Single Family,33.832087,-118.323919
+7206-033-061,1409 Camino Real,Torrance,CA,90503,J. Example,,,1536000,Owner,,new,1409 Camino Real,90503,5,5,3560,18800,2016,13,Condo,33.8417,-118.344998
+7377-029-070,3864 Hawthorne Blvd,Rolling Hills Estates,CA,90274,M. Testerman,,,2665000,Owner,,new,3864 Hawthorne Blvd,90274,5,4,3290,13100,2005,23,Single Family,33.777547,-118.370862
+7137-002-005,4902 Granvia Altamira,Redondo Beach,CA,90277,L. Testerman,,,2347000,Owner,,new,4902 Granvia Altamira,90277,5,4,4210,16100,1985,39,Single Family,33.85824,-118.371965
+7600-023-030,5671 Vista Del Mar,Rancho Palos Verdes,CA,90275,F. Sampleton,,,1892000,Owner,,new,5671 Vista Del Mar,90275,4,4,3080,12500,2018,6,Single Family,33.727952,-118.389404
+7923-023-024,1489 Prospect Ave,Torrance,CA,90503,B. Mockton,,,989000,Owner,,new,1489 Prospect Ave,90503,3,2,1890,8100,1964,5,Single Family,33.826938,-118.348937
+7483-034-049,2303 Silver Spur Rd,Redondo Beach,CA,90277,J. Mockton,,,830000,Owner,,new,2303 Silver Spur Rd,90277,2,1,1270,4700,2015,31,Condo,33.831294,-118.376735
+7457-022-078,709 Camino Real,Redondo Beach,CA,90277,K. Mockton,,,2011000,Owner,,new,709 Camino Real,90277,4,4,3100,13600,1975,32,Single Family,33.831849,-118.3797
+7985-013-096,6596 Deep Valley Dr,Palos Verdes Estates,CA,90274,F. Demoworth,,,2197000,Absentee,,new,1660 Main St,94105,3,2,1890,6000,1982,20,Single Family,33.795252,-118.402548
+7680-024-017,5958 Prospect Ave,Manhattan Beach,CA,90266,K. Testerman,,,3567000,Owner,,new,5958 Prospect Ave,90266,5,4,3760,17800,1999,12,Single Family,33.876499,-118.412427
+7901-032-079,1224 Hawthorne Blvd,Rolling Hills Estates,CA,90274,C. Placeholder,,,2817000,Owner,,new,1224 Hawthorne Blvd,90274,5,5,3910,7300,2006,41,Single Family,33.786851,-118.373444
+7985-020-085,2094 Highland Ave,Palos Verdes Estates,CA,90274,A. Example,,,2679000,Absentee,,new,7877 Main St,91403,5,4,3330,17800,2015,40,Condo,33.795175,-118.398942
+7467-025-003,6294 Silver Spur Rd,Torrance,CA,90503,H. Example,,,1470000,Owner,,new,6294 Silver Spur Rd,90503,5,4,3600,14400,1983,29,Single Family,33.82517,-118.329268
+7981-011-078,3768 Camino Real,Rancho Palos Verdes,CA,90275,G. Mockton,,,1425000,Owner,,new,3768 Camino Real,90275,3,3,1610,3000,1970,13,Single Family,33.737373,-118.388473
+7993-025-078,424 Deep Valley Dr,Rancho Palos Verdes,CA,90275,F. Sampleton,,,2795000,Owner,,new,424 Deep Valley Dr,90275,5,5,3790,9800,2001,40,Single Family,33.759435,-118.38631
+7978-015-097,5803 Rolling Hills Rd,Manhattan Beach,CA,90266,K. Example,,,2500000,Absentee,,new,511 Wilshire Blvd,90210,2,1,1400,5300,2008,12,Single Family,33.868662,-118.40446
+7604-007-070,6115 Granvia Altamira,Manhattan Beach,CA,90266,D. Mockton,,,4070000,Absentee,,new,6818 Main St,94105,5,4,3660,8800,1999,38,Condo,33.875607,-118.420939
+7180-002-098,725 Silver Spur Rd,Rancho Palos Verdes,CA,90275,K. Dummett,,,2132000,Absentee,,new,3005 Ventura Blvd,94105,5,4,3210,13300,1989,20,Single Family,33.742055,-118.390589
+7912-003-027,4755 Vista Del Mar,Rancho Palos Verdes,CA,90275,L. Dummett,,,1910000,Owner,,new,4755 Vista Del Mar,90275,4,4,2900,14900,1984,21,Single Family,33.726604,-118.390923
+7525-002-070,5341 Aviation Blvd,Torrance,CA,90503,J. Sample,,,1018000,Owner,,new,5341 Aviation Blvd,90503,3,3,1990,5300,1952,1,Single Family,33.824167,-118.341431
+7127-001-097,6656 Aviation Blvd,Rancho Palos Verdes,CA,90275,J. Fixture,,,1990000,Owner,,new,6656 Aviation Blvd,90275,4,3,3060,9900,1982,8,Single Family,33.733941,-118.387461
+7104-012-075,375 Rolling Hills Rd,Rancho Palos Verdes,CA,90275,G. Demoworth,,,1295000,Absentee,,new,960 Main St,89109,2,1,1460,7800,1951,6,Single Family,33.736346,-118.390307
+7610-034-047,5143 Camino Real,Redondo Beach,CA,90277,L. Sample,,,1714000,Absentee,,new,3439 Ventura Blvd,94105,3,3,2200,3600,1990,8,Single Family,33.862058,-118.398487
+7675-001-053,1729 Anza Ave,Palos Verdes Estates,CA,90274,E. Demoworth,,,3467000,Owner,,new,1729 Anza Ave,90274,5,4,4540,23200,1954,23,Condo,33.79583,-118.379298
+7203-025-007,1125 Crenshaw Blvd,Manhattan Beach,CA,90266,L. Stubbs,,,3595000,Owner,,new,1125 Crenshaw Blvd,90266,5,5,3360,13000,1955,7,Single Family,33.890617,-118.428792
+7829-005-056,6363 Aviation Blvd,Rolling Hills Estates,CA,90274,J. Dummett,,,2786000,Owner,,new,6363 Aviation Blvd,90274,5,5,3500,11900,1984,31,Condo,33.783694,-118.368613
+7126-035-050,1296 Vista Del Mar,Rolling Hills Estates,CA,90274,G. Sampleton,,,2524000,Absentee,,new,3251 Wilshire Blvd,90210,5,4,4170,7500,2011,21,Single Family,33.780495,-118.339924
+7797-014-036,1729 Granvia Altamira,Rancho Palos Verdes,CA,90275,L. Mockton,,,2283000,Absentee,,new,7222 Main St,94105,5,4,3700,6500,1994,6,Single Family,33.74941,-118.388697
+7785-032-021,4113 Calle Mayor,Palos Verdes Estates,CA,90274,M. Sampleton,,,2848000,Owner,,new,4113 Calle Mayor,90274,4,3,2430,13100,1996,14,Single Family,33.785198,-118.392607
+7598-015-062,767 Deep Valley Dr,Palos Verdes Estates,CA,90274,L. Placeholder,,,3467000,Owner,,new,767 Deep Valley Dr,90274,5,4,4310,22400,1981,19,Single Family,33.796046,-118.379168
+7507-039-019,679 Granvia Altamira,Palos Verdes Estates,CA,90274,G. Stubbs,,,2360000,Owner,,new,679 Granvia Altamira,90274,4,4,2720,10300,2007,31,Single Family,33.783629,-118.393083
+7942-013-051,5217 Prospect Ave,Rancho Palos Verdes,CA,90275,G. Example,,,1870000,Owner,,new,5217 Prospect Ave,90275,4,3,2390,6000,2012,18,Single Family,33.736451,-118.36982
+7721-008-037,3692 Esplanade,Palos Verdes Estates,CA,90274,M. Dummett,,,3360000,Owner,,new,3692 Esplanade,90274,5,5,4740,23300,2000,20,Single Family,33.787052,-118.41131
+7314-036-047,3374 Esplanade,Redondo Beach,CA,90277,J. Placeholder,,,1888000,Owner,,new,3374 Esplanade,90277,4,4,2900,11000,1969,13,Single Family,33.857306,-118.404105
+7392-025-087,4097 Vista Del Mar,Palos Verdes Estates,CA,90274,J. Example,,,2207000,Owner,,new,4097 Vista Del Mar,90274,5,5,3250,11600,1994,37,Single Family,33.772381,-118.398247
+7981-011-055,2138 Anza Ave,Rancho Palos Verdes,CA,90275,E. Example,,,2813000,Owner,,new,2138 Anza Ave,90275,5,5,4730,16500,1965,5,Single Family,33.750458,-118.369745
+7908-021-064,4370 Crenshaw Blvd,Torrance,CA,90503,E. Sampleton,,,1025000,Owner,,new,4370 Crenshaw Blvd,90503,3,2,1860,8500,2007,24,Single Family,33.845654,-118.331275
+7585-027-076,2824 Vista Del Mar,Redondo Beach,CA,90277,C. Stubbs,,,1294000,Absentee,,new,7577 Main St,91403,3,3,1840,3900,1980,15,Single Family,33.846167,-118.398315
+7655-027-015,4834 Granvia Altamira,Rolling Hills Estates,CA,90274,E. Mockton,,,2942000,Owner,,new,4834 Granvia Altamira,90274,5,4,4760,22000,1951,36,Single Family,33.771106,-118.370532
+7768-022-059,4421 Calle Mayor,Manhattan Beach,CA,90266,C. Stubbs,,,3970000,Owner,,new,4421 Calle Mayor,90266,5,5,3950,6800,1979,0,Single Family,33.892184,-118.398134
+7215-022-083,5505 Prospect Ave,Manhattan Beach,CA,90266,A. Dummett,,,2463000,Owner,,new,5505 Prospect Ave,90266,3,3,1600,4200,2010,16,Condo,33.895898,-118.412369
+7306-007-047,4063 Camino Real,Rolling Hills Estates,CA,90274,F. Demoworth,,,2282000,Owner,,new,4063 Camino Real,90274,4,4,2550,13300,1996,40,Condo,33.79453,-118.361872
+7998-019-060,519 Vista Del Mar,Torrance,CA,90503,L. Placeholder,,,650000,Owner,,new,519 Vista Del Mar,90503,2,2,1260,5200,1973,30,Single Family,33.849523,-118.357749
+7226-024-061,6652 Crenshaw Blvd,Rancho Palos Verdes,CA,90275,A. Fixture,,,2163000,Absentee,,new,8143 Ventura Blvd,90210,4,3,2880,6000,2015,29,Single Family,33.726848,-118.394786
+7819-029-004,2120 Rolling Hills Rd,Redondo Beach,CA,90277,M. Placeholder,,,1639000,Absentee,,new,2856 Wilshire Blvd,90210,3,2,2130,10400,1948,41,Single Family,33.860669,-118.388739
+7207-037-077,651 Hawthorne Blvd,Rancho Palos Verdes,CA,90275,C. Sample,,,1333000,Owner,,new,651 Hawthorne Blvd,90275,2,1,1310,6500,1997,6,Single Family,33.739965,-118.387306
+7856-035-046,5600 Silver Spur Rd,Rolling Hills Estates,CA,90274,C. Sample,,,2161000,Owner,,new,5600 Silver Spur Rd,90274,4,4,2680,10400,1978,20,Condo,33.778725,-118.339522
+7563-019-032,4109 Calle Mayor,Redondo Beach,CA,90277,E. Mockton,,,1927000,Owner,,new,4109 Calle Mayor,90277,4,4,2670,8600,1950,38,Condo,33.860853,-118.384431
+7331-032-035,808 Crenshaw Blvd,Torrance,CA,90503,B. Dummett,,,1748000,Owner,,new,808 Crenshaw Blvd,90503,4,3,3170,17000,2014,2,Single Family,33.834651,-118.350744
+7439-009-083,6649 Crenshaw Blvd,Palos Verdes Estates,CA,90274,M. Example,,,2699000,Absentee,,new,4234 Main St,90210,4,4,3090,12000,1967,4,Single Family,33.780741,-118.409731
+7206-028-035,829 Via Campesina,Rancho Palos Verdes,CA,90275,E. Placeholder,,,3264000,Owner,,new,829 Via Campesina,90275,5,4,4380,8600,1984,39,Single Family,33.732736,-118.389192
+7236-003-041,4004 Highland Ave,Rancho Palos Verdes,CA,90275,A. Fixture,,,3120000,Owner,,new,4004 Highland Ave,90275,5,4,4740,7600,1978,39,Condo,33.741712,-118.397505
+7259-011-016,386 Camino Real,Redondo Beach,CA,90277,M. Placeholder,,,2233000,Owner,,new,386 Camino Real,90277,5,4,3640,7900,2002,1,Condo,33.859628,-118.390862
+7369-035-079,5706 Aviation Blvd,Palos Verdes Estates,CA,90274,F. Example,,,1705000,Owner,,new,5706 Aviation Blvd,90274,3,3,1650,4700,1985,13,Single Family,33.785174,-118.389337
+7120-018-080,409 Rolling Hills Rd,Rancho Palos Verdes,CA,90275,A. Dummett,,,2396000,Owner,,new,409 Rolling Hills Rd,90275,5,4,4270,14800,1963,2,Single Family,33.742535,-118.404171
+7648-039-015,5533 Via Campesina,Redondo Beach,CA,90277,M. Sampleton,,,2065000,Absentee,,new,3723 Main St,91403,5,4,4200,21300,1952,27,Single Family,33.859791,-118.400879
+7682-023-015,4954 Calle Mayor,Torrance,CA,90503,J. Testerman,,,650000,Absentee,,new,2359 Ventura Blvd,94105,2,2,1230,2200,1977,25,Single Family,33.83069,-118.352055
+7698-016-086,6210 Highland Ave,Palos Verdes Estates,CA,90274,M. Testerman,,,2476000,Owner,,new,6210 Highland Ave,90274,4,3,2800,6000,2015,41,Condo,33.795892,-118.400475
+7402-010-045,5663 Rolling Hills Rd,Rolling Hills Estates,CA,90274,A. Placeholder,,,1723000,Owner,,new,5663 Rolling Hills Rd,90274,2,2,1590,2700,1991,14,Condo,33.791439,-118.375265
+7398-011-036,4856 Hawthorne Blvd,Palos Verdes Estates,CA,90274,M. Fixture,,,2733000,Owner,,new,4856 Hawthorne Blvd,90274,5,4,3200,17300,2012,23,Single Family,33.795338,-118.401337
+7331-014-098,3711 Rolling Hills Rd,Redondo Beach,CA,90277,C. Sampleton,,,2250000,Absentee,,new,3852 Wilshire Blvd,89109,5,4,4620,20700,1999,5,Single Family,33.863219,-118.40321
+7388-026-044,2893 Vista Del Mar,Rolling Hills Estates,CA,90274,B. Placeholder,,,2432000,Owner,,new,2893 Vista Del Mar,90274,5,4,3820,8700,2008,3,Single Family,33.776335,-118.359409
+7674-034-017,5279 Granvia Altamira,Manhattan Beach,CA,90266,M. Stubbs,,,3677000,Owner,,new,5279 Granvia Altamira,90266,5,5,3390,6900,1968,10,Single Family,33.893976,-118.420769
+7904-035-021,3698 Highland Ave,Manhattan Beach,CA,90266,A. Fixture,,,3129000,Owner,,new,3698 Highland Ave,90266,4,4,3070,14700,1973,29,Single Family,33.877074,-118.41631
+7380-019-009,2859 Calle Mayor,Redondo Beach,CA,90277,E. Sample,,,2211000,Owner,,new,2859 Calle Mayor,90277,5,4,4100,16800,1970,6,Single Family,33.848613,-118.38923
+7696-009-059,3290 Silver Spur Rd,Manhattan Beach,CA,90266,K. Demoworth,,,3541000,Owner,,new,3290 Silver Spur Rd,90266,4,4,2850,5800,1979,19,Single Family,33.899842,-118.39997
+7446-010-088,5512 Camino Real,Rolling Hills Estates,CA,90274,G. Dummett,,,3028000,Owner,,new,5512 Camino Real,90274,5,5,4550,14200,1950,23,Single Family,33.770135,-118.357229
+7574-013-065,3016 Rolling Hills Rd,Palos Verdes Estates,CA,90274,A. Sampleton,,,1826000,Owner,,new,3016 Rolling Hills Rd,90274,3,2,1880,10100,2004,23,Single Family,33.771893,-118.377329
+7323-029-097,6739 Via Campesina,Manhattan Beach,CA,90266,B. Stubbs,,,4328000,Owner,,new,6739 Via Campesina,90266,5,5,4430,11200,1976,10,Single Family,33.883497,-118.403129
+7103-039-054,1736 Palos Verdes Dr,Palos Verdes Estates,CA,90274,F. Fixture,,,3163000,Owner,,new,1736 Palos Verdes Dr,90274,5,5,3620,9900,2013,26,Single Family,33.788143,-118.383394
+7743-020-070,323 Crenshaw Blvd,Redondo Beach,CA,90277,L. Demoworth,,,1429000,Absentee,,new,8235 Main St,90210,2,1,1310,5300,1965,32,Single Family,33.841202,-118.386467
+7330-019-098,4109 Camino Real,Manhattan Beach,CA,90266,D. Dummett,,,3040000,Owner,,new,4109 Camino Real,90266,4,4,2650,4900,1986,3,Single Family,33.886028,-118.418138
+7435-035-019,6596 Hawthorne Blvd,Manhattan Beach,CA,90266,C. Sampleton,,,3564000,Owner,,new,6596 Hawthorne Blvd,90266,5,4,4100,9600,2011,33,Single Family,33.867395,-118.399117
+7717-028-059,381 Silver Spur Rd,Manhattan Beach,CA,90266,C. Testerman,,,2803000,Absentee,,new,7399 Wilshire Blvd,90210,3,3,1800,7600,1954,16,Single Family,33.879931,-118.42285
+7399-023-084,3981 Hawthorne Blvd,Rancho Palos Verdes,CA,90275,K. Sample,,,2809000,Owner,,new,3981 Hawthorne Blvd,90275,5,4,3390,15300,1966,32,Single Family,33.761525,-118.404502
+7996-012-036,5544 Aviation Blvd,Rancho Palos Verdes,CA,90275,L. Example,,,1140000,Owner,,new,5544 Aviation Blvd,90275,3,2,1780,8000,1990,35,Single Family,33.751117,-118.372144
+7820-024-093,3721 Camino Real,Palos Verdes Estates,CA,90274,C. Sampleton,,,3094000,Owner,,new,3721 Camino Real,90274,5,4,4350,12000,1973,19,Single Family,33.778755,-118.407521
+7160-019-055,5342 Highland Ave,Redondo Beach,CA,90277,C. Mockton,,,3003000,Owner,,new,5342 Highland Ave,90277,5,4,4760,22600,1984,3,Single Family,33.832146,-118.377062
+7948-001-032,882 Calle Mayor,Palos Verdes Estates,CA,90274,C. Fixture,,,2919000,Owner,,new,882 Calle Mayor,90274,5,4,3660,17700,1952,3,Condo,33.7737,-118.39369
+7813-021-002,407 Crenshaw Blvd,Redondo Beach,CA,90277,L. Mockton,,,1703000,Owner,,new,407 Crenshaw Blvd,90277,4,3,3130,7700,1993,40,Single Family,33.861317,-118.396794
+7667-008-005,5697 Silver Spur Rd,Rancho Palos Verdes,CA,90275,L. Mockton,,,2329000,Owner,,new,5697 Silver Spur Rd,90275,4,4,2640,11100,1953,27,Single Family,33.727297,-118.390925
+7644-021-013,4123 Granvia Altamira,Rancho Palos Verdes,CA,90275,C. Stubbs,,,1861000,Owner,,new,4123 Granvia Altamira,90275,4,4,2900,12100,1951,33,Condo,33.752178,-118.395975
+7581-029-051,3919 Rolling Hills Rd,Palos Verdes Estates,CA,90274,E. Testerman,,,2697000,Owner,,new,3919 Rolling Hills Rd,90274,4,4,2940,10300,1989,35,Condo,33.784935,-118.382879
+7647-025-056,3077 Palos Verdes Dr,Rolling Hills Estates,CA,90274,L. Sample,,,2541000,Owner,,new,3077 Palos Verdes Dr,90274,5,4,3460,8500,1949,5,Single Family,33.798645,-118.347824
+7352-034-079,4129 Anza Ave,Palos Verdes Estates,CA,90274,G. Sampleton,,,3035000,Owner,,new,4129 Anza Ave,90274,4,4,2770,8300,1998,7,Single Family,33.765559,-118.401467
+7108-008-010,808 Deep Valley Dr,Rancho Palos Verdes,CA,90275,C. Demoworth,,,2443000,Absentee,,new,7916 Wilshire Blvd,91403,5,4,3480,10700,2016,3,Single Family,33.739468,-118.374806
+7759-030-081,109 Via Campesina,Redondo Beach,CA,90277,K. Sample,,,1669000,Absentee,,new,6549 Main St,94105,4,3,2480,10600,1957,27,Condo,33.846693,-118.388409
+7203-027-003,4084 Via Campesina,Rancho Palos Verdes,CA,90275,B. Demoworth,,,2222000,Owner,,new,4084 Via Campesina,90275,4,4,2570,12400,1971,4,Condo,33.755966,-118.381142
+7254-020-046,430 Crenshaw Blvd,Palos Verdes Estates,CA,90274,M. Sample,,,2472000,Owner,,new,430 Crenshaw Blvd,90274,3,2,1940,8500,1950,30,Single Family,33.761063,-118.405174
+7272-035-047,3434 Rolling Hills Rd,Palos Verdes Estates,CA,90274,H. Fixture,,,3080000,Absentee,,new,6600 Main St,90210,5,5,3700,6900,1968,25,Single Family,33.768553,-118.395245
+7288-039-064,2923 Calle Mayor,Palos Verdes Estates,CA,90274,B. Sample,,,2408000,Owner,,new,2923 Calle Mayor,90274,4,3,2760,6200,2012,22,Condo,33.767542,-118.398614
+7549-008-080,6700 Deep Valley Dr,Palos Verdes Estates,CA,90274,M. Mockton,,,2483000,Owner,,new,6700 Deep Valley Dr,90274,5,5,3240,9800,1983,1,Single Family,33.780419,-118.376518
+7816-027-051,411 Crenshaw Blvd,Palos Verdes Estates,CA,90274,A. Stubbs,,,3437000,Owner,,new,411 Crenshaw Blvd,90274,5,4,4320,16200,1982,33,Single Family,33.794647,-118.384458
+7671-023-075,5298 Highland Ave,Palos Verdes Estates,CA,90274,G. Demoworth,,,3274000,Owner,,new,5298 Highland Ave,90274,5,4,4270,20700,1974,5,Single Family,33.782902,-118.406238
+7864-031-067,2428 Anza Ave,Rancho Palos Verdes,CA,90275,F. Demoworth,,,1972000,Absentee,,new,2051 Main St,89109,4,3,2980,13000,2003,26,Single Family,33.728595,-118.369452
+7629-029-033,3508 Calle Mayor,Rolling Hills Estates,CA,90274,J. Example,,,1909000,Absentee,,new,3062 Ventura Blvd,91403,4,4,2470,5600,1984,26,Single Family,33.80327,-118.370836
+7648-004-054,1088 Deep Valley Dr,Redondo Beach,CA,90277,B. Sample,,,1569000,Owner,,new,1088 Deep Valley Dr,90277,3,2,1890,9700,2017,26,Single Family,33.849587,-118.404304
+7923-027-075,2623 Anza Ave,Manhattan Beach,CA,90266,M. Mockton,,,3399000,Owner,,new,2623 Anza Ave,90266,5,4,3360,15000,2005,24,Single Family,33.881748,-118.42628
+7277-010-034,5341 Silver Spur Rd,Manhattan Beach,CA,90266,D. Fixture,,,3470000,Owner,,new,5341 Silver Spur Rd,90266,4,3,2610,6500,1976,9,Single Family,33.888558,-118.416184
+7878-035-064,6028 Calle Mayor,Palos Verdes Estates,CA,90274,G. Dummett,,,3000000,Owner,,new,6028 Calle Mayor,90274,5,4,4100,20500,2007,10,Single Family,33.761236,-118.397342
+7937-005-003,1863 Esplanade,Rancho Palos Verdes,CA,90275,L. Stubbs,,,1524000,Owner,,new,1863 Esplanade,90275,2,1,1550,3600,1974,41,Single Family,33.759589,-118.39871
+7419-005-008,2454 Via Campesina,Rolling Hills Estates,CA,90274,E. Fixture,,,3160000,Owner,,new,2454 Via Campesina,90274,5,4,4250,20200,1987,27,Single Family,33.785718,-118.369617
+7699-001-088,3532 Aviation Blvd,Palos Verdes Estates,CA,90274,H. Placeholder,,,3130000,Owner,,new,3532 Aviation Blvd,90274,5,5,3640,11900,2012,24,Single Family,33.76565,-118.410631
+7110-008-073,5989 Silver Spur Rd,Rancho Palos Verdes,CA,90275,F. Mockton,,,2073000,Owner,,new,5989 Silver Spur Rd,90275,4,4,2700,9200,2017,20,Single Family,33.740774,-118.402972
+7273-011-029,2129 Rolling Hills Rd,Palos Verdes Estates,CA,90274,F. Dummett,,,2760000,Owner,,new,2129 Rolling Hills Rd,90274,4,3,2460,9500,1948,23,Single Family,33.793382,-118.379149
+7626-020-074,5256 Vista Del Mar,Rolling Hills Estates,CA,90274,H. Stubbs,,,2297000,Owner,,new,5256 Vista Del Mar,90274,4,4,2530,6900,1974,36,Single Family,33.778253,-118.353716
+7882-009-033,6644 Deep Valley Dr,Rolling Hills Estates,CA,90274,G. Placeholder,,,2374000,Owner,,new,6644 Deep Valley Dr,90274,4,4,2830,5000,1982,36,Single Family,33.794514,-118.347552
+7397-016-046,3085 Crenshaw Blvd,Rancho Palos Verdes,CA,90275,J. Placeholder,,,2553000,Owner,,new,3085 Crenshaw Blvd,90275,5,4,3620,17800,1976,15,Single Family,33.759892,-118.388527
+7699-026-055,6273 Via Campesina,Torrance,CA,90503,D. Dummett,,,864000,Owner,,new,6273 Via Campesina,90503,3,2,2130,6300,2008,6,Single Family,33.823145,-118.336097
+7902-013-021,5914 Hawthorne Blvd,Torrance,CA,90503,C. Placeholder,,,859000,Absentee,,new,8524 Ventura Blvd,89109,3,2,1620,6300,1992,15,Single Family,33.818699,-118.33008
+7556-003-084,884 Granvia Altamira,Torrance,CA,90503,D. Stubbs,,,1096000,Owner,,new,884 Granvia Altamira,90503,4,4,2320,7200,1990,3,Single Family,33.826416,-118.350535
+7137-005-091,3770 Rolling Hills Rd,Palos Verdes Estates,CA,90274,L. Demoworth,,,2890000,Absentee,,new,3370 Wilshire Blvd,89109,5,5,4280,7500,1979,31,Single Family,33.787431,-118.384879
+7865-005-008,3414 Highland Ave,Palos Verdes Estates,CA,90274,E. Sampleton,,,3219000,Owner,,new,3414 Highland Ave,90274,5,5,4290,14800,1973,0,Single Family,33.767099,-118.377722
+7624-011-079,2140 Palos Verdes Dr,Rolling Hills Estates,CA,90274,K. Dummett,,,2075000,Owner,,new,2140 Palos Verdes Dr,90274,3,2,2090,7200,2014,30,Single Family,33.799366,-118.353463
+7405-013-001,5321 Deep Valley Dr,Rancho Palos Verdes,CA,90275,H. Placeholder,,,2782000,Owner,,new,5321 Deep Valley Dr,90275,5,4,3630,17500,2007,5,Single Family,33.742734,-118.392636
+7823-003-094,5715 Hawthorne Blvd,Torrance,CA,90503,C. Sampleton,,,920000,Absentee,,new,1189 Ventura Blvd,91403,3,2,1960,9200,1962,22,Single Family,33.838226,-118.339235
+7849-030-068,4113 Camino Real,Manhattan Beach,CA,90266,K. Example,,,3280000,Owner,,new,4113 Camino Real,90266,4,4,2840,9100,1983,24,Single Family,33.902664,-118.423109
+7320-008-008,1188 Hawthorne Blvd,Rancho Palos Verdes,CA,90275,L. Stubbs,,,2321000,Owner,,new,1188 Hawthorne Blvd,90275,5,5,3360,14300,1954,34,Single Family,33.739254,-118.380941
+7836-037-043,5514 Anza Ave,Palos Verdes Estates,CA,90274,G. Mockton,,,2717000,Owner,,new,5514 Anza Ave,90274,5,4,3390,18500,2004,41,Single Family,33.779868,-118.409867
+7608-015-093,1554 Crenshaw Blvd,Palos Verdes Estates,CA,90274,J. Placeholder,,,3954000,Owner,,new,1554 Crenshaw Blvd,90274,5,4,4340,16200,1956,9,Single Family,33.782638,-118.394895
+7757-018-049,1619 Vista Del Mar,Rolling Hills Estates,CA,90274,F. Placeholder,,,2888000,Absentee,,new,7803 Main St,91403,5,5,4530,16900,1981,19,Single Family,33.791348,-118.363449
+7627-031-086,4656 Camino Real,Rolling Hills Estates,CA,90274,D. Testerman,,,2144000,Owner,,new,4656 Camino Real,90274,4,3,2910,14400,1958,40,Single Family,33.798166,-118.36701
+7273-014-037,4622 Aviation Blvd,Rancho Palos Verdes,CA,90275,C. Testerman,,,2773000,Owner,,new,4622 Aviation Blvd,90275,5,4,4510,19300,2002,41,Single Family,33.754559,-118.398291
+7461-001-076,970 Silver Spur Rd,Manhattan Beach,CA,90266,F. Demoworth,,,3044000,Owner,,new,970 Silver Spur Rd,90266,4,4,2660,11100,2011,39,Single Family,33.89869,-118.404286
+7482-023-074,3736 Camino Real,Palos Verdes Estates,CA,90274,G. Demoworth,,,2309000,Owner,,new,3736 Camino Real,90274,3,2,2290,4000,2007,7,Single Family,33.789891,-118.397859
+7763-006-096,1935 Esplanade,Rancho Palos Verdes,CA,90275,E. Testerman,,,1780000,Owner,,new,1935 Esplanade,90275,5,5,3260,6000,1975,39,Single Family,33.740345,-118.38042
+7421-016-010,1817 Calle Mayor,Rancho Palos Verdes,CA,90275,D. Example,,,1864000,Owner,,new,1817 Calle Mayor,90275,3,3,1900,6700,1983,9,Single Family,33.739244,-118.388358
+7372-034-048,2367 Vista Del Mar,Redondo Beach,CA,90277,B. Stubbs,,,1498000,Owner,,new,2367 Vista Del Mar,90277,4,3,2400,5100,1955,30,Single Family,33.858489,-118.39517
+7443-019-051,2864 Highland Ave,Manhattan Beach,CA,90266,L. Stubbs,,,2707000,Owner,,new,2864 Highland Ave,90266,3,3,1690,7000,1957,1,Single Family,33.880116,-118.405915
+7401-008-057,3069 Hawthorne Blvd,Rolling Hills Estates,CA,90274,A. Testerman,,,1767000,Absentee,,new,8811 Ventura Blvd,89109,3,2,2220,9200,1958,11,Single Family,33.80543,-118.34568
+7709-001-022,6019 Anza Ave,Palos Verdes Estates,CA,90274,B. Mockton,,,2233000,Owner,,new,6019 Anza Ave,90274,4,3,2630,12000,1965,29,Single Family,33.765914,-118.398599
+7266-004-075,5512 Granvia Altamira,Manhattan Beach,CA,90266,B. Demoworth,,,2442000,Owner,,new,5512 Granvia Altamira,90266,2,1,1230,4300,1963,9,Single Family,33.893942,-118.40228
+7182-008-001,5099 Anza Ave,Redondo Beach,CA,90277,E. Sampleton,,,1141000,Absentee,,new,899 Wilshire Blvd,94105,2,1,1580,5500,1964,20,Condo,33.860776,-118.402319
+7828-026-022,1742 Silver Spur Rd,Rolling Hills Estates,CA,90274,J. Example,,,2721000,Absentee,,new,3604 Wilshire Blvd,89109,5,4,4220,7400,2011,3,Single Family,33.790849,-118.339622
+7236-035-026,1365 Prospect Ave,Rancho Palos Verdes,CA,90275,J. Sample,,,2145000,Owner,,new,1365 Prospect Ave,90275,4,3,2720,13900,1977,0,Single Family,33.746598,-118.37809
+7737-012-016,2758 Via Campesina,Redondo Beach,CA,90277,J. Mockton,,,2546000,Owner,,new,2758 Via Campesina,90277,5,5,4270,22800,1963,8,Single Family,33.832677,-118.393212
+7192-026-077,2387 Vista Del Mar,Torrance,CA,90503,J. Fixture,,,1357000,Absentee,,new,2194 Wilshire Blvd,89109,4,4,2870,9000,1952,21,Single Family,33.852763,-118.336697
+7993-027-059,942 Crenshaw Blvd,Rolling Hills Estates,CA,90274,F. Demoworth,,,2684000,Owner,,new,942 Crenshaw Blvd,90274,5,4,3420,6500,2001,27,Single Family,33.778121,-118.360434
+7692-010-088,914 Anza Ave,Rolling Hills Estates,CA,90274,K. Fixture,,,1715000,Owner,,new,914 Anza Ave,90274,3,3,2060,9500,1953,25,Single Family,33.791357,-118.369098
+7348-025-087,3122 Vista Del Mar,Redondo Beach,CA,90277,E. Sample,,,2427000,Owner,,new,3122 Vista Del Mar,90277,5,4,3870,9400,1975,11,Single Family,33.839049,-118.374618
+7106-021-018,2159 Deep Valley Dr,Rolling Hills Estates,CA,90274,B. Placeholder,,,2464000,Absentee,,new,3964 Main St,89109,5,5,4660,8200,1974,38,Single Family,33.798974,-118.368593
+7843-036-014,1653 Hawthorne Blvd,Rolling Hills Estates,CA,90274,K. Fixture,,,1507000,Owner,,new,1653 Hawthorne Blvd,90274,2,2,1220,6200,1952,1,Single Family,33.792535,-118.359499
+7124-022-070,2775 Via Campesina,Redondo Beach,CA,90277,G. Demoworth,,,1589000,Owner,,new,2775 Via Campesina,90277,3,2,2260,6500,1962,23,Single Family,33.848257,-118.396154
+7595-013-036,4655 Aviation Blvd,Palos Verdes Estates,CA,90274,L. Dummett,,,2497000,Owner,,new,4655 Aviation Blvd,90274,3,3,1710,8900,1977,24,Single Family,33.7897,-118.384786
+7789-024-085,2515 Via Campesina,Rolling Hills Estates,CA,90274,E. Demoworth,,,2747000,Absentee,,new,3341 Ventura Blvd,89109,5,4,4240,11100,2006,16,Single Family,33.790847,-118.358765
+7414-016-051,5346 Vista Del Mar,Rancho Palos Verdes,CA,90275,M. Sampleton,,,2472000,Owner,,new,5346 Vista Del Mar,90275,5,5,3850,11500,1948,36,Single Family,33.752192,-118.37449
+7596-035-031,261 Palos Verdes Dr,Redondo Beach,CA,90277,M. Stubbs,,,1408000,Owner,,new,261 Palos Verdes Dr,90277,3,2,2040,4800,2014,22,Single Family,33.838263,-118.391654
+7923-001-035,2391 Hawthorne Blvd,Manhattan Beach,CA,90266,E. Dummett,,,4235000,Owner,,new,2391 Hawthorne Blvd,90266,5,5,4550,11000,1961,39,Single Family,33.901542,-118.422226
+7729-006-030,4174 Vista Del Mar,Torrance,CA,90503,H. Fixture,,,2002000,Absentee,,new,6069 Ventura Blvd,90210,5,5,4410,24100,2016,0,Single Family,33.847092,-118.354627
+7962-031-090,1209 Highland Ave,Rancho Palos Verdes,CA,90275,M. Example,,,2792000,Owner,,new,1209 Highland Ave,90275,5,4,3590,5900,2008,5,Single Family,33.750528,-118.38679
+7613-020-016,4569 Prospect Ave,Palos Verdes Estates,CA,90274,D. Example,,,2888000,Owner,,new,4569 Prospect Ave,90274,4,3,3000,16200,2006,20,Condo,33.792989,-118.387201
+7399-001-082,4137 Via Campesina,Palos Verdes Estates,CA,90274,B. Dummett,,,2799000,Absentee,,new,6807 Wilshire Blvd,91403,4,4,2980,7500,1996,12,Single Family,33.77592,-118.394662
+7995-018-029,6787 Prospect Ave,Rancho Palos Verdes,CA,90275,G. Example,,,1746000,Absentee,,new,3611 Ventura Blvd,89109,2,1,1280,6200,1959,17,Single Family,33.753575,-118.400749
+7706-020-056,1338 Crenshaw Blvd,Torrance,CA,90503,C. Demoworth,,,1047000,Owner,,new,1338 Crenshaw Blvd,90503,4,3,2410,7000,1978,1,Single Family,33.826513,-118.35002
+7291-039-051,299 Rolling Hills Rd,Manhattan Beach,CA,90266,K. Dummett,,,2820000,Owner,,new,299 Rolling Hills Rd,90266,3,2,2280,10600,1985,28,Single Family,33.8963,-118.420239
+7874-023-049,2206 Silver Spur Rd,Redondo Beach,CA,90277,B. Example,,,1589000,Owner,,new,2206 Silver Spur Rd,90277,3,2,1990,6900,2017,12,Single Family,33.852596,-118.396071
+7290-021-015,4548 Silver Spur Rd,Torrance,CA,90503,E. Fixture,,,709000,Owner,,new,4548 Silver Spur Rd,90503,2,1,1390,6800,2001,35,Single Family,33.838543,-118.328858
+7383-002-093,5264 Camino Real,Torrance,CA,90503,B. Dummett,,,1398000,Owner,,new,5264 Camino Real,90503,5,4,3250,8400,1952,26,Single Family,33.847628,-118.326269
+7263-018-031,5111 Deep Valley Dr,Manhattan Beach,CA,90266,C. Stubbs,,,3605000,Owner,,new,5111 Deep Valley Dr,90266,5,4,3990,16100,1981,9,Single Family,33.871837,-118.403309
+7598-025-091,6122 Deep Valley Dr,Palos Verdes Estates,CA,90274,J. Demoworth,,,3105000,Owner,,new,6122 Deep Valley Dr,90274,5,4,4560,19300,1990,12,Single Family,33.779414,-118.389754
+7593-004-068,5009 Aviation Blvd,Rolling Hills Estates,CA,90274,B. Sampleton,,,1632000,Owner,,new,5009 Aviation Blvd,90274,3,2,2070,7100,1954,2,Single Family,33.793354,-118.36139
+7723-037-013,1714 Rolling Hills Rd,Manhattan Beach,CA,90266,L. Placeholder,,,3450000,Owner,,new,1714 Rolling Hills Rd,90266,4,4,2750,9100,1954,8,Single Family,33.872694,-118.417226
+7692-013-064,3690 Calle Mayor,Palos Verdes Estates,CA,90274,K. Sample,,,1974000,Owner,,new,3690 Calle Mayor,90274,3,3,2030,8600,1967,36,Single Family,33.780036,-118.397349
+7340-032-082,4250 Camino Real,Rancho Palos Verdes,CA,90275,K. Mockton,,,2310000,Absentee,,new,1316 Ventura Blvd,94105,5,5,3650,15400,1952,4,Single Family,33.738983,-118.385144
+7966-020-023,6480 Silver Spur Rd,Palos Verdes Estates,CA,90274,C. Sample,,,2719000,Owner,,new,6480 Silver Spur Rd,90274,4,4,2400,5200,1977,9,Single Family,33.773292,-118.40493
+7105-014-023,6412 Vista Del Mar,Rancho Palos Verdes,CA,90275,A. Placeholder,,,2370000,Owner,,new,6412 Vista Del Mar,90275,4,4,2880,6500,1961,0,Single Family,33.730259,-118.374976
+7126-023-035,3638 Prospect Ave,Palos Verdes Estates,CA,90274,M. Fixture,,,2349000,Owner,,new,3638 Prospect Ave,90274,3,2,1970,9400,1992,24,Single Family,33.789105,-118.394015
+7948-031-033,5296 Crenshaw Blvd,Torrance,CA,90503,F. Stubbs,,,1938000,Owner,,new,5296 Crenshaw Blvd,90503,5,4,4110,13100,1968,13,Single Family,33.837431,-118.352993
+7334-023-010,4410 Deep Valley Dr,Palos Verdes Estates,CA,90274,M. Example,,,2591000,Absentee,,new,6661 Main St,90210,4,4,3030,6100,1972,41,Single Family,33.79314,-118.384862
+7963-016-071,266 Crenshaw Blvd,Rancho Palos Verdes,CA,90275,M. Dummett,,,1627000,Owner,,new,266 Crenshaw Blvd,90275,4,4,2620,13900,1972,30,Single Family,33.732165,-118.377123
+7989-033-001,5664 Vista Del Mar,Rancho Palos Verdes,CA,90275,D. Placeholder,,,1643000,Owner,,new,5664 Vista Del Mar,90275,4,3,2530,9400,1955,19,Single Family,33.739146,-118.380427
+7318-008-084,2016 Aviation Blvd,Manhattan Beach,CA,90266,G. Demoworth,,,3684000,Absentee,,new,7307 Ventura Blvd,90210,5,5,4040,9900,1974,30,Single Family,33.901681,-118.41308
+7611-030-049,1394 Vista Del Mar,Torrance,CA,90503,B. Demoworth,,,1937000,Owner,,new,1394 Vista Del Mar,90503,5,5,4460,22100,2016,14,Single Family,33.821148,-118.353164
+7544-016-096,2010 Deep Valley Dr,Manhattan Beach,CA,90266,L. Placeholder,,,2512000,Owner,,new,2010 Deep Valley Dr,90266,3,3,2050,6100,1995,27,Single Family,33.90147,-118.394523
+7416-006-042,2324 Via Campesina,Manhattan Beach,CA,90266,M. Sample,,,2932000,Owner,,new,2324 Via Campesina,90266,4,3,2910,15400,1986,9,Single Family,33.888331,-118.425997
+7316-011-095,399 Deep Valley Dr,Torrance,CA,90503,L. Placeholder,,,900000,Owner,,new,399 Deep Valley Dr,90503,2,1,1490,5200,1978,3,Single Family,33.852983,-118.327836
+7655-007-077,5910 Calle Mayor,Rancho Palos Verdes,CA,90275,F. Mockton,,,2513000,Absentee,,new,519 Ventura Blvd,90210,5,4,3320,8800,2012,21,Single Family,33.74543,-118.397113
+7579-029-011,6516 Silver Spur Rd,Torrance,CA,90503,C. Placeholder,,,1950000,Owner,,new,6516 Silver Spur Rd,90503,5,4,3730,19100,1981,5,Single Family,33.847816,-118.343523
+7303-008-056,5622 Highland Ave,Manhattan Beach,CA,90266,J. Dummett,,,3253000,Owner,,new,5622 Highland Ave,90266,3,2,2240,5400,2014,34,Condo,33.901563,-118.421476
+7577-037-013,2393 Calle Mayor,Palos Verdes Estates,CA,90274,D. Fixture,,,2920000,Owner,,new,2393 Calle Mayor,90274,4,3,2670,4800,1975,28,Single Family,33.778266,-118.392574
+7724-027-080,195 Via Campesina,Torrance,CA,90503,H. Testerman,,,715000,Owner,,new,195 Via Campesina,90503,2,2,1390,6600,1998,0,Single Family,33.82882,-118.331834
+7289-003-039,2425 Camino Real,Rolling Hills Estates,CA,90274,K. Fixture,,,2555000,Owner,,new,2425 Camino Real,90274,5,5,4260,23000,1991,4,Condo,33.798356,-118.345751
+7821-017-060,620 Vista Del Mar,Palos Verdes Estates,CA,90274,B. Sample,,,2136000,Owner,,new,620 Vista Del Mar,90274,3,2,1650,8900,2007,22,Condo,33.770424,-118.384927
+7854-024-027,3847 Prospect Ave,Manhattan Beach,CA,90266,K. Dummett,,,3031000,Owner,,new,3847 Prospect Ave,90266,2,1,1510,5900,1958,13,Single Family,33.882973,-118.39665
+7317-030-037,707 Calle Mayor,Palos Verdes Estates,CA,90274,B. Stubbs,,,2762000,Owner,,new,707 Calle Mayor,90274,5,4,3400,9200,1971,7,Single Family,33.769928,-118.395606
+7715-017-058,3880 Palos Verdes Dr,Rolling Hills Estates,CA,90274,E. Stubbs,,,2112000,Owner,,new,3880 Palos Verdes Dr,90274,4,4,2630,5600,2018,27,Single Family,33.778014,-118.360674
+7252-019-011,4623 Via Campesina,Rolling Hills Estates,CA,90274,M. Fixture,,,1979000,Owner,,new,4623 Via Campesina,90274,2,1,1400,3300,1987,30,Single Family,33.785468,-118.350223
+7898-009-043,2949 Via Campesina,Manhattan Beach,CA,90266,E. Example,,,3767000,Owner,,new,2949 Via Campesina,90266,5,4,3480,9100,2009,35,Single Family,33.896295,-118.421015
+7383-021-042,2827 Silver Spur Rd,Redondo Beach,CA,90277,A. Sampleton,,,1900000,Absentee,,new,3127 Main St,89109,5,5,3560,15900,1957,18,Single Family,33.839213,-118.401651
+7290-017-037,6082 Highland Ave,Redondo Beach,CA,90277,C. Dummett,,,1022000,Owner,,new,6082 Highland Ave,90277,2,1,1270,5200,2008,14,Single Family,33.8568,-118.372855
+7878-026-011,4883 Palos Verdes Dr,Torrance,CA,90503,G. Fixture,,,1620000,Owner,,new,4883 Palos Verdes Dr,90503,5,5,3480,12900,1979,2,Single Family,33.828424,-118.356835
+7702-007-062,1422 Via Campesina,Manhattan Beach,CA,90266,C. Fixture,,,2805000,Owner,,new,1422 Via Campesina,90266,2,1,1530,4600,2001,8,Single Family,33.879462,-118.420992
+7277-019-059,6164 Vista Del Mar,Rolling Hills Estates,CA,90274,C. Stubbs,,,1942000,Owner,,new,6164 Vista Del Mar,90274,4,3,2970,9500,1956,19,Single Family,33.779506,-118.352887
+7403-029-059,2467 Crenshaw Blvd,Redondo Beach,CA,90277,D. Testerman,,,1966000,Absentee,,new,232 Ventura Blvd,94105,5,4,4480,16100,2000,33,Single Family,33.865666,-118.405573
+7858-021-078,287 Esplanade,Rancho Palos Verdes,CA,90275,B. Sampleton,,,1669000,Owner,,new,287 Esplanade,90275,4,3,2420,11400,2010,24,Single Family,33.728247,-118.378197
+7519-034-074,3294 Aviation Blvd,Torrance,CA,90503,C. Stubbs,,,2240000,Owner,,new,3294 Aviation Blvd,90503,5,4,4260,20100,1968,5,Single Family,33.818657,-118.336709
+7143-031-072,4999 Via Campesina,Rancho Palos Verdes,CA,90275,G. Sampleton,,,1547000,Absentee,,new,5234 Main St,90210,3,2,2120,11300,1995,6,Single Family,33.732936,-118.398747
+7296-001-031,4030 Calle Mayor,Manhattan Beach,CA,90266,M. Testerman,,,4622000,Owner,,new,4030 Calle Mayor,90266,5,5,4360,13100,1979,38,Single Family,33.898282,-118.407974
+7787-017-005,738 Silver Spur Rd,Rolling Hills Estates,CA,90274,A. Stubbs,,,2402000,Absentee,,new,3546 Ventura Blvd,89109,4,3,2550,6100,1971,36,Single Family,33.795417,-118.368605
+7454-008-023,282 Camino Real,Rancho Palos Verdes,CA,90275,K. Example,,,2472000,Owner,,new,282 Camino Real,90275,4,3,3140,5400,2011,24,Single Family,33.740081,-118.383074
+7466-012-002,2812 Silver Spur Rd,Rancho Palos Verdes,CA,90275,M. Stubbs,,,1258000,Absentee,,new,6438 Ventura Blvd,90210,3,2,1820,4900,2008,24,Single Family,33.750547,-118.390677
+7317-013-051,4914 Aviation Blvd,Manhattan Beach,CA,90266,L. Dummett,,,3688000,Owner,,new,4914 Aviation Blvd,90266,5,5,3990,6500,1966,36,Single Family,33.892485,-118.424623
+7911-017-084,5020 Highland Ave,Rancho Palos Verdes,CA,90275,E. Testerman,,,1571000,Absentee,,new,7351 Main St,94105,2,2,1350,5700,1994,3,Single Family,33.734171,-118.374766
+7532-030-016,1301 Deep Valley Dr,Rancho Palos Verdes,CA,90275,K. Dummett,,,1216000,Owner,,new,1301 Deep Valley Dr,90275,2,1,1280,3900,2010,30,Single Family,33.749156,-118.374485
+7336-023-067,4344 Anza Ave,Rancho Palos Verdes,CA,90275,F. Placeholder,,,1671000,Owner,,new,4344 Anza Ave,90275,3,2,2180,10600,1978,5,Single Family,33.747541,-118.386007
+7558-027-096,621 Deep Valley Dr,Torrance,CA,90503,F. Fixture,,,940000,Owner,,new,621 Deep Valley Dr,90503,4,4,2310,10900,1953,22,Single Family,33.848801,-118.335849
+7721-007-094,622 Highland Ave,Manhattan Beach,CA,90266,B. Mockton,,,3276000,Owner,,new,622 Highland Ave,90266,5,5,4660,9600,2002,35,Single Family,33.876862,-118.414209
+7467-029-089,5011 Silver Spur Rd,Torrance,CA,90503,J. Sample,,,938000,Owner,,new,5011 Silver Spur Rd,90503,3,2,2180,6700,1992,13,Single Family,33.819656,-118.333557
