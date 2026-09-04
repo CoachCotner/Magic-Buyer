@@ -76,8 +76,9 @@ export const BUYER_FIELDS = [
  */
 export const CHANNELS = [
   { key: 'letter', label: 'Letter',      descriptor: 'Direct mail',        master: true },
-  { key: 'email',  label: 'Email',       descriptor: 'Cold outreach' },
+  { key: 'email',  label: 'Email',       descriptor: 'To sphere — ask for a forward' },
   { key: 'text',   label: 'Text',        descriptor: 'SMS to past clients' },
+  // Letter goes to homeowners; email and text go to the agent's own sphere.
   { key: 'call',   label: 'Call script', descriptor: 'Phone talk track' },
 ];
 
