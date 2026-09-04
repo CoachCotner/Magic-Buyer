@@ -1,0 +1,21 @@
+# Large media — never commit the webinar recording
+media/*
+!media/README.md
+
+# Extracted frames and audio are regenerable
+phase1/frames/*
+!phase1/frames/.gitkeep
+phase1/audio.wav
+
+# Working lists may contain owner PII — keep out of git
+lists/*.csv
+data/*.csv
+!data/README.md
+
+# Secrets
+.env
+.env.*
+
+node_modules/
+__pycache__/
+*.pyc
