@@ -124,3 +124,18 @@ status column there is no way to run the follow-up cadence the concept depends o
 5. Follow-up cadence — how long after the mail drop does the email/text/call go?
 6. Is the letter genuinely the master that the others derive from, or is each
    channel generated independently?
+
+---
+
+## Update — list size is filter-driven
+
+Confirmed by Lauren from the recording: the count is whatever the filters return.
+It can be near zero or a few hundred; the demo's 68 was simply that area with
+those criteria, not a target the tool aims at.
+
+So **there is no built-in list size**. The 100–150 in the brief is a *campaign
+decision* — how many letters to send for one buyer — not a number the tool
+produces. Implication for our build: after filtering, the recipient list needs a
+way to cap or rank down to a mailable number, and the running count has to be
+visible while criteria are being adjusted, since that is how the user steers
+toward a workable size.
