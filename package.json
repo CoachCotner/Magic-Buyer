@@ -1,0 +1,18 @@
+{
+  "name": "magic-buyer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Buyer-driven off-market listing lead generation",
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "csv-parse": "^5.6.0",
+    "csv-stringify": "^6.5.2",
+    "leaflet": "^1.9.4",
+    "leaflet-draw": "^1.0.4"
+  }
+}

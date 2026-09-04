@@ -137,3 +137,45 @@ The screenshot is small — pasting it directly into chat is the fastest path an
 needs no Drive step at all.
 
 ### Still $0 spent.
+
+---
+
+## 2026-09-04 — Session 1, part 3: started building
+
+Lauren's call: the paid tool is ~$1,600 for the data plus a monthly fee, which
+is not happening. Build the same flow for her own use. Scope settled as LA
+County, since that is where the entire practice is — see docs/DATA_SOURCING.md.
+
+### Cost model, ours vs theirs
+
+| Piece | Theirs | Ours |
+|---|---|---|
+| Software | in the fee | $0, built here |
+| Property data | in the fee | $0, LA County public parcels |
+| Owner names | in the fee | $0, title rep CSV |
+| Skip trace | bundled | per-record, only for who is actually mailed |
+| Letter generation | monthly | Claude API, cents per buyer |
+| Postage + printing | not included | unchanged either way |
+
+The recurring monthly fee goes away entirely. Skip trace remains the only
+per-use data cost, and it is paid per list rather than per month.
+
+### Built this session
+
+- **`server/schema.js`** — one source of truth for every field. The six list
+  columns match the paid tool exactly; `dnc` and `status` are ours. Also carries
+  the buyer profile fields and the five channels. The skip-trace export header is
+  derived here (16 of 20 columns go out; the 4 the service fills in do not).
+- **`server/fairhousing.js`** — screens generated text before saving. Nine
+  categories covering federal FHA classes plus the California FEHA additions
+  (marital status, source of income, military/veteran), a steering check for
+  neighborhood-characterizing language, and the charm-pricing ban from the brief.
+  High severity blocks; medium and low warn.
+- **`test/fairhousing.test.mjs`** — 17 assertions, all passing. Nine violating
+  phrasings caught, six legitimate property-criteria sentences pass clean, and
+  blocking vs warning behaviour verified.
+
+Leaflet and leaflet-draw are vendored from npm rather than a CDN, so the map
+works with no outside network at run time.
+
+### Still $0 spent.
