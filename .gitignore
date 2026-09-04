@@ -3,7 +3,7 @@ media/*
 !media/README.md
 
 # Extracted frames and audio are regenerable
-phase1/frames/*
+phase1/frames/**
 !phase1/frames/.gitkeep
 phase1/audio.wav
 
