@@ -67,13 +67,18 @@ export const BUYER_FIELDS = [
   { key: 'agent_cell',    label: 'Your cell',             type: 'text' },
 ];
 
-/** The five outputs. Social post is last: it does not exist in the paid tool. */
+/**
+ * The four outputs. Letter is the master; the rest derive from it.
+ *
+ * Social post was cut. It is greyed out as "Coming soon" in the paid tool, so
+ * there was nothing to replicate, and it is the one channel that reaches
+ * nobody in particular — the whole point here is reaching a named homeowner.
+ */
 export const CHANNELS = [
-  { key: 'letter', label: 'Letter',      descriptor: 'Direct mail',     master: true },
+  { key: 'letter', label: 'Letter',      descriptor: 'Direct mail',        master: true },
   { key: 'email',  label: 'Email',       descriptor: 'Cold outreach' },
   { key: 'text',   label: 'Text',        descriptor: 'SMS to past clients' },
   { key: 'call',   label: 'Call script', descriptor: 'Phone talk track' },
-  { key: 'social', label: 'Social post', descriptor: 'Nextdoor / Facebook' },
 ];
 
 export const recipientHeader = () => RECIPIENT_FIELDS.map((f) => f.key);

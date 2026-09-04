@@ -179,3 +179,31 @@ Leaflet and leaflet-draw are vendored from npm rather than a CDN, so the map
 works with no outside network at run time.
 
 ### Still $0 spent.
+
+### Decision: social post cut, four channels
+
+Lauren: no social post, emails matter. Both point the same way.
+
+The social post was already the odd one out — greyed out as "Coming soon" in the
+paid tool, so nothing to replicate, and the only channel that reaches nobody in
+particular. Everything else here is addressed to a named homeowner. Cut.
+
+**Channels are now: Letter (master) → Email, Text, Call script.**
+
+#### What this puts on email
+
+Email is now a primary channel, not a nice-to-have, so two things follow:
+
+1. **Email fill rate is the constraint.** His demo showed 43 of 68 with an email
+   (63%). Whatever skip-trace service we pick has to do email append, not just
+   phones — worth confirming it is included rather than a pricier add-on, since
+   some services charge separately for it. Goes on the list of things to check
+   before paying anyone.
+2. **Cold email to homeowners has its own rules**, the same way calling has DNC.
+   CAN-SPAM requires a real physical postal address in the message, accurate
+   headers and subject line, and a working opt-out that gets honored. None of
+   that is onerous, but the generator should produce compliant footers rather
+   than leave it to be remembered per-send. Adding to the Phase 3 build.
+
+The recipient list already carries `email` and `dnc`. An `email_opt_out` column
+will be needed alongside them once sending starts.
