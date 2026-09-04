@@ -16,6 +16,37 @@ Not yet real: the parcel data is synthetic South Bay sample data, because the LA
 County download is blocked by this environment's network policy. Swap in the real
 file and nothing else changes. See `BUILD_NOTES.md`.
 
+
+## Which of these files matter to you
+
+Most of the `.md` files are notes — the project's memory, so decisions don't get
+re-litigated later. Here is the honest sort.
+
+### Edit this one
+
+| File | Why |
+|---|---|
+| **`magic_buyer_letter_master.md`** | Your letter, and therefore your voice. The email, text and call script all derive from it. Change it and everything downstream changes. This is the only file you need to touch. |
+
+### Read once, if you want the reasoning
+
+| File | Answers |
+|---|---|
+| `MAGIC_BUYER_SPEC.md` | What the paid tool actually does, screen by screen |
+| `docs/VALUE_PROBLEM.md` | Why assessed value misleads in California, and what to use instead |
+| `docs/DATA_SOURCING.md` | Why you don't need to buy nationwide property data |
+
+### Ignore unless something looks wrong
+
+`BUILD_NOTES.md` (running log of decisions and costs), `docs/SCREENSHOT_FINDINGS.md`
+and `docs/EMAIL_CHANNEL.md` (what was read off the webinar screenshots). Written so
+a future session can pick up cold — not for you to work through.
+
+### The actual product
+
+The `.md` files are paperwork. The tool is `npm start`. Reading none of them and
+running the app is a perfectly good way to use this.
+
 ## Run it
 
 ```bash
