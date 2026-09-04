@@ -207,3 +207,59 @@ Email is now a primary channel, not a nice-to-have, so two things follow:
 
 The recipient list already carries `email` and `dnc`. An `email_opt_out` column
 will be needed alongside them once sending starts.
+
+---
+
+## 2026-09-04 — Session 1, part 4: the tool works end to end
+
+Built overnight while Lauren was away, on her go-ahead. Phase 1's deliverable
+(`MAGIC_BUYER_SPEC.md`) was done, so this is Phase 3.
+
+### What runs
+
+`npm start` → http://localhost:4000. Four screens matching the spec:
+
+1. **Describe your buyer** — one sentence, parsed into every criterion.
+2. **Criteria** — pre-filled and editable, with a live count and a map offering
+   all three area modes (draw, ZIP, radius).
+3. **Recipients** — the six columns from the paid tool, plus DNC and status.
+   Save as CSV, export for skip trace, import the results back.
+4. **Outreach** — letter, email, text, call script, each with a Copy button and
+   a fair housing verdict above it.
+
+### Verified, not assumed
+
+Driven with a real browser end to end: parse → 8 properties → widen the price
+range → 56 → save list → generate. Screenshots in the session.
+
+Two real bugs the run surfaced and fixed:
+
+- **Skip-trace export 404'd.** `res.download` refuses dotfiles by default and the
+  temp file was named `.skiptrace-*.csv`. Now streamed from memory — no temp file.
+- **Absentee owners had no mailing address.** The API dropped `mail_addr` on the
+  way to the browser, so a saved list could not have been mailed to an absentee
+  owner at all — the single most valuable segment. Now carried through, with
+  `mail_zip` added to the schema.
+
+Also fixed: `hidden` was losing to `display:flex` on the map mode boxes, so the
+ZIP and radius panels showed at once.
+
+### Test coverage — 100 assertions, 4 suites
+
+| Suite | What it holds down |
+|---|---|
+| `parse-buyer` (40) | money in every form, word numbers, "Newton MA" glued state, all pill fields |
+| `filter` (19) | geometry, MLS address matching, owner/absentee, monotonic counts, off-market exclusion |
+| `fairhousing` (17) | nine violation categories caught, six legitimate letters pass clean |
+| `generate` (24) | round numbers, no hype, three bullets, DRE on the letter, a bad note blocked |
+
+### Still open
+
+- **LA County parcel data** — blocked by the network policy. Everything is built
+  against the real schema; it is a file swap.
+- **CRMLS export** — needs Lauren's download to exclude on-market and withdrawn.
+- **Mail merge to PDF** — the one Phase 3 item not yet built.
+- **Skip-trace provider** — still unchosen, still unpaid. Email append must be
+  confirmed as included.
+
+### Still $0 spent.

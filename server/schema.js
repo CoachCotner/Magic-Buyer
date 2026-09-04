@@ -24,6 +24,7 @@ export const RECIPIENT_FIELDS = [
   { key: 'dnc',        label: 'DNC',        source: 'skiptrace',  export: false },
   { key: 'status',     label: 'Status',     source: 'campaign',   export: false },
   { key: 'mail_addr',  label: 'Mailing address', source: 'parcel', export: true },
+  { key: 'mail_zip',   label: 'Mailing ZIP', source: 'parcel',     export: true  },
   { key: 'beds',       label: 'Beds',       source: 'parcel',     export: true  },
   { key: 'baths',      label: 'Baths',      source: 'parcel',     export: true  },
   { key: 'sqft',       label: 'Sq ft',      source: 'parcel',     export: true  },

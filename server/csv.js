@@ -29,3 +29,9 @@ export const slug = (s) =>
   String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60) || 'untitled';
 
 export const listPath = (root, name) => join(root, `${slug(name)}.csv`);
+
+/** Serialize rows to a CSV string — for streaming a download without a temp file. */
+export function toCsvString(rows, header) {
+  const columns = header ?? (rows.length ? Object.keys(rows[0]) : []);
+  return stringify(rows, { header: true, columns });
+}

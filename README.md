@@ -8,8 +8,41 @@ Built for a California (DRE #01242185) South Bay / Palos Verdes practice.
 
 ## Status
 
-Phase 1 (learn from the webinar recording) — **scaffolded, blocked on source media.**
-See `BUILD_NOTES.md` for blockers and decisions.
+**Working end to end on sample data.** Describe a buyer in one sentence, watch the
+count move as you adjust criteria, save the recipient list, and generate all four
+pieces of outreach. 100 tests passing.
+
+Not yet real: the parcel data is synthetic South Bay sample data, because the LA
+County download is blocked by this environment's network policy. Swap in the real
+file and nothing else changes. See `BUILD_NOTES.md`.
+
+## Run it
+
+```bash
+npm install
+npm start          # → http://localhost:4000
+npm test           # 100 assertions across 4 suites
+```
+
+Optional, for Claude-written copy instead of templates:
+
+```bash
+export ANTHROPIC_API_KEY=sk-ant-...
+```
+
+Without a key the generator fills templates, so the tool works offline and on day
+one. Either way every generated piece passes the fair housing screen first.
+
+### Using real data
+
+Drop these in `data/` and restart:
+
+- **`parcels.csv`** — LA County parcels. Same columns as `sample-parcels.csv`;
+  owner names come from your title rep. Sample data is used only when this
+  file is absent.
+- **`on-market.csv`** — a CRMLS export with `address` and `zip`. Every address in
+  it is excluded from results. Include **withdrawn** listings, not just actives
+  and pendings — a withdrawn listing is still under an agency agreement.
 
 ## Phases
 

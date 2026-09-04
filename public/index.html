@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Magic Buyer</title>
+<link rel="icon" href="/favicon.svg">
+<link rel="stylesheet" href="/vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="/vendor/leaflet-draw/leaflet.draw.css">
+<link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">Magic&nbsp;Buyer</div>
+  <nav class="steps">
+    <button class="step" data-goto="1"><span>1</span> Describe</button>
+    <button class="step" data-goto="2"><span>2</span> Criteria</button>
+    <button class="step" data-goto="3"><span>3</span> Recipients</button>
+    <button class="step" data-goto="4"><span>4</span> Outreach</button>
+  </nav>
+  <div class="meta" id="meta"></div>
+</header>
+
+<main>
+
+<!-- ── 1 ─────────────────────────────────────────────── -->
+<section class="screen" id="screen-1">
+  <div class="center">
+    <h1>Describe your buyer</h1>
+    <p class="sub">One sentence is all it takes. The rest fills itself in.</p>
+    <div class="searchrow">
+      <input id="sentence" type="text" autocomplete="off"
+             placeholder="The Kims, 4 bed 3 bath in Palos Verdes Estates CA, $2M-$2.4M, pre-approved">
+      <button id="parse" class="primary">Next &rarr;</button>
+    </div>
+    <p class="try">
+      Try: <button class="linky" id="tryit">"The Kims, 4 bed 3 bath single family in Palos Verdes Estates CA, $2M&ndash;$2.4M, pre-approved, flexible closing, minor updates ok"</button>
+    </p>
+    <div id="parse-flags" class="flags" hidden></div>
+  </div>
+</section>
+
+<!-- ── 2 ─────────────────────────────────────────────── -->
+<section class="screen" id="screen-2" hidden>
+  <div class="split">
+    <div class="panel">
+      <h2 id="buyer-title">Your buyer</h2>
+      <p class="sub" id="buyer-summary">Search criteria &amp; letter content</p>
+
+      <div class="count" id="count">&mdash;</div>
+      <div class="countnote" id="countnote"></div>
+
+      <fieldset><legend>Location</legend>
+        <div class="row3">
+          <label>City<input id="f-city"></label>
+          <label>State<input id="f-state" maxlength="2"></label>
+          <label>ZIP<input id="f-zip"></label>
+        </div>
+      </fieldset>
+
+      <fieldset><legend>Value &amp; size</legend>
+        <div class="row4">
+          <label>Price min<input id="f-price_min" inputmode="numeric"></label>
+          <label>Price max<input id="f-price_max" inputmode="numeric"></label>
+          <label>Sq ft min<input id="f-sqft_min" inputmode="numeric"></label>
+          <label>Sq ft max<input id="f-sqft_max" inputmode="numeric"></label>
+        </div>
+      </fieldset>
+
+      <fieldset><legend>Lot size (sq ft)</legend>
+        <div class="row2">
+          <label>Lot min<input id="f-lot_min" inputmode="numeric"></label>
+          <label>Lot max<input id="f-lot_max" inputmode="numeric"></label>
+        </div>
+      </fieldset>
+
+      <fieldset><legend>Property type</legend><div class="pills" id="p-property_type"></div></fieldset>
+      <fieldset><legend>Beds</legend><div class="pills" id="p-beds"></div></fieldset>
+      <fieldset><legend>Baths</legend><div class="pills" id="p-baths"></div></fieldset>
+      <fieldset><legend>Owner status</legend><div class="pills" id="p-owner_status"></div></fieldset>
+      <fieldset><legend>Years owned</legend><div class="pills" id="p-years_owned"></div></fieldset>
+
+      <hr>
+      <p class="note">These describe the buyer, not the property. They do not filter the list &mdash; they go into the letter.</p>
+      <fieldset><legend>Financing</legend><div class="pills" id="p-financing"></div></fieldset>
+      <fieldset><legend>Closing flexibility</legend><div class="pills" id="p-closing"></div></fieldset>
+      <fieldset><legend>Property condition</legend><div class="pills" id="p-condition"></div></fieldset>
+
+      <fieldset><legend>Anything else?</legend>
+        <textarea id="f-why_area" rows="2" placeholder="e.g. relocating for work, needs a home office, wants a flat yard for a dog"></textarea>
+        <p class="hint">Property and situation only. Never who the buyer is, or who the neighborhood suits.</p>
+        <div id="why-flags" class="flags" hidden></div>
+      </fieldset>
+
+      <button id="to-recipients" class="primary wide">Continue &rarr;</button>
+    </div>
+
+    <div class="mapwrap">
+      <div class="maptools">
+        <button data-mode="draw" class="mode active">Draw a shape</button>
+        <button data-mode="zips" class="mode">ZIP codes</button>
+        <button data-mode="radius" class="mode">Radius</button>
+        <button id="clear-area" class="ghost">Clear selection</button>
+      </div>
+      <div id="zipbox" class="modebox" hidden>
+        <input id="zips" placeholder="90274, 90275, 90277">
+      </div>
+      <div id="radiusbox" class="modebox" hidden>
+        <label>Miles <input id="radius-miles" type="number" value="1.5" min="0.1" step="0.1"></label>
+        <span class="hint">Click the map to place the centre.</span>
+      </div>
+      <div id="map"></div>
+      <div class="mapnote" id="areanote">No area selected &mdash; filtering the whole dataset.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3 ─────────────────────────────────────────────── -->
+<section class="screen" id="screen-3" hidden>
+  <div class="panel wide-panel">
+    <div class="listhead">
+      <div>
+        <h2>Recipients <span id="rcount">0</span></h2>
+        <p class="sub" id="fill">&mdash;</p>
+      </div>
+      <div class="listactions">
+        <input id="listname" placeholder="List name" >
+        <button id="save-list" class="primary">Save list</button>
+        <button id="dl-skiptrace" class="ghost">Export for skip trace</button>
+        <label class="ghost filelabel">Import skip trace<input type="file" id="up-skiptrace" accept=".csv" hidden></label>
+      </div>
+    </div>
+    <div id="import-result" class="banner" hidden></div>
+    <input id="rsearch" class="search" placeholder="Search address, owner, phone, email…">
+    <div class="tablewrap">
+      <table id="rtable">
+        <thead><tr><th>Address</th><th>Owner</th><th>Phone</th><th>Email</th><th class="num">Value</th><th>Type</th><th>DNC</th><th>Status</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <button id="to-outreach" class="primary wide">Write the outreach &rarr;</button>
+  </div>
+</section>
+
+<!-- ── 4 ─────────────────────────────────────────────── -->
+<section class="screen" id="screen-4" hidden>
+  <div class="split">
+    <div class="channels">
+      <h2>Channels</h2>
+      <button class="chan active" data-chan="letter"><b>Letter</b><span>Direct mail &mdash; to the homeowners</span></button>
+      <button class="chan" data-chan="email"><b>Email</b><span>To your sphere &mdash; ask for a forward</span></button>
+      <button class="chan" data-chan="text"><b>Text</b><span>SMS to past clients</span></button>
+      <button class="chan" data-chan="call"><b>Call script</b><span>Phone talk track</span></button>
+      <hr>
+      <div class="buyerfields" id="buyerfields"></div>
+      <button id="generate" class="primary wide">Generate</button>
+      <p class="hint" id="genmode"></p>
+    </div>
+    <div class="panel output">
+      <div id="fh" class="flags" hidden></div>
+      <div class="outhead">
+        <span id="outtitle">Letter</span>
+        <span class="outactions">
+          <button id="copy" class="ghost">Copy</button>
+          <button id="regen" class="ghost">Regenerate</button>
+        </span>
+      </div>
+      <pre id="out" class="out">Fill in your details and press Generate.</pre>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script src="/vendor/leaflet/leaflet.js"></script>
+<script src="/vendor/leaflet-draw/leaflet.draw.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>
