@@ -9,7 +9,8 @@ import { existsSync } from 'node:fs';
 import { parseBuyer, describe } from './parse-buyer.js';
 import { applyFilters, normalizeAddress, deriveOwnerType } from './filter.js';
 import { generateAll, hasApiKey } from './generate.js';
-import { screen } from './fairhousing.js';
+import { screen, isBlocking } from './fairhousing.js';
+import { buildPdf, buildLabels, mailingAddress } from './mailmerge.js';
 import { readCsv, writeCsv, listFiles, slug, listPath, toCsvString } from './csv.js';
 import { RECIPIENT_FIELDS, LIST_COLUMNS, BUYER_FIELDS, CHANNELS, STATUS_VALUES,
          recipientHeader, skipTraceExportHeader } from './schema.js';
@@ -153,6 +154,33 @@ app.patch('/api/lists/:name/status', (req, res) => {
   row.status = status;
   writeCsv(file, rows, recipientHeader());
   res.json({ apn, status });
+});
+
+/** Mail merge: one PDF, one page per recipient, addressed where post actually goes. */
+app.post('/api/lists/:name/merge.pdf', async (req, res) => {
+  const file = listPath(LISTS, req.params.name);
+  if (!existsSync(file)) return res.status(404).json({ error: 'no such list' });
+  const letter = req.body?.letter;
+  if (!letter) return res.status(400).json({ error: 'letter required' });
+
+  // Nothing gets printed that would not pass the screen.
+  const flags = screen(letter, 'letter');
+  if (isBlocking(flags)) return res.status(422).json({ error: 'letter failed the fair housing check', flags });
+
+  const rows = readCsv(file);
+  const pdf = await buildPdf(rows, letter, { skipDnc: false });
+  res.set('content-type', 'application/pdf');
+  res.set('content-disposition', `attachment; filename="${slug(req.params.name)}-letters.pdf"`);
+  res.send(pdf);
+});
+
+/** Envelope / label CSV, same order as the PDF. */
+app.get('/api/lists/:name/labels.csv', (req, res) => {
+  const file = listPath(LISTS, req.params.name);
+  if (!existsSync(file)) return res.status(404).send('no such list');
+  res.set('content-type', 'text/csv; charset=utf-8');
+  res.set('content-disposition', `attachment; filename="${slug(req.params.name)}-labels.csv"`);
+  res.send(buildLabels(readCsv(file)));
 });
 
 /** Buyer profile → four channels, screened. */

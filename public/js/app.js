@@ -389,7 +389,39 @@ function showChannel() {
   const titles = { letter: 'Letter', email: 'Email', text: 'Text', call: 'Call script' };
   $('#outtitle').textContent = titles[state.channel];
   $('#out').textContent = state.channel === 'email' ? `Subject: ${c.subject}\n\n${c.body}` : c;
+  // Mail merge only makes sense for the letter — it is the only piece that gets posted.
+  const isLetter = state.channel === 'letter';
+  $('#merge-pdf').hidden = !isLetter;
+  $('#merge-labels').hidden = !isLetter;
 }
+
+$('#merge-pdf').addEventListener('click', async () => {
+  if (!state.listName) return alert('Save the recipient list first (step 3).');
+  const btn = $('#merge-pdf');
+  btn.textContent = 'Building…';
+  try {
+    const r = await fetch(`/api/lists/${encodeURIComponent(state.listName)}/merge.pdf`, {
+      method: 'POST', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ letter: state.channels.letter }),
+    });
+    if (!r.ok) throw new Error((await r.json()).error || r.statusText);
+    const blob = await r.blob();
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `${state.listName}-letters.pdf`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  } catch (err) {
+    alert(`Could not build the letters: ${err.message}`);
+  } finally {
+    btn.textContent = 'Letters PDF';
+  }
+});
+
+$('#merge-labels').addEventListener('click', () => {
+  if (!state.listName) return alert('Save the recipient list first (step 3).');
+  location.href = `/api/lists/${encodeURIComponent(state.listName)}/labels.csv`;
+});
 
 $('#copy').addEventListener('click', async () => {
   await navigator.clipboard.writeText($('#out').textContent);

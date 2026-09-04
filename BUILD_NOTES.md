@@ -258,8 +258,26 @@ ZIP and radius panels showed at once.
 - **LA County parcel data** — blocked by the network policy. Everything is built
   against the real schema; it is a file swap.
 - **CRMLS export** — needs Lauren's download to exclude on-market and withdrawn.
-- **Mail merge to PDF** — the one Phase 3 item not yet built.
 - **Skip-trace provider** — still unchosen, still unpaid. Email append must be
   confirmed as included.
 
 ### Still $0 spent.
+
+### Mail merge — built
+
+`POST /api/lists/:name/merge.pdf` returns one PDF, one page per recipient, and
+`GET /api/lists/:name/labels.csv` returns envelope labels in the same order.
+
+The detail that matters: **an absentee owner does not live at the property.**
+Mailing the letter to the house sends it to their tenant. Every recipient is
+addressed at their mailing address when one differs, with a small `re: <property
+address>` line so the owner knows which house is meant. The label CSV marks each
+row `property` or `mailing address (absentee)`.
+
+The fair housing screen runs again at this last gate — a letter that fails it
+returns 422 and no PDF is produced. Nothing gets printed that could not be sent.
+
+Verified by rendering the PDF: 8 recipients, 8 pages, correct salutation, address
+block and DRE line.
+
+**Phase 3 is now complete.**
