@@ -203,6 +203,7 @@ td select{font:12px var(--sans);padding:2px 5px;background:var(--card);color:var
   <div class="modesw">
     <button class="mode on" data-mode="buyer">Magic Buyer</button>
     <button class="mode" data-mode="cannon">Cannonball</button>
+    <button class="mode" data-mode="deal">Deal of the Week</button>
   </div>
   <button class="btn quiet" id="dataBtn" style="white-space:nowrap">Data</button>
   <div class="status" id="status"></div>
@@ -439,6 +440,57 @@ td select{font:12px var(--sans);padding:2px 5px;background:var(--card);color:var
         </div>
       </div>
       <div class="sheet report" id="cbOut">Pick a listing on the left, then write the report.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Deal of the Week ───────────────────────── -->
+<section id="dw" hidden>
+  <div class="two">
+    <div class="card">
+      <div class="eyebrow">The listing that’s going viral</div>
+      <h2 style="font-family:var(--serif);font-weight:500;font-size:23px">Deal of the Week</h2>
+      <p style="color:var(--ink-2);font-size:13px;margin:4px 0 14px">
+        Find the listing separating itself on Zillow or Redfin — the one with a save count
+        far above the rest — and use it as the reason to talk to everyone.</p>
+
+      <label class="field"><span>Address</span><input id="dw_addr" placeholder="95 Crawford St"></label>
+      <div class="grid2">
+        <label class="field"><span>City</span><input id="dw_city"></label>
+        <label class="field"><span>Price</span><input id="dw_price" inputmode="numeric" placeholder="1250000"></label>
+      </div>
+      <div class="grid2">
+        <label class="field"><span>Saves on Zillow</span><input id="dw_saves" inputmode="numeric" placeholder="43"></label>
+        <label class="field"><span>Days since it listed</span><input id="dw_days" inputmode="numeric" placeholder="1"></label>
+      </div>
+      <div class="grid2">
+        <label class="field"><span>Beds</span><input id="dw_beds" inputmode="numeric"></label>
+        <label class="field"><span>Sq ft</span><input id="dw_sqft" inputmode="numeric"></label>
+      </div>
+      <label class="field"><span>New listings you scanned this week</span>
+        <input id="dw_scanned" inputmode="numeric" placeholder="47"></label>
+      <label class="field"><span>Why it’s moving</span>
+        <textarea id="dw_why" rows="2" placeholder="e.g. remodelled kitchen, flat yard, priced under the last three comps"></textarea></label>
+
+      <button class="btn block" id="dwWrite">Write the campaign</button>
+      <p style="font-size:11.5px;color:var(--ink-3);margin:8px 0 0">
+        A save rate far above the neighbourhood average is the signal. Roughly 10% of views
+        saving it is exceptional.</p>
+    </div>
+
+    <div>
+      <div id="dwNotice"></div>
+      <div class="outbar">
+        <div style="display:flex;gap:5px;flex-wrap:wrap">
+          <button class="chan on" data-dw="email" style="width:auto;margin:0;padding:7px 11px"><b style="font-size:12.5px">Email your database</b></button>
+          <button class="chan" data-dw="text" style="width:auto;margin:0;padding:7px 11px"><b style="font-size:12.5px">Referral text</b></button>
+          <button class="chan" data-dw="neighbors" style="width:auto;margin:0;padding:7px 11px"><b style="font-size:12.5px">Nearby owners</b></button>
+        </div>
+        <div><button class="btn quiet" id="dwCopy">Copy</button></div>
+      </div>
+      <div class="sheet plain" id="dwOut">Fill in the listing, then write the campaign.</div>
+      <div id="dwList"></div>
     </div>
   </div>
 </section>
@@ -1472,7 +1524,24 @@ function joinOwners(){
   return {matched};
 }
 
+/* From the transcript, verbatim reasoning: "Which of these listings is more
+   likely to convert into an appointment? The one on the market for one day, or
+   the one on the market for 110 days? Clearly the one on the market for 110."
+
+   A one-day listing is usually an agent cancelling and relisting to reset days
+   on market — the seller never failed, so there is nothing to write to them
+   about. Sort by how long it actually sat, and mark the short ones. */
+function rankExpired(list){
+  return [...list].sort((a,b)=>(b.dom||0)-(a.dom||0));
+}
+const domNote = d =>
+  !d ? {label:'no days on market', cls:''}
+  : d <= 7  ? {label:`${d} day${d>1?'s':''} — likely a relist, not a failed sale`, cls:'weak'}
+  : d >= 90 ? {label:`${d} days on market — sat a long time`, cls:'strong'}
+  : {label:`${d} days on market`, cls:''};
+
 function paintExpired(){
+  EXPIRED = rankExpired(EXPIRED);
   $('#cbCount').textContent=EXPIRED.length;
   if(!EXPIRED.length){
     $('#cbList').innerHTML=`<div class="notice warn"><b>No expired listings loaded yet</b>
@@ -1485,9 +1554,18 @@ function paintExpired(){
     ? `<div class="notice warn" style="margin-bottom:9px"><b>${EXPIRED.length-named} without an owner name</b>
        MLS exports name the listing agent, not the owner. Load your title data under
        <b>Data</b> and these fill in automatically by address.</div>` : '';
-  $('#cbList').innerHTML=gap+EXPIRED.map((e,i)=>`<button class="pick" data-i="${i}">
-    <b>${esc(e.address)}</b><em>${esc(e.city)}${e.price?' · '+usd(e.price):''}${e.dom?' · '+e.dom+' days on market':''} · ${esc(e.status)}${
-      e.owner?'':' · no owner name'}</em></button>`).join('');
+  const strong=EXPIRED.filter(e=>(e.dom||0)>=90).length;
+  const weak=EXPIRED.filter(e=>e.dom&&e.dom<=7).length;
+  const lead = `<p style="font-size:12.5px;color:var(--ink-2);margin:0 0 9px">
+    Sorted by how long each sat. ${strong?`<b>${strong}</b> sat 90+ days — start there. `:''}
+    ${weak?`${weak} lasted a week or less, which usually means an agent relisted to reset the clock rather than a seller who failed.`:''}</p>`;
+  $('#cbList').innerHTML=gap+lead+EXPIRED.map((e,i)=>{
+    const d=domNote(e.dom);
+    return `<button class="pick" data-i="${i}">
+    <b>${esc(e.address)}</b><em>${esc(e.city)}${e.price?' · '+usd(e.price):''} · ${esc(e.status)}${
+      e.owner?'':' · no owner name'}<br><span style="color:${
+        d.cls==='strong'?'var(--accent)':d.cls==='weak'?'var(--amber)':'var(--ink-3)'}">${esc(d.label)}</span></em></button>`;
+  }).join('');
   $$('#cbList .pick').forEach(b=>b.onclick=()=>{
     $$('#cbList .pick').forEach(x=>x.classList.remove('on')); b.classList.add('on');
     CB=EXPIRED[+b.dataset.i]; $('#cbForm').hidden=false;
@@ -1613,12 +1691,146 @@ $('#cbPdf').onclick=async()=>{
 /* mode switch */
 $$('.modesw .mode').forEach(b=>b.onclick=()=>{
   $$('.modesw .mode').forEach(x=>x.classList.remove('on')); b.classList.add('on');
-  const cannon=b.dataset.mode==='cannon';
-  $('#cb').hidden=!cannon;
-  [1,2,3,4].forEach(i=>{ if(cannon) $('#s'+i).hidden=true; });
-  $$('.rail button').forEach(x=>x.style.display=cannon?'none':'');
-  if(cannon) paintExpired(); else go(step);
+  const mode=b.dataset.mode;
+  $('#cb').hidden = mode!=='cannon';
+  $('#dw').hidden = mode!=='deal';
+  const away = mode!=='buyer';
+  [1,2,3,4].forEach(i=>{ if(away) $('#s'+i).hidden=true; });
+  $$('.rail button').forEach(x=>x.style.display=away?'none':'');
+  if(mode==='cannon') paintExpired();
+  else if(mode==='deal'){ if(!$('#dw_city').value && S.c.city) $('#dw_city').value=S.c.city; }
+  else go(step);
 });
+
+/* ═══════ Deal of the Week ═══════
+   The visible half is an email about a listing that is going viral. The half
+   everyone misses — his words — is that the same listing hands you a mailing
+   list: every similar home nearby whose owner would want to know their
+   neighbourhood just got hot.
+
+   Three audiences, one listing:
+     email     → your database
+     text      → ten people from your sphere, the infinite referral script
+     neighbors → owners of comparable homes near it, drawn from your own data */
+let DW=null, DWCH='email', DWNEAR=[];
+
+function dealInputs(){
+  const n=id=>{ const v=parseFloat(String($('#'+id).value).replace(/[^0-9.]/g,'')); return Number.isFinite(v)?v:0; };
+  return { addr:$('#dw_addr').value.trim(), city:$('#dw_city').value.trim(),
+    price:n('dw_price'), saves:n('dw_saves'), days:n('dw_days'),
+    beds:n('dw_beds'), sqft:n('dw_sqft'), scanned:n('dw_scanned'),
+    why:$('#dw_why').value.trim() };
+}
+
+/* Comparable homes near the hot one, from whatever data is loaded. */
+function nearbyLike(d){
+  if(!PARCELS.length) return [];
+  const city=d.city.toLowerCase();
+  const lo=d.price?d.price*0.8:null, hi=d.price?d.price*1.2:null;
+  return PARCELS.filter(p=>{
+    if(city && String(p.city||'').toLowerCase()!==city) return false;
+    if(normAddr(p.address,p.zip)===normAddr(d.addr,'')) return false;   // not the listing itself
+    if(lo&&hi){ const v=Number(p.value)||0; if(v&&(v<lo||v>hi)) return false; }
+    if(d.beds && Number(p.beds) && Math.abs(Number(p.beds)-d.beds)>1) return false;
+    return true;
+  });
+}
+
+function dealCopy(d, agent){
+  const saveLine = d.saves
+    ? `${d.saves} ${d.saves===1?'buyer':'buyers'} saved it${d.days?` in the first ${d.days===1?'24 hours':`${d.days} days`}`:''}`
+    : 'it is getting an unusual amount of attention';
+  const scan = d.scanned ? `I ran my weekly scan across the ${d.scanned} homes that came on in ${d.city||'the area'}. ` : '';
+  const why = d.why ? `${d.why.charAt(0).toUpperCase()}${d.why.slice(1).replace(/\.$/,'')}. ` : '';
+
+  const email = {
+    subject: `${d.saves?`${d.saves} buyers saved this in ${d.days===1?'a day':'days'}`:'The one listing separating itself'}${d.city?` in ${d.city}`:''}`,
+    body: [
+`${scan}One of them is already separating itself from the rest.`,``,
+`${d.addr}${d.city?`, ${d.city}`:''}${d.price?` — ${money(d.price)}`:''}`,``,
+`${saveLine}. ${why}There are two markets right now: homes that sit, and homes that sell. This one is going to sell.`,``,
+`If you have been watching this area, or you know anyone who has, this is the one to look at. Reply and I will send you everything I have on it.`,``,
+agent.agent_name||'[your name]', agent.agent_cell||''].filter(x=>x!==undefined).join('\n')
+  };
+
+  const text =
+`Hey [name], hope all's well. I just came across this listing and it immediately made me think of you. ` +
+`There's a home ${d.city?`in ${d.city}`:'nearby'} going viral right now — ${saveLine}${d.why?`, ${d.why.charAt(0).toLowerCase()}${d.why.slice(1).replace(/\.$/,'')}`:''}. ` +
+`I know you're not looking to make a move, but because you're so well connected I wanted to put it on your radar. ` +
+`Is it worth sharing with someone you know?`;
+
+  const neighbors = [
+`Subject: A home near you is getting a lot of attention`,``,
+`I am a real estate agent here in ${d.city||'the area'}, and I am writing because of one listing rather than because of your house.`,``,
+`${d.addr}${d.price?`, listed at ${money(d.price)}`:''}, ${saveLine.toLowerCase()}. ${why}When one home in an area moves like that, it tends to reset what people think the street is worth — including yours.`,``,
+`I am not asking you to sell. If it has been a while since anyone gave you a straight number on your home, I am happy to put one together. No obligation, and no listing conversation attached.`,``,
+`${agent.agent_name||'[your name]'}${agent.agent_cell?`\n${agent.agent_cell}`:''}`].join('\n');
+
+  return {email, text, neighbors};
+}
+
+async function writeDeal(){
+  const d=dealInputs();
+  if(!d.addr) return notice('#dwNotice','warn','Add the address first',[]);
+  let agent={}; try{ agent=JSON.parse(localStorage.getItem('mb_agent')||'{}'); }catch{}
+  DW=dealCopy(d,agent);
+  DWNEAR=nearbyLike(d);
+  showDeal();
+
+  const all=[DW.email.subject,DW.email.body,DW.text,DW.neighbors].join('\n');
+  const f=screen(all,'deal of the week');
+  f.ok ? notice('#dwNotice','ok','Fair housing check passed',['Describes the listing and the market, not who should live there.'])
+       : notice('#dwNotice', blocking(f)?'bad':'warn', blocking(f)?'Do not send':'Worth a look',
+          f.flags.map(x=>`<b>${esc(x.category)}</b> — “${esc(x.phrase)}”. ${esc(x.why)}`));
+}
+$('#dwWrite').onclick=writeDeal;
+
+$$('[data-dw]').forEach(b=>b.onclick=()=>{
+  $$('[data-dw]').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+  DWCH=b.dataset.dw; showDeal();
+});
+
+function showDeal(){
+  if(!DW){ return; }
+  const out=$('#dwOut');
+  out.textContent = DWCH==='email' ? `Subject: ${DW.email.subject}\n\n${DW.email.body}`
+    : DWCH==='text' ? DW.text : DW.neighbors;
+
+  const host=$('#dwList');
+  if(DWCH!=='neighbors'){
+    host.innerHTML = DWCH==='text'
+      ? `<div class="notice ok" style="margin-top:12px"><b>Ten people, not a hundred</b>
+         Pick ten from your sphere and send it. At ten a week you reach 150 contacts in
+         fifteen weeks, then start again with “thanks for the referral last time — I have another one for you”.</div>`
+      : '';
+    return;
+  }
+  if(!DWNEAR.length){
+    host.innerHTML=`<div class="notice warn" style="margin-top:12px"><b>No comparable homes loaded</b>
+      Load property data for this city under <b>Data</b>, and this becomes a mailing list of
+      every similar home near the listing.</div>`;
+    return;
+  }
+  const withPhone=DWNEAR.filter(p=>p.phone).length, withEmail=DWNEAR.filter(p=>p.email).length;
+  host.innerHTML=`<div class="notice ok" style="margin-top:12px">
+    <b>${DWNEAR.length.toLocaleString()} comparable homes near it</b>
+    <ul><li>${withPhone} with a phone · ${withEmail} with an email</li>
+    <li>Same city, within 20% of the price, and within one bedroom</li></ul></div>
+    <div class="tblwrap" style="margin-top:10px;max-height:34vh"><table><thead><tr>
+      <th>Address</th><th>Owner</th><th class="right">Value</th><th>Type</th></tr></thead><tbody>${
+      DWNEAR.slice(0,150).map(p=>`<tr><td>${esc(p.address)}<span class="sub">${esc(p.city)}</span></td>
+        <td>${esc(p.owner)||'<span class="none">—</span>'}</td>
+        <td class="right">${usd(p.value)}</td>
+        <td><span class="chip${p.type==='Absentee'?' abs':''}">${esc(p.type)}</span></td></tr>`).join('')}
+    </tbody></table></div>
+    <button class="btn quiet" id="dwExport" style="margin-top:9px">Export this list</button>`;
+  const btn=$('#dwExport');
+  if(btn) btn.onclick=()=>offer(`${($('#dw_addr').value.trim()||'deal').replace(/[^\w]+/g,'-').toLowerCase()}-nearby.csv`,
+    toCsv(DWNEAR.map(p=>Object.fromEntries(SKIP_COLS.map(c=>[c,p[c]??'']))),SKIP_COLS));
+}
+
+$('#dwCopy').onclick=async()=>{ try{ await navigator.clipboard.writeText($('#dwOut').textContent);
+  $('#dwCopy').textContent='Copied'; setTimeout(()=>$('#dwCopy').textContent='Copy',1400);}catch{} };
 
 /* ═══════ boot ═══════ */
 function setStatus(){
