@@ -110,3 +110,74 @@ trustee sale, so the useful window is filings from roughly three months back.
 Older lead sheets are worth loading — the same dedupe key handles them, and the
 interesting question is which NODs from June and July have *not* since sold or
 cured.
+
+---
+
+## Never trust the owner name on a lead sheet
+
+Two of the thirteen South Bay filings have now been checked against the recorder,
+and both were wrong — in different ways.
+
+**2414 Alvord Ln — the status was stale.** The filing was already over. Sold
+08/19/2026, lien reconveyed 08/26. Both the 09/01 and 09/04 pulls still list it
+as live. See `docs/REVERSE_MORTGAGE.md`.
+
+**23030 Kathryn Ave — the owner is stale by four years.** The lead sheet names
+**John S Lee**. He sold in March 2022.
+
+| | |
+|---|---|
+| APN | 7530-018-002 |
+| Grant deed | dated 03/08/2022, recorded 2022.347378, Lawyers Title, escrow 03-019795-WB |
+| Grantors | **John S. Lee and Izumi Sagara**, husband and wife as community property |
+| Grantee | **Ronald E. Arbolida, Trustee of the A and B Family Trust dated 10/01/2021** |
+| Owner mailing address | 22850 Crenshaw Blvd **Suite 205**, Torrance — not the property |
+| Documentary transfer tax | **$280.50**, computed on full value **less liens and encumbrances remaining at time of sale** |
+| 2025 assessed | $1,537,051 (land $1,320,566 / improvements $216,485) · tax **$17,052.28** · **no homeowner's exemption** |
+| House | 4bd / 2ba, 1,443 sq ft, built 1954, 5,222 sq ft lot, one story |
+
+Note the spelling: the deed says **Arbolida**. The property report renders it
+"Arblida." The deed is authoritative.
+
+### What the transfer tax says
+
+At LA County's $1.10 per $1,000, $280.50 means **$255,000** of taxable
+consideration — and the checked box says that figure is net of encumbrances that
+**remained on the property at the time of sale**. A buyer who obtained new
+financing and paid off the seller's loan would have been taxed on full value,
+which here would have been roughly $1,600.
+
+So Arbolida appears to have taken title **subject to** existing financing, paying
+about $255,000 for the equity. The 2022 base year value of $1,448,400 grows at
+Prop 13's 2% to exactly the $1,537,051 now assessed, which confirms the March
+2022 transfer as the reassessment event.
+
+### Why that matters, and what to confirm
+
+The foreclosing lender is Finance of America Mortgage LLC on a $772,500 loan,
+$74,262 in arrears. **If that deed of trust was recorded before March 2022, it is
+still John Lee's loan.** In a subject-to structure the seller stays personally
+liable on the note while the buyer holds title — so if the buyer stops paying,
+the seller's credit is destroyed and he has no power to fix it, because he does
+not own the house.
+
+**One pull resolves it:** the transaction history for APN 7530-018-002, to date
+the Finance of America deed of trust. Before 03/2022 means it is Lee's note.
+
+Two different people, two different letters:
+
+- **Ronald E. Arbolida** owns it and is the only one who can sell. Absentee
+  investor at a Crenshaw Boulevard suite, no homeowner's exemption, a $17,000
+  annual tax bill, and about $255,000 of his own money in a property heading to
+  auction. That is an arithmetic conversation, not a distress one.
+- **John S. Lee** cannot sell and may not know any of this is happening. Whether
+  to write to him at all waits on the deed of trust date — and never to 23030
+  Kathryn, which he has not owned since 2022.
+
+### The rule
+
+Owner names on foreclosure lead sheets are unreliable in both directions — a
+filing that is already resolved, and a name that has not owned the property in
+years. **Resolve current vesting by APN before writing to anyone.** Writing to
+John Lee at Kathryn Avenue would have put a foreclosure letter in a stranger's
+mailbox with the wrong person's name on it.
