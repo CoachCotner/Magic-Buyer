@@ -403,3 +403,31 @@ knows before committing.
 One thing Cole does *not* do: it will not make a DNC-flagged number callable. For
 the 11 mail-only rows it either finds a different number that happens to be
 clean, or it confirms the same wall. It is not an unlock.
+
+## Sept 5 — the contact gap is 9 records, not 99
+
+Rebuilt the count as an actual worklist (`lists/contact_worklist.csv`) instead of
+a total, and the number collapsed:
+
+| | Count | Why |
+|---|---|---|
+| Need a manual lookup **now** | **9** | 8 foreclosure owners with no phone on any file, plus Highridge #311 where every number is DNC-flagged |
+| Already have contact | 5 | 4 expired/FSBO rows with clean phones and emails, 1 foreclosure with a phone |
+| Should not be contacted as distress | 4 | HOA liens in the low four figures — Carson x2, Hawthorne, Redondo N PCH |
+| **Blocked behind Realist, not behind a people-search** | **75** | multi-unit, no owner *name* at all — cannot look up a person you cannot name |
+
+That last row is the point. The 75 multi-unit owners were the bulk of the
+"99-record gap" used to size the Cole decision, and none of them are a
+people-search problem. They are an APN → Realist problem. Realist returns owner
+name and mailing address, and mail does not need a phone number. Only if she
+later wants to *call* those owners does a contact vendor enter the picture, and
+by then she will know how many of the 75 are trusts and LLCs that a household
+database cannot resolve anyway.
+
+So: nine lookups. Fifteen minutes. No vendor, no automation, no $795.
+
+Cole stays a no. Revisit only on the Deal of the Week trigger already recorded.
+
+TruePeopleSearch is no longer free either (per Lauren, 09/05). The free
+people-search era is closing generally — treat any of them as a one-off manual
+tool, never as a data source the app depends on.
