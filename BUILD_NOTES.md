@@ -352,3 +352,54 @@ submission identifies the property. The export needs a `vip_code` column and the
 generator needs to mint the codes.
 
 Costs money: nothing new.
+
+## Sept 5 — Cole Information, $795/yr unlimited: not yet
+
+**Costs money. Evaluated, recommended against for now.**
+
+Cole Realty Resource / Cole Information sells an unlimited seat at $795/yr. What
+it gives that nothing else in the stack does: consumer phone and email keyed to a
+household, **with DNC status flagged**, plus radius search around an address and
+CSV export.
+
+The gap it would fill today, counted against real files:
+
+| Gap | Records |
+|---|---|
+| Multi-unit owners — no name, phone or email in the MLS export | 75 |
+| South Bay foreclosure filings with no phone (12 of 13) | 12 |
+| Expired/FSBO rows where every number is DNC-flagged | 11 |
+| **Total** | **~99** |
+
+Ninety-nine records is roughly $25 of per-hit skip trace. $795 buys unlimited,
+and unlimited is not what a 99-record gap needs.
+
+Three reasons to wait rather than buy:
+
+1. **Check the association first.** A lot of REALTOR associations and MLSs carry
+   Cole as an included member benefit. CRMLS product dashboard and SBAOR member
+   benefits. Either $0 or $795 — worth the five minutes.
+2. **The machine isn't built.** Foreclosure mode and multi-unit mode don't exist
+   yet. Buying data ahead of the tool that consumes it is exactly how the Realist
+   export burned 5,000 records and produced no file. That already happened once
+   on this project.
+3. **Cole is weakest where the gap is biggest.** 75 of the 99 records are
+   multi-unit owners, and multi-unit owners are disproportionately LLCs, trusts
+   and out-of-area managers. Cole is a *household* database — it is built to
+   answer "who lives at this address." It will whiff on "Smith Family Trust c/o a
+   property manager in Irvine." Cole is also historically landline-heavy, which
+   is a poor fit for beach-city owners.
+
+**Revisit when Deal of the Week becomes weekly.** Circle prospecting is the one
+use here that is genuinely unlimited-shaped: 200 neighbors a week is 10,000
+records a year, and at that volume $795 is cheap and per-hit pricing is not. That
+is the trigger, not the current list.
+
+**Before signing anything:** confirm the term. Annual data contracts are usually
+12-month commitments with auto-renew, and "unlimited" usually carries a fair-use
+cap. Ask for both in writing, and ask for a trial to test coverage on a block she
+knows before committing.
+
+One thing Cole does *not* do: it will not make a DNC-flagged number callable. For
+the 11 mail-only rows it either finds a different number that happens to be
+clean, or it confirms the same wall. It is not an unlock.
