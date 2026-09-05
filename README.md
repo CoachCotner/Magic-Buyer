@@ -1,3 +1,5 @@
+**Start here: [STATUS.md](STATUS.md)** — the four tactics, what each needs, and what to do this week.
+
 # Magic Buyer
 
 For one real, pre-approved buyer, find 100–150 off-market homes that match their
