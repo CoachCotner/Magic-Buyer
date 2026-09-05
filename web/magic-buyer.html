@@ -224,8 +224,12 @@ td select{font:12px var(--sans);padding:2px 5px;background:var(--card);color:var
       A farm list from your title rep is the easiest source — one CSV with owner names,
       mailing addresses and property details already joined. Column names don’t matter.
     </p>
+    <label style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-2);margin-bottom:9px">
+      <input type="checkbox" id="appendMode" checked style="width:auto;margin:0"> Add to what’s already loaded
+    </label>
     <button class="btn quiet" id="upParcels">Choose parcel CSV…</button>
     <div id="parcelReport"></div>
+    <div id="areaSummary"></div>
 
     <hr>
     <div class="eyebrow">2 · Currently listed (optional)</div>
@@ -1125,11 +1129,29 @@ $('#dataPanel').onclick=e=>{ if(e.target.id==='dataPanel') $('#dataPanel').hidde
 $('#upParcels').onclick=()=>filePick(text=>{
   try{
     const {parcels,map}=adoptParcels(parseCsv(text));
-    PARCELS=parcels; USING_OWN=true; bounds=null;
-    const abs=parcels.filter(p=>p.type==='Absentee').length;
-    reportMapping('#parcelReport',map,parcels.length,
-      `<div style="margin-top:4px">${abs.toLocaleString()} absentee · ${(parcels.length-abs).toLocaleString()} owner-occupied</div>`);
-    persist(); setStatus(); recount();
+    const append=$('#appendMode').checked && USING_OWN;
+    let added=parcels, dupes=0;
+    if(append){
+      // Areas arrive as separate files — merge them, keyed on APN then address,
+      // so a second pull of the same city updates rather than duplicates.
+      const key=p=>String(p.apn).startsWith('row-') ? normAddr(p.address,p.zip) : String(p.apn).trim();
+      const have=new Map(PARCELS.map(p=>[key(p),p]));
+      added=[];
+      for(const p of parcels){
+        const k=key(p);
+        if(have.has(k)){ Object.assign(have.get(k),p); dupes++; }
+        else { have.set(k,p); added.push(p); }
+      }
+      PARCELS=[...have.values()];
+    } else {
+      PARCELS=parcels;
+    }
+    USING_OWN=true; bounds=null;
+    const abs=PARCELS.filter(p=>p.type==='Absentee').length;
+    reportMapping('#parcelReport',map,PARCELS.length,
+      `<div style="margin-top:4px">${append?`${added.length.toLocaleString()} new · ${dupes.toLocaleString()} updated · `:''}`+
+      `${abs.toLocaleString()} absentee · ${(PARCELS.length-abs).toLocaleString()} owner-occupied</div>`);
+    persist(); setStatus(); recount(); paintAreas();
   }catch(err){ $('#parcelReport').innerHTML=`<div class="notice bad"><b>Couldn’t read that file</b>${esc(err.message)}</div>`; }
 });
 
@@ -1177,11 +1199,22 @@ $('#upMls').onclick=()=>filePick(text=>{
   }catch(err){ $('#mlsReport').innerHTML=`<div class="notice bad"><b>Couldn’t read that file</b>${esc(err.message)}</div>`; }
 });
 
+function paintAreas(){
+  const host=$('#areaSummary'); if(!host) return;
+  if(!USING_OWN){ host.innerHTML=''; return; }
+  const by={};
+  for(const p of PARCELS){ const c=p.city||'(no city)'; (by[c]??={n:0,owner:0}); by[c].n++; if(p.owner) by[c].owner++; }
+  const rows=Object.entries(by).sort((a,b)=>b[1].n-a[1].n);
+  host.innerHTML=`<div class="notice ok" style="margin-top:10px"><b>Areas loaded</b>
+    <div class="maprow" style="grid-template-columns:1fr auto">${rows.map(([c,v])=>
+      `<b>${esc(c)}</b><span>${v.n.toLocaleString()}${v.owner<v.n?` · ${v.n-v.owner} without a name`:''}</span>`).join('')}</div></div>`;
+}
+
 $('#resetData').onclick=()=>{
   PARCELS=SEED.rows.map(r=>Object.fromEntries(SEED.keys.map((k,i)=>[k,r[i]])));
   EXCLUDE=new Set(); USING_OWN=false; bounds=null;
   try{ localStorage.removeItem('mb_parcels'); localStorage.removeItem('mb_excl'); }catch{}
-  $('#parcelReport').innerHTML=''; $('#mlsReport').innerHTML='';
+  $('#parcelReport').innerHTML=''; $('#mlsReport').innerHTML=''; $('#areaSummary').innerHTML='';
   setStatus(); recount();
 };
 
@@ -1364,7 +1397,7 @@ function setStatus(){
       : '<span class="tag">SAMPLE DATA</span>'}${EXCLUDE.size?` · ${EXCLUDE.size} listed excluded`:''}<br>`+
     `<span style="opacity:.85">${SAMPLE?'Claude writes the copy':'templates — Claude unavailable here'}</span>`;
 }
-restore(); setStatus(); go(1); $('#sentence').focus();
+restore(); setStatus(); paintAreas(); go(1); $('#sentence').focus();
 
 (async()=>{
   if(!window.claude?.use) return;
