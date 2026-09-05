@@ -456,3 +456,30 @@ death, partial SSN, parents' names. Recorded documents routinely carry that. It
 must never reach a mail merge, a generated letter, or an export. The foreclosure
 mode should read recorded documents for *status only* — is the filing still
 live — and discard the rest.
+
+## Sept 5 — stop doing forensics; the system is mail-and-filter
+
+Four hours went into per-property research on three filings. Two of the three
+came off the list as a result (Alvord sold; Kathryn's owner is a loan officer at
+the foreclosing lender, DRE #01150256, who can list it himself). That was worth
+it once — it produced the reverse-mortgage rule, the stale-owner rule and the
+APN join rule. It is not an operating model.
+
+The operating model is the paid tool's: mail the list, research the responders.
+
+**The foreclosure mode therefore does the following on upload, automatically,
+and nothing else requires a human before the mail goes out:**
+
+1. Dedupe filings on `(APN, document_number)`.
+2. Join to a Realist export **by APN** for current owner and mailing address.
+3. Flag `stale owner` where the lead-sheet name does not match Realist vesting.
+4. Flag `reverse mortgage` where `loan_amt ÷ 1.5` lands on an FHA HECM limit,
+   or the lender name matches a reverse lender. Suppress LTV on those rows.
+5. Flag `HOA lien` where the beneficiary is an association and the amount is
+   small relative to value. Exclude from the distress letter.
+6. Flag `auction inside mail window` where a sale date is within ~10 days.
+7. Mint a VIP code per recipient; carry it as an export column.
+8. Produce letters: standard, reverse-mortgage/estate, and skip.
+
+Verification of live status against the recorder happens **on response**, not
+before mailing. Kathryn Ave is struck.
