@@ -33,16 +33,18 @@ liens, stale owners, and auctions inside the mail window; mint VIP codes;
 produce three letter variants. Verification against the recorder happens when
 someone responds, not before.
 
-## Broker email — send once, covers everything distress
+## Compliance — one question, when it comes up
 
-> I want to prospect homeowners with recorded NODs and trustee sale notices in
-> the South Bay and list the ones that make sense to sell.
-> 1. Any required disclosure or addendum on a listing with a recorded notice?
-> 2. Required form for third-party authorization to speak with a servicer?
-> 3. Broker review needed before soliciting an owner in foreclosure?
-> 4. If I bring an investor buyer, that buyer is an equity purchaser under Civil
->    Code §1695 — five-business-day rescission, required contract and notice.
->    What form does eXp want, and does E&O cover me on that side?
+The listing side needs no permission: listed with Lauren, written third-party
+authorization, no separate fee, paid from commission. That is licensed activity.
+
+The one question with a single correct answer is on the **buyer** side, and it
+goes to eXp transactions/compliance — a forms question, not an opinion — **only
+when a buyer is actually being brought to a property in foreclosure:**
+
+> My buyer is purchasing a residence with a recorded notice of default, which
+> makes them an equity purchaser under Civil Code §1695. Which contract form
+> and cancellation notice does eXp require?
 
 ## Struck, and why
 
