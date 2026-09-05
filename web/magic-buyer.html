@@ -421,6 +421,8 @@ td select{font:12px var(--sans);padding:2px 5px;background:var(--card);color:var
           <label class="field"><span>Price cuts</span><input id="cb_cuts" inputmode="numeric"></label>
         </div>
         <label class="field"><span>Photos in the listing</span><input id="cb_photos" inputmode="numeric"></label>
+        <label class="field"><span>HOA dues per month, if any</span>
+          <input id="cb_hoa" inputmode="numeric" placeholder="e.g. 1150"></label>
         <label class="field"><span>What sold nearby since they listed (optional)</span>
           <textarea id="cb_comps" rows="2" placeholder="e.g. three homes on the same street sold between $1.3M and $1.45M"></textarea></label>
         <button class="btn block" id="cbWrite">Write the report</button>
@@ -652,8 +654,10 @@ let EXCLUDE = new Set();
    The letter is the master. Email, text and call script derive from it, which is
    why they sound like one person wrote them in a sitting. */
 function money(n){ const v=Number(n); if(!Number.isFinite(v)) return '';
+  // Round house prices; never round a monthly figure like HOA dues into "$1K".
   if(v>=1e6) return '$'+(v/1e6).toFixed(2).replace(/\.?0+$/,'')+'M';
-  return '$'+Math.round(v/1000)+'K'; }
+  if(v>=100000) return '$'+Math.round(v/1000)+'K';
+  return '$'+Math.round(v).toLocaleString('en-US'); }
 function budgetPhrase(b){
   if(b.price_min&&b.price_max) return `between ${money(b.price_min)} and ${money(b.price_max)}`;
   if(b.price_max) return `up to ${money(b.price_max)}`;
@@ -1163,6 +1167,7 @@ function statusesFromParcels(parcels){
         price:p.list_price, orig:p.list_price, dom:p.dom,
         beds:p.beds, baths:p.baths, sqft:p.sqft,
         phone:p.phone, email:p.email, remarks:p.remarks,
+        property_type:p.property_type, est:p.value,
         mail_addr:p.mail_addr, mail_zip:p.mail_zip, type:p.type,
       });
       continue;
@@ -1571,9 +1576,21 @@ function paintExpired(){
     CB=EXPIRED[+b.dataset.i]; $('#cbForm').hidden=false;
     $('#cb_orig').value=CB.orig||CB.price||''; $('#cb_final').value=CB.price||'';
     $('#cb_dom').value=CB.dom||''; $('#cb_cuts').value=''; $('#cb_photos').value='';
+    $('#cb_hoa').value='';
+    const attached=isAttached(CB);
+    $('#cb_hoa').closest('.field').style.display = attached ? '' : 'none';
+    if(attached) notice('#cbNotice','warn','Attached home — find the HOA dues before you write',
+      ['On a condo or townhouse the monthly dues are part of what a buyer underwrites. A home priced at or below its value that still did not sell is usually carrying a cost the price cannot fix.']);
     $('#cbTitle').textContent=CB.address;
   });
 }
+
+/* A condo or townhouse carries dues a buyer underwrites alongside the price.
+   Lauren's read on 1100 Wilshire: high HOA is what kills these sales. It holds
+   across her file — eight of ten attached homes were priced at or below their
+   estimated value and still sat. Price is not the lever on those. */
+const isAttached = e => /condo|townhouse|town home/i.test(String(e.property_type||''))
+  || /\b(apt|unit|#)\b|#/i.test(String(e.address||''));
 
 function cannonReport(d){
   const cuts=Number(d.cuts)||0, dom=Number(d.dom)||0, photos=Number(d.photos)||0;
@@ -1581,19 +1598,32 @@ function cannonReport(d){
   const drop = orig&&fin&&orig>fin ? Math.round((1-fin/orig)*100) : 0;
 
   // The diagnosis follows the numbers rather than a fixed script.
+  const hoa=Number(d.hoa)||0;
+  const est=Number(d.est)||0;
+  const atOrUnder = est && fin && fin <= est*1.02;
+
   const signals=[];
-  if(cuts>=2||drop>=8) signals.push('price');
+  // Carrying cost first: on an attached home priced at or under value that still
+  // sat, another price cut is the wrong answer and the wrong conversation.
+  if(isAttached(d) && (hoa>=400 || (atOrUnder && dom>=90))) signals.push('carrying');
+  if(!signals.length && (cuts>=2||drop>=8)) signals.push('price');
   if(photos&&photos<20) signals.push('presentation');
   if(dom>=60&&!signals.length) signals.push('market');
   if(!signals.length) signals.push('presentation');
 
-  const read = signals.includes('price')
+  const read = signals.includes('carrying')
+    ? `The home was priced ${atOrUnder&&est?`at or below what it is worth${fin<est*0.97?` — about ${money(est-fin)} under`:''}`:'fairly'}, and it still did not sell in ${dom||'a full listing period'} days. That is rarely a price problem. On a home with monthly dues${hoa?` of ${money(hoa)}`:''}, a buyer is underwriting the payment, not the price, and every reduction makes the listing look weaker without changing the number that actually stopped them.`
+    : signals.includes('price')
     ? `The price moved ${cuts?`${cuts} time${cuts>1?'s':''}`:'downward'}${drop?`, about ${drop}% from where it started`:''}, and it still did not find a buyer. When that happens, the second and third cuts usually arrive after the buyers who were watching have already moved on. The order matters more than the number.`
     : signals.includes('presentation')
     ? `The listing carried ${photos||'a limited number of'} photos. Buyers in this price range look at homes on a phone first, and a home that photographs thinly gets filtered out before anyone stands in the doorway. That is a fixable problem and it has nothing to do with the house.`
     : `${dom} days without an offer, with the price holding steady, usually means the home was reaching the wrong buyers rather than the wrong price.`;
 
-  const changes = signals.includes('price')
+  const changes = signals.includes('carrying')
+    ? [`Put the real monthly number in front of buyers up front — dues, taxes, insurance — so the people who tour it have already accepted it and the rest never waste your Sunday.`,
+       `Get the HOA documents, reserves and any pending assessment reviewed before relisting, so a lender or a buyer's agent cannot use an unknown to walk away late.`,
+       `Market it to the buyers this actually suits — someone trading down, or paying cash, for whom the dues buy something they want rather than something they tolerate.`]
+    : signals.includes('price')
     ? ['Reset the price once, deliberately, to a number the recent sales actually support — not another reduction that signals more are coming.',
        'Reshoot and relaunch so the listing reads as new rather than as the same home at a lower number.',
        'Go back to every agent who showed it and ask directly what their buyer said. That feedback is usually the whole answer.']
@@ -1638,7 +1668,8 @@ async function writeCannon(){
   if(!CB) return;
   let agent={}; try{ agent=JSON.parse(localStorage.getItem('mb_agent')||'{}'); }catch{}
   const d={...CB, orig:$('#cb_orig').value, final:$('#cb_final').value, dom:$('#cb_dom').value,
-    cuts:$('#cb_cuts').value, photos:$('#cb_photos').value, comps:$('#cb_comps').value};
+    cuts:$('#cb_cuts').value, photos:$('#cb_photos').value, comps:$('#cb_comps').value,
+    hoa:$('#cb_hoa').value, est:CB.est, property_type:CB.property_type};
   const r=cannonReport(d);
   CBCOPY=reportText(r,agent); paintReport(r,agent);
 
