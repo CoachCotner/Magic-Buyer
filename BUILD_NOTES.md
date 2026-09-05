@@ -431,3 +431,28 @@ Cole stays a no. Revisit only on the Deal of the Week trigger already recorded.
 TruePeopleSearch is no longer free either (per Lauren, 09/05). The free
 people-search era is closing generally — treat any of them as a one-off manual
 tool, never as a data source the app depends on.
+
+## Sept 5 — key on APN, never on address
+
+Pulled 23332 Audrey Ave when the target was 23310 Audrey Ave. Both are on the
+same block — APN 7378-005-055 and 7378-005-051 — and the addresses differ by two
+digits. The report came back clean and internally consistent, about the wrong
+family.
+
+That is not a careless mistake, it is the predictable one. Street numbers on a
+single block are near-identical strings, every source spells the address
+differently, and nothing in a returned document announces that it answered a
+different question than the one asked.
+
+**Rule: APN is the join key everywhere.** The address is a display field. Any
+record the app carries from the lead sheets, Realist, the recorder or IgniteRE
+gets matched on parcel number, and any row whose APN cannot be resolved is
+flagged rather than matched by address similarity. The existing
+`normalizeAddress` helper stays for display and for de-duping within one file —
+it must not be used to join across sources.
+
+Also: this pull returned a **death certificate** — full name, date and cause of
+death, partial SSN, parents' names. Recorded documents routinely carry that. It
+must never reach a mail merge, a generated letter, or an export. The foreclosure
+mode should read recorded documents for *status only* — is the filing still
+live — and discard the rest.
