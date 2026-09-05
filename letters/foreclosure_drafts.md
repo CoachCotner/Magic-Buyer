@@ -15,82 +15,109 @@ squarely inside the §2945.1 exemption.
 
 ---
 
-## 1 — Michael Wermers · 23310 Audrey Ave, Torrance
+## 1 — Michael and Cynthia Wermers · 23310 Audrey Ave, Torrance
 
-**Situation:** Trustee sale set for 09/28/2026. $36,164 in default against a
-$702,000 loan on a 4-bed, 2,415 sq ft house bought in 2007. Substantial equity.
-Runs Green Parrot Software Development from the address; business line
-(310) 791-5200. Cindy L Wermers is an officer of the company and may be on title.
+**From the recorded Notice of Trustee's Sale (Doc 2026.621869, dated 08/18/2026)
+and the property detail — APN 7378-005-051:**
 
-**Approach:** Phone first. Twenty-three days is too short for mail to carry the
-conversation, and a business line at the property is the cleanest contact
-position on the list.
+| | |
+|---|---|
+| Owner of record | **Wermers Family Trust — Michael & Cindy Wermers, Trustees** |
+| Deed of trust | dated 05/24/2019, recorded 05/31/2019, Inst. 20190502911 |
+| Executed by | **Michael Wermers and Cynthia Wermers, husband and wife as joint tenants** |
+| **Total unpaid balance + estimated costs** | **$742,646.37** |
+| **Sale** | **09/28/2026, 11:00 AM — 400 Civic Center Plaza, Pomona** |
+| Foreclosure trustee | Barrett Daffin Frappier Treder & Weiss LLP, Ontario CA · (866) 795-1852 |
+| Postponement line | **833-561-0243** · sales.bdfgroup.com · file **00000010810489** |
+| House | 4bd / 3ba, 2,415 sq ft, 2 stories, built 1966, 6,004 sq ft lot |
+| Bought | **10/28/1999 for $395,000** |
+| 2025 assessed | $620,718 · annual tax $7,179.22 · homestead exemption active |
+| Contact | Green Parrot Software Development, (310) 791-5200, at the property |
+
+**Correction to the earlier draft.** The lead sheet's $36,164 is the *arrears* on
+the notice of default — what it would take to reinstate. It is not the payoff.
+The recorded payoff at sale is **$742,646.37**. Both numbers are real and they
+answer different questions, and quoting the small one as the amount owed would be
+wrong.
+
+**Cynthia signs too.** She is on the 2019 deed of trust as a joint tenant and is a
+co-trustee of the family trust. Any listing needs both signatures, and she is an
+equally legitimate person to reach.
+
+**Free rule-out, better than a title pull:** the notice itself gives the
+postponement line — 833-561-0243, or sales.bdfgroup.com, file 00000010810489.
+Trustee sales are postponed constantly. Check it the morning you call.
+
+**Approach:** Phone. Twenty-three days is too short for mail to carry it, and a
+business line at the property is the cleanest contact position on the list.
 
 ### Phone script
 
 > Mr. Wermers, my name is Lauren Cotner, I'm a real estate agent here in the
 > South Bay. I'm calling about the house on Audrey.
 >
-> I'll be straight with you about why I'm calling, because I'd rather not be
-> cagey about it. There's a trustee sale date recorded against the property for
-> the twenty-eighth of this month. That's public record, which is how I know.
+> I'll be straight with you about why, because I'd rather not be cagey. There's a
+> notice of trustee's sale recorded against the property, with a sale date of
+> September twenty-eighth. That's public record, and it's how I know.
 >
-> The reason I picked up the phone instead of sending you something in the mail
-> is that the numbers on it are unusual. The amount in default is about
-> thirty-six thousand. The loan is about seven hundred thousand. And a
-> four-bedroom on your street is worth considerably more than that today. So
-> unlike most of these, you're not underwater — there looks to be real money in
-> that house that belongs to you.
+> The reason I picked up the phone rather than sending you a letter is the
+> arithmetic. The notice puts the total owed at about seven hundred and
+> forty-three thousand. A four-bedroom of your size on your street is worth
+> considerably more than that today. So unlike most of these, you are not
+> underwater — there looks to be real money in that house that belongs to you and
+> your wife.
 >
-> That's the only reason I'm calling. If that sale runs and nobody does anything,
+> That's the whole reason I'm calling. If the sale runs and nobody does anything,
 > the process decides what happens to that money instead of you.
 >
 > So my question is just: do you already have a plan for the twenty-eighth?
 >
-> [If yes] Good. Then I'll get out of your way. If anything changes I'm easy to find.
+> [If yes] Good. Then I'll get out of your way. If anything changes, I'm easy to find.
 >
 > [If no, or unsure] There are usually about four options — reinstate, refinance,
 > sell before the date, or let it run. I'm only qualified to help with one of
-> them, which is selling. I can tell you in about ten minutes what the house is
-> actually worth and whether a sale before the twenty-eighth is realistic. No
-> charge and no obligation, and if the answer is that selling is the wrong move,
-> I'll tell you that too.
+> them, which is selling. What I can tell you in about ten minutes is what the
+> house is actually worth and whether a sale before the twenty-eighth is
+> realistic. No charge, no obligation, and if selling is the wrong move I'll tell
+> you that too.
 >
-> [If listed] Then the next thing is that I'd get your written authorization to
-> talk to the servicer directly, so you're not the one chasing them. I don't
-> charge separately for that — it's part of what I do, and I'm paid out of the
-> commission when it sells.
+> [If he asks about reinstating] The trustee handling it is Barrett Daffin, and
+> the number for a reinstatement quote is on the notice — I can read it to you.
+> That figure is theirs to give, not mine.
+>
+> [If listed] Then the next thing is that I'd want written authorization from
+> both you and Mrs. Wermers to talk to the servicer directly, so you're not the
+> ones chasing them. I don't charge separately for that. It's part of what I do
+> and I'm paid out of the commission when it sells.
 
-**Do not say:** that you can stop the sale, that you can get the date postponed,
-anything about what the servicer will or won't agree to, or any number for the
-house you haven't actually run.
-
-**If you reach Cindy Wermers instead:** same opening, same question. Don't
-characterize the situation to a second person beyond what's already public record.
+**Do not say:** that you can stop or postpone the sale, what the servicer will
+agree to, a reinstatement figure of your own, or any value for the house you have
+not actually run.
 
 ### Backup letter — if you get voicemail
 
-> Dear Mr. Wermers,
+> Dear Mr. and Mrs. Wermers,
 >
-> I left you a message today and I want to put the same thing in writing, in case
-> a letter is easier than a phone call.
+> I left a message today and I want to put the same thing in writing, in case a
+> letter is easier than a phone call.
 >
-> I'm a real estate agent in the South Bay. There is a trustee sale date recorded
-> against 23310 Audrey Avenue for September 28. That's a matter of public record,
-> and it's how I came to write to you.
+> I'm a real estate agent here in the South Bay. A notice of trustee's sale has
+> been recorded against 23310 Audrey Avenue, with a sale date of September 28.
+> That's a matter of public record, and it's how I came to write to you.
 >
-> I'm writing because the numbers are unusual. The amount in default is around
-> thirty-six thousand dollars, against a loan of about seven hundred thousand,
-> on a house that is worth a good deal more than the loan. Most letters like this
-> go to people who owe more than their house is worth. That is not your situation.
-> There appears to be substantial equity in that property, and it is yours.
+> I'm writing because of the arithmetic. The notice puts the total owed at about
+> seven hundred and forty-three thousand dollars, on a house that is worth a good
+> deal more than that. Most letters like this one go to people who owe more than
+> their home is worth. That does not appear to be your situation. There looks to
+> be substantial equity in that property, and it is yours.
 >
 > I can't stop a foreclosure and I'm not going to pretend otherwise. What I can
 > tell you is what the house would actually sell for, and whether a sale before
 > the twenty-eighth is realistic. That takes about ten minutes and costs nothing.
 >
-> If you already have this handled, please ignore this letter entirely — that is a
-> completely fine answer, and I'd rather you have a plan than have me involved.
+> If you already have this handled, please ignore this letter entirely. That is a
+> completely fine answer, and I would rather you have a plan than have me
+> involved.
 >
 > If you don't, my number is below and I will pick up.
 >
