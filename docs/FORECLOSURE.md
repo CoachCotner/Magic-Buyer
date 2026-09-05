@@ -1,27 +1,33 @@
 # Foreclosure (NOD / NOT) — what the September files actually contain
 
-Source: four lead-sheet CSVs, LA County, filings dated 09/01/2026 and 09/04/2026.
-Deduped on `(APN, document_number)` because the two dates overlap.
+Source: eight lead-sheet CSVs, LA County, filings dated 08/25, 08/27, 09/01 and
+09/04/2026. Deduped on `(APN, document_number)` because the dates overlap heavily
+— the eight files hold 283 distinct filings, not eight files' worth.
 
 ## Totals
 
-- **154 unique filings** — 113 Notices of Default, 41 Notices of Trustee Sale
+- **283 unique filings** — 203 Notices of Default, 80 Notices of Trustee Sale
 - LA County by property type:
 
   | Count | Type |
   |---|---|
-  | 135 | Residential, 1 unit |
-  | 9 | Commercial |
-  | 5 | Multi-unit (2) |
-  | 2 | Industrial |
-  | 1 | Multi-unit (3) |
-  | 1 | Multi-unit (4) |
+  | 248 | Residential, 1 unit |
+  | 14 | Commercial |
+  | 9 | Multi-unit (2) |
+  | 5 | Multi-unit (3) |
+  | 3 | Industrial |
+  | 2 | Multi-unit (4) |
+  | 1 | Multi-unit (5) |
   | 1 | Land / agricultural |
 
-## South Bay — 11 of 154
+## South Bay — 13 of 283
 
-Carson 4 · Rancho Palos Verdes 2 · Redondo Beach 1 · Torrance 1 · Hawthorne 1 ·
-Hermosa Beach 1 · San Pedro 1. Ten residential, one commercial.
+Carson 4 · Redondo Beach 2 · Rancho Palos Verdes 2 · Torrance 2 · Hawthorne 1 ·
+Hermosa Beach 1 · San Pedro 1. Twelve residential, one commercial.
+
+Twelve days of filings added only two South Bay names. That is the real rate:
+about one a week across the whole peninsula and beach cities. It is a slow list,
+which is an argument for running it standing rather than in bursts.
 
 | Kind | City | Address | LTV | Default | Loan | Auction |
 |---|---|---|---|---|---|---|
@@ -34,8 +40,10 @@ Hermosa Beach 1 · San Pedro 1. Ten residential, one commercial.
 | NOD | Rancho Palos Verdes | 4255 Exultant Dr | 125% | $64,612 | $1,326,000 | — |
 | NOD | Rancho Palos Verdes | 26622 Whitehorn Dr | 72% | $47,856 | $1,170,000 | — |
 | NOD | Redondo Beach | 108 N Pacific Coast Hwy | 5% | — | $4,881 | — |
+| NOD | Redondo Beach | 2414 Alvord Ln | — | $177,079 | $1,019,475 | — |
 | NOT | San Pedro | 1760 El Rey Rd | 73% | $222,911 | $686,000 | 09/17/26 |
 | NOD | Torrance | 23030 Kathryn Ave | 36% | $74,262 | $772,500 | — |
+| NOT | Torrance | 23310 Audrey Ave | 80% | $36,164 | $702,000 | 09/28/26 |
 
 ## How to read these
 
@@ -55,9 +63,18 @@ always means real equity, and a high one may or may not.
   is stale, so this may still be fine, but it may also be a short sale. Do not
   promise anything here.
 
-**The two NOTs with auction dates are the only ones with a clock.** San Pedro
-sells 09/17/26, Carson Main St 09/16/26. By the time mail arrives those are
-essentially over.
+**Redondo, 2414 Alvord Ln, is its own category.** The beneficiary is Finance of
+America *Reverse* — a HECM. A reverse mortgage goes into default when the
+borrower dies, moves out, or stops paying taxes and insurance, not when they miss
+a payment. The person who has to act is usually an heir, not the borrower, and
+heirs of a paid-off Redondo house with a $1.02M accrued balance almost always
+need to sell. The letter for that one is written to a family settling an estate,
+not to a homeowner in trouble.
+
+**The NOTs with auction dates are the only ones with a clock.** Carson Main St
+sells 09/16/26, San Pedro 09/17/26, Torrance Audrey Ave 09/28/26. By the time
+mail arrives the first two are essentially over; Audrey Ave has about three
+weeks.
 
 ## Rules before any of this goes in the mail
 
