@@ -342,3 +342,65 @@ looking in your price range"*, and *"Second touch for anyone who opened"*.
 
 The last one implies **open-tracking-driven follow-up sequencing**. Out of scope
 for v1, but it is where the Magic Buyer "Go to Campaign Page" button leads.
+
+---
+
+## 11. Confirmed from the recording — via the Otter transcript
+
+The webinar was captured by Otter, and Lauren shared its summary. This closes
+most of section 8's open questions and corrects one thing I had wrong.
+
+### The framing
+
+**Service-first vs sales-first.** Service-first agents work their existing
+clients and prospect inconsistently, which caps them in a soft market.
+Sales-first agents market and prospect continuously. Every tool below serves the
+second posture.
+
+### The three tactics
+
+| | What it does | Ours |
+|---|---|---|
+| **Magic Buyer** | Describe a buyer's criteria, get off-market matches plus the outreach | ✅ built |
+| **Deal of the Week** | Find listings with unusually high engagement (Zillow save rates) and use them as bait to re-engage the database, via an "Infinite Referral Script" | ✗ not built |
+| **Cannonball** | Expired listings → detailed home profiles and **customized landing pages**; a new "expired buy box" watches up to 10 ZIP codes for automatic updates | ⚠ built as a mailed report |
+
+### Correction: Cannonball is landing pages
+
+I built it as a printable report because that is what the single screenshot
+showed. His version publishes **a page per property**. The analysis is the same;
+the delivery is not. A landing page is also measurable — he can see who opened
+it — which is the point of the "second touch for anyone who opened" campaign
+seen in the sibling screens.
+
+Worth building. The generated content already exists; it needs a publish target
+rather than a PDF.
+
+The "expired buy box across 10 ZIP codes" is a saved search with alerts. **Lauren
+already has this for free** — a daily email delivers FSBO, expired, NOD and NOT
+lists as CSV for six Southern California counties. See docs/DAILY_LEADS.md.
+
+### Confirmed: they license nationwide data
+
+The September 21 update includes segmentation over **178 million off-market
+listings**. That is a licensed national dataset, exactly as docs/DATA_SOURCING.md
+inferred. It is the thing the fee pays for, and the thing a single-market agent
+does not need.
+
+### Their September 21 release
+
+- **New Pro plan** — content creation, publishing, and an email tool capped at
+  1,000 contacts
+- **Segmentation** — hyper-local segments drawn on a map, over that 178M dataset
+- **Vibes** — an AI agent service, waitlisted
+
+### One tactic deliberately not copied
+
+He suggests pairing Magic Buyer with Claude or ChatGPT to send **high-volume
+personalised emails at random intervals to avoid spam filters**.
+
+The personalisation is right and worth doing. The interval-randomising is
+deliverability evasion, and the domain it burns would be Lauren's. Our email
+path stays: genuinely personal, sane volume, real opt-outs, honest headers — the
+version that keeps a sending reputation intact. Noted here so the omission is a
+decision on the record rather than an oversight.

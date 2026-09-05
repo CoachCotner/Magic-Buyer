@@ -278,6 +278,14 @@ td select{font:12px var(--sans);padding:2px 5px;background:var(--card);color:var
 
       <div class="tally"><b id="count">—</b><em id="countNote">Adjust anything and this updates.</em></div>
 
+      <fieldset id="areaBox" hidden><div class="eyebrow">Area / neighbourhood</div>
+        <select id="f_area" style="width:100%;padding:8px 10px;border:1px solid var(--line);
+          border-radius:5px;font:14px var(--sans);background:var(--card);color:var(--ink)"></select>
+        <p style="font-size:11.5px;color:var(--ink-3);margin:5px 0 0">
+          From your data’s area or subdivision column — a neighbourhood like the Riviera
+          crosses city lines, so this beats filtering by city.</p>
+      </fieldset>
+
       <fieldset><div class="eyebrow">Location</div>
         <div class="grid3">
           <label class="field"><span>City</span><input id="f_city"></label>
@@ -557,6 +565,7 @@ function matches(p,c){
   if(c.property_type&&p.property_type!==c.property_type) return false;
   if(c.city&&String(p.city).toLowerCase()!==c.city.toLowerCase()) return false;
   if(c.zip&&String(p.zip)!==String(c.zip)) return false;
+  if(c.area&&String(p.area||'')!==String(c.area)) return false;
   if(c.owner_status&&c.owner_status!=='Any'&&p.type!==c.owner_status) return false;
   if(c.years_owned&&c.years_owned!=='Any'){
     const min=parseInt(c.years_owned,10);
@@ -733,9 +742,20 @@ for(const [key,vals] of Object.entries(PILLS)){
       S.c[key]= v==='Any'?null:v; if(NARROWS.has(key)) recount(); };
     host.appendChild(b); });
 }
+function paintAreaOptions(){
+  const box=$('#areaBox'), sel=$('#f_area');
+  const values=[...new Set(PARCELS.map(p=>p.area).filter(Boolean))].sort();
+  box.hidden = values.length===0;
+  if(!values.length){ if(S.c.area){ S.c.area=null; } return; }
+  sel.innerHTML=`<option value="">Any area</option>`+
+    values.map(v=>`<option${v===S.c.area?' selected':''}>${esc(v)}</option>`).join('');
+}
+$('#f_area').onchange=e=>{ S.c.area=e.target.value||null; recount(); };
+
 function paintForm(){
   FIELDS.forEach(k=>{ const el=$('#f_'+k); if(el) el.value=S.c[k]??''; });
   $('#f_why_area').value=S.c.why_area||'';
+  paintAreaOptions();
   for(const key of Object.keys(PILLS)){ const host=$('#p_'+key); if(!host) continue;
     const want=S.c[key]??'Any';
     [...host.children].forEach(b=>b.classList.toggle('on',String(b.dataset.v)===String(want))); }
@@ -1034,6 +1054,8 @@ const ALIASES={
   value:['value','assessed value','total value','market value','total assessed value','assessedvalue','list price','estimated value'],
   last_sale:['last sale date','sale date','last sold','sold date','transfer date','recording date','lastsaledate'],
   property_type:['property type','use code','use','type','propertytype','land use'],
+  area:['area','mls area','mlsarea','area name','subdivision','subdivision name','neighborhood',
+    'neighbourhood','community','tract','tract name','tract no','legal subdivision'],
   lat:['lat','latitude'],
   lon:['lon','lng','long','longitude'],
 };
@@ -1065,9 +1087,143 @@ function normalizeType(v){
   if(/vacant|land/.test(t)) return 'Land';
   return 'Single Family';
 }
+/* Read listing status out of whatever file has it. Returns the addresses to
+   exclude (still under an agency agreement) and the expireds to work. */
+/* Same split as readStatuses, but over already-adopted lead-sheet rows. */
+function statusesFromParcels(parcels){
+  const exclude=new Set(), expired=[], unknown=new Set();
+  let ended=0, blank=0;
+  for(const p of parcels){
+    const st=String(p.listing_status||'').trim().toLowerCase();
+    if(!st){ blank++; continue; }
+    if(AGENCY_ENDED.includes(st)){
+      ended++;
+      if(!['sold','closed','s'].includes(st)) expired.push({
+        address:p.address, city:p.city, zip:p.zip, owner:p.owner, status:st,
+        price:p.list_price, orig:p.list_price, dom:p.dom,
+        beds:p.beds, baths:p.baths, sqft:p.sqft,
+        phone:p.phone, email:p.email, remarks:p.remarks,
+        mail_addr:p.mail_addr, mail_zip:p.mail_zip, type:p.type,
+      });
+      continue;
+    }
+    if(!UNDER_AGENCY.includes(st)) unknown.add(st);
+    exclude.add(normAddr(p.address,p.zip));
+  }
+  return {statusCol:'Status', exclude, expired, unknown:[...unknown], ended, blank};
+}
+
+function readStatuses(rows, map){
+  const headers=Object.keys(rows[0]||{});
+  const statusCol=headers.find(h=>/status/i.test(h));
+  if(!statusCol) return null;
+  const priceCol=headers.find(h=>/list price|current price|^price$/i.test(h));
+  const origCol=headers.find(h=>/original.*price|orig list/i.test(h));
+  const domCol=headers.find(h=>/\bdom\b|days on market|cdom/i.test(h));
+  const exclude=new Set(), expired=[], unknown=new Set();
+  let ended=0, blank=0;
+  for(const r of rows){
+    const a=r[map.address]; if(!a) continue;
+    const st=String(r[statusCol]??'').trim().toLowerCase();
+    if(!st){ blank++; continue; }                     // never listed — not an exclusion
+    if(AGENCY_ENDED.includes(st)){
+      ended++;
+      if(!['sold','closed','s'].includes(st)) expired.push({
+        address:String(a).trim(), city:String(r[map.city]??'').trim(), zip:String(r[map.zip]??'').trim(),
+        owner:String(r[map.owner]??'').trim(), status:st,
+        price:numOf(r[priceCol]), orig:numOf(r[origCol]), dom:numOf(r[domCol]),
+        beds:numOf(r[map.beds]), baths:numOf(r[map.baths]), sqft:numOf(r[map.sqft]),
+      });
+      continue;
+    }
+    if(!UNDER_AGENCY.includes(st)) unknown.add(st);
+    exclude.add(normAddr(a, r[map.zip]));
+  }
+  return {statusCol, exclude, expired, unknown:[...unknown], ended, blank};
+}
+
+/* The daily FSBO/Expired/NOD lead sheet has its own shape — 142 columns, owner
+   details, and up to twelve skip-traced phones per record each carrying its own
+   DNC flag. It arrives every day, so it gets a proper adapter rather than best
+   guesses from the generic matcher.
+
+   The DNC flags are the part that matters. A number marked Y must never be
+   presented as callable, so the primary phone is always the first CLEAN one and
+   a record with no clean number is marked DNC outright. */
+const isLeadSheet = headers =>
+  headers.some(h=>/^augmented phone 1_1$/i.test(h.trim())) ||
+  (headers.some(h=>/^owner name1$/i.test(h.trim())) && headers.some(h=>/^days on market$/i.test(h.trim())));
+
+function contactsFrom(r){
+  // parseCsv lowercases headers; accept either casing so the adapter is not
+  // silently coupled to that decision.
+  const get=k=>String(r[k] ?? r[k.toLowerCase()] ?? '').trim();
+  const phones=[], emails=[];
+  const push=(num,dnc,type)=>{ if(num) phones.push({num, dnc:/^y/i.test(dnc||''), type:type||''}); };
+  push(get('Contact Phone'), get('Contact Phone DNC'), get('Contact Line Type'));
+  for(let i=1;i<=4;i++){
+    for(let j=1;j<=3;j++){
+      push(get(`Augmented Phone ${i}_${j}`), get(`Augmented Phone ${i}_${j} DNC`), get(`Augmented Line Type ${i}_${j}`));
+      const e=get(`Augmented Email ${i}_${j}`); if(e) emails.push(e);
+    }
+  }
+  const seen=new Set();
+  const uniq=phones.filter(p=>!seen.has(p.num)&&seen.add(p.num));
+  const clean=uniq.filter(p=>!p.dnc);
+  return { phones:uniq, emails:[...new Set(emails)], clean };
+}
+
+const prettyPhone = n => {
+  const d=String(n).replace(/\D/g,'');
+  return d.length===10 ? `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}` : String(n);
+};
+
+function adoptLeadSheet(rows){
+  const money = v => { const n=parseFloat(String(v??'').replace(/[^0-9.]/g,'')); return Number.isFinite(n)?Math.round(n):0; };
+  const out=rows.map((r,i)=>{
+    const get=k=>String(r[k] ?? r[k.toLowerCase()] ?? '').trim();
+    const {phones,emails,clean}=contactsFrom(r);
+    const situs=get('Address');
+    const mail=get('Owner Address');
+    const occupied=get('Owner Occupied').toUpperCase();
+    const p={
+      apn:get('APN')||`row-${i+1}`,
+      address:situs, city:get('City'), state:get('State')||'CA', zip:get('Zip').slice(0,5),
+      owner:get('Owner Name1')||get('Owner Name2'),
+      phone: clean.length ? prettyPhone(clean[0].num) : '',
+      email: emails[0]||'',
+      // Estimated value beats the assessed figure in a Prop 13 state.
+      value: money(get('Estimated Value')) || money(get('Tax Assessed Value')),
+      assessed: money(get('Tax Assessed Value')),
+      dnc: clean.length ? '' : (phones.length ? 'yes' : ''),
+      status:'new',
+      mail_addr:mail, mail_zip:get('Owner Zip').slice(0,5),
+      beds:money(get('Bedrooms'))||money(get('Tax Beds')),
+      baths:parseFloat(get('Bathrooms')||get('Tax Baths'))||0,
+      sqft:money(get('Square Footage'))||money(get('Tax Square Footage')),
+      lot_sqft:money(get('Lot Size')),
+      year_built:money(get('Year Built')),
+      years_owned: yearsSince(get('Sale Date')),
+      property_type: normalizeType(get('Property type')),
+      area: get('Subdivision'), lat:null, lon:null,
+      // Cannonball inputs, straight from the sheet
+      listing_status:get('Status'), dom:money(get('Days On Market')),
+      list_price:money(get('Price')), remarks:get('Remarks/Ad Text'),
+      phone_count:phones.length, clean_count:clean.length, email_count:emails.length,
+    };
+    p.type = occupied==='Y' ? 'Owner' : occupied==='N' ? 'Absentee'
+      : (mail && mail.toLowerCase()!==situs.toLowerCase() ? 'Absentee' : 'Owner');
+    return p;
+  }).filter(p=>p.address);
+  if(!out.length) throw new Error('No rows with an address.');
+  return out;
+}
+
 function adoptParcels(rows){
   if(!rows.length) throw new Error('That file had no rows.');
-  const map=mapColumns(Object.keys(rows[0]));
+  const headers=Object.keys(rows[0]);
+  if(isLeadSheet(headers)) return {parcels:adoptLeadSheet(rows), map:{__leadSheet:true}, leadSheet:true};
+  const map=mapColumns(headers);
   if(!map.address) throw new Error('No address column found. The file needs a property address.');
   const out=rows.map((r,i)=>{
     const address=String(r[map.address]??'').trim();
@@ -1085,6 +1241,7 @@ function adoptParcels(rows){
       year_built:numOf(r[map.year_built]),
       years_owned:yearsSince(r[map.last_sale]),
       property_type:normalizeType(r[map.property_type]),
+      area:String(r[map.area]??'').trim(),
       lat:map.lat?numOf(r[map.lat]):null, lon:map.lon?numOf(r[map.lon]):null,
     };
     p.type = mail && mail.toLowerCase()!==address.toLowerCase() ? 'Absentee' : 'Owner';
@@ -1128,7 +1285,8 @@ $('#dataPanel').onclick=e=>{ if(e.target.id==='dataPanel') $('#dataPanel').hidde
 
 $('#upParcels').onclick=()=>filePick(text=>{
   try{
-    const {parcels,map}=adoptParcels(parseCsv(text));
+    const raw=parseCsv(text);
+    const {parcels,map,leadSheet}=adoptParcels(raw);
     const append=$('#appendMode').checked && USING_OWN;
     let added=parcels, dupes=0;
     if(append){
@@ -1148,10 +1306,45 @@ $('#upParcels').onclick=()=>filePick(text=>{
     }
     USING_OWN=true; bounds=null;
     const abs=PARCELS.filter(p=>p.type==='Absentee').length;
-    reportMapping('#parcelReport',map,PARCELS.length,
+    if(leadSheet){
+      const withPhone=PARCELS.filter(p=>p.phone).length, withEmail=PARCELS.filter(p=>p.email).length;
+      const allDnc=PARCELS.filter(p=>p.dnc).length;
+      const totalNums=PARCELS.reduce((a,p)=>a+(p.phone_count||0),0);
+      const blocked=PARCELS.reduce((a,p)=>a+((p.phone_count||0)-(p.clean_count||0)),0);
+      $('#parcelReport').innerHTML=`<div class="notice ok">
+        <b>Daily lead sheet — ${PARCELS.length.toLocaleString()} records</b>
+        <ul>
+          <li>Owner name and mailing address on ${PARCELS.filter(p=>p.owner).length} of ${PARCELS.length}</li>
+          <li><b>${withPhone} with a callable phone</b>, ${withEmail} with an email — already skip traced</li>
+          <li>Value taken from the estimated figure, not the assessed one</li>
+        </ul></div>` +
+        (blocked?`<div class="notice warn"><b>${blocked} of ${totalNums} numbers are on the Do-Not-Call list</b>
+          <ul><li>Those numbers are never shown — each record displays its first clean one</li>
+          ${allDnc?`<li><b>${allDnc} record${allDnc>1?'s have':' has'} no clean number at all</b> — marked DNC, mail only</li>`:''}
+          </ul></div>`:'');
+    } else reportMapping('#parcelReport',map,PARCELS.length,
       `<div style="margin-top:4px">${append?`${added.length.toLocaleString()} new · ${dupes.toLocaleString()} updated · `:''}`+
       `${abs.toLocaleString()} absentee · ${(PARCELS.length-abs).toLocaleString()} owner-occupied</div>`);
-    persist(); setStatus(); recount(); paintAreas();
+    // If this same file carries listing status, it does the CRMLS job as well.
+    // The lead sheet already carries status on each adopted row, so route from
+    // those rather than re-reading the raw file through the generic mapper.
+    const st = leadSheet ? statusesFromParcels(parcels) : readStatuses(raw,map);
+    let statusNote='';
+    if(st){
+      if(append&&EXCLUDE.size) st.exclude.forEach(a=>EXCLUDE.add(a));
+      else EXCLUDE=st.exclude;
+      EXPIRED = append ? [...EXPIRED,...st.expired] : st.expired;
+      statusNote=`<div class="notice ok" style="margin-top:9px"><b>This file has listing status too</b>
+        <ul><li>${st.exclude.size.toLocaleString()} currently listed or withdrawn — excluded from your buyer lists</li>
+        <li>${st.expired.length.toLocaleString()} expired or cancelled — sent to Cannonball</li>
+        <li>${st.blank.toLocaleString()} never listed — kept, and usually your best prospects</li></ul>
+        <div style="margin-top:5px;opacity:.85">Read from the “${esc(st.statusCol)}” column. Check it against a
+        home you know is listed right now — tax-record status can lag the live MLS.</div></div>`+
+        (st.unknown.length?`<div class="notice warn"><b>Statuses I didn’t recognise — excluded to be safe</b>
+          <ul>${st.unknown.map(u=>`<li>${esc(u)}</li>`).join('')}</ul></div>`:'');
+    }
+    joinOwners(); persist(); setStatus(); paintAreaOptions(); recount(); paintAreas(); paintExpired();
+    $('#parcelReport').insertAdjacentHTML('beforeend', statusNote);
   }catch(err){ $('#parcelReport').innerHTML=`<div class="notice bad"><b>Couldn’t read that file</b>${esc(err.message)}</div>`; }
 });
 
@@ -1190,7 +1383,7 @@ $('#upMls').onclick=()=>filePick(text=>{
       }
       set.add(normAddr(a, r[map.zip]));
     }
-    EXCLUDE=set; persist(); recount(); paintExpired();
+    EXCLUDE=set; joinOwners(); persist(); recount(); paintExpired();
     $('#mlsReport').innerHTML=`<div class="notice ok"><b>${set.size.toLocaleString()} addresses excluded</b>
       <ul><li>${kept.toLocaleString()} expired, cancelled or sold — left in your list</li>
       ${statusCol?`<li>read from the “${esc(statusCol)}” column</li>`:'<li>no status column, so every row was excluded</li>'}</ul></div>`+
@@ -1247,6 +1440,30 @@ function ethicsScreen(text){
   return {ok:flags.length===0&&fh.ok, flags:[...flags,...fh.flags], label:'report'};
 }
 
+/* An MLS export names the listing agent, rarely the owner. The title data has
+   the owner and the mailing address. Match them on the address and fill the gaps —
+   otherwise the report has nowhere to be posted. */
+function joinOwners(){
+  if(!EXPIRED.length) return {matched:0};
+  const byAddr=new Map(PARCELS.map(p=>[normAddr(p.address,p.zip),p]));
+  let matched=0;
+  for(const e of EXPIRED){
+    const p=byAddr.get(normAddr(e.address,e.zip));
+    if(!p) continue;
+    matched++;
+    if(p.dom&&!e.dom) e.dom=p.dom;
+    if(p.list_price&&!e.price) e.price=p.list_price;
+    if(p.remarks) e.remarks=p.remarks;
+    if(p.phone) e.phone=p.phone;
+    if(p.email) e.email=p.email;
+    if(!e.owner) e.owner=p.owner||'';
+    e.mail_addr=p.mail_addr||''; e.mail_zip=p.mail_zip||''; e.type=p.type||'';
+    if(!e.beds) e.beds=p.beds; if(!e.baths) e.baths=p.baths; if(!e.sqft) e.sqft=p.sqft;
+    e.assessed=p.value; e.years_owned=p.years_owned; e.year_built=p.year_built;
+  }
+  return {matched};
+}
+
 function paintExpired(){
   $('#cbCount').textContent=EXPIRED.length;
   if(!EXPIRED.length){
@@ -1255,8 +1472,14 @@ function paintExpired(){
       The same file powers both tools.</div>`;
     $('#cbForm').hidden=true; return;
   }
-  $('#cbList').innerHTML=EXPIRED.map((e,i)=>`<button class="pick" data-i="${i}">
-    <b>${esc(e.address)}</b><em>${esc(e.city)}${e.price?' · '+usd(e.price):''}${e.dom?' · '+e.dom+' days on market':''} · ${esc(e.status)}</em></button>`).join('');
+  const named=EXPIRED.filter(e=>e.owner).length;
+  const gap = named<EXPIRED.length
+    ? `<div class="notice warn" style="margin-bottom:9px"><b>${EXPIRED.length-named} without an owner name</b>
+       MLS exports name the listing agent, not the owner. Load your title data under
+       <b>Data</b> and these fill in automatically by address.</div>` : '';
+  $('#cbList').innerHTML=gap+EXPIRED.map((e,i)=>`<button class="pick" data-i="${i}">
+    <b>${esc(e.address)}</b><em>${esc(e.city)}${e.price?' · '+usd(e.price):''}${e.dom?' · '+e.dom+' days on market':''} · ${esc(e.status)}${
+      e.owner?'':' · no owner name'}</em></button>`).join('');
   $$('#cbList .pick').forEach(b=>b.onclick=()=>{
     $$('#cbList .pick').forEach(x=>x.classList.remove('on')); b.classList.add('on');
     CB=EXPIRED[+b.dataset.i]; $('#cbForm').hidden=false;
