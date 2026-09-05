@@ -33,6 +33,35 @@ and the property detail — APN 7378-005-051:**
 | Bought | **10/28/1999 for $395,000** |
 | 2025 assessed | $620,718 · annual tax $7,179.22 · homestead exemption active |
 | Contact | Green Parrot Software Development, (310) 791-5200, at the property |
+| **Property taxes** | **Current** — verified at TTC 09/05/2026. No senior tax lien. |
+
+**Taxes being current matters twice.** Nothing senior comes off the top, so the
+net-proceeds math is clean. And current taxes alongside a delinquent mortgage is
+a specific pattern — someone is still tending the property. People who have given
+up stop paying everything.
+
+**Net proceeds, structurally** (Lauren supplies the sale price from her own CMA):
+
+    sale price
+      − payoff, $742,646.37 and rising
+      − commission
+      − escrow, title, transfer tax
+      − any repair or concession
+    = net to the Wermers
+
+At anything in the range a 2,415 sq ft four-bedroom in 90505 commands, that net
+is well into six figures. **That number is the entire reason to make the call.**
+
+**The payoff is not fixed.** $742,646.37 was the figure at initial publication of
+the notice. Per-diem interest and trustee fees accrue. Quote it as "about seven
+hundred forty-three thousand as of the notice," never as a settled number.
+
+**On postponement — know it, do not promise it.** Servicers do sometimes postpone
+a sale when there is a signed purchase contract in hand, because a sale nets them
+more than an auction. That is the real mechanism by which twenty-three days
+becomes workable. It is entirely the beneficiary's decision. If he asks, the
+honest answer is that it happens and it is not hers to grant.
+
 
 **Correction to the earlier draft.** The lead sheet's $36,164 is the *arrears* on
 the notice of default — what it would take to reinstate. It is not the payoff.
