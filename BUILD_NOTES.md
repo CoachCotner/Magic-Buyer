@@ -329,3 +329,26 @@ Verified live: 78 Torrance parcels → 69 after dropping an export in mid-sessio
 restart.
 
 **138 assertions, 6 suites.**
+
+## Sept 5 — foreclosure and multi-unit data, and the landing page that already exists
+
+Sorted four LA County NOD/NOT lead sheets (09/01 and 09/04): 154 unique filings,
+11 in the South Bay, 10 of those residential. Four of the eleven are HOA liens in
+the low four figures, not mortgage defaults — treating those as distress would be
+both wrong and predatory. Written up in `docs/FORECLOSURE.md`.
+
+Sorted three CRMLS expired/cancelled multi-unit exports: 75 unique buildings
+across Torrance, Redondo and Hermosa, 47 of them 2-4 units. `StreetNumber` is
+empty on every row, so none of it is mailable from the MLS export alone — but 72
+of 75 carry an APN, and Realist turns an APN into owner name and mailing address,
+which the MLS never had. The APN list is the deliverable, not the address list.
+Written up in `docs/MULTI_UNIT.md`.
+
+Found `getyourhomeoptions.com` on her Netlify (project `stellular-parfait-de9bd4`,
+forms enabled). It already carries a form named `foreclosure-leads` with a
+`vip_code` field and a `received_letter` radio. That is the missing destination
+for the foreclosure mode: print a per-recipient code on the letter, and the form
+submission identifies the property. The export needs a `vip_code` column and the
+generator needs to mint the codes.
+
+Costs money: nothing new.
