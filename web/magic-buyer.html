@@ -1,0 +1,1381 @@
+<title>Magic Buyer</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#fbfaf7; --card:#ffffff; --ink:#16191b; --ink-2:#5d6560; --ink-3:#8b918c;
+  --line:#e5e2db; --line-2:#efece6;
+  --accent:#1b5544; --accent-2:#2c7a62; --accent-wash:#e9f1ee;
+  --amber:#8f5d16; --amber-wash:#f8efdf;
+  --stop:#8d2f2f; --stop-wash:#f9eaea;
+  --shadow:0 1px 2px rgba(22,25,27,.05),0 8px 24px -12px rgba(22,25,27,.12);
+  --r:7px;
+  --sans:"IBM Plex Sans",ui-sans-serif,system-ui,sans-serif;
+  --serif:"Newsreader",Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#121415; --card:#1a1d1f; --ink:#eceae5; --ink-2:#a3aaa5; --ink-3:#7b827d;
+  --line:#2b2f31; --line-2:#232729;
+  --accent:#6fbfa4; --accent-2:#8ed3ba; --accent-wash:#17302a;
+  --amber:#d9a458; --amber-wash:#32270f;
+  --stop:#e08a8a; --stop-wash:#361c1c;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -14px rgba(0,0,0,.7);
+}}
+:root[data-theme="dark"]{
+  --paper:#121415; --card:#1a1d1f; --ink:#eceae5; --ink-2:#a3aaa5; --ink-3:#7b827d;
+  --line:#2b2f31; --line-2:#232729;
+  --accent:#6fbfa4; --accent-2:#8ed3ba; --accent-wash:#17302a;
+  --amber:#d9a458; --amber-wash:#32270f;
+  --stop:#e08a8a; --stop-wash:#361c1c;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -14px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 var(--sans);
+  -webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}
+h1,h2,h3{margin:0;text-wrap:balance}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ── chrome ───────────────────────────────── */
+header{display:flex;align-items:center;gap:26px;padding:0 20px;height:56px;
+  background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:40}
+.brand{font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:-.01em;white-space:nowrap}
+.rail{display:flex;gap:2px;flex:1;min-width:0;overflow:auto}
+.rail button{background:none;border:0;padding:6px 10px;border-radius:5px;color:var(--ink-3);
+  font-size:13px;display:flex;align-items:center;gap:7px;white-space:nowrap}
+.rail button .n{width:18px;height:18px;border-radius:50%;background:var(--line);color:var(--ink-2);
+  display:grid;place-items:center;font-size:10.5px;font-weight:600;font-family:var(--mono)}
+.rail button.on{color:var(--ink);background:var(--accent-wash)}
+.rail button.on .n{background:var(--accent);color:var(--card)}
+.rail button:disabled{opacity:.4;cursor:default}
+.status{font-size:11.5px;color:var(--ink-3);text-align:right;line-height:1.35;white-space:nowrap}
+.tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size:10px;font-weight:600;
+  letter-spacing:.03em;background:var(--amber-wash);color:var(--amber)}
+.tag.live{background:var(--accent-wash);color:var(--accent)}
+
+main{padding:24px 20px 80px;max-width:1240px;margin:0 auto}
+
+/* ── step 1 ───────────────────────────────── */
+.opening{max-width:660px;margin:8vh auto 0}
+.opening h1{font-family:var(--serif);font-size:38px;font-weight:500;letter-spacing:-.02em;margin-bottom:8px}
+.opening p.lede{color:var(--ink-2);margin:0 0 26px;font-size:16px}
+.ask{display:flex;gap:8px}
+.ask input{flex:1;padding:14px 16px;font:16px var(--sans);background:var(--card);
+  border:1px solid var(--line);border-radius:var(--r);color:var(--ink)}
+.ask input::placeholder{color:var(--ink-3)}
+.examples{margin-top:18px;display:flex;flex-direction:column;gap:7px}
+.examples span{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.examples button{background:none;border:0;padding:0;text-align:left;color:var(--accent);
+  font-size:13.5px;font-family:var(--mono)}
+.examples button:hover{text-decoration:underline}
+
+/* ── shared ───────────────────────────────── */
+.two{display:grid;grid-template-columns:minmax(320px,400px) 1fr;gap:18px;align-items:start}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.eyebrow{font-size:10.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:7px}
+.btn{background:var(--accent);color:var(--card);border:0;border-radius:5px;padding:11px 17px;
+  font-weight:500}
+.btn:hover{background:var(--accent-2)}
+.btn.block{width:100%;margin-top:14px}
+.btn.quiet{background:transparent;color:var(--ink);border:1px solid var(--line);padding:7px 12px;font-size:13px}
+.btn.quiet:hover{background:transparent;border-color:var(--accent);color:var(--accent)}
+.btn:disabled{opacity:.45;cursor:default}
+.field{display:block;margin-bottom:10px}
+.field span{display:block;font-size:11.5px;color:var(--ink-2);margin-bottom:3px}
+.field input,.field textarea,input.plain{width:100%;padding:8px 10px;background:var(--card);
+  border:1px solid var(--line);border-radius:5px;font:14px var(--sans);color:var(--ink)}
+.field textarea{resize:vertical;font-size:13.5px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.grid3{display:grid;grid-template-columns:2fr .6fr 1fr;gap:8px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.pills{display:flex;flex-wrap:wrap;gap:5px}
+.pill{border:1px solid var(--line);background:var(--card);color:var(--ink-2);border-radius:999px;
+  padding:4px 11px;font-size:12.5px}
+.pill:hover{border-color:var(--accent-2);color:var(--accent)}
+.pill.on{background:var(--accent);border-color:var(--accent);color:var(--card)}
+fieldset{border:0;padding:0;margin:0 0 13px}
+hr{border:0;border-top:1px solid var(--line-2);margin:16px 0}
+.aside{font-size:12.5px;color:var(--ink-2);background:var(--accent-wash);padding:8px 10px;
+  border-radius:5px;line-height:1.45}
+
+/* live count */
+.tally{border-bottom:1px solid var(--line-2);padding-bottom:14px;margin-bottom:15px}
+.tally b{display:block;font-family:var(--serif);font-size:40px;font-weight:500;line-height:1;
+  color:var(--accent);font-variant-numeric:tabular-nums}
+.tally em{display:block;font-style:normal;font-size:12.5px;color:var(--ink-3);margin-top:5px}
+
+/* scatter */
+.plot{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.plot header{all:unset;display:flex;gap:6px;padding:11px 13px;border-bottom:1px solid var(--line);
+  align-items:center;flex-wrap:wrap}
+.plot svg{display:block;width:100%;height:min(56vh,520px);touch-action:none;cursor:crosshair}
+.plotfoot{padding:9px 13px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink-2)}
+.dot{fill:var(--accent);opacity:.75}
+.dot.abs{fill:var(--amber)}
+.dot.out{fill:var(--ink-3);opacity:.16}
+.band{fill:var(--accent);opacity:.09;stroke:var(--accent);stroke-width:1;stroke-dasharray:4 3}
+.citylabel{fill:var(--ink-3);font:500 10px var(--sans);letter-spacing:.04em;text-transform:uppercase}
+
+/* table */
+.tblwrap{overflow:auto;max-height:56vh;border:1px solid var(--line);border-radius:var(--r)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{position:sticky;top:0;background:var(--card);text-align:left;font-size:10px;font-weight:600;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding:9px 11px;
+  border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:8px 11px;border-bottom:1px solid var(--line-2);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+.right{text-align:right;font-variant-numeric:tabular-nums;font-family:var(--mono);font-size:12.5px}
+.sub{display:block;color:var(--ink-3);font-size:11.5px}
+.none{color:var(--ink-3)}
+.chip{display:inline-block;font-size:10.5px;padding:1.5px 7px;border-radius:999px;
+  background:var(--line-2);color:var(--ink-2);white-space:nowrap}
+.chip.abs{background:var(--amber-wash);color:var(--amber)}
+.chip.dnc{background:var(--stop-wash);color:var(--stop);font-weight:600}
+td select{font:12px var(--sans);padding:2px 5px;background:var(--card);color:var(--ink);
+  border:1px solid var(--line);border-radius:4px}
+.toolbar{display:flex;gap:7px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.toolbar input.plain{width:auto;flex:1;min-width:150px}
+
+/* outreach */
+.chan{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);
+  border-radius:5px;padding:9px 12px;margin-bottom:5px}
+.chan b{display:block;font-weight:600;font-size:13.5px}
+.chan em{font-style:normal;font-size:11.5px;color:var(--ink-3)}
+.chan.on{border-color:var(--accent);background:var(--accent-wash)}
+.sheet{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);padding:44px 48px;min-height:420px;
+  font-family:var(--serif);font-size:15.5px;line-height:1.72;white-space:pre-wrap}
+.sheet.plain{font-family:var(--mono);font-size:13px;line-height:1.65;padding:24px 26px}
+.outbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:11px;flex-wrap:wrap}
+.outbar h3{font-size:15px}
+.outbar div{display:flex;gap:6px;flex-wrap:wrap}
+
+/* notices */
+.notice{border-radius:5px;padding:10px 12px;font-size:13px;margin-bottom:12px;line-height:1.5}
+.notice.ok{background:var(--accent-wash);color:var(--accent)}
+.notice.warn{background:var(--amber-wash);color:var(--amber)}
+.notice.bad{background:var(--stop-wash);color:var(--stop)}
+.notice b{display:block;margin-bottom:3px}
+.notice ul{margin:5px 0 0;padding-left:17px}
+.notice li{margin-bottom:3px}
+.modesw{display:flex;gap:2px;background:var(--line-2);padding:2px;border-radius:6px}
+.modesw .mode{background:none;border:0;padding:5px 12px;border-radius:5px;font-size:12.5px;color:var(--ink-2)}
+.modesw .mode.on{background:var(--card);color:var(--ink);font-weight:500;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.report h2{font-family:var(--serif);font-size:27px;font-weight:500;margin:0 0 3px;letter-spacing:-.01em}
+.report .kicker{font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:9px}
+.report h3{font-family:var(--sans);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--accent);margin:26px 0 8px;font-weight:600}
+.report p{margin:0 0 13px}
+.report ul{margin:0 0 13px;padding-left:19px}
+.report li{margin-bottom:7px}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1px;
+  background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden;margin:16px 0 4px}
+.facts div{background:var(--card);padding:11px 13px}
+.facts b{display:block;font-family:var(--mono);font-size:17px;font-weight:500;color:var(--ink)}
+.facts span{font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
+.pick{width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:6px;
+  padding:9px 11px;margin-bottom:5px;font:inherit;color:var(--ink)}
+.pick.on{border-color:var(--accent);background:var(--accent-wash)}
+.pick b{display:block;font-size:13.5px;font-weight:500}
+.pick em{font-style:normal;font-size:11.5px;color:var(--ink-3)}
+.datapanel{position:fixed;inset:0;background:rgba(10,12,13,.42);z-index:60;
+  display:grid;place-items:start center;padding:70px 16px 30px;overflow:auto}
+.datacard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);padding:22px;width:min(560px,100%)}
+.maprow{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;font-size:12.5px;margin-top:10px}
+.maprow b{font-weight:500;color:var(--ink-2)}
+.maprow span{font-family:var(--mono);font-size:11.5px;color:var(--accent)}
+@media (max-width:880px){.two{grid-template-columns:1fr}.rail{display:none}.sheet{padding:26px 22px}}
+</style>
+
+<header>
+  <div class="brand">Magic&nbsp;Buyer</div>
+  <nav class="rail">
+    <button data-step="1"><span class="n">1</span>Describe</button>
+    <button data-step="2" disabled><span class="n">2</span>Criteria</button>
+    <button data-step="3" disabled><span class="n">3</span>Recipients</button>
+    <button data-step="4" disabled><span class="n">4</span>Outreach</button>
+  </nav>
+  <div class="modesw">
+    <button class="mode on" data-mode="buyer">Magic Buyer</button>
+    <button class="mode" data-mode="cannon">Cannonball</button>
+  </div>
+  <button class="btn quiet" id="dataBtn" style="white-space:nowrap">Data</button>
+  <div class="status" id="status"></div>
+</header>
+
+<div id="dataPanel" class="datapanel" hidden>
+  <div class="datacard">
+    <div class="outbar">
+      <h3 style="font-family:var(--serif);font-weight:500;font-size:20px">Your data</h3>
+      <button class="btn quiet" id="dataClose">Close</button>
+    </div>
+    <p style="color:var(--ink-2);font-size:13.5px;margin:0 0 16px">
+      The tool ships with synthetic South Bay parcels so you can see how it works.
+      Load your own and it becomes real. Files stay in this browser — nothing is uploaded anywhere.
+    </p>
+
+    <div class="eyebrow">1 · Properties</div>
+    <p style="font-size:13px;color:var(--ink-2);margin:0 0 8px">
+      A farm list from your title rep is the easiest source — one CSV with owner names,
+      mailing addresses and property details already joined. Column names don’t matter.
+    </p>
+    <button class="btn quiet" id="upParcels">Choose parcel CSV…</button>
+    <div id="parcelReport"></div>
+
+    <hr>
+    <div class="eyebrow">2 · Currently listed (optional)</div>
+    <p style="font-size:13px;color:var(--ink-2);margin:0 0 8px">
+      A CRMLS export with <b>all statuses</b>. Active, pending, backup, hold, coming soon and
+      <b>withdrawn</b> are excluded — all still under an agency agreement. Expired, cancelled
+      and sold stay in. Refresh it weekly.
+    </p>
+    <button class="btn quiet" id="upMls">Choose CRMLS export…</button>
+    <div id="mlsReport"></div>
+
+    <hr>
+    <button class="btn quiet" id="resetData">Back to sample data</button>
+  </div>
+</div>
+
+<main>
+
+<!-- 1 ─────────────────────────────────────── -->
+<section id="s1">
+  <div class="opening">
+    <h1>Describe your buyer.</h1>
+    <p class="lede">One sentence. Everything else fills itself in.</p>
+    <div class="ask">
+      <input id="sentence" autocomplete="off" spellcheck="false"
+        placeholder="The Kims, 4 bed 3 bath in Palos Verdes Estates CA, $2M–$2.4M, pre-approved">
+      <button class="btn" id="go">Next</button>
+    </div>
+    <div class="examples">
+      <span>Try one</span>
+      <button class="ex">The Kims, 4 bed 3 bath single family in Palos Verdes Estates CA, $2M-$2.4M, pre-approved, flexible closing, minor updates ok</button>
+      <button class="ex">Dana, condo in Redondo Beach CA, under $950,000, FHA, no rush</button>
+      <button class="ex">The Ruizes, 3 bed in Torrance CA, $1.1M-$1.4M, cash buyer, major reno ok, owned 10+ years</button>
+    </div>
+    <div id="s1notice"></div>
+  </div>
+</section>
+
+<!-- 2 ─────────────────────────────────────── -->
+<section id="s2" hidden>
+  <div class="two">
+    <div class="card">
+      <div class="eyebrow">Search criteria &amp; letter content</div>
+      <h2 id="buyerName" style="font-family:var(--serif);font-weight:500;font-size:23px">Your buyer</h2>
+      <p style="color:var(--ink-2);font-size:13px;margin:4px 0 16px" id="buyerLine"></p>
+
+      <div class="tally"><b id="count">—</b><em id="countNote">Adjust anything and this updates.</em></div>
+
+      <fieldset><div class="eyebrow">Location</div>
+        <div class="grid3">
+          <label class="field"><span>City</span><input id="f_city"></label>
+          <label class="field"><span>State</span><input id="f_state" maxlength="2"></label>
+          <label class="field"><span>ZIP</span><input id="f_zip"></label>
+        </div></fieldset>
+
+      <fieldset><div class="eyebrow">Value &amp; size</div>
+        <div class="grid4">
+          <label class="field"><span>Price min</span><input id="f_price_min" inputmode="numeric"></label>
+          <label class="field"><span>Price max</span><input id="f_price_max" inputmode="numeric"></label>
+          <label class="field"><span>Sq ft min</span><input id="f_sqft_min" inputmode="numeric"></label>
+          <label class="field"><span>Sq ft max</span><input id="f_sqft_max" inputmode="numeric"></label>
+        </div></fieldset>
+
+      <fieldset><div class="eyebrow">Property type</div><div class="pills" id="p_property_type"></div></fieldset>
+      <fieldset><div class="eyebrow">Beds</div><div class="pills" id="p_beds"></div></fieldset>
+      <fieldset><div class="eyebrow">Baths</div><div class="pills" id="p_baths"></div></fieldset>
+      <fieldset><div class="eyebrow">Owner status</div><div class="pills" id="p_owner_status"></div></fieldset>
+      <fieldset><div class="eyebrow">Years owned</div><div class="pills" id="p_years_owned"></div></fieldset>
+
+      <hr>
+      <p class="aside">These three describe the buyer, not the property. They don’t narrow the list — they go into the letter.</p>
+      <fieldset style="margin-top:13px"><div class="eyebrow">Financing</div><div class="pills" id="p_financing"></div></fieldset>
+      <fieldset><div class="eyebrow">Closing flexibility</div><div class="pills" id="p_closing"></div></fieldset>
+      <fieldset><div class="eyebrow">Property condition</div><div class="pills" id="p_condition"></div></fieldset>
+
+      <fieldset><div class="eyebrow">Anything else</div>
+        <textarea id="f_why_area" rows="2" placeholder="e.g. relocating for work, needs a home office, wants a flat yard for a dog"></textarea>
+        <p style="font-size:11.5px;color:var(--ink-3);margin:5px 0 0">Property and situation only — never who the buyer is, or who the area suits.</p>
+        <div id="whyNotice"></div>
+      </fieldset>
+
+      <button class="btn block" id="toList">Continue to recipients</button>
+    </div>
+
+    <div class="plot">
+      <header>
+        <button class="btn quiet" id="clearBand">Clear selection</button>
+        <span style="font-size:12.5px;color:var(--ink-3)">Drag on the plot to select an area</span>
+      </header>
+      <svg id="plot" viewBox="0 0 820 560" preserveAspectRatio="xMidYMid meet"></svg>
+      <div class="plotfoot" id="plotFoot">Every dot is a parcel, placed by its real coordinates. Amber dots are absentee owners.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 ─────────────────────────────────────── -->
+<section id="s3" hidden>
+  <div class="card">
+    <div class="outbar">
+      <div>
+        <div class="eyebrow">Recipients</div>
+        <h2 style="font-family:var(--serif);font-weight:500;font-size:23px"><span id="rcount">0</span> homeowners</h2>
+        <p style="color:var(--ink-2);font-size:13px;margin:3px 0 0" id="fill"></p>
+      </div>
+      <div>
+        <button class="btn quiet" id="saveList">Save list</button>
+        <button class="btn quiet" id="expSkip">Export for skip trace</button>
+        <button class="btn quiet" id="impSkip">Import skip trace</button>
+        <button class="btn quiet" id="expLabels">Labels CSV</button>
+      </div>
+    </div>
+    <div id="listNotice"></div>
+    <div class="toolbar">
+      <input class="plain" id="search" placeholder="Search address, owner, phone, email…">
+    </div>
+    <div class="tblwrap">
+      <table><thead><tr>
+        <th>Address</th><th>Owner</th><th>Phone</th><th>Email</th>
+        <th class="right">Value</th><th>Type</th><th>DNC</th><th>Status</th>
+      </tr></thead><tbody id="rows"></tbody></table>
+    </div>
+    <button class="btn block" id="toWrite">Write the outreach</button>
+  </div>
+</section>
+
+<!-- 4 ─────────────────────────────────────── -->
+<section id="s4" hidden>
+  <div class="two">
+    <div class="card">
+      <div class="eyebrow">Channels</div>
+      <button class="chan on" data-ch="letter"><b>Letter</b><em>Direct mail — to the homeowners</em></button>
+      <button class="chan" data-ch="email"><b>Email</b><em>To your sphere — ask for a forward</em></button>
+      <button class="chan" data-ch="text"><b>Text</b><em>SMS to past clients</em></button>
+      <button class="chan" data-ch="call"><b>Call script</b><em>Phone talk track</em></button>
+      <hr>
+      <div class="eyebrow">Your details</div>
+      <div id="agentFields"></div>
+      <button class="btn block" id="write">Write it</button>
+      <p style="font-size:11.5px;color:var(--ink-3);margin:8px 0 0" id="writeNote"></p>
+    </div>
+    <div>
+      <div id="fhNotice"></div>
+      <div class="outbar">
+        <h3 id="outName" style="font-family:var(--serif);font-weight:500">Letter</h3>
+        <div>
+          <button class="btn quiet" id="copy">Copy</button>
+          <button class="btn quiet" id="rewrite">Rewrite</button>
+          <button class="btn quiet" id="dlLetters">Download letters</button>
+        </div>
+      </div>
+      <div class="sheet" id="out">Fill in your details, then press <b>Write it</b>.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Cannonball ─────────────────────────────── -->
+<section id="cb" hidden>
+  <div class="two">
+    <div class="card">
+      <div class="eyebrow">Listings that didn’t sell</div>
+      <h2 style="font-family:var(--serif);font-weight:500;font-size:23px"><span id="cbCount">0</span> expired or cancelled</h2>
+      <p style="color:var(--ink-2);font-size:13px;margin:4px 0 14px">
+        Pulled from the same CRMLS export. These owners still want to sell — their agency
+        agreement has simply ended.</p>
+      <div id="cbList" style="max-height:34vh;overflow:auto;margin-bottom:14px"></div>
+      <div id="cbForm" hidden>
+        <hr>
+        <div class="eyebrow">Fill in what the export didn’t have</div>
+        <div class="grid2">
+          <label class="field"><span>Original price</span><input id="cb_orig" inputmode="numeric"></label>
+          <label class="field"><span>Final price</span><input id="cb_final" inputmode="numeric"></label>
+          <label class="field"><span>Days on market</span><input id="cb_dom" inputmode="numeric"></label>
+          <label class="field"><span>Price cuts</span><input id="cb_cuts" inputmode="numeric"></label>
+        </div>
+        <label class="field"><span>Photos in the listing</span><input id="cb_photos" inputmode="numeric"></label>
+        <label class="field"><span>What sold nearby since they listed (optional)</span>
+          <textarea id="cb_comps" rows="2" placeholder="e.g. three homes on the same street sold between $1.3M and $1.45M"></textarea></label>
+        <button class="btn block" id="cbWrite">Write the report</button>
+        <p style="font-size:11.5px;color:var(--ink-3);margin:8px 0 0">
+          Never names or blames the previous agent — that’s a Code of Ethics problem, and it
+          doesn’t work anyway.</p>
+      </div>
+    </div>
+    <div>
+      <div id="cbNotice"></div>
+      <div class="outbar">
+        <h3 id="cbTitle" style="font-family:var(--serif);font-weight:500">Report</h3>
+        <div>
+          <button class="btn quiet" id="cbCopy">Copy</button>
+          <button class="btn quiet" id="cbRedo">Rewrite</button>
+          <button class="btn quiet" id="cbPdf">Download PDF</button>
+        </div>
+      </div>
+      <div class="sheet report" id="cbOut">Pick a listing on the left, then write the report.</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+/* ═══════ sample parcels — synthetic South Bay, clearly marked in the UI ═══════ */
+const SEED = {"keys":["apn","address","city","zip","owner","value","type","mail_addr","mail_zip","beds","baths","sqft","lot_sqft","year_built","years_owned","property_type","lat","lon"],"rows":[["7938-033-029","6612 Highland Ave","Manhattan Beach","90266","D. Placeholder",3832000,"Owner","6612 Highland Ave","90266",4,3,3120,16000,1986,15,"Single Family",33.87322,-118.42393],["7943-005-003","3011 Palos Verdes Dr","Rolling Hills Estates","90274","A. Demoworth",2849000,"Owner","3011 Palos Verdes Dr","90274",5,4,4300,16400,2014,27,"Single Family",33.80242,-118.36805],["7849-015-023","1601 Prospect Ave","Rolling Hills Estates","90274","E. Sample",1350000,"Owner","1601 Prospect Ave","90274",2,2,1540,2900,2017,14,"Single Family",33.7974,-118.34125],["7373-039-065","936 Camino Real","Palos Verdes Estates","90274","L. Testerman",2524000,"Owner","936 Camino Real","90274",4,4,2580,6700,1987,40,"Single Family",33.76856,-118.40888],["7935-020-078","986 Via Campesina","Rancho Palos Verdes","90275","A. Stubbs",1139000,"Owner","986 Via Campesina","90275",3,2,1700,3500,2006,4,"Single Family",33.75424,-118.3714],["7765-001-017","3242 Silver Spur Rd","Manhattan Beach","90266","C. Example",3772000,"Absentee","7832 Wilshire Blvd","89109",5,4,4360,11300,1992,18,"Single Family",33.87838,-118.39664],["7842-038-044","4421 Crenshaw Blvd","Palos Verdes Estates","90274","L. Testerman",2066000,"Owner","4421 Crenshaw Blvd","90274",3,3,1990,9000,1971,25,"Single Family",33.77942,-118.38142],["7827-020-081","1902 Prospect Ave","Rolling Hills Estates","90274","B. Stubbs",2496000,"Owner","1902 Prospect Ave","90274",5,4,3770,14500,2017,12,"Single Family",33.77634,-118.37077],["7685-018-029","3413 Deep Valley Dr","Redondo Beach","90277","F. Dummett",2292000,"Owner","3413 Deep Valley Dr","90277",5,4,4130,10300,2003,38,"Single Family",33.84583,-118.3857],["7300-034-088","588 Granvia Altamira","Manhattan Beach","90266","A. Fixture",3432000,"Owner","588 Granvia Altamira","90266",5,4,3810,16700,2017,5,"Single Family",33.87594,-118.40278],["7690-004-077","1064 Hawthorne Blvd","Palos Verdes Estates","90274","L. Placeholder",2423000,"Owner","1064 Hawthorne Blvd","90274",4,3,2870,6000,2006,31,"Single Family",33.77872,-118.39553],["7312-015-056","940 Rolling Hills Rd","Rancho Palos Verdes","90275","H. Fixture",1493000,"Owner","940 Rolling Hills Rd","90275",2,1,1420,5900,1977,34,"Condo",33.72913,-118.38605],["7902-004-045","169 Camino Real","Rancho Palos Verdes","90275","M. Sample",1767000,"Owner","169 Camino Real","90275",4,3,3080,11900,1985,23,"Single Family",33.72903,-118.38215],["7428-025-005","4950 Vista Del Mar","Rolling Hills Estates","90274","D. Example",2492000,"Owner","4950 Vista Del Mar","90274",5,4,4480,23500,2009,22,"Single Family",33.7719,-118.36533],["7341-008-070","2589 Aviation Blvd","Manhattan Beach","90266","A. Placeholder",3735000,"Owner","2589 Aviation Blvd","90266",5,5,4450,8800,2007,34,"Condo",33.87295,-118.3948],["7145-014-070","4051 Rolling Hills Rd","Rolling Hills Estates","90274","L. Placeholder",2094000,"Owner","4051 Rolling Hills Rd","90274",4,3,2480,5900,2003,10,"Single Family",33.79071,-118.36025],["7845-032-021","2182 Granvia Altamira","Palos Verdes Estates","90274","M. Example",2502000,"Owner","2182 Granvia Altamira","90274",5,4,3400,10200,1973,14,"Single Family",33.78227,-118.41129],["7543-009-015","1243 Prospect Ave","Palos Verdes Estates","90274","L. Dummett",2009000,"Owner","1243 Prospect Ave","90274",3,2,1970,7000,1949,16,"Single Family",33.76414,-118.39723],["7301-028-038","5837 Granvia Altamira","Manhattan Beach","90266","G. Dummett",3929000,"Owner","5837 Granvia Altamira","90266",5,4,4510,17600,1964,37,"Condo",33.87772,-118.4008],["7406-039-025","4938 Highland Ave","Manhattan Beach","90266","J. Demoworth",3280000,"Absentee","5130 Ventura Blvd","90210",5,4,3280,7200,1974,25,"Single Family",33.8868,-118.39632],["7526-038-087","6714 Prospect Ave","Redondo Beach","90277","H. Stubbs",2721000,"Owner","6714 Prospect Ave","90277",5,5,3890,14700,1955,18,"Single Family",33.85767,-118.3976],["7622-026-033","280 Aviation Blvd","Rancho Palos Verdes","90275","G. Demoworth",1615000,"Owner","280 Aviation Blvd","90275",3,3,2020,5700,2004,26,"Single Family",33.75526,-118.39193],["7233-014-044","1338 Aviation Blvd","Rancho Palos Verdes","90275","C. Fixture",2391000,"Owner","1338 Aviation Blvd","90275",5,4,3880,7700,1955,1,"Single Family",33.74278,-118.3943],["7222-002-043","5869 Camino Real","Palos Verdes Estates","90274","J. Sample",1923000,"Owner","5869 Camino Real","90274",3,2,1640,5800,1999,37,"Single Family",33.79073,-118.38478],["7348-036-088","3426 Calle Mayor","Redondo Beach","90277","K. Dummett",2671000,"Owner","3426 Calle Mayor","90277",5,4,4410,14200,2013,22,"Single Family",33.83889,-118.38372],["7750-010-041","5709 Crenshaw Blvd","Rolling Hills Estates","90274","D. Sample",2610000,"Owner","5709 Crenshaw Blvd","90274",5,5,4200,21900,2017,14,"Single Family",33.77894,-118.36679],["7132-026-042","3290 Granvia Altamira","Torrance","90503","G. Placeholder",1928000,"Owner","3290 Granvia Altamira","90503",5,4,3610,14600,1962,24,"Single Family",33.81994,-118.35542],["7209-019-068","3313 Camino Real","Rolling Hills Estates","90274","G. Sampleton",1995000,"Absentee","6713 Ventura Blvd","89109",4,4,2450,6300,1998,15,"Single Family",33.79158,-118.34076],["7339-026-065","1952 Calle Mayor","Rolling Hills Estates","90274","L. Fixture",2093000,"Owner","1952 Calle Mayor","90274",4,3,2440,13400,2012,9,"Single Family",33.8016,-118.34284],["7287-012-062","6657 Aviation Blvd","Palos Verdes Estates","90274","L. Placeholder",1689000,"Owner","6657 Aviation Blvd","90274",2,2,1270,5800,2017,38,"Condo",33.77178,-118.38667],["7407-020-055","3078 Crenshaw Blvd","Rolling Hills Estates","90274","F. Dummett",2017000,"Owner","3078 Crenshaw Blvd","90274",4,3,2330,10000,1997,24,"Single Family",33.79828,-118.3636],["7577-035-064","2374 Rolling Hills Rd","Manhattan Beach","90266","A. Fixture",2408000,"Owner","2374 Rolling Hills Rd","90266",2,1,1550,7500,1954,4,"Single Family",33.86943,-118.42064],["7327-016-098","3338 Hawthorne Blvd","Manhattan Beach","90266","J. Dummett",4524000,"Owner","3338 Hawthorne Blvd","90266",5,5,4540,21400,1993,4,"Single Family",33.89367,-118.39967],["7548-001-041","5717 Deep Valley Dr","Torrance","90503","L. Sampleton",1555000,"Owner","5717 Deep Valley Dr","90503",5,4,3860,14700,2008,26,"Single Family",33.82663,-118.33495],["7687-006-040","3476 Crenshaw Blvd","Torrance","90503","H. Example",824000,"Owner","3476 Crenshaw Blvd","90503",2,1,1460,7600,2004,17,"Single Family",33.82285,-118.32972],["7371-011-069","6708 Aviation Blvd","Rancho Palos Verdes","90275","D. Sampleton",1976000,"Owner","6708 Aviation Blvd","90275",4,3,2730,5900,2016,3,"Single Family",33.73225,-118.37493],["7554-011-062","6150 Silver Spur Rd","Rancho Palos Verdes","90275","E. Dummett",1783000,"Owner","6150 Silver Spur Rd","90275",3,3,1850,6700,1985,27,"Single Family",33.74457,-118.39953],["7278-032-006","2113 Calle Mayor","Manhattan Beach","90266","K. Example",3869000,"Absentee","5453 Wilshire Blvd","94105",5,4,3250,15600,2017,37,"Single Family",33.88235,-118.41642],["7488-027-032","6253 Hawthorne Blvd","Rancho Palos Verdes","90275","A. Stubbs",2123000,"Owner","6253 Hawthorne Blvd","90275",5,5,3340,8200,2010,41,"Single Family",33.73577,-118.37016],["7840-022-042","488 Esplanade","Palos Verdes Estates","90274","J. Dummett",3405000,"Absentee","1311 Ventura Blvd","91403",5,4,4110,16100,1970,0,"Single Family",33.76116,-118.39019],["7699-038-010","706 Rolling Hills Rd","Rancho Palos Verdes","90275","F. Sampleton",1518000,"Owner","706 Rolling Hills Rd","90275",3,3,1710,5600,1958,2,"Single Family",33.73069,-118.38115],["7347-008-057","4689 Granvia Altamira","Rolling Hills Estates","90274","L. Dummett",2108000,"Absentee","2656 Main St","91403",4,3,2820,10900,2015,36,"Condo",33.78476,-118.34373],["7667-020-055","4123 Hawthorne Blvd","Palos Verdes Estates","90274","A. Example",3306000,"Owner","4123 Hawthorne Blvd","90274",5,4,4010,11300,1979,38,"Single Family",33.76886,-118.40487],["7219-023-041","4552 Rolling Hills Rd","Torrance","90503","L. Mockton",1982000,"Absentee","2044 Main St","91403",5,4,4090,20900,1992,34,"Single Family",33.84853,-118.33187],["7418-028-023","2439 Esplanade","Palos Verdes Estates","90274","D. Mockton",2838000,"Absentee","5403 Ventura Blvd","91403",5,4,4410,14200,2002,6,"Single Family",33.76996,-118.37769],["7990-035-081","2164 Anza Ave","Redondo Beach","90277","C. Mockton",1589000,"Absentee","4256 Ventura Blvd","89109",4,4,2380,12800,1996,30,"Condo",33.83163,-118.37186],["7751-008-034","4355 Camino Real","Palos Verdes Estates","90274","J. Stubbs",2851000,"Owner","4355 Camino Real","90274",5,4,3580,14500,2010,12,"Single Family",33.77612,-118.37923],["7918-036-025","1011 Highland Ave","Manhattan Beach","90266","K. Sampleton",4137000,"Owner","1011 Highland Ave","90266",5,4,3840,7100,1959,19,"Single Family",33.88759,-118.40715],["7862-005-063","467 Camino Real","Rolling Hills Estates","90274","M. Sampleton",1512000,"Owner","467 Camino Real","90274",2,1,1520,7100,1979,22,"Single Family",33.78204,-118.36133],["7584-038-087","3751 Rolling Hills Rd","Rolling Hills Estates","90274","E. Placeholder",2079000,"Owner","3751 Rolling Hills Rd","90274",4,3,2730,5300,1956,37,"Single Family",33.77456,-118.3468],["7532-009-003","1553 Highland Ave","Rancho Palos Verdes","90275","M. Sampleton",2555000,"Owner","1553 Highland Ave","90275",5,5,3800,17900,1994,24,"Single Family",33.75939,-118.37471],["7542-002-054","113 Anza Ave","Manhattan Beach","90266","C. Testerman",4120000,"Absentee","7202 Wilshire Blvd","89109",5,4,3820,7800,2011,37,"Single Family",33.88077,-118.42301],["7328-024-059","3746 Hawthorne Blvd","Rolling Hills Estates","90274","F. Example",2505000,"Owner","3746 Hawthorne Blvd","90274",5,5,3770,10000,1963,21,"Single Family",33.79096,-118.34349],["7349-003-087","6239 Palos Verdes Dr","Palos Verdes Estates","90274","A. Example",2464000,"Absentee","6142 Wilshire Blvd","94105",5,4,3360,15600,1986,21,"Single Family",33.78558,-118.37914],["7408-033-018","1006 Via Campesina","Palos Verdes Estates","90274","G. Sampleton",2638000,"Owner","1006 Via Campesina","90274",4,3,2880,12200,1949,35,"Single Family",33.7875,-118.37953],["7110-003-009","5000 Via Campesina","Torrance","90503","G. Demoworth",704000,"Absentee","6659 Main St","91403",2,1,1320,5600,1956,19,"Single Family",33.82031,-118.33211],["7526-008-042","2092 Esplanade","Rancho Palos Verdes","90275","H. Dummett",1603000,"Absentee","3692 Main St","91403",3,3,2280,8500,2004,3,"Single Family",33.73172,-118.38937],["7285-023-038","2049 Camino Real","Rolling Hills Estates","90274","H. Testerman",1712000,"Owner","2049 Camino Real","90274",2,1,1370,5700,2011,41,"Single Family",33.777,-118.36902],["7960-033-064","1091 Rolling Hills Rd","Palos Verdes Estates","90274","C. Mockton",3059000,"Absentee","4110 Main St","94105",4,4,2850,4800,2014,13,"Single Family",33.78966,-118.39055],["7926-024-040","5178 Highland Ave","Rolling Hills Estates","90274","A. Testerman",2478000,"Absentee","1688 Wilshire Blvd","90210",5,5,4540,16700,1969,32,"Single Family",33.78194,-118.34829],["7864-001-005","6002 Crenshaw Blvd","Rancho Palos Verdes","90275","L. Mockton",2037000,"Absentee","3843 Wilshire Blvd","89109",5,4,3580,16600,1961,21,"Condo",33.76105,-118.38375],["7351-037-015","648 Aviation Blvd","Manhattan Beach","90266","G. Mockton",3543000,"Owner","648 Aviation Blvd","90266",5,4,3870,16900,2003,11,"Condo",33.89885,-118.41729],["7140-030-021","2739 Highland Ave","Rolling Hills Estates","90274","M. Stubbs",2338000,"Absentee","5677 Wilshire Blvd","89109",4,3,2560,13500,1989,17,"Single Family",33.78907,-118.35206],["7571-027-061","1379 Highland Ave","Torrance","90503","F. Sampleton",1032000,"Owner","1379 Highland Ave","90503",4,3,2540,10600,1983,8,"Single Family",33.84105,-118.33435],["7521-002-060","2571 Deep Valley Dr","Rolling Hills Estates","90274","A. Fixture",2270000,"Absentee","8230 Main St","91403",4,3,2670,6800,1992,2,"Single Family",33.80045,-118.35119],["7415-009-093","616 Esplanade","Torrance","90503","G. Placeholder",1541000,"Owner","616 Esplanade","90503",4,3,3070,9400,1993,23,"Single Family",33.83781,-118.33815],["7198-015-089","1832 Silver Spur Rd","Rancho Palos Verdes","90275","G. Placeholder",2172000,"Owner","1832 Silver Spur Rd","90275",4,3,3070,4900,1991,24,"Condo",33.73846,-118.40394],["7472-008-084","4034 Camino Real","Manhattan Beach","90266","F. Mockton",3140000,"Owner","4034 Camino Real","90266",5,4,3500,14700,2012,22,"Single Family",33.87059,-118.4256],["7175-015-007","119 Prospect Ave","Rancho Palos Verdes","90275","B. Fixture",2702000,"Owner","119 Prospect Ave","90275",5,5,4200,22500,2009,18,"Single Family",33.73677,-118.38094],["7300-015-061","1601 Crenshaw Blvd","Palos Verdes Estates","90274","M. Placeholder",2995000,"Owner","1601 Crenshaw Blvd","90274",4,3,3160,17000,1968,3,"Condo",33.79304,-118.39581],["7493-029-029","1270 Palos Verdes Dr","Rancho Palos Verdes","90275","J. Dummett",2715000,"Owner","1270 Palos Verdes Dr","90275",5,4,3880,7000,1986,32,"Single Family",33.74316,-118.37587],["7372-019-040","3974 Granvia Altamira","Manhattan Beach","90266","M. Sampleton",3312000,"Owner","3974 Granvia Altamira","90266",4,4,3190,10200,1976,27,"Single Family",33.87301,-118.41296],["7707-013-010","6195 Rolling Hills Rd","Palos Verdes Estates","90274","D. Stubbs",3693000,"Owner","6195 Rolling Hills Rd","90274",5,4,4320,10800,1953,38,"Single Family",33.77968,-118.40626],["7770-022-009","6525 Vista Del Mar","Rancho Palos Verdes","90275","A. Sample",2309000,"Owner","6525 Vista Del Mar","90275",5,4,4450,8500,2006,22,"Single Family",33.74165,-118.37737],["7949-028-074","1733 Calle Mayor","Palos Verdes Estates","90274","D. Example",3421000,"Absentee","503 Ventura Blvd","94105",5,5,3620,9900,1991,26,"Condo",33.76719,-118.40192],["7820-013-062","618 Esplanade","Rolling Hills Estates","90274","A. Fixture",2251000,"Owner","618 Esplanade","90274",4,3,2880,7300,1955,22,"Condo",33.76997,-118.35262],["7949-008-041","4483 Deep Valley Dr","Manhattan Beach","90266","G. Sampleton",3503000,"Owner","4483 Deep Valley Dr","90266",3,2,2160,6000,1991,10,"Single Family",33.88911,-118.40173],["7268-022-089","5679 Hawthorne Blvd","Rolling Hills Estates","90274","K. Dummett",2073000,"Owner","5679 Hawthorne Blvd","90274",3,2,1980,6200,1950,28,"Single Family",33.77642,-118.37372],["7294-035-077","4987 Deep Valley Dr","Palos Verdes Estates","90274","A. Sampleton",1582000,"Absentee","1401 Wilshire Blvd","94105",2,1,1330,2200,1959,0,"Single Family",33.77346,-118.40932],["7495-017-056","3649 Calle Mayor","Manhattan Beach","90266","A. Testerman",3276000,"Owner","3649 Calle Mayor","90266",2,1,1330,4600,1961,36,"Single Family",33.87112,-118.42138],["7321-033-030","5728 Vista Del Mar","Rolling Hills Estates","90274","K. Testerman",2090000,"Absentee","380 Main St","89109",4,4,2940,10900,1982,35,"Condo",33.79972,-118.35971],["7970-029-096","1917 Vista Del Mar","Rancho Palos Verdes","90275","J. Sampleton",1194000,"Owner","1917 Vista Del Mar","90275",3,2,1760,5100,2008,41,"Single Family",33.76064,-118.40072],["7473-004-063","2305 Aviation Blvd","Torrance","90503","E. Fixture",974000,"Owner","2305 Aviation Blvd","90503",3,2,1780,5600,1979,4,"Single Family",33.83278,-118.34838],["7172-008-093","904 Deep Valley Dr","Torrance","90503","C. Demoworth",2294000,"Owner","904 Deep Valley Dr","90503",5,5,4660,23600,1958,41,"Single Family",33.81998,-118.32894],["7720-034-036","1224 Rolling Hills Rd","Palos Verdes Estates","90274","F. Sample",2006000,"Owner","1224 Rolling Hills Rd","90274",3,2,1600,7100,1997,8,"Single Family",33.78888,-118.41004],["7434-019-069","4862 Camino Real","Redondo Beach","90277","A. Testerman",2170000,"Owner","4862 Camino Real","90277",5,4,3580,15500,1976,34,"Single Family",33.85356,-118.38204],["7769-033-043","2108 Rolling Hills Rd","Torrance","90503","C. Placeholder",1612000,"Owner","2108 Rolling Hills Rd","90503",4,3,3020,15500,1972,32,"Single Family",33.85361,-118.33818],["7422-030-048","6433 Camino Real","Redondo Beach","90277","D. Sample",1349000,"Owner","6433 Camino Real","90277",2,1,1280,3600,2006,2,"Single Family",33.84716,-118.39686],["7162-027-064","2297 Anza Ave","Rancho Palos Verdes","90275","H. Example",2305000,"Owner","2297 Anza Ave","90275",5,4,3790,18300,2005,21,"Condo",33.76231,-118.37582],["7610-016-029","3807 Highland Ave","Redondo Beach","90277","L. Example",2212000,"Owner","3807 Highland Ave","90277",5,4,3760,19200,1977,26,"Single Family",33.85985,-118.38075],["7645-019-025","1021 Camino Real","Rolling Hills Estates","90274","E. Stubbs",1472000,"Owner","1021 Camino Real","90274",2,2,1220,3200,1960,29,"Single Family",33.78896,-118.36345],["7332-009-017","4327 Calle Mayor","Redondo Beach","90277","K. Placeholder",1609000,"Absentee","5103 Main St","91403",4,3,2570,13700,1948,27,"Single Family",33.84528,-118.38234],["7889-013-011","1496 Anza Ave","Rancho Palos Verdes","90275","A. Stubbs",2149000,"Owner","1496 Anza Ave","90275",5,4,4140,11600,1955,16,"Condo",33.75786,-118.39369],["7152-006-083","786 Crenshaw Blvd","Redondo Beach","90277","K. Demoworth",1247000,"Absentee","3361 Wilshire Blvd","89109",3,2,1780,5500,1978,31,"Single Family",33.85533,-118.40233],["7337-022-038","370 Aviation Blvd","Manhattan Beach","90266","L. Demoworth",2562000,"Owner","370 Aviation Blvd","90266",4,4,2330,9100,2002,31,"Single Family",33.88309,-118.39755],["7256-028-064","4765 Via Campesina","Manhattan Beach","90266","L. Sampleton",2396000,"Owner","4765 Via Campesina","90266",2,2,1470,2400,1958,11,"Single Family",33.90231,-118.41372],["7994-025-046","3053 Hawthorne Blvd","Redondo Beach","90277","D. Demoworth",1927000,"Owner","3053 Hawthorne Blvd","90277",5,4,3780,18200,1994,12,"Single Family",33.85465,-118.38218],["7394-001-092","2432 Anza Ave","Redondo Beach","90277","K. Sample",1401000,"Owner","2432 Anza Ave","90277",2,2,1580,6800,1956,31,"Single Family",33.85289,-118.37164],["7807-033-012","1688 Hawthorne Blvd","Manhattan Beach","90266","H. Sample",2811000,"Absentee","7784 Ventura Blvd","91403",4,4,2940,15800,1979,31,"Single Family",33.87172,-118.40296],["7649-029-034","158 Hawthorne Blvd","Rolling Hills Estates","90274","B. Sample",2075000,"Owner","158 Hawthorne Blvd","90274",4,3,2930,15100,1961,40,"Single Family",33.78868,-118.37514],["7756-033-064","1136 Calle Mayor","Rolling Hills Estates","90274","M. Testerman",2070000,"Owner","1136 Calle Mayor","90274",4,4,2470,10300,2010,16,"Single Family",33.78976,-118.34137],["7441-020-070","3411 Calle Mayor","Torrance","90503","D. Testerman",2526000,"Owner","3411 Calle Mayor","90503",5,5,4560,21800,2016,4,"Single Family",33.85277,-118.33639],["7707-031-056","2439 Via Campesina","Palos Verdes Estates","90274","B. Testerman",3272000,"Owner","2439 Via Campesina","90274",5,4,3790,10600,1967,11,"Single Family",33.76218,-118.3953],["7138-037-048","4587 Granvia Altamira","Manhattan Beach","90266","E. Testerman",3148000,"Owner","4587 Granvia Altamira","90266",3,2,1680,4400,1991,39,"Single Family",33.88655,-118.40855],["7650-007-052","3370 Camino Real","Manhattan Beach","90266","E. Sample",3576000,"Absentee","1519 Ventura Blvd","89109",5,5,4300,10900,2017,15,"Single Family",33.87698,-118.40279],["7168-020-002","1606 Granvia Altamira","Manhattan Beach","90266","H. Fixture",2927000,"Owner","1606 Granvia Altamira","90266",4,3,2860,9200,1987,3,"Single Family",33.87724,-118.41181],["7944-024-071","1486 Calle Mayor","Rancho Palos Verdes","90275","M. Sampleton",1550000,"Owner","1486 Calle Mayor","90275",3,2,2290,9300,2014,12,"Single Family",33.75964,-118.37403],["7921-032-020","3898 Vista Del Mar","Palos Verdes Estates","90274","J. Mockton",1936000,"Owner","3898 Vista Del Mar","90274",2,1,1520,7500,2008,22,"Single Family",33.77756,-118.39244],["7605-007-024","3717 Prospect Ave","Torrance","90503","B. Example",1203000,"Owner","3717 Prospect Ave","90503",4,3,3030,14700,2006,31,"Single Family",33.84071,-118.32944],["7351-016-088","3021 Palos Verdes Dr","Manhattan Beach","90266","L. Placeholder",3262000,"Owner","3021 Palos Verdes Dr","90266",4,3,2900,14600,1989,37,"Condo",33.89601,-118.42828],["7838-021-005","5171 Rolling Hills Rd","Torrance","90503","A. Dummett",1092000,"Owner","5171 Rolling Hills Rd","90503",4,3,2400,6700,1953,21,"Single Family",33.83736,-118.35799],["7760-019-051","786 Palos Verdes Dr","Redondo Beach","90277","E. Fixture",1699000,"Owner","786 Palos Verdes Dr","90277",4,3,2560,7400,1964,15,"Single Family",33.85757,-118.40349],["7301-023-017","1898 Vista Del Mar","Torrance","90503","F. Stubbs",1168000,"Owner","1898 Vista Del Mar","90503",4,4,2750,13900,1955,34,"Single Family",33.82834,-118.34913],["7161-018-083","383 Hawthorne Blvd","Rancho Palos Verdes","90275","J. Testerman",2030000,"Owner","383 Hawthorne Blvd","90275",4,3,2670,12200,2014,38,"Single Family",33.74603,-118.3972],["7705-026-045","1855 Via Campesina","Manhattan Beach","90266","E. Mockton",2353000,"Absentee","1544 Ventura Blvd","94105",2,1,1510,4700,2018,36,"Condo",33.89213,-118.42456],["7694-017-068","6024 Esplanade","Redondo Beach","90277","G. Demoworth",2139000,"Owner","6024 Esplanade","90277",5,4,4180,19500,1948,29,"Single Family",33.85747,-118.38564],["7215-024-002","2574 Aviation Blvd","Redondo Beach","90277","H. Sampleton",1486000,"Owner","2574 Aviation Blvd","90277",3,2,1990,6300,2009,23,"Single Family",33.84321,-118.39561],["7202-010-060","888 Crenshaw Blvd","Palos Verdes Estates","90274","B. Fixture",2440000,"Owner","888 Crenshaw Blvd","90274",4,4,3160,15200,1985,3,"Single Family",33.76467,-118.40699],["7456-019-036","1127 Aviation Blvd","Rancho Palos Verdes","90275","K. Stubbs",1659000,"Absentee","7526 Ventura Blvd","91403",3,2,2100,9400,1954,31,"Single Family",33.73062,-118.37365],["7815-002-096","5870 Aviation Blvd","Rolling Hills Estates","90274","K. Sampleton",2639000,"Absentee","7598 Wilshire Blvd","94105",5,5,4170,18900,2008,40,"Single Family",33.78937,-118.33961],["7260-004-037","2746 Rolling Hills Rd","Torrance","90503","K. Sample",1569000,"Owner","2746 Rolling Hills Rd","90503",5,4,3740,13400,1988,4,"Single Family",33.8321,-118.34007],["7712-001-046","6374 Calle Mayor","Manhattan Beach","90266","E. Mockton",3506000,"Owner","6374 Calle Mayor","90266",4,4,3110,14700,1951,7,"Condo",33.88747,-118.40659],["7748-030-032","5044 Rolling Hills Rd","Palos Verdes Estates","90274","J. Sample",2818000,"Owner","5044 Rolling Hills Rd","90274",5,5,3510,13000,2008,32,"Condo",33.76826,-118.39368],["7584-020-096","122 Crenshaw Blvd","Torrance","90503","H. Mockton",1915000,"Absentee","1387 Wilshire Blvd","90210",5,4,3500,9600,1997,32,"Single Family",33.85055,-118.33816],["7477-033-018","6531 Deep Valley Dr","Palos Verdes Estates","90274","A. Sample",1820000,"Absentee","6563 Main St","90210",2,2,1500,6500,1979,15,"Single Family",33.76829,-118.39964],["7843-005-085","835 Aviation Blvd","Rancho Palos Verdes","90275","J. Example",2785000,"Owner","835 Aviation Blvd","90275",5,5,4180,17600,2008,4,"Condo",33.72919,-118.39761],["7954-033-054","857 Camino Real","Rolling Hills Estates","90274","D. Sample",3125000,"Owner","857 Camino Real","90274",5,4,4620,23100,2014,12,"Single Family",33.77171,-118.34799],["7582-035-044","5440 Rolling Hills Rd","Rolling Hills Estates","90274","M. Example",3296000,"Absentee","1921 Main St","90210",5,5,4400,18200,1950,39,"Single Family",33.78921,-118.36859],["7471-036-033","5990 Granvia Altamira","Manhattan Beach","90266","C. Fixture",3784000,"Owner","5990 Granvia Altamira","90266",4,3,3140,8500,1985,12,"Single Family",33.87877,-118.4278],["7801-031-078","4550 Calle Mayor","Rolling Hills Estates","90274","K. Dummett",1810000,"Owner","4550 Calle Mayor","90274",2,1,1370,2400,1956,3,"Condo",33.77363,-118.36958],["7138-024-016","4597 Rolling Hills Rd","Redondo Beach","90277","M. Demoworth",1123000,"Owner","4597 Rolling Hills Rd","90277",2,2,1430,6900,1998,3,"Single Family",33.86563,-118.37207],["7650-029-086","671 Palos Verdes Dr","Redondo Beach","90277","K. Sampleton",1887000,"Owner","671 Palos Verdes Dr","90277",5,4,3490,7300,1975,5,"Single Family",33.84372,-118.37451],["7547-010-035","5876 Prospect Ave","Redondo Beach","90277","H. Sample",2188000,"Owner","5876 Prospect Ave","90277",5,4,3640,19000,2015,40,"Single Family",33.85135,-118.38727],["7979-001-030","2512 Rolling Hills Rd","Palos Verdes Estates","90274","C. Dummett",2633000,"Owner","2512 Rolling Hills Rd","90274",5,4,4070,7200,2004,40,"Condo",33.76562,-118.40715],["7819-010-095","2305 Silver Spur Rd","Manhattan Beach","90266","J. Example",2001000,"Owner","2305 Silver Spur Rd","90266",2,2,1510,3200,2016,30,"Single Family",33.88217,-118.39747],["7178-022-049","3816 Palos Verdes Dr","Manhattan Beach","90266","C. Dummett",3991000,"Owner","3816 Palos Verdes Dr","90266",4,3,3030,13900,1959,22,"Single Family",33.89522,-118.40182],["7359-007-097","5823 Granvia Altamira","Rolling Hills Estates","90274","F. Example",2376000,"Absentee","1248 Ventura Blvd","94105",4,3,3170,17400,1963,40,"Single Family",33.78782,-118.35257],["7974-019-013","1759 Silver Spur Rd","Redondo Beach","90277","G. Dummett",1229000,"Owner","1759 Silver Spur Rd","90277",2,1,1450,7500,1987,18,"Single Family",33.83988,-118.38857],["7978-020-097","3370 Vista Del Mar","Torrance","90503","D. Stubbs",1809000,"Owner","3370 Vista Del Mar","90503",5,5,4690,11800,2006,24,"Single Family",33.8179,-118.32679],["7861-029-069","5694 Vista Del Mar","Rancho Palos Verdes","90275","M. Fixture",2122000,"Owner","5694 Vista Del Mar","90275",3,3,2160,10000,1994,14,"Single Family",33.74454,-118.37314],["7941-011-096","4008 Camino Real","Manhattan Beach","90266","E. Dummett",3510000,"Owner","4008 Camino Real","90266",4,3,2420,5000,1981,36,"Single Family",33.89337,-118.40147],["7358-038-055","1268 Prospect Ave","Palos Verdes Estates","90274","E. Sampleton",2860000,"Owner","1268 Prospect Ave","90274",4,3,2590,12200,1979,6,"Single Family",33.79107,-118.40937],["7180-027-093","2246 Silver Spur Rd","Rancho Palos Verdes","90275","C. Mockton",1618000,"Owner","2246 Silver Spur Rd","90275",4,4,2320,4500,1954,15,"Single Family",33.74918,-118.37377],["7247-037-064","3824 Anza Ave","Manhattan Beach","90266","A. Dummett",2765000,"Owner","3824 Anza Ave","90266",2,1,1560,5500,2005,18,"Single Family",33.88493,-118.41561],["7902-036-007","3496 Silver Spur Rd","Manhattan Beach","90266","E. Example",3720000,"Owner","3496 Silver Spur Rd","90266",4,3,2800,8400,1954,27,"Single Family",33.88893,-118.415],["7584-010-042","3045 Vista Del Mar","Palos Verdes Estates","90274","G. Sampleton",3813000,"Owner","3045 Vista Del Mar","90274",5,4,4110,22300,1980,11,"Single Family",33.76205,-118.37876],["7172-028-094","5842 Prospect Ave","Redondo Beach","90277","M. Dummett",1960000,"Owner","5842 Prospect Ave","90277",4,4,2970,6400,1961,36,"Single Family",33.83493,-118.38876],["7596-003-013","4304 Crenshaw Blvd","Rancho Palos Verdes","90275","J. Mockton",2694000,"Absentee","3356 Wilshire Blvd","91403",5,4,3330,11900,1966,38,"Single Family",33.75059,-118.39459],["7916-015-064","208 Vista Del Mar","Rancho Palos Verdes","90275","F. Fixture",2587000,"Owner","208 Vista Del Mar","90275",5,4,4380,14000,1995,15,"Single Family",33.73499,-118.37372],["7805-028-002","4764 Anza Ave","Rancho Palos Verdes","90275","F. Stubbs",3053000,"Owner","4764 Anza Ave","90275",5,5,4210,8200,1998,35,"Single Family",33.74371,-118.37536],["7149-012-094","5389 Vista Del Mar","Rancho Palos Verdes","90275","J. Sample",2675000,"Owner","5389 Vista Del Mar","90275",5,4,3640,15300,1996,3,"Single Family",33.73962,-118.37803],["7525-028-047","2230 Granvia Altamira","Torrance","90503","F. Testerman",953000,"Owner","2230 Granvia Altamira","90503",3,3,1850,7100,1972,7,"Single Family",33.82766,-118.34849],["7347-006-090","5150 Aviation Blvd","Manhattan Beach","90266","L. Placeholder",3804000,"Absentee","1078 Main St","89109",4,4,3140,16100,2016,14,"Condo",33.86686,-118.42059],["7330-021-014","5879 Via Campesina","Torrance","90503","J. Testerman",1784000,"Owner","5879 Via Campesina","90503",5,4,3360,11000,1949,33,"Condo",33.84582,-118.33161],["7974-001-012","146 Calle Mayor","Manhattan Beach","90266","L. Mockton",4375000,"Owner","146 Calle Mayor","90266",5,4,4580,21500,1973,22,"Condo",33.87221,-118.39441],["7786-025-080","6734 Deep Valley Dr","Palos Verdes Estates","90274","D. Stubbs",2688000,"Absentee","4874 Ventura Blvd","91403",5,4,3200,17200,1966,7,"Single Family",33.79545,-118.40303],["7234-034-082","5977 Vista Del Mar","Redondo Beach","90277","E. Example",2160000,"Owner","5977 Vista Del Mar","90277",5,4,3660,18000,1953,27,"Single Family",33.86045,-118.38836],["7284-025-062","3831 Highland Ave","Torrance","90503","J. Mockton",650000,"Owner","3831 Highland Ave","90503",2,1,1370,7200,1957,28,"Single Family",33.83539,-118.33586],["7643-017-049","3707 Aviation Blvd","Redondo Beach","90277","C. Demoworth",1998000,"Owner","3707 Aviation Blvd","90277",5,5,3250,7300,1958,37,"Single Family",33.85991,-118.37812],["7118-017-027","1973 Palos Verdes Dr","Torrance","90503","E. Stubbs",1703000,"Owner","1973 Palos Verdes Dr","90503",5,5,3490,5700,1955,17,"Single Family",33.83289,-118.32466],["7103-025-070","488 Camino Real","Rancho Palos Verdes","90275","E. Fixture",2581000,"Absentee","1545 Ventura Blvd","91403",5,5,4520,15600,1979,25,"Single Family",33.75334,-118.40267],["7566-015-011","5900 Via Campesina","Redondo Beach","90277","M. Placeholder",1538000,"Owner","5900 Via Campesina","90277",3,2,2160,8300,1989,22,"Condo",33.83733,-118.3924],["7675-039-024","4434 Anza Ave","Palos Verdes Estates","90274","E. Stubbs",2567000,"Owner","4434 Anza Ave","90274",4,3,2700,12000,2006,34,"Condo",33.79352,-118.3984],["7717-021-075","6767 Prospect Ave","Rolling Hills Estates","90274","B. Mockton",2319000,"Absentee","1707 Ventura Blvd","94105",4,3,3000,10800,1969,20,"Single Family",33.79171,-118.36312],["7766-021-006","2440 Hawthorne Blvd","Palos Verdes Estates","90274","C. Testerman",2147000,"Owner","2440 Hawthorne Blvd","90274",4,3,2670,11200,1989,37,"Single Family",33.79575,-118.39475],["7371-008-034","3600 Prospect Ave","Manhattan Beach","90266","K. Fixture",2915000,"Owner","3600 Prospect Ave","90266",4,4,2540,4200,1957,16,"Single Family",33.86994,-118.41907],["7430-018-072","2870 Highland Ave","Redondo Beach","90277","H. Stubbs",2022000,"Owner","2870 Highland Ave","90277",4,3,3060,13800,1987,0,"Single Family",33.86645,-118.39404],["7775-037-051","5459 Granvia Altamira","Redondo Beach","90277","A. Demoworth",2016000,"Owner","5459 Granvia Altamira","90277",4,3,3090,8900,2000,39,"Single Family",33.83866,-118.39875],["7183-005-067","3993 Anza Ave","Rancho Palos Verdes","90275","G. Sampleton",2429000,"Owner","3993 Anza Ave","90275",4,4,2890,9100,1969,38,"Single Family",33.75144,-118.40085],["7326-030-091","4445 Anza Ave","Palos Verdes Estates","90274","C. Placeholder",2790000,"Owner","4445 Anza Ave","90274",5,4,4490,20500,2003,39,"Single Family",33.79083,-118.40809],["7208-021-039","5804 Via Campesina","Manhattan Beach","90266","L. Demoworth",1931000,"Absentee","2748 Main St","90210",2,1,1380,3700,1979,27,"Single Family",33.89847,-118.42445],["7114-031-016","2301 Via Campesina","Rancho Palos Verdes","90275","B. Testerman",2301000,"Owner","2301 Via Campesina","90275",4,3,2870,14300,1960,2,"Condo",33.73369,-118.39653],["7359-039-058","1207 Hawthorne Blvd","Redondo Beach","90277","C. Mockton",1709000,"Owner","1207 Hawthorne Blvd","90277",3,2,2200,8100,1963,33,"Condo",33.83825,-118.38805],["7215-023-013","2416 Palos Verdes Dr","Manhattan Beach","90266","D. Example",4074000,"Absentee","4587 Main St","89109",5,4,3480,8600,1961,21,"Single Family",33.89021,-118.39632],["7131-007-054","6456 Prospect Ave","Redondo Beach","90277","G. Dummett",1696000,"Owner","6456 Prospect Ave","90277",3,2,2110,11400,1998,37,"Single Family",33.83584,-118.37468],["7384-006-071","2600 Esplanade","Rancho Palos Verdes","90275","E. Sample",2313000,"Owner","2600 Esplanade","90275",4,3,3020,12000,1985,6,"Single Family",33.75531,-118.39966],["7948-019-036","4081 Palos Verdes Dr","Rancho Palos Verdes","90275","G. Testerman",1562000,"Absentee","4375 Main St","90210",3,2,2180,4800,2008,32,"Condo",33.74644,-118.40128],["7257-013-048","133 Crenshaw Blvd","Rancho Palos Verdes","90275","H. Dummett",1338000,"Owner","133 Crenshaw Blvd","90275",3,3,1990,5900,1958,39,"Single Family",33.74339,-118.4033],["7578-029-019","1210 Calle Mayor","Rolling Hills Estates","90274","M. Mockton",3258000,"Owner","1210 Calle Mayor","90274",5,5,4180,17400,1950,17,"Single Family",33.79675,-118.36161],["7325-002-061","3040 Anza Ave","Manhattan Beach","90266","D. Placeholder",4082000,"Owner","3040 Anza Ave","90266",5,4,3820,17200,2004,11,"Single Family",33.90074,-118.41481],["7725-008-008","6392 Esplanade","Palos Verdes Estates","90274","L. Stubbs",2130000,"Absentee","1760 Wilshire Blvd","91403",3,3,1680,6700,1988,25,"Single Family",33.77034,-118.39295],["7686-037-020","2541 Via Campesina","Rolling Hills Estates","90274","C. Sampleton",3253000,"Absentee","4146 Wilshire Blvd","89109",5,5,4150,8600,2011,29,"Condo",33.78816,-118.36285],["7917-036-052","572 Aviation Blvd","Rolling Hills Estates","90274","M. Mockton",2483000,"Owner","572 Aviation Blvd","90274",5,5,4240,14600,1977,17,"Condo",33.79946,-118.35759],["7524-022-058","4602 Rolling Hills Rd","Rancho Palos Verdes","90275","B. Testerman",823000,"Owner","4602 Rolling Hills Rd","90275",2,1,1210,3300,1995,13,"Condo",33.74869,-118.38077],["7760-024-095","2366 Deep Valley Dr","Palos Verdes Estates","90274","D. Stubbs",2580000,"Owner","2366 Deep Valley Dr","90274",4,4,3070,15200,1953,14,"Single Family",33.76589,-118.38426],["7367-023-004","2414 Highland Ave","Rancho Palos Verdes","90275","K. Mockton",1661000,"Owner","2414 Highland Ave","90275",3,2,1820,4800,1996,12,"Condo",33.7304,-118.40337],["7220-006-048","720 Anza Ave","Palos Verdes Estates","90274","M. Demoworth",2908000,"Owner","720 Anza Ave","90274",4,3,2890,11100,2016,26,"Condo",33.7654,-118.39721],["7684-021-065","6608 Vista Del Mar","Rancho Palos Verdes","90275","K. Dummett",1590000,"Owner","6608 Vista Del Mar","90275",3,2,1890,9200,1963,8,"Single Family",33.74876,-118.39943],["7622-007-056","4892 Camino Real","Rancho Palos Verdes","90275","M. Stubbs",1544000,"Absentee","6236 Ventura Blvd","90210",4,3,2380,10300,1981,18,"Condo",33.72992,-118.36991],["7822-039-048","2218 Palos Verdes Dr","Torrance","90503","G. Placeholder",1403000,"Owner","2218 Palos Verdes Dr","90503",5,4,3300,16200,1951,41,"Single Family",33.82161,-118.35386],["7569-012-043","2086 Deep Valley Dr","Redondo Beach","90277","M. Sample",1006000,"Absentee","8873 Ventura Blvd","89109",2,2,1210,5800,1957,30,"Single Family",33.85384,-118.37161],["7104-021-016","3123 Silver Spur Rd","Torrance","90503","G. Mockton",1804000,"Owner","3123 Silver Spur Rd","90503",5,4,3790,11600,2005,25,"Single Family",33.82779,-118.32839],["7461-009-006","4247 Hawthorne Blvd","Palos Verdes Estates","90274","H. Placeholder",3172000,"Owner","4247 Hawthorne Blvd","90274",4,4,3020,15700,2002,36,"Single Family",33.79637,-118.37948],["7321-027-036","441 Highland Ave","Redondo Beach","90277","C. Placeholder",1752000,"Absentee","8308 Ventura Blvd","89109",5,4,3580,14800,1953,29,"Single Family",33.86567,-118.37667],["7196-016-054","4532 Anza Ave","Rolling Hills Estates","90274","M. Testerman",2029000,"Owner","4532 Anza Ave","90274",4,3,3050,15500,1970,38,"Single Family",33.7788,-118.34388],["7716-003-006","1986 Granvia Altamira","Manhattan Beach","90266","A. Fixture",2829000,"Owner","1986 Granvia Altamira","90266",4,3,2780,8900,1979,34,"Single Family",33.88921,-118.39781],["7124-036-098","5512 Aviation Blvd","Rancho Palos Verdes","90275","K. Sampleton",1313000,"Owner","5512 Aviation Blvd","90275",3,2,1620,5700,1956,8,"Single Family",33.73795,-118.38535],["7176-013-062","5213 Hawthorne Blvd","Rolling Hills Estates","90274","K. Sample",2157000,"Absentee","2841 Main St","89109",3,2,1930,10600,1983,34,"Single Family",33.77866,-118.35587],["7604-002-030","6177 Rolling Hills Rd","Torrance","90503","D. Stubbs",650000,"Absentee","2604 Main St","91403",2,1,1380,5300,1981,18,"Condo",33.84166,-118.34867],["7908-026-047","4976 Aviation Blvd","Rolling Hills Estates","90274","J. Testerman",2878000,"Owner","4976 Aviation Blvd","90274",5,4,3920,9800,1989,29,"Single Family",33.79333,-118.37438],["7669-017-097","5916 Calle Mayor","Rancho Palos Verdes","90275","A. Mockton",2059000,"Absentee","8358 Ventura Blvd","91403",5,4,3400,8800,1985,35,"Single Family",33.7615,-118.37498],["7547-033-038","4553 Camino Real","Manhattan Beach","90266","G. Example",2768000,"Owner","4553 Camino Real","90266",4,4,2480,11100,2011,24,"Condo",33.86889,-118.409],["7238-036-005","6483 Calle Mayor","Rancho Palos Verdes","90275","B. Example",2421000,"Absentee","7261 Wilshire Blvd","94105",5,4,3380,7900,1980,31,"Single Family",33.74131,-118.38868],["7290-032-010","1451 Hawthorne Blvd","Manhattan Beach","90266","M. Example",3145000,"Owner","1451 Hawthorne Blvd","90266",2,1,1330,4000,1961,15,"Single Family",33.88921,-118.40416],["7142-003-084","6474 Esplanade","Rancho Palos Verdes","90275","C. Fixture",1810000,"Owner","6474 Esplanade","90275",4,3,2300,11800,1950,18,"Single Family",33.74101,-118.3987],["7209-007-034","3867 Via Campesina","Torrance","90503","E. Dummett",982000,"Owner","3867 Via Campesina","90503",3,2,1790,5400,2014,28,"Single Family",33.8266,-118.34533],["7100-038-036","979 Aviation Blvd","Torrance","90503","A. Mockton",2343000,"Owner","979 Aviation Blvd","90503",5,4,4520,10100,1976,35,"Single Family",33.8283,-118.32657],["7763-027-080","4488 Hawthorne Blvd","Palos Verdes Estates","90274","G. Fixture",2732000,"Owner","4488 Hawthorne Blvd","90274",4,4,2360,4700,1994,31,"Single Family",33.7802,-118.40749],["7480-001-036","2845 Crenshaw Blvd","Torrance","90503","C. Dummett",1194000,"Owner","2845 Crenshaw Blvd","90503",4,3,2560,4700,2003,22,"Condo",33.83574,-118.33428],["7211-008-014","2618 Silver Spur Rd","Redondo Beach","90277","E. Sample",1706000,"Owner","2618 Silver Spur Rd","90277",3,2,1990,6400,1963,5,"Single Family",33.8592,-118.39005],["7199-038-013","808 Prospect Ave","Rolling Hills Estates","90274","E. Dummett",2797000,"Owner","808 Prospect Ave","90274",5,5,4420,16900,1972,22,"Single Family",33.79115,-118.3426],["7195-009-007","4384 Highland Ave","Palos Verdes Estates","90274","B. Fixture",2569000,"Owner","4384 Highland Ave","90274",3,3,2000,4800,1982,29,"Single Family",33.78636,-118.3875],["7102-007-034","6774 Palos Verdes Dr","Rancho Palos Verdes","90275","J. Example",1460000,"Owner","6774 Palos Verdes Dr","90275",3,3,1850,3000,1959,0,"Condo",33.734,-118.37615],["7723-009-015","6747 Crenshaw Blvd","Rolling Hills Estates","90274","D. Mockton",2991000,"Owner","6747 Crenshaw Blvd","90274",5,4,3700,11000,1968,38,"Condo",33.78888,-118.34882],["7122-025-094","1852 Deep Valley Dr","Redondo Beach","90277","K. Dummett",1543000,"Owner","1852 Deep Valley Dr","90277",4,3,2340,3800,1949,2,"Single Family",33.86432,-118.40488],["7990-028-089","3031 Prospect Ave","Palos Verdes Estates","90274","L. Sampleton",2364000,"Absentee","2740 Wilshire Blvd","90210",3,2,1760,3100,1969,17,"Single Family",33.78163,-118.40578],["7726-031-061","247 Calle Mayor","Rolling Hills Estates","90274","H. Fixture",1908000,"Owner","247 Calle Mayor","90274",3,2,1660,3100,2006,27,"Single Family",33.78931,-118.35404],["7691-005-023","1534 Granvia Altamira","Redondo Beach","90277","G. Mockton",1726000,"Owner","1534 Granvia Altamira","90277",4,3,2350,10800,1991,12,"Single Family",33.8643,-118.37767],["7817-037-059","2407 Camino Real","Manhattan Beach","90266","M. Stubbs",2476000,"Owner","2407 Camino Real","90266",2,2,1410,4900,1994,12,"Single Family",33.88198,-118.40837],["7688-004-074","2556 Via Campesina","Torrance","90503","E. Demoworth",1516000,"Owner","2556 Via Campesina","90503",5,5,3440,18500,1948,28,"Single Family",33.82393,-118.33374],["7302-009-044","6526 Silver Spur Rd","Palos Verdes Estates","90274","F. Placeholder",1595000,"Owner","6526 Silver Spur Rd","90274",2,2,1470,5100,2002,29,"Single Family",33.79564,-118.4057],["7271-015-071","6170 Via Campesina","Redondo Beach","90277","H. Sample",2661000,"Owner","6170 Via Campesina","90277",5,4,4270,18300,1994,27,"Single Family",33.85233,-118.37456],["7991-023-082","263 Hawthorne Blvd","Palos Verdes Estates","90274","C. Demoworth",3884000,"Owner","263 Hawthorne Blvd","90274",5,4,4510,14600,1954,9,"Single Family",33.7618,-118.401],["7129-035-026","386 Crenshaw Blvd","Rancho Palos Verdes","90275","E. Testerman",1899000,"Owner","386 Crenshaw Blvd","90275",3,2,1930,9900,1983,13,"Single Family",33.73825,-118.38005],["7192-007-029","575 Crenshaw Blvd","Palos Verdes Estates","90274","G. Example",2560000,"Owner","575 Crenshaw Blvd","90274",4,3,2880,11900,1987,30,"Single Family",33.77282,-118.40198],["7195-019-020","1416 Vista Del Mar","Rolling Hills Estates","90274","K. Demoworth",2628000,"Owner","1416 Vista Del Mar","90274",5,4,4290,15300,1964,5,"Condo",33.78213,-118.34083],["7899-028-002","4630 Granvia Altamira","Manhattan Beach","90266","C. Placeholder",4014000,"Absentee","6383 Wilshire Blvd","91403",5,5,3860,18900,1956,23,"Single Family",33.90053,-118.41206],["7905-022-069","1612 Hawthorne Blvd","Redondo Beach","90277","L. Stubbs",1108000,"Owner","1612 Hawthorne Blvd","90277",3,2,1720,9000,1986,24,"Single Family",33.83624,-118.38371],["7770-035-081","4531 Granvia Altamira","Rolling Hills Estates","90274","L. Sampleton",1581000,"Absentee","7092 Wilshire Blvd","89109",3,3,1830,4200,1966,37,"Single Family",33.79176,-118.36906],["7750-001-068","591 Esplanade","Palos Verdes Estates","90274","E. Demoworth",3700000,"Owner","591 Esplanade","90274",5,4,4380,7300,1965,2,"Single Family",33.78582,-118.40074],["7500-003-023","4634 Highland Ave","Manhattan Beach","90266","F. Mockton",2974000,"Absentee","6611 Ventura Blvd","89109",5,4,3300,14700,1953,40,"Single Family",33.87309,-118.4258],["7727-010-019","6416 Prospect Ave","Rolling Hills Estates","90274","E. Example",2785000,"Owner","6416 Prospect Ave","90274",4,4,3110,5500,2012,13,"Single Family",33.78319,-118.37014],["7666-031-005","1419 Palos Verdes Dr","Manhattan Beach","90266","A. Fixture",4328000,"Owner","1419 Palos Verdes Dr","90266",5,5,3600,8700,1998,21,"Single Family",33.88493,-118.41849],["7273-026-086","2724 Camino Real","Torrance","90503","B. Fixture",1219000,"Owner","2724 Camino Real","90503",4,4,2440,9600,1979,39,"Single Family",33.8221,-118.35206],["7812-033-042","3417 Deep Valley Dr","Rancho Palos Verdes","90275","D. Sample",1906000,"Absentee","1455 Main St","91403",4,4,3160,5900,1961,14,"Single Family",33.75591,-118.40053],["7373-011-071","5552 Aviation Blvd","Torrance","90503","J. Demoworth",713000,"Owner","5552 Aviation Blvd","90503",2,1,1520,6700,1976,10,"Single Family",33.84401,-118.32755],["7955-007-092","1928 Granvia Altamira","Redondo Beach","90277","D. Dummett",1365000,"Owner","1928 Granvia Altamira","90277",3,3,1970,9100,1948,5,"Single Family",33.83253,-118.37961],["7118-006-007","3123 Aviation Blvd","Redondo Beach","90277","H. Mockton",2316000,"Absentee","3120 Wilshire Blvd","89109",5,5,3930,15700,1966,36,"Condo",33.85139,-118.40323],["7837-019-086","4172 Crenshaw Blvd","Rolling Hills Estates","90274","E. Placeholder",1536000,"Absentee","1725 Wilshire Blvd","94105",2,1,1330,4400,1963,19,"Single Family",33.78603,-118.35015],["7477-033-063","1984 Granvia Altamira","Rolling Hills Estates","90274","A. Stubbs",2360000,"Absentee","6706 Main St","90210",4,3,3160,14500,1987,38,"Single Family",33.77807,-118.35778],["7946-012-052","4974 Esplanade","Torrance","90503","D. Testerman",992000,"Owner","4974 Esplanade","90503",3,2,2090,7900,2010,4,"Single Family",33.83027,-118.32634],["7945-028-033","4445 Hawthorne Blvd","Rancho Palos Verdes","90275","L. Dummett",2454000,"Absentee","5031 Wilshire Blvd","90210",5,4,4710,17200,1992,16,"Single Family",33.72999,-118.39108],["7355-002-085","6526 Aviation Blvd","Redondo Beach","90277","H. Sampleton",1933000,"Owner","6526 Aviation Blvd","90277",4,3,2820,5400,1968,3,"Single Family",33.83788,-118.39329],["7955-010-053","5600 Highland Ave","Rolling Hills Estates","90274","J. Fixture",2108000,"Owner","5600 Highland Ave","90274",4,3,2780,15100,2010,31,"Single Family",33.77179,-118.36157],["7894-013-003","6560 Camino Real","Rolling Hills Estates","90274","A. Testerman",3369000,"Owner","6560 Camino Real","90274",5,5,4450,18200,1988,18,"Single Family",33.78621,-118.35656],["7719-017-015","5804 Aviation Blvd","Rolling Hills Estates","90274","L. Dummett",2309000,"Owner","5804 Aviation Blvd","90274",5,4,3530,15100,1985,32,"Single Family",33.78056,-118.3532],["7951-001-082","2842 Aviation Blvd","Palos Verdes Estates","90274","F. Fixture",1835000,"Owner","2842 Aviation Blvd","90274",3,2,1940,5000,1989,41,"Single Family",33.79104,-118.39291],["7748-034-097","537 Crenshaw Blvd","Manhattan Beach","90266","F. Fixture",3445000,"Owner","537 Crenshaw Blvd","90266",4,3,2550,5000,2015,33,"Single Family",33.88476,-118.42038],["7144-019-086","1783 Hawthorne Blvd","Torrance","90503","J. Stubbs",868000,"Owner","1783 Hawthorne Blvd","90503",2,1,1590,3800,1952,39,"Single Family",33.85123,-118.35383],["7795-010-069","2929 Calle Mayor","Redondo Beach","90277","E. Sample",2573000,"Owner","2929 Calle Mayor","90277",5,5,3980,17300,2002,16,"Single Family",33.85625,-118.39449],["7387-004-074","529 Deep Valley Dr","Redondo Beach","90277","B. Stubbs",1837000,"Absentee","874 Wilshire Blvd","91403",5,4,3620,14400,1984,29,"Condo",33.83725,-118.40614],["7120-001-094","5747 Anza Ave","Manhattan Beach","90266","G. Dummett",2701000,"Owner","5747 Anza Ave","90266",3,2,1840,3300,1991,11,"Single Family",33.87832,-118.41835],["7943-028-072","583 Deep Valley Dr","Redondo Beach","90277","A. Demoworth",715000,"Owner","583 Deep Valley Dr","90277",2,1,1330,4600,2016,33,"Single Family",33.8389,-118.3959],["7681-015-043","1726 Calle Mayor","Rancho Palos Verdes","90275","M. Sample",1866000,"Owner","1726 Calle Mayor","90275",2,2,1510,3300,2005,39,"Single Family",33.75272,-118.38725],["7781-012-055","4560 Esplanade","Torrance","90503","K. Sample",1331000,"Owner","4560 Esplanade","90503",4,3,3000,10100,1990,34,"Condo",33.83413,-118.3374],["7666-031-054","2276 Hawthorne Blvd","Rolling Hills Estates","90274","M. Testerman",2241000,"Owner","2276 Hawthorne Blvd","90274",4,3,2540,13900,1998,18,"Single Family",33.78233,-118.37135],["7801-034-036","6381 Hawthorne Blvd","Rolling Hills Estates","90274","C. Placeholder",1564000,"Absentee","1564 Main St","94105",3,2,2050,8000,2010,10,"Single Family",33.80208,-118.37152],["7524-039-087","4584 Aviation Blvd","Redondo Beach","90277","L. Placeholder",1553000,"Owner","4584 Aviation Blvd","90277",4,4,2340,11200,1976,40,"Condo",33.83225,-118.39596],["7279-020-050","1994 Palos Verdes Dr","Manhattan Beach","90266","D. Demoworth",3461000,"Owner","1994 Palos Verdes Dr","90266",3,3,1850,3000,1973,24,"Condo",33.9011,-118.40314],["7340-013-004","3817 Crenshaw Blvd","Rolling Hills Estates","90274","C. Demoworth",2494000,"Owner","3817 Crenshaw Blvd","90274",4,4,3050,15500,1970,18,"Single Family",33.78582,-118.37123],["7747-023-039","225 Via Campesina","Manhattan Beach","90266","H. Sampleton",3485000,"Owner","225 Via Campesina","90266",4,3,2870,15100,1954,12,"Single Family",33.87572,-118.41613],["7461-022-091","5559 Anza Ave","Manhattan Beach","90266","J. Sample",4141000,"Absentee","4760 Ventura Blvd","89109",5,5,4220,15500,1975,7,"Single Family",33.90138,-118.39556],["7376-024-042","5112 Deep Valley Dr","Torrance","90503","M. Example",1472000,"Owner","5112 Deep Valley Dr","90503",5,4,3200,6300,1991,32,"Condo",33.84977,-118.35156],["7454-036-006","2881 Aviation Blvd","Torrance","90503","A. Stubbs",2508000,"Owner","2881 Aviation Blvd","90503",5,4,4540,16700,2002,0,"Single Family",33.84982,-118.35736],["7841-026-051","5337 Vista Del Mar","Manhattan Beach","90266","L. Sampleton",3505000,"Absentee","605 Ventura Blvd","94105",3,2,2150,4400,1975,31,"Single Family",33.86863,-118.40958],["7618-038-073","2781 Silver Spur Rd","Redondo Beach","90277","K. Mockton",1592000,"Owner","2781 Silver Spur Rd","90277",4,3,2320,7300,1960,5,"Single Family",33.85246,-118.37215],["7480-004-074","2629 Granvia Altamira","Rolling Hills Estates","90274","J. Dummett",2805000,"Absentee","5965 Ventura Blvd","90210",5,4,3820,10200,1957,35,"Single Family",33.77788,-118.37382],["7833-011-097","3928 Aviation Blvd","Rolling Hills Estates","90274","D. Testerman",2229000,"Owner","3928 Aviation Blvd","90274",5,4,3620,15800,2015,23,"Single Family",33.78097,-118.3537],["7274-023-012","6791 Aviation Blvd","Redondo Beach","90277","F. Example",1721000,"Owner","6791 Aviation Blvd","90277",4,4,2750,10900,1997,11,"Single Family",33.83871,-118.37983],["7420-021-065","3488 Camino Real","Redondo Beach","90277","D. Fixture",2541000,"Absentee","6337 Main St","91403",5,5,4230,19800,1986,40,"Single Family",33.83716,-118.39369],["7892-021-017","3636 Vista Del Mar","Torrance","90503","B. Sample",1831000,"Absentee","6251 Main St","91403",5,5,4010,20100,1951,13,"Single Family",33.81867,-118.3232],["7335-001-085","912 Deep Valley Dr","Palos Verdes Estates","90274","A. Testerman",3298000,"Owner","912 Deep Valley Dr","90274",5,5,3580,7200,2017,15,"Single Family",33.78789,-118.38428],["7934-001-059","2102 Anza Ave","Rancho Palos Verdes","90275","D. Fixture",2878000,"Owner","2102 Anza Ave","90275",5,5,4030,10600,1979,32,"Single Family",33.75757,-118.38726],["7567-008-027","2911 Via Campesina","Manhattan Beach","90266","D. Sample",2867000,"Absentee","4371 Main St","94105",3,2,2140,5600,1995,33,"Single Family",33.88197,-118.42021],["7649-028-015","4064 Rolling Hills Rd","Palos Verdes Estates","90274","F. Mockton",2827000,"Owner","4064 Rolling Hills Rd","90274",4,4,3070,6700,1970,30,"Condo",33.77854,-118.38693],["7968-006-023","6610 Prospect Ave","Manhattan Beach","90266","A. Demoworth",3149000,"Absentee","4523 Main St","89109",5,4,3930,11400,1950,6,"Single Family",33.89503,-118.41662],["7904-037-039","2410 Deep Valley Dr","Redondo Beach","90277","H. Mockton",2254000,"Absentee","6698 Main St","91403",5,4,4150,20200,1960,41,"Single Family",33.84744,-118.37802],["7898-001-093","264 Prospect Ave","Palos Verdes Estates","90274","G. Sample",2127000,"Owner","264 Prospect Ave","90274",4,4,2430,5100,1975,10,"Single Family",33.76831,-118.40219],["7504-028-068","2590 Anza Ave","Rolling Hills Estates","90274","M. Mockton",2824000,"Owner","2590 Anza Ave","90274",5,4,4200,21500,1949,7,"Single Family",33.77867,-118.35459],["7906-023-039","1569 Esplanade","Redondo Beach","90277","H. Sample",1980000,"Owner","1569 Esplanade","90277",5,5,3370,12900,2000,6,"Single Family",33.85392,-118.39845],["7208-036-017","340 Hawthorne Blvd","Torrance","90503","M. Mockton",1047000,"Owner","340 Hawthorne Blvd","90503",3,3,1930,3400,2000,40,"Single Family",33.8262,-118.32481],["7911-034-093","621 Anza Ave","Rolling Hills Estates","90274","H. Example",2891000,"Owner","621 Anza Ave","90274",5,5,3940,18300,1975,27,"Single Family",33.79977,-118.35711],["7414-028-001","5722 Rolling Hills Rd","Rolling Hills Estates","90274","H. Dummett",1895000,"Owner","5722 Rolling Hills Rd","90274",4,3,2430,11700,2004,6,"Condo",33.79888,-118.37388],["7751-001-007","6237 Via Campesina","Rancho Palos Verdes","90275","B. Sampleton",2260000,"Absentee","7201 Ventura Blvd","90210",5,4,3680,7300,2014,27,"Single Family",33.74285,-118.39931],["7987-002-027","2032 Prospect Ave","Rancho Palos Verdes","90275","G. Placeholder",1500000,"Owner","2032 Prospect Ave","90275",3,3,1880,4900,1975,25,"Single Family",33.76195,-118.40082],["7727-017-065","3150 Granvia Altamira","Manhattan Beach","90266","L. Dummett",3376000,"Owner","3150 Granvia Altamira","90266",4,3,2630,5900,2008,11,"Single Family",33.86683,-118.40655],["7985-014-098","1996 Camino Real","Rancho Palos Verdes","90275","K. Dummett",2094000,"Owner","1996 Camino Real","90275",4,4,2620,8700,1951,5,"Single Family",33.7414,-118.37016],["7943-016-077","2471 Anza Ave","Torrance","90503","B. Stubbs",976000,"Owner","2471 Anza Ave","90503",3,2,1660,4300,1959,31,"Single Family",33.84084,-118.32276],["7339-022-097","463 Anza Ave","Palos Verdes Estates","90274","H. Placeholder",2903000,"Owner","463 Anza Ave","90274",5,4,3610,9500,1967,18,"Single Family",33.79586,-118.383],["7419-030-095","4559 Palos Verdes Dr","Palos Verdes Estates","90274","D. Sampleton",2538000,"Owner","4559 Palos Verdes Dr","90274",4,4,2360,10700,1948,36,"Single Family",33.77515,-118.40714],["7658-003-045","1484 Rolling Hills Rd","Torrance","90503","M. Example",1112000,"Owner","1484 Rolling Hills Rd","90503",3,3,2140,5800,1960,37,"Single Family",33.83131,-118.34114],["7928-032-001","4681 Hawthorne Blvd","Rolling Hills Estates","90274","C. Mockton",2403000,"Absentee","1581 Wilshire Blvd","89109",4,4,3020,16100,1973,40,"Single Family",33.79877,-118.34022],["7492-026-028","2277 Aviation Blvd","Rolling Hills Estates","90274","A. Testerman",1826000,"Owner","2277 Aviation Blvd","90274",3,3,1630,8700,2002,26,"Single Family",33.80068,-118.35618],["7510-003-050","131 Anza Ave","Palos Verdes Estates","90274","G. Fixture",2007000,"Owner","131 Anza Ave","90274",4,4,2440,4000,1986,38,"Single Family",33.7706,-118.37681],["7599-010-023","1850 Camino Real","Rancho Palos Verdes","90275","C. Mockton",1897000,"Owner","1850 Camino Real","90275",4,4,3040,9000,2018,13,"Single Family",33.76118,-118.39024],["7190-027-013","5858 Palos Verdes Dr","Rancho Palos Verdes","90275","C. Placeholder",1911000,"Owner","5858 Palos Verdes Dr","90275",4,4,3180,6100,1952,12,"Single Family",33.73932,-118.38996],["7567-010-027","269 Vista Del Mar","Redondo Beach","90277","A. Fixture",2257000,"Owner","269 Vista Del Mar","90277",5,4,4680,16400,2016,15,"Single Family",33.84234,-118.37101],["7601-005-018","5329 Palos Verdes Dr","Palos Verdes Estates","90274","A. Mockton",3074000,"Absentee","267 Wilshire Blvd","94105",5,4,4740,8800,1994,23,"Single Family",33.7912,-118.40437],["7958-003-078","5781 Granvia Altamira","Palos Verdes Estates","90274","E. Example",3425000,"Owner","5781 Granvia Altamira","90274",5,4,4630,18700,2003,1,"Single Family",33.76658,-118.38698],["7843-039-060","683 Palos Verdes Dr","Rolling Hills Estates","90274","J. Fixture",3150000,"Owner","683 Palos Verdes Dr","90274",5,4,4540,11600,2012,14,"Single Family",33.79742,-118.34618],["7521-024-046","3376 Anza Ave","Rancho Palos Verdes","90275","H. Sampleton",1572000,"Owner","3376 Anza Ave","90275",4,4,2350,6600,2018,15,"Single Family",33.76074,-118.39139],["7268-024-059","139 Silver Spur Rd","Manhattan Beach","90266","J. Fixture",3158000,"Owner","139 Silver Spur Rd","90266",3,3,1990,10900,1996,24,"Single Family",33.87467,-118.41502],["7880-037-044","3317 Prospect Ave","Palos Verdes Estates","90274","A. Example",3103000,"Owner","3317 Prospect Ave","90274",5,4,4330,12500,1969,22,"Single Family",33.78643,-118.40874],["7104-018-034","1321 Granvia Altamira","Rancho Palos Verdes","90275","A. Testerman",1909000,"Owner","1321 Granvia Altamira","90275",4,3,3170,14400,1993,0,"Single Family",33.73941,-118.37575],["7378-033-030","6272 Camino Real","Palos Verdes Estates","90274","F. Mockton",2446000,"Absentee","2405 Ventura Blvd","90210",5,5,3380,17700,2006,23,"Single Family",33.78179,-118.38422],["7237-034-092","569 Calle Mayor","Torrance","90503","L. Dummett",1911000,"Owner","569 Calle Mayor","90503",5,4,4390,13600,1972,41,"Single Family",33.83389,-118.34854],["7405-035-079","4801 Deep Valley Dr","Rolling Hills Estates","90274","E. Stubbs",3289000,"Owner","4801 Deep Valley Dr","90274",5,5,4630,22600,1981,37,"Single Family",33.78669,-118.34615],["7308-004-010","6713 Aviation Blvd","Rolling Hills Estates","90274","C. Testerman",2046000,"Owner","6713 Aviation Blvd","90274",4,3,2750,13100,1955,22,"Single Family",33.77973,-118.34046],["7334-028-069","3799 Via Campesina","Redondo Beach","90277","G. Demoworth",2940000,"Owner","3799 Via Campesina","90277",5,4,4690,19400,1992,11,"Single Family",33.85095,-118.37127],["7494-031-079","5986 Crenshaw Blvd","Redondo Beach","90277","F. Fixture",2249000,"Owner","5986 Crenshaw Blvd","90277",5,4,4490,23000,1994,0,"Single Family",33.83939,-118.37787],["7931-016-060","6275 Highland Ave","Torrance","90503","G. Sampleton",1465000,"Absentee","2162 Ventura Blvd","89109",4,4,3090,13600,1993,12,"Single Family",33.83083,-118.33539],["7611-012-096","5187 Anza Ave","Manhattan Beach","90266","M. Stubbs",3319000,"Owner","5187 Anza Ave","90266",5,5,4340,20700,1975,31,"Condo",33.89656,-118.41745],["7264-015-076","1595 Anza Ave","Rolling Hills Estates","90274","F. Sampleton",2889000,"Owner","1595 Anza Ave","90274",5,5,4320,15600,1962,31,"Condo",33.79353,-118.36069],["7223-034-091","2368 Vista Del Mar","Palos Verdes Estates","90274","E. Placeholder",1883000,"Owner","2368 Vista Del Mar","90274",3,3,1980,8800,1972,22,"Single Family",33.77105,-118.40162],["7683-035-073","4185 Via Campesina","Palos Verdes Estates","90274","J. Sampleton",2800000,"Owner","4185 Via Campesina","90274",5,5,4380,23900,2016,29,"Single Family",33.7631,-118.39304],["7841-018-092","292 Esplanade","Redondo Beach","90277","F. Sample",1370000,"Owner","292 Esplanade","90277",3,2,1780,5000,1954,31,"Single Family",33.84716,-118.39632],["7878-023-030","4081 Palos Verdes Dr","Rolling Hills Estates","90274","D. Placeholder",1868000,"Owner","4081 Palos Verdes Dr","90274",3,3,2090,3600,1952,35,"Single Family",33.79269,-118.35229],["7938-008-092","3735 Via Campesina","Redondo Beach","90277","D. Sample",1543000,"Owner","3735 Via Campesina","90277",3,2,1660,7500,2010,15,"Single Family",33.86364,-118.38383],["7974-023-016","6400 Rolling Hills Rd","Palos Verdes Estates","90274","A. Placeholder",3014000,"Owner","6400 Rolling Hills Rd","90274",5,4,4160,8300,1953,7,"Single Family",33.76911,-118.40692],["7737-038-007","835 Crenshaw Blvd","Rancho Palos Verdes","90275","G. Dummett",3412000,"Absentee","2367 Wilshire Blvd","91403",5,4,4580,10200,1957,10,"Single Family",33.75137,-118.39443],["7652-010-002","1998 Esplanade","Palos Verdes Estates","90274","E. Sample",3402000,"Absentee","8446 Wilshire Blvd","94105",5,4,4190,9500,1949,1,"Condo",33.78387,-118.40277],["7957-010-035","6737 Prospect Ave","Redondo Beach","90277","E. Demoworth",2652000,"Absentee","2214 Main St","90210",5,4,4610,18400,2003,40,"Single Family",33.84359,-118.39396],["7170-033-042","4915 Prospect Ave","Rancho Palos Verdes","90275","A. Fixture",1700000,"Owner","4915 Prospect Ave","90275",3,2,2220,6300,2016,6,"Single Family",33.75442,-118.37822],["7110-030-068","5938 Palos Verdes Dr","Palos Verdes Estates","90274","B. Placeholder",2666000,"Owner","5938 Palos Verdes Dr","90274",3,3,1930,6900,1989,21,"Single Family",33.7856,-118.39828],["7941-001-024","4557 Hawthorne Blvd","Palos Verdes Estates","90274","G. Testerman",3166000,"Owner","4557 Hawthorne Blvd","90274",5,5,4560,16800,1973,30,"Single Family",33.77481,-118.40713],["7641-005-084","906 Granvia Altamira","Redondo Beach","90277","B. Testerman",1410000,"Absentee","3873 Main St","90210",4,3,2320,11700,2014,37,"Single Family",33.84029,-118.39408],["7937-033-095","6717 Aviation Blvd","Redondo Beach","90277","B. Sample",1489000,"Owner","6717 Aviation Blvd","90277",3,2,2080,7800,1974,18,"Single Family",33.84709,-118.37851],["7457-003-041","5945 Highland Ave","Palos Verdes Estates","90274","J. Dummett",3430000,"Owner","5945 Highland Ave","90274",5,4,4690,25700,2007,4,"Single Family",33.77769,-118.3879],["7741-018-015","297 Rolling Hills Rd","Torrance","90503","G. Stubbs",2344000,"Owner","297 Rolling Hills Rd","90503",5,4,4560,19300,2012,1,"Single Family",33.8385,-118.34741],["7789-011-031","5765 Aviation Blvd","Redondo Beach","90277","A. Demoworth",2436000,"Owner","5765 Aviation Blvd","90277",5,5,4170,8600,1979,1,"Single Family",33.85608,-118.39378],["7490-006-094","5539 Aviation Blvd","Manhattan Beach","90266","E. Dummett",3631000,"Owner","5539 Aviation Blvd","90266",5,5,3460,13500,1953,26,"Condo",33.88394,-118.3939],["7603-012-012","423 Anza Ave","Redondo Beach","90277","M. Testerman",1906000,"Owner","423 Anza Ave","90277",4,4,3020,16400,1973,38,"Single Family",33.84159,-118.39877],["7117-026-094","6190 Anza Ave","Redondo Beach","90277","M. Placeholder",1407000,"Absentee","4951 Wilshire Blvd","90210",3,2,1690,8800,2001,9,"Single Family",33.84237,-118.39348],["7795-013-083","2219 Prospect Ave","Manhattan Beach","90266","K. Example",3038000,"Owner","2219 Prospect Ave","90266",2,2,1570,8400,1960,5,"Single Family",33.87414,-118.41528],["7480-010-068","908 Granvia Altamira","Rancho Palos Verdes","90275","E. Dummett",2137000,"Absentee","1469 Main St","91403",5,4,3780,14500,1952,6,"Single Family",33.72704,-118.38431],["7537-036-037","4933 Prospect Ave","Rancho Palos Verdes","90275","K. Dummett",2705000,"Owner","4933 Prospect Ave","90275",5,5,4610,9000,1954,11,"Single Family",33.74937,-118.38665],["7641-033-098","3158 Calle Mayor","Rolling Hills Estates","90274","K. Demoworth",2013000,"Owner","3158 Calle Mayor","90274",4,3,2460,8100,1987,10,"Single Family",33.78174,-118.34154],["7929-009-003","6041 Via Campesina","Rancho Palos Verdes","90275","L. Fixture",2980000,"Owner","6041 Via Campesina","90275",5,5,4550,11900,1977,41,"Single Family",33.72844,-118.37288],["7403-010-094","5624 Highland Ave","Palos Verdes Estates","90274","L. Placeholder",2918000,"Owner","5624 Highland Ave","90274",5,5,3730,9100,2000,29,"Single Family",33.77792,-118.38158],["7922-038-051","4715 Highland Ave","Rancho Palos Verdes","90275","J. Fixture",1820000,"Owner","4715 Highland Ave","90275",2,2,1410,5800,2005,27,"Single Family",33.73777,-118.38483],["7678-035-085","5546 Silver Spur Rd","Redondo Beach","90277","L. Demoworth",1701000,"Owner","5546 Silver Spur Rd","90277",4,4,2790,6200,1965,20,"Single Family",33.83768,-118.39847],["7819-022-071","2370 Crenshaw Blvd","Torrance","90503","K. Sample",2227000,"Owner","2370 Crenshaw Blvd","90503",5,4,4330,20500,1953,4,"Single Family",33.84168,-118.33798],["7755-005-069","5133 Hawthorne Blvd","Rancho Palos Verdes","90275","H. Mockton",3044000,"Owner","5133 Hawthorne Blvd","90275",5,4,3850,7100,1965,31,"Single Family",33.75767,-118.39879],["7324-011-016","263 Palos Verdes Dr","Manhattan Beach","90266","H. Sample",4151000,"Owner","263 Palos Verdes Dr","90266",5,4,3780,12400,1975,5,"Single Family",33.89278,-118.41612],["7785-023-019","3789 Anza Ave","Rolling Hills Estates","90274","F. Example",2930000,"Owner","3789 Anza Ave","90274",5,5,4470,13000,1999,35,"Condo",33.80511,-118.35262],["7864-029-008","2228 Hawthorne Blvd","Palos Verdes Estates","90274","M. Fixture",2414000,"Owner","2228 Hawthorne Blvd","90274",4,4,3170,8900,1956,32,"Single Family",33.78009,-118.37833],["7503-014-055","3839 Granvia Altamira","Rancho Palos Verdes","90275","C. Dummett",1513000,"Absentee","5988 Main St","91403",3,3,1780,9200,1966,3,"Single Family",33.75361,-118.39209],["7362-012-058","302 Granvia Altamira","Rancho Palos Verdes","90275","H. Mockton",2712000,"Owner","302 Granvia Altamira","90275",5,4,4460,7100,1981,20,"Single Family",33.73085,-118.3913],["7182-014-070","451 Calle Mayor","Rancho Palos Verdes","90275","B. Example",2545000,"Absentee","3053 Wilshire Blvd","91403",5,4,4580,14900,1966,3,"Single Family",33.73091,-118.3997],["7317-019-061","4334 Aviation Blvd","Rolling Hills Estates","90274","B. Stubbs",2731000,"Absentee","2187 Ventura Blvd","89109",5,5,4450,11500,1977,15,"Single Family",33.77901,-118.37395],["7287-014-071","1659 Anza Ave","Rancho Palos Verdes","90275","H. Stubbs",2553000,"Absentee","7495 Main St","89109",5,5,4760,12200,2000,12,"Single Family",33.74328,-118.40165],["7108-011-049","1271 Silver Spur Rd","Rolling Hills Estates","90274","A. Demoworth",2004000,"Owner","1271 Silver Spur Rd","90274",3,2,2250,5000,1954,13,"Single Family",33.79242,-118.34591],["7771-027-056","4357 Vista Del Mar","Torrance","90503","H. Testerman",650000,"Owner","4357 Vista Del Mar","90503",2,1,1400,3800,1976,15,"Single Family",33.81873,-118.35089],["7912-015-004","1691 Calle Mayor","Manhattan Beach","90266","B. Dummett",3023000,"Absentee","2072 Main St","91403",4,3,3160,8000,2005,21,"Single Family",33.88149,-118.39704],["7944-006-063","6313 Aviation Blvd","Manhattan Beach","90266","H. Testerman",3426000,"Absentee","4042 Ventura Blvd","94105",4,3,2910,9900,1995,0,"Single Family",33.86879,-118.39565],["7482-028-064","4054 Granvia Altamira","Manhattan Beach","90266","L. Dummett",3840000,"Owner","4054 Granvia Altamira","90266",5,4,4690,24300,1953,4,"Single Family",33.90052,-118.39835],["7773-014-092","292 Anza Ave","Torrance","90503","L. Sample",1688000,"Owner","292 Anza Ave","90503",5,5,3730,14800,1951,28,"Single Family",33.81791,-118.32903],["7314-013-069","5441 Camino Real","Rolling Hills Estates","90274","C. Sample",2152000,"Owner","5441 Camino Real","90274",3,2,2000,7000,2003,29,"Single Family",33.77246,-118.36541],["7748-007-027","2659 Highland Ave","Rancho Palos Verdes","90275","G. Sample",1217000,"Absentee","2187 Ventura Blvd","89109",2,1,1400,4400,1962,8,"Single Family",33.74569,-118.37697],["7435-007-034","1546 Camino Real","Manhattan Beach","90266","G. Demoworth",3753000,"Owner","1546 Camino Real","90266",4,3,2820,6100,2015,4,"Single Family",33.87402,-118.41702],["7486-039-005","2670 Crenshaw Blvd","Rolling Hills Estates","90274","J. Testerman",2659000,"Absentee","2896 Ventura Blvd","91403",5,5,3580,14000,1963,7,"Single Family",33.78055,-118.34574],["7397-004-003","2553 Rolling Hills Rd","Torrance","90503","C. Fixture",1816000,"Owner","2553 Rolling Hills Rd","90503",5,4,4430,14300,1962,21,"Single Family",33.82255,-118.34438],["7276-039-049","3747 Palos Verdes Dr","Rolling Hills Estates","90274","D. Mockton",3197000,"Owner","3747 Palos Verdes Dr","90274",5,5,4320,9300,1949,33,"Single Family",33.79253,-118.34412],["7530-005-043","554 Calle Mayor","Torrance","90503","E. Sampleton",1118000,"Absentee","7823 Main St","90210",4,3,2530,5400,2016,21,"Single Family",33.82819,-118.34686],["7284-006-038","3865 Calle Mayor","Redondo Beach","90277","L. Placeholder",1244000,"Owner","3865 Calle Mayor","90277",3,3,2120,5100,2002,10,"Single Family",33.85491,-118.37805],["7343-028-037","2530 Silver Spur Rd","Redondo Beach","90277","L. Sample",1590000,"Owner","2530 Silver Spur Rd","90277",4,4,2520,7000,1950,12,"Single Family",33.84615,-118.38522],["7893-024-071","2893 Highland Ave","Rancho Palos Verdes","90275","D. Dummett",1946000,"Owner","2893 Highland Ave","90275",4,4,2960,11400,1956,34,"Single Family",33.74889,-118.37436],["7970-039-016","453 Rolling Hills Rd","Redondo Beach","90277","H. Sampleton",2167000,"Owner","453 Rolling Hills Rd","90277",4,4,3100,10300,1986,17,"Single Family",33.85019,-118.388],["7960-025-012","4220 Via Campesina","Rolling Hills Estates","90274","E. Fixture",2278000,"Absentee","863 Main St","94105",4,3,2320,5600,2008,39,"Condo",33.80417,-118.36752],["7475-010-044","1920 Calle Mayor","Redondo Beach","90277","D. Example",2525000,"Owner","1920 Calle Mayor","90277",5,4,4330,17400,1999,19,"Single Family",33.85464,-118.3912],["7820-014-029","1798 Via Campesina","Palos Verdes Estates","90274","L. Stubbs",2268000,"Owner","1798 Via Campesina","90274",4,3,2810,8600,1955,8,"Single Family",33.78279,-118.39565],["7517-021-077","3400 Via Campesina","Palos Verdes Estates","90274","K. Sample",3010000,"Owner","3400 Via Campesina","90274",5,4,3940,14900,1949,37,"Single Family",33.77652,-118.38306],["7700-036-069","3166 Prospect Ave","Rancho Palos Verdes","90275","B. Fixture",2353000,"Absentee","1270 Wilshire Blvd","90210",5,5,3660,13800,2011,22,"Single Family",33.73911,-118.39301],["7186-033-098","4254 Silver Spur Rd","Manhattan Beach","90266","K. Demoworth",3927000,"Owner","4254 Silver Spur Rd","90266",5,5,4680,15600,2016,5,"Single Family",33.89745,-118.42147],["7319-012-077","6235 Rolling Hills Rd","Manhattan Beach","90266","D. Dummett",3205000,"Owner","6235 Rolling Hills Rd","90266",4,4,2680,9100,1951,30,"Single Family",33.88799,-118.39798],["7538-039-021","5698 Granvia Altamira","Rancho Palos Verdes","90275","B. Placeholder",2208000,"Owner","5698 Granvia Altamira","90275",5,5,3210,10000,1962,32,"Single Family",33.73542,-118.38588],["7941-021-014","5744 Deep Valley Dr","Palos Verdes Estates","90274","B. Fixture",2468000,"Owner","5744 Deep Valley Dr","90274",4,4,2750,7700,2015,19,"Single Family",33.78075,-118.39662],["7384-005-024","1602 Esplanade","Rancho Palos Verdes","90275","A. Mockton",1899000,"Owner","1602 Esplanade","90275",4,3,2960,4900,1985,9,"Single Family",33.72986,-118.38771],["7977-017-029","5371 Aviation Blvd","Manhattan Beach","90266","J. Fixture",3135000,"Absentee","736 Main St","91403",4,3,2610,6200,1972,15,"Condo",33.87274,-118.40785],["7231-033-075","4199 Hawthorne Blvd","Rancho Palos Verdes","90275","M. Fixture",2337000,"Owner","4199 Hawthorne Blvd","90275",5,4,3930,9000,1953,15,"Single Family",33.73262,-118.39947],["7159-006-008","3026 Granvia Altamira","Rolling Hills Estates","90274","A. Placeholder",1941000,"Owner","3026 Granvia Altamira","90274",3,2,1950,8400,2012,24,"Condo",33.79887,-118.35461],["7104-034-050","121 Anza Ave","Torrance","90503","L. Fixture",1326000,"Owner","121 Anza Ave","90503",4,3,2500,9000,2015,27,"Single Family",33.84185,-118.32526],["7473-021-006","2804 Aviation Blvd","Redondo Beach","90277","K. Sample",1738000,"Absentee","3561 Wilshire Blvd","89109",4,3,2350,4300,1961,12,"Single Family",33.86023,-118.399],["7489-023-002","5359 Crenshaw Blvd","Redondo Beach","90277","E. Sampleton",2636000,"Owner","5359 Crenshaw Blvd","90277",5,4,3720,19600,1969,24,"Single Family",33.84085,-118.39595],["7182-035-047","4503 Rolling Hills Rd","Manhattan Beach","90266","F. Example",3330000,"Owner","4503 Rolling Hills Rd","90266",5,4,3260,10600,2007,12,"Single Family",33.88753,-118.42143],["7467-033-021","1468 Rolling Hills Rd","Torrance","90503","F. Example",1801000,"Owner","1468 Rolling Hills Rd","90503",5,4,4500,10300,1963,34,"Condo",33.85078,-118.35186],["7408-014-079","2907 Vista Del Mar","Manhattan Beach","90266","E. Example",3072000,"Owner","2907 Vista Del Mar","90266",3,2,1620,2700,1993,28,"Single Family",33.89167,-118.40822],["7156-030-085","1072 Rolling Hills Rd","Torrance","90503","F. Sampleton",930000,"Owner","1072 Rolling Hills Rd","90503",3,2,2000,10400,1956,33,"Single Family",33.81992,-118.35022],["7959-026-051","1513 Via Campesina","Rolling Hills Estates","90274","K. Example",2002000,"Owner","1513 Via Campesina","90274",4,3,2470,11700,1993,15,"Single Family",33.79472,-118.36155],["7908-028-045","3912 Highland Ave","Palos Verdes Estates","90274","H. Demoworth",2397000,"Owner","3912 Highland Ave","90274",5,5,3350,17600,2010,13,"Single Family",33.77955,-118.39615],["7784-008-026","1252 Anza Ave","Palos Verdes Estates","90274","J. Mockton",3141000,"Absentee","4458 Wilshire Blvd","89109",5,4,3450,11400,1993,23,"Single Family",33.78033,-118.40074],["7595-024-024","4712 Highland Ave","Torrance","90503","M. Fixture",1104000,"Owner","4712 Highland Ave","90503",4,3,2610,6200,1995,10,"Single Family",33.85144,-118.33291],["7508-029-084","2855 Prospect Ave","Torrance","90503","M. Stubbs",1256000,"Owner","2855 Prospect Ave","90503",4,4,2780,14600,1994,22,"Single Family",33.83209,-118.32392],["7206-033-061","1409 Camino Real","Torrance","90503","J. Example",1536000,"Owner","1409 Camino Real","90503",5,5,3560,18800,2016,13,"Condo",33.8417,-118.345],["7377-029-070","3864 Hawthorne Blvd","Rolling Hills Estates","90274","M. Testerman",2665000,"Owner","3864 Hawthorne Blvd","90274",5,4,3290,13100,2005,23,"Single Family",33.77755,-118.37086],["7137-002-005","4902 Granvia Altamira","Redondo Beach","90277","L. Testerman",2347000,"Owner","4902 Granvia Altamira","90277",5,4,4210,16100,1985,39,"Single Family",33.85824,-118.37197],["7600-023-030","5671 Vista Del Mar","Rancho Palos Verdes","90275","F. Sampleton",1892000,"Owner","5671 Vista Del Mar","90275",4,4,3080,12500,2018,6,"Single Family",33.72795,-118.3894],["7923-023-024","1489 Prospect Ave","Torrance","90503","B. Mockton",989000,"Owner","1489 Prospect Ave","90503",3,2,1890,8100,1964,5,"Single Family",33.82694,-118.34894],["7483-034-049","2303 Silver Spur Rd","Redondo Beach","90277","J. Mockton",830000,"Owner","2303 Silver Spur Rd","90277",2,1,1270,4700,2015,31,"Condo",33.83129,-118.37673],["7457-022-078","709 Camino Real","Redondo Beach","90277","K. Mockton",2011000,"Owner","709 Camino Real","90277",4,4,3100,13600,1975,32,"Single Family",33.83185,-118.3797],["7985-013-096","6596 Deep Valley Dr","Palos Verdes Estates","90274","F. Demoworth",2197000,"Absentee","1660 Main St","94105",3,2,1890,6000,1982,20,"Single Family",33.79525,-118.40255],["7680-024-017","5958 Prospect Ave","Manhattan Beach","90266","K. Testerman",3567000,"Owner","5958 Prospect Ave","90266",5,4,3760,17800,1999,12,"Single Family",33.8765,-118.41243],["7901-032-079","1224 Hawthorne Blvd","Rolling Hills Estates","90274","C. Placeholder",2817000,"Owner","1224 Hawthorne Blvd","90274",5,5,3910,7300,2006,41,"Single Family",33.78685,-118.37344],["7985-020-085","2094 Highland Ave","Palos Verdes Estates","90274","A. Example",2679000,"Absentee","7877 Main St","91403",5,4,3330,17800,2015,40,"Condo",33.79518,-118.39894],["7467-025-003","6294 Silver Spur Rd","Torrance","90503","H. Example",1470000,"Owner","6294 Silver Spur Rd","90503",5,4,3600,14400,1983,29,"Single Family",33.82517,-118.32927],["7981-011-078","3768 Camino Real","Rancho Palos Verdes","90275","G. Mockton",1425000,"Owner","3768 Camino Real","90275",3,3,1610,3000,1970,13,"Single Family",33.73737,-118.38847],["7993-025-078","424 Deep Valley Dr","Rancho Palos Verdes","90275","F. Sampleton",2795000,"Owner","424 Deep Valley Dr","90275",5,5,3790,9800,2001,40,"Single Family",33.75944,-118.38631],["7978-015-097","5803 Rolling Hills Rd","Manhattan Beach","90266","K. Example",2500000,"Absentee","511 Wilshire Blvd","90210",2,1,1400,5300,2008,12,"Single Family",33.86866,-118.40446],["7604-007-070","6115 Granvia Altamira","Manhattan Beach","90266","D. Mockton",4070000,"Absentee","6818 Main St","94105",5,4,3660,8800,1999,38,"Condo",33.87561,-118.42094],["7180-002-098","725 Silver Spur Rd","Rancho Palos Verdes","90275","K. Dummett",2132000,"Absentee","3005 Ventura Blvd","94105",5,4,3210,13300,1989,20,"Single Family",33.74206,-118.39059],["7912-003-027","4755 Vista Del Mar","Rancho Palos Verdes","90275","L. Dummett",1910000,"Owner","4755 Vista Del Mar","90275",4,4,2900,14900,1984,21,"Single Family",33.7266,-118.39092],["7525-002-070","5341 Aviation Blvd","Torrance","90503","J. Sample",1018000,"Owner","5341 Aviation Blvd","90503",3,3,1990,5300,1952,1,"Single Family",33.82417,-118.34143],["7127-001-097","6656 Aviation Blvd","Rancho Palos Verdes","90275","J. Fixture",1990000,"Owner","6656 Aviation Blvd","90275",4,3,3060,9900,1982,8,"Single Family",33.73394,-118.38746],["7104-012-075","375 Rolling Hills Rd","Rancho Palos Verdes","90275","G. Demoworth",1295000,"Absentee","960 Main St","89109",2,1,1460,7800,1951,6,"Single Family",33.73635,-118.39031],["7610-034-047","5143 Camino Real","Redondo Beach","90277","L. Sample",1714000,"Absentee","3439 Ventura Blvd","94105",3,3,2200,3600,1990,8,"Single Family",33.86206,-118.39849],["7675-001-053","1729 Anza Ave","Palos Verdes Estates","90274","E. Demoworth",3467000,"Owner","1729 Anza Ave","90274",5,4,4540,23200,1954,23,"Condo",33.79583,-118.3793],["7203-025-007","1125 Crenshaw Blvd","Manhattan Beach","90266","L. Stubbs",3595000,"Owner","1125 Crenshaw Blvd","90266",5,5,3360,13000,1955,7,"Single Family",33.89062,-118.42879],["7829-005-056","6363 Aviation Blvd","Rolling Hills Estates","90274","J. Dummett",2786000,"Owner","6363 Aviation Blvd","90274",5,5,3500,11900,1984,31,"Condo",33.78369,-118.36861],["7126-035-050","1296 Vista Del Mar","Rolling Hills Estates","90274","G. Sampleton",2524000,"Absentee","3251 Wilshire Blvd","90210",5,4,4170,7500,2011,21,"Single Family",33.7805,-118.33992],["7797-014-036","1729 Granvia Altamira","Rancho Palos Verdes","90275","L. Mockton",2283000,"Absentee","7222 Main St","94105",5,4,3700,6500,1994,6,"Single Family",33.74941,-118.3887],["7785-032-021","4113 Calle Mayor","Palos Verdes Estates","90274","M. Sampleton",2848000,"Owner","4113 Calle Mayor","90274",4,3,2430,13100,1996,14,"Single Family",33.7852,-118.39261],["7598-015-062","767 Deep Valley Dr","Palos Verdes Estates","90274","L. Placeholder",3467000,"Owner","767 Deep Valley Dr","90274",5,4,4310,22400,1981,19,"Single Family",33.79605,-118.37917],["7507-039-019","679 Granvia Altamira","Palos Verdes Estates","90274","G. Stubbs",2360000,"Owner","679 Granvia Altamira","90274",4,4,2720,10300,2007,31,"Single Family",33.78363,-118.39308],["7942-013-051","5217 Prospect Ave","Rancho Palos Verdes","90275","G. Example",1870000,"Owner","5217 Prospect Ave","90275",4,3,2390,6000,2012,18,"Single Family",33.73645,-118.36982],["7721-008-037","3692 Esplanade","Palos Verdes Estates","90274","M. Dummett",3360000,"Owner","3692 Esplanade","90274",5,5,4740,23300,2000,20,"Single Family",33.78705,-118.41131],["7314-036-047","3374 Esplanade","Redondo Beach","90277","J. Placeholder",1888000,"Owner","3374 Esplanade","90277",4,4,2900,11000,1969,13,"Single Family",33.85731,-118.40411],["7392-025-087","4097 Vista Del Mar","Palos Verdes Estates","90274","J. Example",2207000,"Owner","4097 Vista Del Mar","90274",5,5,3250,11600,1994,37,"Single Family",33.77238,-118.39825],["7981-011-055","2138 Anza Ave","Rancho Palos Verdes","90275","E. Example",2813000,"Owner","2138 Anza Ave","90275",5,5,4730,16500,1965,5,"Single Family",33.75046,-118.36974],["7908-021-064","4370 Crenshaw Blvd","Torrance","90503","E. Sampleton",1025000,"Owner","4370 Crenshaw Blvd","90503",3,2,1860,8500,2007,24,"Single Family",33.84565,-118.33128],["7585-027-076","2824 Vista Del Mar","Redondo Beach","90277","C. Stubbs",1294000,"Absentee","7577 Main St","91403",3,3,1840,3900,1980,15,"Single Family",33.84617,-118.39831],["7655-027-015","4834 Granvia Altamira","Rolling Hills Estates","90274","E. Mockton",2942000,"Owner","4834 Granvia Altamira","90274",5,4,4760,22000,1951,36,"Single Family",33.77111,-118.37053],["7768-022-059","4421 Calle Mayor","Manhattan Beach","90266","C. Stubbs",3970000,"Owner","4421 Calle Mayor","90266",5,5,3950,6800,1979,0,"Single Family",33.89218,-118.39813],["7215-022-083","5505 Prospect Ave","Manhattan Beach","90266","A. Dummett",2463000,"Owner","5505 Prospect Ave","90266",3,3,1600,4200,2010,16,"Condo",33.8959,-118.41237],["7306-007-047","4063 Camino Real","Rolling Hills Estates","90274","F. Demoworth",2282000,"Owner","4063 Camino Real","90274",4,4,2550,13300,1996,40,"Condo",33.79453,-118.36187],["7998-019-060","519 Vista Del Mar","Torrance","90503","L. Placeholder",650000,"Owner","519 Vista Del Mar","90503",2,2,1260,5200,1973,30,"Single Family",33.84952,-118.35775],["7226-024-061","6652 Crenshaw Blvd","Rancho Palos Verdes","90275","A. Fixture",2163000,"Absentee","8143 Ventura Blvd","90210",4,3,2880,6000,2015,29,"Single Family",33.72685,-118.39479],["7819-029-004","2120 Rolling Hills Rd","Redondo Beach","90277","M. Placeholder",1639000,"Absentee","2856 Wilshire Blvd","90210",3,2,2130,10400,1948,41,"Single Family",33.86067,-118.38874],["7207-037-077","651 Hawthorne Blvd","Rancho Palos Verdes","90275","C. Sample",1333000,"Owner","651 Hawthorne Blvd","90275",2,1,1310,6500,1997,6,"Single Family",33.73996,-118.38731],["7856-035-046","5600 Silver Spur Rd","Rolling Hills Estates","90274","C. Sample",2161000,"Owner","5600 Silver Spur Rd","90274",4,4,2680,10400,1978,20,"Condo",33.77873,-118.33952],["7563-019-032","4109 Calle Mayor","Redondo Beach","90277","E. Mockton",1927000,"Owner","4109 Calle Mayor","90277",4,4,2670,8600,1950,38,"Condo",33.86085,-118.38443],["7331-032-035","808 Crenshaw Blvd","Torrance","90503","B. Dummett",1748000,"Owner","808 Crenshaw Blvd","90503",4,3,3170,17000,2014,2,"Single Family",33.83465,-118.35074],["7439-009-083","6649 Crenshaw Blvd","Palos Verdes Estates","90274","M. Example",2699000,"Absentee","4234 Main St","90210",4,4,3090,12000,1967,4,"Single Family",33.78074,-118.40973],["7206-028-035","829 Via Campesina","Rancho Palos Verdes","90275","E. Placeholder",3264000,"Owner","829 Via Campesina","90275",5,4,4380,8600,1984,39,"Single Family",33.73274,-118.38919],["7236-003-041","4004 Highland Ave","Rancho Palos Verdes","90275","A. Fixture",3120000,"Owner","4004 Highland Ave","90275",5,4,4740,7600,1978,39,"Condo",33.74171,-118.3975],["7259-011-016","386 Camino Real","Redondo Beach","90277","M. Placeholder",2233000,"Owner","386 Camino Real","90277",5,4,3640,7900,2002,1,"Condo",33.85963,-118.39086],["7369-035-079","5706 Aviation Blvd","Palos Verdes Estates","90274","F. Example",1705000,"Owner","5706 Aviation Blvd","90274",3,3,1650,4700,1985,13,"Single Family",33.78517,-118.38934],["7120-018-080","409 Rolling Hills Rd","Rancho Palos Verdes","90275","A. Dummett",2396000,"Owner","409 Rolling Hills Rd","90275",5,4,4270,14800,1963,2,"Single Family",33.74253,-118.40417],["7648-039-015","5533 Via Campesina","Redondo Beach","90277","M. Sampleton",2065000,"Absentee","3723 Main St","91403",5,4,4200,21300,1952,27,"Single Family",33.85979,-118.40088],["7682-023-015","4954 Calle Mayor","Torrance","90503","J. Testerman",650000,"Absentee","2359 Ventura Blvd","94105",2,2,1230,2200,1977,25,"Single Family",33.83069,-118.35205],["7698-016-086","6210 Highland Ave","Palos Verdes Estates","90274","M. Testerman",2476000,"Owner","6210 Highland Ave","90274",4,3,2800,6000,2015,41,"Condo",33.79589,-118.40048],["7402-010-045","5663 Rolling Hills Rd","Rolling Hills Estates","90274","A. Placeholder",1723000,"Owner","5663 Rolling Hills Rd","90274",2,2,1590,2700,1991,14,"Condo",33.79144,-118.37526],["7398-011-036","4856 Hawthorne Blvd","Palos Verdes Estates","90274","M. Fixture",2733000,"Owner","4856 Hawthorne Blvd","90274",5,4,3200,17300,2012,23,"Single Family",33.79534,-118.40134],["7331-014-098","3711 Rolling Hills Rd","Redondo Beach","90277","C. Sampleton",2250000,"Absentee","3852 Wilshire Blvd","89109",5,4,4620,20700,1999,5,"Single Family",33.86322,-118.40321],["7388-026-044","2893 Vista Del Mar","Rolling Hills Estates","90274","B. Placeholder",2432000,"Owner","2893 Vista Del Mar","90274",5,4,3820,8700,2008,3,"Single Family",33.77634,-118.35941],["7674-034-017","5279 Granvia Altamira","Manhattan Beach","90266","M. Stubbs",3677000,"Owner","5279 Granvia Altamira","90266",5,5,3390,6900,1968,10,"Single Family",33.89398,-118.42077],["7904-035-021","3698 Highland Ave","Manhattan Beach","90266","A. Fixture",3129000,"Owner","3698 Highland Ave","90266",4,4,3070,14700,1973,29,"Single Family",33.87707,-118.41631],["7380-019-009","2859 Calle Mayor","Redondo Beach","90277","E. Sample",2211000,"Owner","2859 Calle Mayor","90277",5,4,4100,16800,1970,6,"Single Family",33.84861,-118.38923],["7696-009-059","3290 Silver Spur Rd","Manhattan Beach","90266","K. Demoworth",3541000,"Owner","3290 Silver Spur Rd","90266",4,4,2850,5800,1979,19,"Single Family",33.89984,-118.39997],["7446-010-088","5512 Camino Real","Rolling Hills Estates","90274","G. Dummett",3028000,"Owner","5512 Camino Real","90274",5,5,4550,14200,1950,23,"Single Family",33.77014,-118.35723],["7574-013-065","3016 Rolling Hills Rd","Palos Verdes Estates","90274","A. Sampleton",1826000,"Owner","3016 Rolling Hills Rd","90274",3,2,1880,10100,2004,23,"Single Family",33.77189,-118.37733],["7323-029-097","6739 Via Campesina","Manhattan Beach","90266","B. Stubbs",4328000,"Owner","6739 Via Campesina","90266",5,5,4430,11200,1976,10,"Single Family",33.8835,-118.40313],["7103-039-054","1736 Palos Verdes Dr","Palos Verdes Estates","90274","F. Fixture",3163000,"Owner","1736 Palos Verdes Dr","90274",5,5,3620,9900,2013,26,"Single Family",33.78814,-118.38339],["7743-020-070","323 Crenshaw Blvd","Redondo Beach","90277","L. Demoworth",1429000,"Absentee","8235 Main St","90210",2,1,1310,5300,1965,32,"Single Family",33.8412,-118.38647],["7330-019-098","4109 Camino Real","Manhattan Beach","90266","D. Dummett",3040000,"Owner","4109 Camino Real","90266",4,4,2650,4900,1986,3,"Single Family",33.88603,-118.41814],["7435-035-019","6596 Hawthorne Blvd","Manhattan Beach","90266","C. Sampleton",3564000,"Owner","6596 Hawthorne Blvd","90266",5,4,4100,9600,2011,33,"Single Family",33.8674,-118.39912],["7717-028-059","381 Silver Spur Rd","Manhattan Beach","90266","C. Testerman",2803000,"Absentee","7399 Wilshire Blvd","90210",3,3,1800,7600,1954,16,"Single Family",33.87993,-118.42285],["7399-023-084","3981 Hawthorne Blvd","Rancho Palos Verdes","90275","K. Sample",2809000,"Owner","3981 Hawthorne Blvd","90275",5,4,3390,15300,1966,32,"Single Family",33.76152,-118.4045],["7996-012-036","5544 Aviation Blvd","Rancho Palos Verdes","90275","L. Example",1140000,"Owner","5544 Aviation Blvd","90275",3,2,1780,8000,1990,35,"Single Family",33.75112,-118.37214],["7820-024-093","3721 Camino Real","Palos Verdes Estates","90274","C. Sampleton",3094000,"Owner","3721 Camino Real","90274",5,4,4350,12000,1973,19,"Single Family",33.77875,-118.40752],["7160-019-055","5342 Highland Ave","Redondo Beach","90277","C. Mockton",3003000,"Owner","5342 Highland Ave","90277",5,4,4760,22600,1984,3,"Single Family",33.83215,-118.37706],["7948-001-032","882 Calle Mayor","Palos Verdes Estates","90274","C. Fixture",2919000,"Owner","882 Calle Mayor","90274",5,4,3660,17700,1952,3,"Condo",33.7737,-118.39369],["7813-021-002","407 Crenshaw Blvd","Redondo Beach","90277","L. Mockton",1703000,"Owner","407 Crenshaw Blvd","90277",4,3,3130,7700,1993,40,"Single Family",33.86132,-118.39679],["7667-008-005","5697 Silver Spur Rd","Rancho Palos Verdes","90275","L. Mockton",2329000,"Owner","5697 Silver Spur Rd","90275",4,4,2640,11100,1953,27,"Single Family",33.7273,-118.39092],["7644-021-013","4123 Granvia Altamira","Rancho Palos Verdes","90275","C. Stubbs",1861000,"Owner","4123 Granvia Altamira","90275",4,4,2900,12100,1951,33,"Condo",33.75218,-118.39598],["7581-029-051","3919 Rolling Hills Rd","Palos Verdes Estates","90274","E. Testerman",2697000,"Owner","3919 Rolling Hills Rd","90274",4,4,2940,10300,1989,35,"Condo",33.78493,-118.38288],["7647-025-056","3077 Palos Verdes Dr","Rolling Hills Estates","90274","L. Sample",2541000,"Owner","3077 Palos Verdes Dr","90274",5,4,3460,8500,1949,5,"Single Family",33.79865,-118.34782],["7352-034-079","4129 Anza Ave","Palos Verdes Estates","90274","G. Sampleton",3035000,"Owner","4129 Anza Ave","90274",4,4,2770,8300,1998,7,"Single Family",33.76556,-118.40147],["7108-008-010","808 Deep Valley Dr","Rancho Palos Verdes","90275","C. Demoworth",2443000,"Absentee","7916 Wilshire Blvd","91403",5,4,3480,10700,2016,3,"Single Family",33.73947,-118.37481],["7759-030-081","109 Via Campesina","Redondo Beach","90277","K. Sample",1669000,"Absentee","6549 Main St","94105",4,3,2480,10600,1957,27,"Condo",33.84669,-118.38841],["7203-027-003","4084 Via Campesina","Rancho Palos Verdes","90275","B. Demoworth",2222000,"Owner","4084 Via Campesina","90275",4,4,2570,12400,1971,4,"Condo",33.75597,-118.38114],["7254-020-046","430 Crenshaw Blvd","Palos Verdes Estates","90274","M. Sample",2472000,"Owner","430 Crenshaw Blvd","90274",3,2,1940,8500,1950,30,"Single Family",33.76106,-118.40517],["7272-035-047","3434 Rolling Hills Rd","Palos Verdes Estates","90274","H. Fixture",3080000,"Absentee","6600 Main St","90210",5,5,3700,6900,1968,25,"Single Family",33.76855,-118.39525],["7288-039-064","2923 Calle Mayor","Palos Verdes Estates","90274","B. Sample",2408000,"Owner","2923 Calle Mayor","90274",4,3,2760,6200,2012,22,"Condo",33.76754,-118.39861],["7549-008-080","6700 Deep Valley Dr","Palos Verdes Estates","90274","M. Mockton",2483000,"Owner","6700 Deep Valley Dr","90274",5,5,3240,9800,1983,1,"Single Family",33.78042,-118.37652],["7816-027-051","411 Crenshaw Blvd","Palos Verdes Estates","90274","A. Stubbs",3437000,"Owner","411 Crenshaw Blvd","90274",5,4,4320,16200,1982,33,"Single Family",33.79465,-118.38446],["7671-023-075","5298 Highland Ave","Palos Verdes Estates","90274","G. Demoworth",3274000,"Owner","5298 Highland Ave","90274",5,4,4270,20700,1974,5,"Single Family",33.7829,-118.40624],["7864-031-067","2428 Anza Ave","Rancho Palos Verdes","90275","F. Demoworth",1972000,"Absentee","2051 Main St","89109",4,3,2980,13000,2003,26,"Single Family",33.72859,-118.36945],["7629-029-033","3508 Calle Mayor","Rolling Hills Estates","90274","J. Example",1909000,"Absentee","3062 Ventura Blvd","91403",4,4,2470,5600,1984,26,"Single Family",33.80327,-118.37084],["7648-004-054","1088 Deep Valley Dr","Redondo Beach","90277","B. Sample",1569000,"Owner","1088 Deep Valley Dr","90277",3,2,1890,9700,2017,26,"Single Family",33.84959,-118.4043],["7923-027-075","2623 Anza Ave","Manhattan Beach","90266","M. Mockton",3399000,"Owner","2623 Anza Ave","90266",5,4,3360,15000,2005,24,"Single Family",33.88175,-118.42628],["7277-010-034","5341 Silver Spur Rd","Manhattan Beach","90266","D. Fixture",3470000,"Owner","5341 Silver Spur Rd","90266",4,3,2610,6500,1976,9,"Single Family",33.88856,-118.41618],["7878-035-064","6028 Calle Mayor","Palos Verdes Estates","90274","G. Dummett",3000000,"Owner","6028 Calle Mayor","90274",5,4,4100,20500,2007,10,"Single Family",33.76124,-118.39734],["7937-005-003","1863 Esplanade","Rancho Palos Verdes","90275","L. Stubbs",1524000,"Owner","1863 Esplanade","90275",2,1,1550,3600,1974,41,"Single Family",33.75959,-118.39871],["7419-005-008","2454 Via Campesina","Rolling Hills Estates","90274","E. Fixture",3160000,"Owner","2454 Via Campesina","90274",5,4,4250,20200,1987,27,"Single Family",33.78572,-118.36962],["7699-001-088","3532 Aviation Blvd","Palos Verdes Estates","90274","H. Placeholder",3130000,"Owner","3532 Aviation Blvd","90274",5,5,3640,11900,2012,24,"Single Family",33.76565,-118.41063],["7110-008-073","5989 Silver Spur Rd","Rancho Palos Verdes","90275","F. Mockton",2073000,"Owner","5989 Silver Spur Rd","90275",4,4,2700,9200,2017,20,"Single Family",33.74077,-118.40297],["7273-011-029","2129 Rolling Hills Rd","Palos Verdes Estates","90274","F. Dummett",2760000,"Owner","2129 Rolling Hills Rd","90274",4,3,2460,9500,1948,23,"Single Family",33.79338,-118.37915],["7626-020-074","5256 Vista Del Mar","Rolling Hills Estates","90274","H. Stubbs",2297000,"Owner","5256 Vista Del Mar","90274",4,4,2530,6900,1974,36,"Single Family",33.77825,-118.35372],["7882-009-033","6644 Deep Valley Dr","Rolling Hills Estates","90274","G. Placeholder",2374000,"Owner","6644 Deep Valley Dr","90274",4,4,2830,5000,1982,36,"Single Family",33.79451,-118.34755],["7397-016-046","3085 Crenshaw Blvd","Rancho Palos Verdes","90275","J. Placeholder",2553000,"Owner","3085 Crenshaw Blvd","90275",5,4,3620,17800,1976,15,"Single Family",33.75989,-118.38853],["7699-026-055","6273 Via Campesina","Torrance","90503","D. Dummett",864000,"Owner","6273 Via Campesina","90503",3,2,2130,6300,2008,6,"Single Family",33.82314,-118.3361],["7902-013-021","5914 Hawthorne Blvd","Torrance","90503","C. Placeholder",859000,"Absentee","8524 Ventura Blvd","89109",3,2,1620,6300,1992,15,"Single Family",33.8187,-118.33008],["7556-003-084","884 Granvia Altamira","Torrance","90503","D. Stubbs",1096000,"Owner","884 Granvia Altamira","90503",4,4,2320,7200,1990,3,"Single Family",33.82642,-118.35053],["7137-005-091","3770 Rolling Hills Rd","Palos Verdes Estates","90274","L. Demoworth",2890000,"Absentee","3370 Wilshire Blvd","89109",5,5,4280,7500,1979,31,"Single Family",33.78743,-118.38488],["7865-005-008","3414 Highland Ave","Palos Verdes Estates","90274","E. Sampleton",3219000,"Owner","3414 Highland Ave","90274",5,5,4290,14800,1973,0,"Single Family",33.7671,-118.37772],["7624-011-079","2140 Palos Verdes Dr","Rolling Hills Estates","90274","K. Dummett",2075000,"Owner","2140 Palos Verdes Dr","90274",3,2,2090,7200,2014,30,"Single Family",33.79937,-118.35346],["7405-013-001","5321 Deep Valley Dr","Rancho Palos Verdes","90275","H. Placeholder",2782000,"Owner","5321 Deep Valley Dr","90275",5,4,3630,17500,2007,5,"Single Family",33.74273,-118.39264],["7823-003-094","5715 Hawthorne Blvd","Torrance","90503","C. Sampleton",920000,"Absentee","1189 Ventura Blvd","91403",3,2,1960,9200,1962,22,"Single Family",33.83823,-118.33924],["7849-030-068","4113 Camino Real","Manhattan Beach","90266","K. Example",3280000,"Owner","4113 Camino Real","90266",4,4,2840,9100,1983,24,"Single Family",33.90266,-118.42311],["7320-008-008","1188 Hawthorne Blvd","Rancho Palos Verdes","90275","L. Stubbs",2321000,"Owner","1188 Hawthorne Blvd","90275",5,5,3360,14300,1954,34,"Single Family",33.73925,-118.38094],["7836-037-043","5514 Anza Ave","Palos Verdes Estates","90274","G. Mockton",2717000,"Owner","5514 Anza Ave","90274",5,4,3390,18500,2004,41,"Single Family",33.77987,-118.40987],["7608-015-093","1554 Crenshaw Blvd","Palos Verdes Estates","90274","J. Placeholder",3954000,"Owner","1554 Crenshaw Blvd","90274",5,4,4340,16200,1956,9,"Single Family",33.78264,-118.3949],["7757-018-049","1619 Vista Del Mar","Rolling Hills Estates","90274","F. Placeholder",2888000,"Absentee","7803 Main St","91403",5,5,4530,16900,1981,19,"Single Family",33.79135,-118.36345],["7627-031-086","4656 Camino Real","Rolling Hills Estates","90274","D. Testerman",2144000,"Owner","4656 Camino Real","90274",4,3,2910,14400,1958,40,"Single Family",33.79817,-118.36701],["7273-014-037","4622 Aviation Blvd","Rancho Palos Verdes","90275","C. Testerman",2773000,"Owner","4622 Aviation Blvd","90275",5,4,4510,19300,2002,41,"Single Family",33.75456,-118.39829],["7461-001-076","970 Silver Spur Rd","Manhattan Beach","90266","F. Demoworth",3044000,"Owner","970 Silver Spur Rd","90266",4,4,2660,11100,2011,39,"Single Family",33.89869,-118.40429],["7482-023-074","3736 Camino Real","Palos Verdes Estates","90274","G. Demoworth",2309000,"Owner","3736 Camino Real","90274",3,2,2290,4000,2007,7,"Single Family",33.78989,-118.39786],["7763-006-096","1935 Esplanade","Rancho Palos Verdes","90275","E. Testerman",1780000,"Owner","1935 Esplanade","90275",5,5,3260,6000,1975,39,"Single Family",33.74034,-118.38042],["7421-016-010","1817 Calle Mayor","Rancho Palos Verdes","90275","D. Example",1864000,"Owner","1817 Calle Mayor","90275",3,3,1900,6700,1983,9,"Single Family",33.73924,-118.38836],["7372-034-048","2367 Vista Del Mar","Redondo Beach","90277","B. Stubbs",1498000,"Owner","2367 Vista Del Mar","90277",4,3,2400,5100,1955,30,"Single Family",33.85849,-118.39517],["7443-019-051","2864 Highland Ave","Manhattan Beach","90266","L. Stubbs",2707000,"Owner","2864 Highland Ave","90266",3,3,1690,7000,1957,1,"Single Family",33.88012,-118.40591],["7401-008-057","3069 Hawthorne Blvd","Rolling Hills Estates","90274","A. Testerman",1767000,"Absentee","8811 Ventura Blvd","89109",3,2,2220,9200,1958,11,"Single Family",33.80543,-118.34568],["7709-001-022","6019 Anza Ave","Palos Verdes Estates","90274","B. Mockton",2233000,"Owner","6019 Anza Ave","90274",4,3,2630,12000,1965,29,"Single Family",33.76591,-118.3986],["7266-004-075","5512 Granvia Altamira","Manhattan Beach","90266","B. Demoworth",2442000,"Owner","5512 Granvia Altamira","90266",2,1,1230,4300,1963,9,"Single Family",33.89394,-118.40228],["7182-008-001","5099 Anza Ave","Redondo Beach","90277","E. Sampleton",1141000,"Absentee","899 Wilshire Blvd","94105",2,1,1580,5500,1964,20,"Condo",33.86078,-118.40232],["7828-026-022","1742 Silver Spur Rd","Rolling Hills Estates","90274","J. Example",2721000,"Absentee","3604 Wilshire Blvd","89109",5,4,4220,7400,2011,3,"Single Family",33.79085,-118.33962],["7236-035-026","1365 Prospect Ave","Rancho Palos Verdes","90275","J. Sample",2145000,"Owner","1365 Prospect Ave","90275",4,3,2720,13900,1977,0,"Single Family",33.7466,-118.37809],["7737-012-016","2758 Via Campesina","Redondo Beach","90277","J. Mockton",2546000,"Owner","2758 Via Campesina","90277",5,5,4270,22800,1963,8,"Single Family",33.83268,-118.39321],["7192-026-077","2387 Vista Del Mar","Torrance","90503","J. Fixture",1357000,"Absentee","2194 Wilshire Blvd","89109",4,4,2870,9000,1952,21,"Single Family",33.85276,-118.3367],["7993-027-059","942 Crenshaw Blvd","Rolling Hills Estates","90274","F. Demoworth",2684000,"Owner","942 Crenshaw Blvd","90274",5,4,3420,6500,2001,27,"Single Family",33.77812,-118.36043],["7692-010-088","914 Anza Ave","Rolling Hills Estates","90274","K. Fixture",1715000,"Owner","914 Anza Ave","90274",3,3,2060,9500,1953,25,"Single Family",33.79136,-118.3691],["7348-025-087","3122 Vista Del Mar","Redondo Beach","90277","E. Sample",2427000,"Owner","3122 Vista Del Mar","90277",5,4,3870,9400,1975,11,"Single Family",33.83905,-118.37462],["7106-021-018","2159 Deep Valley Dr","Rolling Hills Estates","90274","B. Placeholder",2464000,"Absentee","3964 Main St","89109",5,5,4660,8200,1974,38,"Single Family",33.79897,-118.36859],["7843-036-014","1653 Hawthorne Blvd","Rolling Hills Estates","90274","K. Fixture",1507000,"Owner","1653 Hawthorne Blvd","90274",2,2,1220,6200,1952,1,"Single Family",33.79254,-118.3595],["7124-022-070","2775 Via Campesina","Redondo Beach","90277","G. Demoworth",1589000,"Owner","2775 Via Campesina","90277",3,2,2260,6500,1962,23,"Single Family",33.84826,-118.39615],["7595-013-036","4655 Aviation Blvd","Palos Verdes Estates","90274","L. Dummett",2497000,"Owner","4655 Aviation Blvd","90274",3,3,1710,8900,1977,24,"Single Family",33.7897,-118.38479],["7789-024-085","2515 Via Campesina","Rolling Hills Estates","90274","E. Demoworth",2747000,"Absentee","3341 Ventura Blvd","89109",5,4,4240,11100,2006,16,"Single Family",33.79085,-118.35877],["7414-016-051","5346 Vista Del Mar","Rancho Palos Verdes","90275","M. Sampleton",2472000,"Owner","5346 Vista Del Mar","90275",5,5,3850,11500,1948,36,"Single Family",33.75219,-118.37449],["7596-035-031","261 Palos Verdes Dr","Redondo Beach","90277","M. Stubbs",1408000,"Owner","261 Palos Verdes Dr","90277",3,2,2040,4800,2014,22,"Single Family",33.83826,-118.39165],["7923-001-035","2391 Hawthorne Blvd","Manhattan Beach","90266","E. Dummett",4235000,"Owner","2391 Hawthorne Blvd","90266",5,5,4550,11000,1961,39,"Single Family",33.90154,-118.42223],["7729-006-030","4174 Vista Del Mar","Torrance","90503","H. Fixture",2002000,"Absentee","6069 Ventura Blvd","90210",5,5,4410,24100,2016,0,"Single Family",33.84709,-118.35463],["7962-031-090","1209 Highland Ave","Rancho Palos Verdes","90275","M. Example",2792000,"Owner","1209 Highland Ave","90275",5,4,3590,5900,2008,5,"Single Family",33.75053,-118.38679],["7613-020-016","4569 Prospect Ave","Palos Verdes Estates","90274","D. Example",2888000,"Owner","4569 Prospect Ave","90274",4,3,3000,16200,2006,20,"Condo",33.79299,-118.3872],["7399-001-082","4137 Via Campesina","Palos Verdes Estates","90274","B. Dummett",2799000,"Absentee","6807 Wilshire Blvd","91403",4,4,2980,7500,1996,12,"Single Family",33.77592,-118.39466],["7995-018-029","6787 Prospect Ave","Rancho Palos Verdes","90275","G. Example",1746000,"Absentee","3611 Ventura Blvd","89109",2,1,1280,6200,1959,17,"Single Family",33.75357,-118.40075],["7706-020-056","1338 Crenshaw Blvd","Torrance","90503","C. Demoworth",1047000,"Owner","1338 Crenshaw Blvd","90503",4,3,2410,7000,1978,1,"Single Family",33.82651,-118.35002],["7291-039-051","299 Rolling Hills Rd","Manhattan Beach","90266","K. Dummett",2820000,"Owner","299 Rolling Hills Rd","90266",3,2,2280,10600,1985,28,"Single Family",33.8963,-118.42024],["7874-023-049","2206 Silver Spur Rd","Redondo Beach","90277","B. Example",1589000,"Owner","2206 Silver Spur Rd","90277",3,2,1990,6900,2017,12,"Single Family",33.8526,-118.39607],["7290-021-015","4548 Silver Spur Rd","Torrance","90503","E. Fixture",709000,"Owner","4548 Silver Spur Rd","90503",2,1,1390,6800,2001,35,"Single Family",33.83854,-118.32886],["7383-002-093","5264 Camino Real","Torrance","90503","B. Dummett",1398000,"Owner","5264 Camino Real","90503",5,4,3250,8400,1952,26,"Single Family",33.84763,-118.32627],["7263-018-031","5111 Deep Valley Dr","Manhattan Beach","90266","C. Stubbs",3605000,"Owner","5111 Deep Valley Dr","90266",5,4,3990,16100,1981,9,"Single Family",33.87184,-118.40331],["7598-025-091","6122 Deep Valley Dr","Palos Verdes Estates","90274","J. Demoworth",3105000,"Owner","6122 Deep Valley Dr","90274",5,4,4560,19300,1990,12,"Single Family",33.77941,-118.38975],["7593-004-068","5009 Aviation Blvd","Rolling Hills Estates","90274","B. Sampleton",1632000,"Owner","5009 Aviation Blvd","90274",3,2,2070,7100,1954,2,"Single Family",33.79335,-118.36139],["7723-037-013","1714 Rolling Hills Rd","Manhattan Beach","90266","L. Placeholder",3450000,"Owner","1714 Rolling Hills Rd","90266",4,4,2750,9100,1954,8,"Single Family",33.87269,-118.41723],["7692-013-064","3690 Calle Mayor","Palos Verdes Estates","90274","K. Sample",1974000,"Owner","3690 Calle Mayor","90274",3,3,2030,8600,1967,36,"Single Family",33.78004,-118.39735],["7340-032-082","4250 Camino Real","Rancho Palos Verdes","90275","K. Mockton",2310000,"Absentee","1316 Ventura Blvd","94105",5,5,3650,15400,1952,4,"Single Family",33.73898,-118.38514],["7966-020-023","6480 Silver Spur Rd","Palos Verdes Estates","90274","C. Sample",2719000,"Owner","6480 Silver Spur Rd","90274",4,4,2400,5200,1977,9,"Single Family",33.77329,-118.40493],["7105-014-023","6412 Vista Del Mar","Rancho Palos Verdes","90275","A. Placeholder",2370000,"Owner","6412 Vista Del Mar","90275",4,4,2880,6500,1961,0,"Single Family",33.73026,-118.37498],["7126-023-035","3638 Prospect Ave","Palos Verdes Estates","90274","M. Fixture",2349000,"Owner","3638 Prospect Ave","90274",3,2,1970,9400,1992,24,"Single Family",33.7891,-118.39401],["7948-031-033","5296 Crenshaw Blvd","Torrance","90503","F. Stubbs",1938000,"Owner","5296 Crenshaw Blvd","90503",5,4,4110,13100,1968,13,"Single Family",33.83743,-118.35299],["7334-023-010","4410 Deep Valley Dr","Palos Verdes Estates","90274","M. Example",2591000,"Absentee","6661 Main St","90210",4,4,3030,6100,1972,41,"Single Family",33.79314,-118.38486],["7963-016-071","266 Crenshaw Blvd","Rancho Palos Verdes","90275","M. Dummett",1627000,"Owner","266 Crenshaw Blvd","90275",4,4,2620,13900,1972,30,"Single Family",33.73217,-118.37712],["7989-033-001","5664 Vista Del Mar","Rancho Palos Verdes","90275","D. Placeholder",1643000,"Owner","5664 Vista Del Mar","90275",4,3,2530,9400,1955,19,"Single Family",33.73915,-118.38043],["7318-008-084","2016 Aviation Blvd","Manhattan Beach","90266","G. Demoworth",3684000,"Absentee","7307 Ventura Blvd","90210",5,5,4040,9900,1974,30,"Single Family",33.90168,-118.41308],["7611-030-049","1394 Vista Del Mar","Torrance","90503","B. Demoworth",1937000,"Owner","1394 Vista Del Mar","90503",5,5,4460,22100,2016,14,"Single Family",33.82115,-118.35316],["7544-016-096","2010 Deep Valley Dr","Manhattan Beach","90266","L. Placeholder",2512000,"Owner","2010 Deep Valley Dr","90266",3,3,2050,6100,1995,27,"Single Family",33.90147,-118.39452],["7416-006-042","2324 Via Campesina","Manhattan Beach","90266","M. Sample",2932000,"Owner","2324 Via Campesina","90266",4,3,2910,15400,1986,9,"Single Family",33.88833,-118.426],["7316-011-095","399 Deep Valley Dr","Torrance","90503","L. Placeholder",900000,"Owner","399 Deep Valley Dr","90503",2,1,1490,5200,1978,3,"Single Family",33.85298,-118.32784],["7655-007-077","5910 Calle Mayor","Rancho Palos Verdes","90275","F. Mockton",2513000,"Absentee","519 Ventura Blvd","90210",5,4,3320,8800,2012,21,"Single Family",33.74543,-118.39711],["7579-029-011","6516 Silver Spur Rd","Torrance","90503","C. Placeholder",1950000,"Owner","6516 Silver Spur Rd","90503",5,4,3730,19100,1981,5,"Single Family",33.84782,-118.34352],["7303-008-056","5622 Highland Ave","Manhattan Beach","90266","J. Dummett",3253000,"Owner","5622 Highland Ave","90266",3,2,2240,5400,2014,34,"Condo",33.90156,-118.42148],["7577-037-013","2393 Calle Mayor","Palos Verdes Estates","90274","D. Fixture",2920000,"Owner","2393 Calle Mayor","90274",4,3,2670,4800,1975,28,"Single Family",33.77827,-118.39257],["7724-027-080","195 Via Campesina","Torrance","90503","H. Testerman",715000,"Owner","195 Via Campesina","90503",2,2,1390,6600,1998,0,"Single Family",33.82882,-118.33183],["7289-003-039","2425 Camino Real","Rolling Hills Estates","90274","K. Fixture",2555000,"Owner","2425 Camino Real","90274",5,5,4260,23000,1991,4,"Condo",33.79836,-118.34575],["7821-017-060","620 Vista Del Mar","Palos Verdes Estates","90274","B. Sample",2136000,"Owner","620 Vista Del Mar","90274",3,2,1650,8900,2007,22,"Condo",33.77042,-118.38493],["7854-024-027","3847 Prospect Ave","Manhattan Beach","90266","K. Dummett",3031000,"Owner","3847 Prospect Ave","90266",2,1,1510,5900,1958,13,"Single Family",33.88297,-118.39665],["7317-030-037","707 Calle Mayor","Palos Verdes Estates","90274","B. Stubbs",2762000,"Owner","707 Calle Mayor","90274",5,4,3400,9200,1971,7,"Single Family",33.76993,-118.39561],["7715-017-058","3880 Palos Verdes Dr","Rolling Hills Estates","90274","E. Stubbs",2112000,"Owner","3880 Palos Verdes Dr","90274",4,4,2630,5600,2018,27,"Single Family",33.77801,-118.36067],["7252-019-011","4623 Via Campesina","Rolling Hills Estates","90274","M. Fixture",1979000,"Owner","4623 Via Campesina","90274",2,1,1400,3300,1987,30,"Single Family",33.78547,-118.35022],["7898-009-043","2949 Via Campesina","Manhattan Beach","90266","E. Example",3767000,"Owner","2949 Via Campesina","90266",5,4,3480,9100,2009,35,"Single Family",33.8963,-118.42101],["7383-021-042","2827 Silver Spur Rd","Redondo Beach","90277","A. Sampleton",1900000,"Absentee","3127 Main St","89109",5,5,3560,15900,1957,18,"Single Family",33.83921,-118.40165],["7290-017-037","6082 Highland Ave","Redondo Beach","90277","C. Dummett",1022000,"Owner","6082 Highland Ave","90277",2,1,1270,5200,2008,14,"Single Family",33.8568,-118.37286],["7878-026-011","4883 Palos Verdes Dr","Torrance","90503","G. Fixture",1620000,"Owner","4883 Palos Verdes Dr","90503",5,5,3480,12900,1979,2,"Single Family",33.82842,-118.35684],["7702-007-062","1422 Via Campesina","Manhattan Beach","90266","C. Fixture",2805000,"Owner","1422 Via Campesina","90266",2,1,1530,4600,2001,8,"Single Family",33.87946,-118.42099],["7277-019-059","6164 Vista Del Mar","Rolling Hills Estates","90274","C. Stubbs",1942000,"Owner","6164 Vista Del Mar","90274",4,3,2970,9500,1956,19,"Single Family",33.77951,-118.35289],["7403-029-059","2467 Crenshaw Blvd","Redondo Beach","90277","D. Testerman",1966000,"Absentee","232 Ventura Blvd","94105",5,4,4480,16100,2000,33,"Single Family",33.86567,-118.40557],["7858-021-078","287 Esplanade","Rancho Palos Verdes","90275","B. Sampleton",1669000,"Owner","287 Esplanade","90275",4,3,2420,11400,2010,24,"Single Family",33.72825,-118.3782],["7519-034-074","3294 Aviation Blvd","Torrance","90503","C. Stubbs",2240000,"Owner","3294 Aviation Blvd","90503",5,4,4260,20100,1968,5,"Single Family",33.81866,-118.33671],["7143-031-072","4999 Via Campesina","Rancho Palos Verdes","90275","G. Sampleton",1547000,"Absentee","5234 Main St","90210",3,2,2120,11300,1995,6,"Single Family",33.73294,-118.39875],["7296-001-031","4030 Calle Mayor","Manhattan Beach","90266","M. Testerman",4622000,"Owner","4030 Calle Mayor","90266",5,5,4360,13100,1979,38,"Single Family",33.89828,-118.40797],["7787-017-005","738 Silver Spur Rd","Rolling Hills Estates","90274","A. Stubbs",2402000,"Absentee","3546 Ventura Blvd","89109",4,3,2550,6100,1971,36,"Single Family",33.79542,-118.36861],["7454-008-023","282 Camino Real","Rancho Palos Verdes","90275","K. Example",2472000,"Owner","282 Camino Real","90275",4,3,3140,5400,2011,24,"Single Family",33.74008,-118.38307],["7466-012-002","2812 Silver Spur Rd","Rancho Palos Verdes","90275","M. Stubbs",1258000,"Absentee","6438 Ventura Blvd","90210",3,2,1820,4900,2008,24,"Single Family",33.75055,-118.39068],["7317-013-051","4914 Aviation Blvd","Manhattan Beach","90266","L. Dummett",3688000,"Owner","4914 Aviation Blvd","90266",5,5,3990,6500,1966,36,"Single Family",33.89249,-118.42462],["7911-017-084","5020 Highland Ave","Rancho Palos Verdes","90275","E. Testerman",1571000,"Absentee","7351 Main St","94105",2,2,1350,5700,1994,3,"Single Family",33.73417,-118.37477],["7532-030-016","1301 Deep Valley Dr","Rancho Palos Verdes","90275","K. Dummett",1216000,"Owner","1301 Deep Valley Dr","90275",2,1,1280,3900,2010,30,"Single Family",33.74916,-118.37449],["7336-023-067","4344 Anza Ave","Rancho Palos Verdes","90275","F. Placeholder",1671000,"Owner","4344 Anza Ave","90275",3,2,2180,10600,1978,5,"Single Family",33.74754,-118.38601],["7558-027-096","621 Deep Valley Dr","Torrance","90503","F. Fixture",940000,"Owner","621 Deep Valley Dr","90503",4,4,2310,10900,1953,22,"Single Family",33.8488,-118.33585],["7721-007-094","622 Highland Ave","Manhattan Beach","90266","B. Mockton",3276000,"Owner","622 Highland Ave","90266",5,5,4660,9600,2002,35,"Single Family",33.87686,-118.41421],["7467-029-089","5011 Silver Spur Rd","Torrance","90503","J. Sample",938000,"Owner","5011 Silver Spur Rd","90503",3,2,2180,6700,1992,13,"Single Family",33.81966,-118.33356]]};
+let PARCELS = SEED.rows.map(r => Object.fromEntries(SEED.keys.map((k,i)=>[k, r[i]])));
+
+/* ═══════ fair housing screen ═══════
+   Describe the property, never the people. Federal FHA classes plus the
+   California additions (marital status, source of income, military/veteran). */
+const RULES = [
+ ['familial status','high','Describes who would live there.',[
+   /\b(great|perfect|ideal|good)\s+(for|place for)\s+(a\s+)?(famil(y|ies)|kids|children)\b/i,
+   /\b(young|growing|new|starter)\s+famil(y|ies)\b/i,/\bfamily[- ]friendly\b/i,
+   /\b(no|without)\s+(kids|children)\b/i,/\b(empty[- ]nester|newlywed|childless)s?\b/i,
+   /\badult\s+(community|living|only)\b/i]],
+ ['age','high','References the age of the buyer or residents.',[
+   /\b(retire(d|e|es|ment)|senior|elderly)\b/i,/\byoung\s+(professional|couple|buyer)s?\b/i,
+   /\bmillennial|boomer\b/i]],
+ ['religion','high','References religion or proximity to worship.',[
+   /\b(christian|catholic|jewish|muslim|hindu|buddhist|mormon)\b/i,/\bchurch[- ]going\b/i]],
+ ['race, national origin','high','References race, ethnicity, origin, or coded exclusivity.',[
+   /\b(white|black|asian|hispanic|latino|caucasian|african[- ]american)\b/i,
+   /\b(ethnic|integrated|diverse|multicultural)\s+(neighborhood|area|community)\b/i,
+   /\bexclusive\s+(neighborhood|community|area)\b/i,/\bmust speak\b/i]],
+ ['disability','high','References physical or mental ability.',[
+   /\b(handicap|disabled|wheelchair|able[- ]bodied)\b/i,/\bperfect for someone who can\b/i]],
+ ['sex, marital status','high','References sex or marital status.',[
+   /\b(single|married|divorced|widowed)\s+(man|woman|male|female|buyer|couple|person)\b/i,
+   /\b(bachelor|bachelorette)\b/i]],
+ ['source of income','medium','Screens on how the purchase is funded — protected in California.',[
+   /\bno\s+(section\s*8|vouchers?|housing assistance)\b/i,/\b(cash|conventional)\s+buyers?\s+only\b/i]],
+ ['military or veteran status','medium','Protected in California.',[
+   /\b(veterans?|military|active[- ]duty)\b/i]],
+ ['steering','high','Characterizes the neighborhood or its residents, not the property.',[
+   /\b(safe|safer|good|better|nice|desirable|bad|rough)\s+(neighborhood|area|part of town|schools?)\b/i,
+   /\b(right|wrong)\s+(kind|type)\s+of\s+(people|neighbor)/i,/\bpeople like you\b/i,
+   /\byou'?ll fit (right )?in\b/i,/\bthe kind of (people|family|buyer)\b/i]],
+];
+const CHARM = /\$\s?\d[\d,]*(97|99|95)\b/;
+function screen(text, label='text'){
+  const flags=[]; if(!text) return {ok:true,flags,label};
+  for(const [category,severity,why,pats] of RULES)
+    for(const p of pats){ const m=text.match(p); if(m) flags.push({category,severity,why,phrase:m[0].trim()}); }
+  const c=text.match(CHARM);
+  if(c) flags.push({category:'pricing style',severity:'low',why:'Round numbers only — never $X97.',phrase:c[0]});
+  return {ok:flags.length===0,flags,label};
+}
+const blocking = r => r.flags.some(f=>f.severity==='high');
+
+/* ═══════ one sentence → criteria ═══════ */
+const WORDS={one:1,two:2,three:3,four:4,five:5,six:6,seven:7,eight:8,nine:9,ten:10};
+const STATES=new Set('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI WY DC'.split(' '));
+function parseMoney(raw){
+  if(!raw) return null;
+  const m=String(raw).replace(/[$,\s]/g,'').match(/^(\d+(?:\.\d+)?)([kKmM])?$/); if(!m) return null;
+  const n=parseFloat(m[1]), s=(m[2]||'').toLowerCase();
+  if(s==='m') return Math.round(n*1e6);
+  if(s==='k') return Math.round(n*1e3);
+  return Math.round(n<10000 ? n*1000 : n);
+}
+const toNum=v=>{ if(v==null) return null; const k=String(v).toLowerCase();
+  if(k in WORDS) return WORDS[k]; const n=parseInt(String(v).replace(/,/g,''),10);
+  return Number.isFinite(n)?n:null; };
+const TABLES={
+  property_type:[[/\bsingle[- ]?family\b|\bhouses?\b/i,'Single Family'],[/\bmulti[- ]?family\b|\bduplex\b/i,'Multi-Family'],
+    [/\bcondos?\b/i,'Condo'],[/\btown(house|home)s?\b/i,'Townhome'],[/\bmobile homes?\b/i,'Mobile Home'],[/\bland\b/i,'Land']],
+  financing:[[/\bpre[- ]?approved?\b/i,'Pre-approved'],[/\ball[- ]cash\b|\bcash\b/i,'Cash buyer'],
+    [/\bfha\b/i,'FHA'],[/\bva loan\b|\bva financing\b/i,'VA'],[/\bconventional\b/i,'Conventional']],
+  closing:[[/\bquick clos\w*|21[- ]days?|fast clos\w*/i,'Quick close (21 days)'],[/\b30[- ]days?\b/i,'30 days'],
+    [/\brent[- ]?back\b/i,'Open to rent-back'],[/\bno rush\b|\bnot in a hurry\b/i,'No rush'],[/\bflexible\b/i,'Flexible']],
+  condition:[[/\bmajor reno\w*|\bgut\b|\bfixer\b|\bneeds work\b/i,'Major renos OK'],[/\bas[- ]is\b|\bno repairs?\b/i,'As-is / no repairs'],
+    [/\bmove[- ]in ready\b|\bturn[- ]?key\b/i,'Move-in ready only'],[/\bminor updates?\b|\bcosmetic\b/i,'Minor updates OK']],
+};
+const firstOf=(t,tbl)=>{ for(const [p,v] of tbl) if(p.test(t)) return v; return null; };
+
+function parseBuyer(sentence){
+  const t=String(sentence||'').trim();
+  const c={nickname:null,city:null,state:null,zip:null,price_min:null,price_max:null,
+    sqft_min:null,sqft_max:null,beds:null,baths:null,property_type:null,
+    owner_status:null,years_owned:'Any',financing:null,closing:null,condition:null,why_area:''};
+  if(!t) return c;
+
+  const rg=t.match(/\$?\s*(\d[\d,]*(?:\.\d+)?\s*[kKmM]?)\s*(?:-|–|—|to|and)\s*\$?\s*(\d[\d,]*(?:\.\d+)?\s*[kKmM]?)/);
+  if(rg){ const lo=parseMoney(rg[1]),hi=parseMoney(rg[2]);
+    if(lo&&hi&&hi>=lo&&hi>=50000){c.price_min=lo;c.price_max=hi;} }
+  if(c.price_max==null){
+    const u=t.match(/\b(?:under|below|up to|max(?:imum)?|budget of)\s*\$?\s*(\d[\d,]*(?:\.\d+)?\s*[kKmM]?)/i);
+    if(u) c.price_max=parseMoney(u[1]);
+    const o=t.match(/\b(?:over|above|at least|min(?:imum)?|starting at)\s*\$?\s*(\d[\d,]*(?:\.\d+)?\s*[kKmM]?)/i);
+    if(o) c.price_min=parseMoney(o[1]);
+    if(c.price_min==null&&c.price_max==null){ const s=t.match(/\$\s*(\d[\d,]*(?:\.\d+)?\s*[kKmM]?)/); if(s) c.price_max=parseMoney(s[1]); }
+  }
+  const bd=t.match(/\b(\d+|one|two|three|four|five|six)\s*\+?\s*(?:bed(?:room)?s?|bd|br)\b/i); if(bd) c.beds=toNum(bd[1]);
+  const ba=t.match(/\b(\d+(?:\.\d)?|one|two|three|four|five)\s*\+?\s*(?:bath(?:room)?s?|ba)\b/i); if(ba) c.baths=toNum(ba[1]);
+  const sf=t.match(/\b([\d,]+)\s*\+?\s*(?:sq\.?\s*ft\.?|sqft|square feet)\b/i); if(sf) c.sqft_min=toNum(sf[1]);
+
+  const loc=t.match(/\bin\s+([A-Z][A-Za-z.'-]*(?:\s+[A-Z][A-Za-z.'-]*){0,3})\s*,?\s*([A-Z]{2})?\b\s*(\d{5})?/);
+  if(loc){ let city=loc[1].trim(), st=loc[2];
+    const tail=city.split(/\s+/).pop();
+    if(!st&&STATES.has((tail||'').toUpperCase())&&city.split(/\s+/).length>1){ st=tail.toUpperCase(); city=city.slice(0,-tail.length).trim(); }
+    if(st&&!STATES.has(st)) st=null;
+    c.city=city.replace(/,$/,'')||null; c.state=st||null; c.zip=loc[3]||null; }
+
+  c.property_type=firstOf(t,TABLES.property_type);
+  c.financing=firstOf(t,TABLES.financing);
+  c.closing=firstOf(t,TABLES.closing);
+  c.condition=firstOf(t,TABLES.condition);
+  if(/\babsentee\b/i.test(t)) c.owner_status='Absentee';
+  const yr=t.match(/\b(?:owned?\s*(?:for)?\s*)?(\d+)\s*\+?\s*years?\b/i);
+  if(yr) c.years_owned=`${yr[1]}+`;
+
+  const head=t.split(',')[0].trim();
+  if(head&&head.length<=48&&!/\d|\$/.test(head)&&/^[A-Z]/.test(head)) c.nickname=head;
+  return c;
+}
+
+/* ═══════ filter ═══════ */
+function matches(p,c){
+  const between=(v,lo,hi)=>{ const n=Number(v); if(!Number.isFinite(n)) return lo==null&&hi==null;
+    if(lo!=null&&n<lo) return false; if(hi!=null&&n>hi) return false; return true; };
+  if(!between(p.value,c.price_min,c.price_max)) return false;
+  if(!between(p.sqft,c.sqft_min,c.sqft_max)) return false;
+  if(c.beds!=null&&Number(p.beds)<c.beds) return false;
+  if(c.baths!=null&&Number(p.baths)<c.baths) return false;
+  if(c.property_type&&p.property_type!==c.property_type) return false;
+  if(c.city&&String(p.city).toLowerCase()!==c.city.toLowerCase()) return false;
+  if(c.zip&&String(p.zip)!==String(c.zip)) return false;
+  if(c.owner_status&&c.owner_status!=='Any'&&p.type!==c.owner_status) return false;
+  if(c.years_owned&&c.years_owned!=='Any'){
+    const min=parseInt(c.years_owned,10);
+    if(Number.isFinite(min)&&Number(p.years_owned)<min) return false; }
+  if(c.band){ const {lat1,lat2,lon1,lon2}=c.band;
+    if(p.lat<Math.min(lat1,lat2)||p.lat>Math.max(lat1,lat2)) return false;
+    if(p.lon<Math.min(lon1,lon2)||p.lon>Math.max(lon1,lon2)) return false; }
+  if(EXCLUDE.size&&EXCLUDE.has(normAddr(p.address,p.zip))) return false;
+  return true;
+}
+function normAddr(a,z){
+  return String(a||'').toLowerCase().replace(/[.,#]/g,' ')
+    .replace(/\b(street|str)\b/g,'st').replace(/\b(avenue|ave)\b/g,'av')
+    .replace(/\bdrive\b/g,'dr').replace(/\broad\b/g,'rd').replace(/\b(boulevard|blvd)\b/g,'bl')
+    .replace(/\blane\b/g,'ln').replace(/\bcourt\b/g,'ct').replace(/\bplace\b/g,'pl')
+    .replace(/\b(north|south|east|west)\b/g,m=>m[0]).replace(/\s+/g,' ').trim()
+    + '|' + String(z||'').trim().slice(0,5);
+}
+let EXCLUDE = new Set();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+/* ═══════ the copy ═══════
+   The letter is the master. Email, text and call script derive from it, which is
+   why they sound like one person wrote them in a sitting. */
+function money(n){ const v=Number(n); if(!Number.isFinite(v)) return '';
+  if(v>=1e6) return '$'+(v/1e6).toFixed(2).replace(/\.?0+$/,'')+'M';
+  return '$'+Math.round(v/1000)+'K'; }
+function budgetPhrase(b){
+  if(b.price_min&&b.price_max) return `between ${money(b.price_min)} and ${money(b.price_max)}`;
+  if(b.price_max) return `up to ${money(b.price_max)}`;
+  if(b.price_min) return `${money(b.price_min)} and up`;
+  return 'flexible'; }
+const place=b=>[b.city,b.state].filter(Boolean).join(', ');
+function readiness(b){
+  const fin = b.financing==='Cash buyer' ? 'An all-cash buyer'
+    : b.financing==='Pre-approved' ? 'Pre-approved'
+    : b.financing ? `Approved for ${b.financing} financing` : 'Pre-approved';
+  const t={'Flexible':'flexible on timing','Quick close (21 days)':'able to close in about three weeks',
+    '30 days':'able to close in about thirty days','No rush':'in no particular hurry',
+    'Open to rent-back':'happy to offer a rent-back if you need time to move'}[b.closing];
+  return t ? `${fin} and ${t}` : `${fin} and ready to move`; }
+function conditionLine(c){ return {'Major renos OK':'Open to a home that needs real work',
+  'As-is / no repairs':'Happy to buy as-is, with no repairs asked for',
+  'Move-in ready only':'Looking for something already in good shape',
+  'Minor updates OK':'Open to a home that needs minor updates'}[c] || null; }
+function bullets(b){ return [readiness(b), conditionLine(b.condition),
+  'Knows what they want and can move quickly when the right home comes up'].filter(Boolean).slice(0,3); }
+
+function letterFor(b){
+  const three=bullets(b);
+  return [
+`Dear {owner},`,``,
+`I am a real estate agent here in ${place(b)||'the neighborhood'}, and I am writing to you about one particular buyer rather than about your house.`,``,
+`Their name is ${b.nickname||'a client of mine'}, and here is where they stand:`,``,
+...three.map(x=>`  • ${x}`),``,
+`Their budget is ${budgetPhrase(b)}, and yours is the kind of home they keep asking me about.${b.why_area?' '+b.why_area.trim():''}`,``,
+`I want to be straightforward about why you are getting this. I am not sending this to the whole neighborhood, and I am not asking you to list your house. I have one buyer, your home fits what they are looking for, and I would rather ask you directly than wonder.`,``,
+`So the only question is this: if the right offer came along, would you be open to a conversation about it?`,``,
+`If the answer is no, that is a completely fine answer, and you will not hear from me about it again. If the answer is maybe, I can tell you what a home like yours is worth right now, with no obligation and no listing conversation attached.`,``,
+`You can reach me directly at ${b.agent_cell||'[your cell]'}.`,``,
+`Sincerely,`,``,
+b.agent_name||'[your name]', b.agent_brokerage||'', b.agent_dre?`DRE #${b.agent_dre}`:''
+  ].filter(x=>x!=='').concat('').join('\n').replace(/\n{3,}/g,'\n\n').trim();
+}
+function emailFor(b){
+  const where=place(b)||'the area', three=bullets(b);
+  return {subject:`Buyer looking in ${where} — know anyone?`, body:[
+`I just got off the phone with my clients who are looking for a home in ${where}, anywhere ${budgetPhrase(b)}.`,``,
+`Here's who they are and what they're looking for:`,``, b.nickname||'My buyers',``,
+...three.map(x=>`- ${x}`),``,
+`If you know anyone in ${b.city||where} who might be thinking about putting their house on the market, please forward this email to them. They can contact me directly at ${b.agent_cell||'[your cell]'}.`,``,
+`I appreciate your help,`, b.agent_name||'[your name]'].join('\n')};
+}
+function textFor(b){
+  return `Hi — quick one. I'm working with ${b.nickname||'a buyer'} looking in ${b.city||place(b)||'the area'} ${budgetPhrase(b)}. `+
+    `They're ${(b.financing||'pre-approved').toLowerCase()} and ready to go. Do you know anyone there who's thought about selling? `+
+    `Even a maybe helps. — ${(b.agent_name||'').split(' ')[0]||'me'}`;
+}
+function callFor(b){
+  return [`OPENING`,
+`"Hi, is this [name]? This is ${b.agent_name||'[your name]'} — I'm a real estate agent here in ${place(b)||'the area'}. I sent you a letter last week about a buyer I'm working with. Do you have thirty seconds?"`,``,
+`IF YES — THE BUYER`,
+`"I'm working with ${b.nickname||'a buyer'}. They're ${(b.financing||'pre-approved').toLowerCase()}, budget ${budgetPhrase(b)}, and ${(b.closing||'flexible').toLowerCase()} on timing. Your home is the kind of home they're looking for."`,``,
+`THE ASK`,
+`"I'm not asking you to list your house. I'm asking whether you'd be open to hearing what they'd pay for it."`,``,
+`IF NOT SELLING`,
+`"Completely understood — thanks for taking the call. If anything changes, my number is ${b.agent_cell||'[your cell]'}."`,
+`→ Mark them dead. Don't call again for this buyer.`,``,
+`IF MAYBE`,
+`"Would it help if I put together what your home would likely sell for right now? No obligation, no listing conversation."`,
+`→ Mark them responded. Follow up within 48 hours.`,``,
+`IF THEY ASK HOW YOU GOT THEIR NUMBER`,
+`"Public property records. If you'd rather I didn't call again, just say so and I'll take you off my list."`,
+`→ If they ask to be removed, mark DNC and honour it.`].join('\n');
+}
+
+/* ═══════ CSV ═══════ */
+const csvCell=v=>{ const s=String(v??''); return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s; };
+const toCsv=(rows,cols)=>[cols.join(','),...rows.map(r=>cols.map(c=>csvCell(r[c])).join(','))].join('\n');
+function parseCsv(text){
+  const out=[]; let row=[],cell='',q=false;
+  for(let i=0;i<text.length;i++){ const ch=text[i];
+    if(q){ if(ch==='"'&&text[i+1]==='"'){cell+='"';i++;} else if(ch==='"') q=false; else cell+=ch; }
+    else if(ch==='"') q=true;
+    else if(ch===','){row.push(cell);cell='';}
+    else if(ch==='\n'){row.push(cell);out.push(row);row=[];cell='';}
+    else if(ch!=='\r') cell+=ch; }
+  if(cell||row.length){row.push(cell);out.push(row);}
+  const head=(out.shift()||[]).map(h=>h.trim().toLowerCase().replace(/^﻿/,''));
+  return out.filter(r=>r.some(c=>c.trim())).map(r=>Object.fromEntries(head.map((h,i)=>[h,(r[i]??'').trim()])));
+}
+</script>
+
+<script>
+/* ═══════ state & helpers ═══════ */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const usd=n=>'$'+Number(n||0).toLocaleString('en-US',{maximumFractionDigits:0});
+const S={c:{},list:[],ch:'letter',copy:null,flags:{},name:'',agent:{}};
+let DB=null, SAMPLE=null, DL=null;
+
+const PILLS={
+  property_type:['Any','Single Family','Multi-Family','Condo','Townhome','Mobile Home','Land'],
+  beds:['Any',2,3,4,5], baths:['Any',1,2,3,4],
+  owner_status:['Any','Owner','Absentee'], years_owned:['Any','2+','5+','10+'],
+  financing:['Pre-approved','Cash buyer','FHA','VA','Conventional'],
+  closing:['Flexible','Quick close (21 days)','30 days','No rush','Open to rent-back'],
+  condition:['Minor updates OK','As-is / no repairs','Move-in ready only','Major renos OK'],
+};
+const NARROWS=new Set(['property_type','beds','baths','owner_status','years_owned']);
+const FIELDS=['city','state','zip','price_min','price_max','sqft_min','sqft_max'];
+
+/* ═══════ steps ═══════ */
+let step=1;
+function go(n){ step=n; [1,2,3,4].forEach(i=>$('#s'+i).hidden=i!==n);
+  $$('.rail button').forEach(b=>{ const i=+b.dataset.step;
+    b.classList.toggle('on',i===n);
+    b.disabled = i===2 ? !S.c.city&&!S.c.price_max : i>=3 ? !S.list.length : false; });
+  window.scrollTo(0,0); if(n===2) drawPlot(); }
+$$('.rail button').forEach(b=>b.onclick=()=>{ if(!b.disabled) go(+b.dataset.step); });
+
+function notice(host,kind,title,items){
+  const el=$(host); if(!kind){el.innerHTML='';return;}
+  el.innerHTML=`<div class="notice ${kind}"><b>${esc(title)}</b>${
+    items&&items.length?`<ul>${items.map(i=>`<li>${i}</li>`).join('')}</ul>`:''}</div>`;
+}
+
+/* ═══════ 1 · describe ═══════ */
+$$('.ex').forEach(b=>b.onclick=()=>{ $('#sentence').value=b.textContent.trim(); $('#go').click(); });
+$('#sentence').onkeydown=e=>{ if(e.key==='Enter') $('#go').click(); };
+$('#go').onclick=()=>{
+  const t=$('#sentence').value.trim(); if(!t) return;
+  const f=screen(t,'description');
+  if(blocking(f)) return notice('#s1notice','bad','That can’t go in a letter to homeowners',
+    f.flags.map(x=>`<b>${esc(x.category)}</b> — “${esc(x.phrase)}”. ${esc(x.why)}`));
+  notice('#s1notice');
+  S.c=parseBuyer(t);
+  $('#buyerName').textContent=S.c.nickname||'Your buyer';
+  $('#buyerLine').textContent=[S.c.beds&&`${S.c.beds}+ bed`,S.c.baths&&`${S.c.baths}+ bath`,
+    place(S.c)&&`in ${place(S.c)}`,(S.c.price_min||S.c.price_max)&&budgetPhrase(S.c)]
+    .filter(Boolean).join(' · ');
+  paintForm(); go(2); recount();
+};
+
+/* ═══════ 2 · criteria ═══════ */
+for(const [key,vals] of Object.entries(PILLS)){
+  const host=$('#p_'+key); if(!host) continue;
+  vals.forEach(v=>{ const b=document.createElement('button');
+    b.className='pill'; b.type='button';
+    b.textContent = typeof v==='number' ? v+'+' : v; b.dataset.v=v;
+    b.onclick=()=>{ [...host.children].forEach(c=>c.classList.remove('on')); b.classList.add('on');
+      S.c[key]= v==='Any'?null:v; if(NARROWS.has(key)) recount(); };
+    host.appendChild(b); });
+}
+function paintForm(){
+  FIELDS.forEach(k=>{ const el=$('#f_'+k); if(el) el.value=S.c[k]??''; });
+  $('#f_why_area').value=S.c.why_area||'';
+  for(const key of Object.keys(PILLS)){ const host=$('#p_'+key); if(!host) continue;
+    const want=S.c[key]??'Any';
+    [...host.children].forEach(b=>b.classList.toggle('on',String(b.dataset.v)===String(want))); }
+}
+FIELDS.forEach(k=>{ const el=$('#f_'+k); if(!el) return;
+  el.oninput=()=>{ const num=/price|sqft/.test(k);
+    S.c[k]= el.value==='' ? null : (num?Number(el.value.replace(/[^0-9.]/g,'')):el.value);
+    clearTimeout(el._t); el._t=setTimeout(recount,260); }; });
+$('#f_why_area').oninput=e=>{ S.c.why_area=e.target.value;
+  clearTimeout(e.target._t); e.target._t=setTimeout(()=>{
+    const f=screen(e.target.value,'note');
+    f.ok ? notice('#whyNotice') : notice('#whyNotice', blocking(f)?'bad':'warn',
+      blocking(f)?'This can’t go in the letter':'Worth a look',
+      f.flags.map(x=>`<b>${esc(x.category)}</b> — “${esc(x.phrase)}”. ${esc(x.why)}`)); },300); };
+
+function recount(){
+  S.list=PARCELS.filter(p=>matches(p,S.c));
+  $('#count').textContent=`${S.list.length} ${S.list.length===1?'property':'properties'}`;
+  const bits=[]; if(S.c.band) bits.push('inside your selected area');
+  if(EXCLUDE.size) bits.push(`${EXCLUDE.size} listed excluded`);
+  $('#countNote').textContent=bits.join(' · ')||'Adjust anything and this updates.';
+  $$('.rail button').forEach(b=>{ if(+b.dataset.step>=3) b.disabled=!S.list.length; });
+  drawPlot();
+}
+
+/* ═══════ scatter ═══════ */
+const PLOT={w:820,h:560,pad:44};
+let bounds=null;
+function computeBounds(){
+  const lats=PARCELS.map(p=>p.lat), lons=PARCELS.map(p=>p.lon);
+  bounds={la1:Math.min(...lats),la2:Math.max(...lats),lo1:Math.min(...lons),lo2:Math.max(...lons)};
+}
+const X=lon=>PLOT.pad+((lon-bounds.lo1)/(bounds.lo2-bounds.lo1||1))*(PLOT.w-2*PLOT.pad);
+const Y=lat=>PLOT.h-PLOT.pad-((lat-bounds.la1)/(bounds.la2-bounds.la1||1))*(PLOT.h-2*PLOT.pad);
+const lonAt=x=>bounds.lo1+((x-PLOT.pad)/(PLOT.w-2*PLOT.pad))*(bounds.lo2-bounds.lo1);
+const latAt=y=>bounds.la1+((PLOT.h-PLOT.pad-y)/(PLOT.h-2*PLOT.pad))*(bounds.la2-bounds.la1);
+
+function drawPlot(){
+  if(!bounds) computeBounds();
+  const inSet=new Set(S.list.map(p=>p.apn));
+  const cities={};
+  PARCELS.forEach(p=>{ (cities[p.city]??=[]).push(p); });
+  let svg='';
+  for(const [city,ps] of Object.entries(cities)){
+    const mx=ps.reduce((a,p)=>a+X(p.lon),0)/ps.length, my=ps.reduce((a,p)=>a+Y(p.lat),0)/ps.length;
+    svg+=`<text class="citylabel" x="${mx.toFixed(1)}" y="${(my-26).toFixed(1)}" text-anchor="middle">${esc(city)}</text>`;
+  }
+  for(const p of PARCELS){
+    const on=inSet.has(p.apn);
+    svg+=`<circle class="dot${on?(p.type==='Absentee'?' abs':''):' out'}" cx="${X(p.lon).toFixed(1)}" cy="${Y(p.lat).toFixed(1)}" r="${on?4:2.5}"><title>${esc(p.address)}, ${esc(p.city)} — ${usd(p.value)} — ${esc(p.type)}</title></circle>`;
+  }
+  if(S.c.band){ const {lat1,lat2,lon1,lon2}=S.c.band;
+    const x=Math.min(X(lon1),X(lon2)), y=Math.min(Y(lat1),Y(lat2));
+    svg+=`<rect class="band" x="${x}" y="${y}" width="${Math.abs(X(lon2)-X(lon1))}" height="${Math.abs(Y(lat2)-Y(lat1))}" rx="3"/>`; }
+  $('#plot').innerHTML=svg;
+  $('#plotFoot').textContent = S.c.band
+    ? `${S.list.length} inside your selection. Drag again to change it.`
+    : 'Every dot is a parcel at its real coordinates. Amber = absentee owner. Drag to select an area.';
+}
+(function dragSelect(){
+  const svg=$('#plot'); let start=null;
+  const pt=e=>{ const r=svg.getBoundingClientRect();
+    return {x:(e.clientX-r.left)/r.width*PLOT.w, y:(e.clientY-r.top)/r.height*PLOT.h}; };
+  svg.addEventListener('pointerdown',e=>{ start=pt(e); svg.setPointerCapture(e.pointerId); });
+  svg.addEventListener('pointermove',e=>{ if(!start) return; const p=pt(e);
+    S.c.band={lat1:latAt(start.y),lat2:latAt(p.y),lon1:lonAt(start.x),lon2:lonAt(p.x)}; drawPlot(); });
+  svg.addEventListener('pointerup',e=>{ if(!start) return; const p=pt(e);
+    if(Math.abs(p.x-start.x)<6&&Math.abs(p.y-start.y)<6) S.c.band=null;
+    start=null; recount(); });
+})();
+$('#clearBand').onclick=()=>{ S.c.band=null; recount(); };
+$('#toList').onclick=()=>{ paintList(); go(3); };
+
+/* ═══════ 3 · recipients ═══════ */
+function paintList(filterText){
+  const rows = filterText
+    ? S.list.filter(p=>[p.address,p.owner,p.phone,p.email,p.city,p.zip]
+        .some(v=>String(v??'').toLowerCase().includes(filterText)))
+    : S.list;
+  $('#rcount').textContent=S.list.length;
+  const ph=S.list.filter(p=>p.phone).length, em=S.list.filter(p=>p.email).length;
+  $('#fill').textContent=`${ph} with phone · ${em} with email`;
+  $('#rows').innerHTML=rows.map(p=>`<tr>
+    <td>${esc(p.address)}<span class="sub">${esc(p.city)}, ${esc(p.zip)}</span></td>
+    <td>${esc(p.owner)||'<span class="none">—</span>'}</td>
+    <td>${p.phone?esc(p.phone):'<span class="none">—</span>'}</td>
+    <td>${p.email?esc(p.email):'<span class="none">—</span>'}</td>
+    <td class="right">${usd(p.value)}</td>
+    <td><span class="chip${p.type==='Absentee'?' abs':''}">${esc(p.type)}</span></td>
+    <td>${p.dnc?'<span class="chip dnc">DNC</span>':'<span class="none">—</span>'}</td>
+    <td><select data-apn="${esc(p.apn)}">${['new','sent','responded','appointment','dead']
+      .map(s=>`<option${s===(p.status||'new')?' selected':''}>${s}</option>`).join('')}</select></td>
+  </tr>`).join('');
+  $$('#rows select').forEach(sel=>sel.onchange=()=>{
+    const p=S.list.find(x=>x.apn===sel.dataset.apn); if(p){p.status=sel.value; saveList(true);} });
+}
+$('#search').oninput=e=>paintList(e.target.value.toLowerCase().trim());
+
+const SKIP_COLS=['apn','address','city','state','zip','owner','value','type','mail_addr','mail_zip','beds','baths','sqft','year_built'];
+const LABEL_COLS=['name','address','city_state_zip','property_address','mail_to'];
+function mailTo(p){
+  const diff = p.mail_addr && p.mail_addr.trim().toLowerCase()!==String(p.address).trim().toLowerCase();
+  return diff ? {line1:p.mail_addr, line2:`${p.city}, ${p.state||'CA'} ${p.mail_zip||''}`.trim(), fwd:true}
+              : {line1:p.address, line2:`${p.city}, ${p.state||'CA'} ${p.zip}`, fwd:false};
+}
+async function offer(filename,data){
+  if(!DL) return notice('#listNotice','warn','Downloads aren’t available in this view',
+    ['Open the artifact directly rather than in a preview, and try again.']);
+  try{ await DL.save({filename,data}); notice('#listNotice','ok',`Saved ${filename}`); }
+  catch(err){ if(err?.code!=='cancelled') notice('#listNotice','warn','Couldn’t save that file',[esc(err?.message||String(err))]); }
+}
+$('#expSkip').onclick=()=>offer(`${S.name||'buyer-list'}-skiptrace.csv`,
+  toCsv(S.list.map(p=>Object.fromEntries(SKIP_COLS.map(c=>[c,p[c]??'']))),SKIP_COLS));
+$('#expLabels').onclick=()=>offer(`${S.name||'buyer-list'}-labels.csv`,
+  toCsv(S.list.map(p=>{const m=mailTo(p);return {name:p.owner||'Current Resident',address:m.line1,
+    city_state_zip:m.line2,property_address:`${p.address}, ${p.city}`,
+    mail_to:m.fwd?'mailing address (absentee)':'property'};}),LABEL_COLS));
+
+const picker=Object.assign(document.createElement('input'),{type:'file',accept:'.csv',hidden:true});
+document.body.appendChild(picker);
+$('#impSkip').onclick=()=>{ picker.value=''; picker.click(); };
+picker.onchange=async()=>{
+  const f=picker.files[0]; if(!f) return;
+  const incoming=parseCsv(await f.text());
+  const byApn=new Map(S.list.map(p=>[String(p.apn).trim(),p]));
+  const byAddr=new Map(S.list.map(p=>[normAddr(p.address,p.zip),p]));
+  let matched=0,ph=0,em=0,dnc=0;
+  for(const r of incoming){
+    const p=byApn.get(String(r.apn??'').trim())??byAddr.get(normAddr(r.address,r.zip));
+    if(!p) continue; matched++;
+    if(r.phone&&!p.phone){p.phone=r.phone;ph++;}
+    if(r.email&&!p.email){p.email=r.email;em++;}
+    if(r.dnc!=null&&String(r.dnc)!==''){ p.dnc=/^(1|true|y|yes)$/i.test(String(r.dnc))?'yes':''; if(p.dnc) dnc++; }
+  }
+  paintList(); saveList(true);
+  notice('#listNotice','ok',`Matched ${matched} of ${incoming.length}`,
+    [`${ph} phone numbers`,`${em} email addresses`,`${dnc} flagged do-not-call`,
+     incoming.length-matched?`${incoming.length-matched} didn’t match anything in this list`:null].filter(Boolean));
+};
+$('#toWrite').onclick=()=>{ paintAgent(); go(4); };
+
+/* ═══════ 4 · outreach ═══════ */
+const AGENT=[['nickname','Buyer nickname'],['why_area','Why this area'],['toured','Toured and passed on'],
+  ['agent_name','Your name'],['agent_cell','Your cell'],['agent_brokerage','Brokerage'],['agent_dre','DRE #']];
+function paintAgent(){
+  let saved={}; try{ saved=JSON.parse(localStorage.getItem('mb_agent')||'{}'); }catch{}
+  $('#agentFields').innerHTML=AGENT.map(([k,label])=>{
+    const v=esc(saved[k]??S.c[k]??'');
+    const big=k==='why_area'||k==='toured';
+    return `<label class="field"><span>${label}</span>${big
+      ?`<textarea id="a_${k}" rows="2">${v}</textarea>`:`<input id="a_${k}" value="${v}">`}</label>`;
+  }).join('');
+}
+function readAgent(){
+  const b={...S.c};
+  AGENT.forEach(([k])=>{ const el=$('#a_'+k); if(el) b[k]=el.value; });
+  try{ localStorage.setItem('mb_agent',JSON.stringify({agent_name:b.agent_name,agent_cell:b.agent_cell,
+    agent_brokerage:b.agent_brokerage,agent_dre:b.agent_dre})); }catch{}
+  S.agent=b; return b;
+}
+$$('.chan').forEach(b=>b.onclick=()=>{ $$('.chan').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); S.ch=b.dataset.ch; showCopy(); });
+
+function showCopy(){
+  const names={letter:'Letter',email:'Email',text:'Text',call:'Call script'};
+  $('#outName').textContent=names[S.ch];
+  $('#dlLetters').hidden = S.ch!=='letter';
+  const sheet=$('#out');
+  sheet.classList.toggle('plain', S.ch!=='letter');
+  if(!S.copy){ sheet.textContent='Fill in your details, then press Write it.'; return; }
+  const c=S.copy[S.ch];
+  sheet.textContent = S.ch==='email' ? `Subject: ${c.subject}\n\n${c.body}`
+    : S.ch==='letter' ? c.replace('{owner}','Neighbor') : c;
+}
+
+async function write(){
+  const b=readAgent();
+  const base={letter:letterFor(b),email:emailFor(b),text:textFor(b),call:callFor(b)};
+  S.copy=base; showCopy();
+  $('#out').textContent='Writing…';
+
+  if(SAMPLE){
+    try{
+      const out=await SAMPLE.json(
+`You are writing outreach for a California real estate agent. Match this voice exactly: warm, direct, plain. No hype, no exclamation marks. Short sentences. Round numbers only (write $2M, never $1,997,000). Never promise a price. Never describe who the buyer IS — no family, age, religion, race, national origin, disability, marital status. Never say who a neighborhood suits. Describe the property and the buyer's situation only.
+
+Here is the agent's own master letter as the voice to match:
+---
+${base.letter.replace('{owner}','Neighbor')}
+---
+
+Buyer details:
+${Object.entries(b).filter(([k,v])=>v&&typeof v==='string'||typeof v==='number').map(([k,v])=>`${k}: ${v}`).join('\n')}
+
+Rewrite all four pieces in that voice. The letter goes to homeowners. The email goes to the agent's OWN sphere asking them to forward it to anyone thinking of selling — it must contain exactly three bullets (readiness, condition tolerance, motivation). The text goes to past clients asking for a referral, under 320 characters. The call script is for phoning a homeowner who got the letter.
+
+Return JSON: {"letter":"...","email":{"subject":"...","body":"..."},"text":"...","call":"..."}
+In the letter, write the salutation exactly as: Dear {owner},`,
+        {modelTier:'default'});
+      if(out&&out.letter) S.copy={letter:out.letter,email:out.email||base.email,
+        text:out.text||base.text,call:out.call||base.call};
+    }catch(err){
+      if(err?.code!=='not_granted') notice('#fhNotice','warn','Claude couldn’t write it — showing the template version',[esc(err?.message||'')]);
+    }
+  }
+
+  const all=[S.copy.letter,S.copy.email.subject,S.copy.email.body,S.copy.text,S.copy.call].join('\n');
+  const f=screen(all,'outreach');
+  S.flags=f;
+  if(f.ok) notice('#fhNotice','ok','Fair housing check passed',
+    ['Property criteria only — nothing describing who the buyer is, or who the area suits.']);
+  else notice('#fhNotice', blocking(f)?'bad':'warn',
+    blocking(f)?'Do not send — fair housing':'Worth a look before sending',
+    f.flags.map(x=>`<b>${esc(x.category)}</b> — “${esc(x.phrase)}”. ${esc(x.why)}`));
+  showCopy();
+}
+$('#write').onclick=write; $('#rewrite').onclick=write;
+
+$('#copy').onclick=async()=>{
+  try{ await navigator.clipboard.writeText($('#out').textContent);
+    $('#copy').textContent='Copied'; setTimeout(()=>$('#copy').textContent='Copy',1400); }
+  catch{ notice('#fhNotice','warn','Couldn’t reach the clipboard',['Select the text and copy it manually.']); }
+};
+
+/* one page per recipient, addressed where the post actually goes */
+$('#dlLetters').onclick=async()=>{
+  if(!S.copy) return;
+  if(blocking(S.flags)) return notice('#fhNotice','bad','Not printing this',
+    ['The letter did not pass the fair housing check. Fix the flagged wording and write it again.']);
+  const {jsPDF}=window.jspdf||{};
+  if(!jsPDF) return notice('#fhNotice','warn','The PDF library didn’t load',['Reload the page and try again.']);
+  const doc=new jsPDF({unit:'pt',format:'letter'});
+  const M=72, W=doc.internal.pageSize.getWidth()-M*2;
+  S.list.forEach((p,i)=>{
+    if(i) doc.addPage();
+    const m=mailTo(p);
+    doc.setFont('helvetica','normal').setFontSize(10.5).setTextColor(70);
+    let y=M;
+    [p.owner||'Current Resident',m.line1,m.line2].filter(Boolean).forEach(l=>{doc.text(l,M,y); y+=14;});
+    if(m.fwd){ doc.setFontSize(8.5).setTextColor(140); doc.text(`re: ${p.address}, ${p.city}`,M,y); y+=12; }
+    y+=26;
+    doc.setFontSize(11).setTextColor(20);
+    const body=S.copy.letter.replace('{owner}', p.owner||'Neighbor');
+    body.split('\n').forEach(para=>{
+      if(!para.trim()){ y+=9; return; }
+      doc.splitTextToSize(para,W).forEach(line=>{
+        if(y>doc.internal.pageSize.getHeight()-M){ doc.addPage(); y=M; }
+        doc.text(line,M,y); y+=15.5; });
+    });
+  });
+  const blob=doc.output('blob');
+  await offerBlob(`${S.name||'buyer-list'}-letters.pdf`, blob);
+};
+async function offerBlob(filename,blob){
+  if(!DL) return notice('#fhNotice','warn','Downloads aren’t available in this view',
+    ['Open the artifact directly rather than in a preview, and try again.']);
+  try{ await DL.save({filename,data:blob}); notice('#fhNotice','ok',`Saved ${filename}`,
+    [`One page per recipient — ${S.list.length} letters, addressed where the post actually goes.`]); }
+  catch(err){ if(err?.code!=='cancelled') notice('#fhNotice','warn','Couldn’t save the PDF',[esc(err?.message||String(err))]); }
+}
+
+/* ═══════ saved lists ═══════ */
+async function saveList(quiet){
+  S.name = S.name || (S.c.nickname||'buyer list');
+  if(!DB){ if(!quiet) notice('#listNotice','warn','Saving isn’t available in this view',
+    ['Your work stays on screen — export the CSV to keep it.']); return; }
+  try{
+    await DB.doc('lists/'+S.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,60)).set({
+      name:S.name, criteria:S.c, saved:new Date().toISOString(),
+      rows:S.list.map(p=>({apn:p.apn,address:p.address,city:p.city,zip:p.zip,owner:p.owner,
+        phone:p.phone||'',email:p.email||'',value:p.value,type:p.type,dnc:p.dnc||'',status:p.status||'new',
+        mail_addr:p.mail_addr||'',mail_zip:p.mail_zip||''})) });
+    if(!quiet) notice('#listNotice','ok',`Saved “${S.name}”`,
+      [`${S.list.length} recipients. It’ll be here when you come back.`]);
+  }catch(err){ if(!quiet) notice('#listNotice','warn','Couldn’t save',[esc(err?.message||String(err))]); }
+}
+$('#saveList').onclick=()=>{ S.name=S.c.nickname||'buyer list'; saveList(false); };
+
+/* ═══════ loading your own data ═══════
+   Column names vary by source — a title rep farm list, a county export and an
+   MLS download all call the same field something different. Match on meaning. */
+const ALIASES={
+  apn:['apn','ain','parcel','parcel number','parcel id','assessor parcel number','assessors parcel number','parcelnumber'],
+  address:['address','situs address','property address','street address','site address','situs','propertyaddress','unparsedaddress','full address'],
+  city:['city','situs city','property city','situscity'],
+  state:['state','situs state','st'],
+  zip:['zip','zip code','zipcode','situs zip','postal code','postalcode','zip5'],
+  owner:['owner','owner name','owner 1','owner1','primary owner','assessee','assessee name','ownername','owner full name'],
+  mail_addr:['mailing address','mail address','owner address','owner mailing address','mailaddress','mailing street'],
+  mail_zip:['mailing zip','mail zip','owner zip','mailingzip'],
+  beds:['beds','bedrooms','bedroom','br','bed'],
+  baths:['baths','bathrooms','bathroom','ba','bath','total baths'],
+  sqft:['sqft','sq ft','square feet','building sqft','living area','building area','livingarea','gla'],
+  lot_sqft:['lot sqft','lot size','lot','lot square feet','lotsizesquarefeet','land sqft'],
+  year_built:['year built','yr built','yearbuilt','year'],
+  value:['value','assessed value','total value','market value','total assessed value','assessedvalue','list price','estimated value'],
+  last_sale:['last sale date','sale date','last sold','sold date','transfer date','recording date','lastsaledate'],
+  property_type:['property type','use code','use','type','propertytype','land use'],
+  lat:['lat','latitude'],
+  lon:['lon','lng','long','longitude'],
+};
+function mapColumns(headers){
+  const lower=headers.map(h=>String(h).trim().toLowerCase());
+  const map={};
+  for(const [field,names] of Object.entries(ALIASES)){
+    let i=-1;
+    for(const n of names){ i=lower.indexOf(n); if(i>=0) break; }
+    // Fuzzy fallback only for aliases long enough to be unambiguous — a short one
+    // like "st" happily matches "last sale date" and quietly mislabels the column.
+    if(i<0) i=lower.findIndex(h=>names.some(n=>n.length>3&&h.includes(n)));
+    if(i>=0&&!Object.values(map).includes(headers[i])) map[field]=headers[i];
+  }
+  return map;
+}
+const numOf=v=>{ const n=parseFloat(String(v??'').replace(/[^0-9.\-]/g,'')); return Number.isFinite(n)?n:0; };
+function yearsSince(dateish){
+  if(!dateish) return 0;
+  const t=Date.parse(dateish); if(Number.isNaN(t)) return 0;
+  return Math.max(0,Math.floor((Date.now()-t)/(365.25*864e5)));
+}
+function normalizeType(v){
+  const t=String(v||'').toLowerCase();
+  if(/condo/.test(t)) return 'Condo';
+  if(/town/.test(t)) return 'Townhome';
+  if(/duplex|triplex|multi|2-4|apartment/.test(t)) return 'Multi-Family';
+  if(/mobile|manufactured/.test(t)) return 'Mobile Home';
+  if(/vacant|land/.test(t)) return 'Land';
+  return 'Single Family';
+}
+function adoptParcels(rows){
+  if(!rows.length) throw new Error('That file had no rows.');
+  const map=mapColumns(Object.keys(rows[0]));
+  if(!map.address) throw new Error('No address column found. The file needs a property address.');
+  const out=rows.map((r,i)=>{
+    const address=String(r[map.address]??'').trim();
+    const zip=String(r[map.zip]??'').trim().slice(0,5);
+    const mail=String(r[map.mail_addr]??'').trim();
+    const p={
+      apn:String(r[map.apn]??`row-${i+1}`).trim(),
+      address, city:String(r[map.city]??'').trim(), state:String(r[map.state]??'CA').trim().slice(0,2)||'CA',
+      zip, owner:String(r[map.owner]??'').trim(),
+      phone:'', email:'', dnc:'', status:'new',
+      value:numOf(r[map.value]),
+      mail_addr:mail, mail_zip:String(r[map.mail_zip]??'').trim().slice(0,5),
+      beds:numOf(r[map.beds]), baths:numOf(r[map.baths]),
+      sqft:numOf(r[map.sqft]), lot_sqft:numOf(r[map.lot_sqft]),
+      year_built:numOf(r[map.year_built]),
+      years_owned:yearsSince(r[map.last_sale]),
+      property_type:normalizeType(r[map.property_type]),
+      lat:map.lat?numOf(r[map.lat]):null, lon:map.lon?numOf(r[map.lon]):null,
+    };
+    p.type = mail && mail.toLowerCase()!==address.toLowerCase() ? 'Absentee' : 'Owner';
+    return p;
+  }).filter(p=>p.address);
+  if(!out.length) throw new Error('Every row was missing an address.');
+  return {parcels:out, map};
+}
+function reportMapping(host,map,rows,extra){
+  const found=Object.entries(map).map(([f,c])=>`<b>${f}</b><span>${esc(c)}</span>`).join('');
+  const missing=['owner','value','beds','sqft','lat'].filter(f=>!map[f]);
+  $(host).innerHTML=`<div class="notice ok"><b>Loaded ${rows.toLocaleString()} properties</b>
+    ${extra||''}<div class="maprow">${found}</div></div>`+
+    (missing.length?`<div class="notice warn"><b>Not found in your file</b>
+      <ul>${missing.map(f=>`<li>${{owner:'owner name — the letter needs it',
+        value:'value — the price filter won’t work',beds:'beds — the bed filter won’t work',
+        sqft:'square feet — the size filter won’t work',
+        lat:'coordinates — the area plot is off, city and ZIP filters still work'}[f]}</li>`).join('')}</ul></div>`:'');
+}
+function persist(){
+  try{ localStorage.setItem('mb_parcels',JSON.stringify(PARCELS));
+       localStorage.setItem('mb_excl',JSON.stringify([...EXCLUDE])); }
+  catch{ /* over quota — the data still works this session */ }
+}
+function restore(){
+  try{
+    const raw=localStorage.getItem('mb_parcels');
+    if(raw){ const rows=JSON.parse(raw); if(Array.isArray(rows)&&rows.length){ PARCELS=rows; USING_OWN=true; } }
+    const ex=localStorage.getItem('mb_excl');
+    if(ex) EXCLUDE=new Set(JSON.parse(ex));
+  }catch{}
+}
+let USING_OWN=false;
+
+const filePick=(cb)=>{ const inp=Object.assign(document.createElement('input'),{type:'file',accept:'.csv,.txt'});
+  inp.onchange=async()=>{ const f=inp.files[0]; if(f) cb(await f.text(), f.name); }; inp.click(); };
+
+$('#dataBtn').onclick=()=>{ $('#dataPanel').hidden=false; };
+$('#dataClose').onclick=()=>{ $('#dataPanel').hidden=true; };
+$('#dataPanel').onclick=e=>{ if(e.target.id==='dataPanel') $('#dataPanel').hidden=true; };
+
+$('#upParcels').onclick=()=>filePick(text=>{
+  try{
+    const {parcels,map}=adoptParcels(parseCsv(text));
+    PARCELS=parcels; USING_OWN=true; bounds=null;
+    const abs=parcels.filter(p=>p.type==='Absentee').length;
+    reportMapping('#parcelReport',map,parcels.length,
+      `<div style="margin-top:4px">${abs.toLocaleString()} absentee · ${(parcels.length-abs).toLocaleString()} owner-occupied</div>`);
+    persist(); setStatus(); recount();
+  }catch(err){ $('#parcelReport').innerHTML=`<div class="notice bad"><b>Couldn’t read that file</b>${esc(err.message)}</div>`; }
+});
+
+/* CRMLS statuses, by what they mean legally rather than by name. */
+const UNDER_AGENCY=['active','active under contract','activeundercontract','a','auc','pending','p',
+  'backup','back up','active backup','hold','on hold','coming soon','cs','withdrawn','w','temporarily off market'];
+const AGENCY_ENDED=['expired','x','cancelled','canceled','c','sold','closed','s'];
+$('#upMls').onclick=()=>filePick(text=>{
+  try{
+    const rows=parseCsv(text);
+    if(!rows.length) throw new Error('That file had no rows.');
+    const map=mapColumns(Object.keys(rows[0]));
+    if(!map.address) throw new Error('No address column found.');
+    const statusCol=Object.keys(rows[0]).find(h=>/status/i.test(h));
+    const set=new Set(); const unknown=new Set(); let kept=0;
+    const priceCol=Object.keys(rows[0]).find(h=>/list price|current price|^price$/i.test(h));
+    const origCol=Object.keys(rows[0]).find(h=>/original.*price|orig list/i.test(h));
+    const domCol=Object.keys(rows[0]).find(h=>/\bdom\b|days on market|cdom/i.test(h));
+    EXPIRED=[];
+    for(const r of rows){
+      const a=r[map.address]; if(!a) continue;
+      if(statusCol){
+        const st=String(r[statusCol]??'').trim().toLowerCase();
+        // Expired and cancelled are not exclusions — they are Cannonball's targets.
+        if(AGENCY_ENDED.includes(st)){
+          kept++;
+          if(st!=='sold'&&st!=='closed'&&st!=='s') EXPIRED.push({
+            address:String(a).trim(), city:String(r[map.city]??'').trim(), zip:String(r[map.zip]??'').trim(),
+            owner:String(r[map.owner]??'').trim(), status:st,
+            price:numOf(r[priceCol]), orig:numOf(r[origCol]), dom:numOf(r[domCol]),
+            beds:numOf(r[map.beds]), baths:numOf(r[map.baths]), sqft:numOf(r[map.sqft]),
+          });
+          continue;
+        }
+        if(st&&!UNDER_AGENCY.includes(st)) unknown.add(st);
+      }
+      set.add(normAddr(a, r[map.zip]));
+    }
+    EXCLUDE=set; persist(); recount(); paintExpired();
+    $('#mlsReport').innerHTML=`<div class="notice ok"><b>${set.size.toLocaleString()} addresses excluded</b>
+      <ul><li>${kept.toLocaleString()} expired, cancelled or sold — left in your list</li>
+      ${statusCol?`<li>read from the “${esc(statusCol)}” column</li>`:'<li>no status column, so every row was excluded</li>'}</ul></div>`+
+      (unknown.size?`<div class="notice warn"><b>Statuses I didn’t recognise — excluded to be safe</b><ul>${
+        [...unknown].map(u=>`<li>${esc(u)}</li>`).join('')}</ul></div>`:'');
+  }catch(err){ $('#mlsReport').innerHTML=`<div class="notice bad"><b>Couldn’t read that file</b>${esc(err.message)}</div>`; }
+});
+
+$('#resetData').onclick=()=>{
+  PARCELS=SEED.rows.map(r=>Object.fromEntries(SEED.keys.map((k,i)=>[k,r[i]])));
+  EXCLUDE=new Set(); USING_OWN=false; bounds=null;
+  try{ localStorage.removeItem('mb_parcels'); localStorage.removeItem('mb_excl'); }catch{}
+  $('#parcelReport').innerHTML=''; $('#mlsReport').innerHTML='';
+  setStatus(); recount();
+};
+
+/* ═══════ Cannonball ═══════
+   Magic Buyer works homes that never listed. Cannonball works the ones that
+   listed and didn't sell — the agency agreement has ended, the owner still
+   wants to move, and nobody has given them a straight answer about why.
+   Same CRMLS export feeds both: actives get excluded there, expireds land here. */
+let EXPIRED=[], CB=null, CBCOPY='';
+
+/* Code of Ethics Article 15: no false or misleading statements about other
+   agents. Blaming the last agent is both a violation and bad persuasion. */
+const ETHICS=[
+ ['disparagement','high','Never characterize the previous agent or their work.',[
+   /\b(your|the|previous|last|former)\s+(agent|realtor|broker)\b[^.]{0,40}\b(fail|didn'?t|never|couldn'?t|neglect|ignor|wrong|bad|poor|lazy)/i,
+   /\b(bad|poor|terrible|lazy|incompetent|amateur)\s+(agent|realtor|broker|job|marketing|photos)\b/i,
+   /\bthey\s+(overpriced|mismanaged|botched|dropped the ball)/i,
+   /\bshould have (hired|listed with)\b/i]],
+ ['guarantee','high','Never promise a sale, a price, or a timeline you cannot control.',[
+   /\bI (will|can) (sell|get you|guarantee)\b/i,/\bguarantee(d|s)?\b/i,
+   /\bpromise (you )?(a|to)\b/i,/\bwill definitely\b/i]],
+ ['pressure','medium','Reads as pressure and invites the reply you do not want.',[
+   /\bact now\b|\blast chance\b|\blimited time\b|\bbefore it'?s too late\b/i]],
+];
+function ethicsScreen(text){
+  const flags=[];
+  for(const [category,severity,why,pats] of ETHICS)
+    for(const p of pats){ const m=text.match(p); if(m) flags.push({category,severity,why,phrase:m[0].trim()}); }
+  const fh=screen(text,'report');
+  return {ok:flags.length===0&&fh.ok, flags:[...flags,...fh.flags], label:'report'};
+}
+
+function paintExpired(){
+  $('#cbCount').textContent=EXPIRED.length;
+  if(!EXPIRED.length){
+    $('#cbList').innerHTML=`<div class="notice warn"><b>No expired listings loaded yet</b>
+      Open <b>Data</b> and upload a CRMLS export that includes expired and cancelled statuses.
+      The same file powers both tools.</div>`;
+    $('#cbForm').hidden=true; return;
+  }
+  $('#cbList').innerHTML=EXPIRED.map((e,i)=>`<button class="pick" data-i="${i}">
+    <b>${esc(e.address)}</b><em>${esc(e.city)}${e.price?' · '+usd(e.price):''}${e.dom?' · '+e.dom+' days on market':''} · ${esc(e.status)}</em></button>`).join('');
+  $$('#cbList .pick').forEach(b=>b.onclick=()=>{
+    $$('#cbList .pick').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+    CB=EXPIRED[+b.dataset.i]; $('#cbForm').hidden=false;
+    $('#cb_orig').value=CB.orig||CB.price||''; $('#cb_final').value=CB.price||'';
+    $('#cb_dom').value=CB.dom||''; $('#cb_cuts').value=''; $('#cb_photos').value='';
+    $('#cbTitle').textContent=CB.address;
+  });
+}
+
+function cannonReport(d){
+  const cuts=Number(d.cuts)||0, dom=Number(d.dom)||0, photos=Number(d.photos)||0;
+  const orig=Number(d.orig)||0, fin=Number(d.final)||0;
+  const drop = orig&&fin&&orig>fin ? Math.round((1-fin/orig)*100) : 0;
+
+  // The diagnosis follows the numbers rather than a fixed script.
+  const signals=[];
+  if(cuts>=2||drop>=8) signals.push('price');
+  if(photos&&photos<20) signals.push('presentation');
+  if(dom>=60&&!signals.length) signals.push('market');
+  if(!signals.length) signals.push('presentation');
+
+  const read = signals.includes('price')
+    ? `The price moved ${cuts?`${cuts} time${cuts>1?'s':''}`:'downward'}${drop?`, about ${drop}% from where it started`:''}, and it still did not find a buyer. When that happens, the second and third cuts usually arrive after the buyers who were watching have already moved on. The order matters more than the number.`
+    : signals.includes('presentation')
+    ? `The listing carried ${photos||'a limited number of'} photos. Buyers in this price range look at homes on a phone first, and a home that photographs thinly gets filtered out before anyone stands in the doorway. That is a fixable problem and it has nothing to do with the house.`
+    : `${dom} days without an offer, with the price holding steady, usually means the home was reaching the wrong buyers rather than the wrong price.`;
+
+  const changes = signals.includes('price')
+    ? ['Reset the price once, deliberately, to a number the recent sales actually support — not another reduction that signals more are coming.',
+       'Reshoot and relaunch so the listing reads as new rather than as the same home at a lower number.',
+       'Go back to every agent who showed it and ask directly what their buyer said. That feedback is usually the whole answer.']
+    : ['Reshoot the home properly — full daylight, every room, and the outdoor space the listing skipped.',
+       'Rewrite the copy around what a buyer at this price is actually choosing between.',
+       'Relaunch rather than re-list, so the home reaches the buyers who never saw it the first time.'];
+
+  return {
+    address:d.address, city:d.city,
+    facts:[dom&&[dom,'days on market'],orig&&[usd(orig),'original price'],
+      fin&&[usd(fin),'final price'],cuts&&[cuts,`price cut${cuts>1?'s':''}`],
+      photos&&[photos,'photos']].filter(Boolean),
+    opening:`${dom?`${dom} days`:'A full listing period'} without an offer is a signal that something about the presentation or the price is not connecting with buyers right now. I have put this together because you deserve a straight answer about what would need to shift before the next listing period.`,
+    work:`Before I reached out, I went through every photo, every line of the listing copy, and every home that has sold nearby since you listed${d.comps?`. ${d.comps.trim()}`:'.'} I would rather send you something useful than call you out of the blue.`,
+    read, changes,
+    ask:`I am not asking you to list with me today. If it is worth a conversation, I will walk you through what I would do differently and what I think the home is worth right now. If it is not, you will not hear from me again.`,
+  };
+}
+function reportText(r,agent){
+  return [`HOME ANALYSIS REPORT`,``,r.address,r.city,``,
+    r.opening,``,r.work,``,`WHAT THE NUMBERS SAY`,r.read,``,
+    `WHAT I WOULD CHANGE`,...r.changes.map(c=>`  • ${c}`),``,
+    `WHERE THAT LEAVES YOU`,r.ask,``,
+    agent.agent_name||'',agent.agent_brokerage||'',agent.agent_cell||'',
+    agent.agent_dre?`DRE #${agent.agent_dre}`:''].filter(x=>x!==undefined).join('\n').replace(/\n{3,}/g,'\n\n');
+}
+function paintReport(r,agent){
+  $('#cbOut').innerHTML=`<div class="kicker">Home analysis report</div>
+    <h2>${esc(r.address)}</h2>
+    <p style="color:var(--ink-3);font-size:13px">${esc(r.city)}</p>
+    ${r.facts.length?`<div class="facts">${r.facts.map(([v,l])=>`<div><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('')}</div>`:''}
+    <p>${esc(r.opening)}</p><p>${esc(r.work)}</p>
+    <h3>What the numbers say</h3><p>${esc(r.read)}</p>
+    <h3>What I would change</h3><ul>${r.changes.map(c=>`<li>${esc(c)}</li>`).join('')}</ul>
+    <h3>Where that leaves you</h3><p>${esc(r.ask)}</p>
+    <p style="margin-top:26px;color:var(--ink-2);font-size:13.5px">${
+      [agent.agent_name,agent.agent_brokerage,agent.agent_cell,agent.agent_dre&&'DRE #'+agent.agent_dre]
+      .filter(Boolean).map(esc).join('<br>')}</p>`;
+}
+
+async function writeCannon(){
+  if(!CB) return;
+  let agent={}; try{ agent=JSON.parse(localStorage.getItem('mb_agent')||'{}'); }catch{}
+  const d={...CB, orig:$('#cb_orig').value, final:$('#cb_final').value, dom:$('#cb_dom').value,
+    cuts:$('#cb_cuts').value, photos:$('#cb_photos').value, comps:$('#cb_comps').value};
+  const r=cannonReport(d);
+  CBCOPY=reportText(r,agent); paintReport(r,agent);
+
+  if(SAMPLE){
+    try{
+      const out=await SAMPLE.json(
+`Rewrite this home analysis report for a California real estate agent. Keep every fact and the same structure, improve only the prose.
+
+VOICE: warm, direct, plain. No hype, no exclamation marks. Short sentences. Round numbers.
+HARD RULES: never mention, characterize or blame the previous agent. Never guarantee a sale, a price or a timeline. Never use urgency or pressure. Never describe who should live there.
+
+${CBCOPY}
+
+Return JSON: {"opening":"...","work":"...","read":"...","changes":["...","...","..."],"ask":"..."}`,
+        {modelTier:'default'});
+      if(out&&out.opening){ Object.assign(r,out); CBCOPY=reportText(r,agent); paintReport(r,agent); }
+    }catch(err){ if(err?.code!=='not_granted') notice('#cbNotice','warn','Claude couldn’t rewrite it — showing the built version',[]); }
+  }
+
+  const f=ethicsScreen(CBCOPY);
+  if(f.ok) notice('#cbNotice','ok','Clear to send',
+    ['No claims about the previous agent, no guaranteed outcome, no pressure.']);
+  else notice('#cbNotice', f.flags.some(x=>x.severity==='high')?'bad':'warn',
+    f.flags.some(x=>x.severity==='high')?'Do not send':'Worth a look',
+    f.flags.map(x=>`<b>${esc(x.category)}</b> — “${esc(x.phrase)}”. ${esc(x.why)}`));
+}
+$('#cbWrite').onclick=writeCannon; $('#cbRedo').onclick=writeCannon;
+$('#cbCopy').onclick=async()=>{ try{ await navigator.clipboard.writeText(CBCOPY);
+  $('#cbCopy').textContent='Copied'; setTimeout(()=>$('#cbCopy').textContent='Copy',1400);}catch{} };
+$('#cbPdf').onclick=async()=>{
+  if(!CBCOPY) return;
+  const {jsPDF}=window.jspdf||{}; if(!jsPDF) return;
+  const doc=new jsPDF({unit:'pt',format:'letter'});
+  const M=72, W=doc.internal.pageSize.getWidth()-M*2; let y=M;
+  doc.setFont('helvetica','normal');
+  CBCOPY.split('\n').forEach(line=>{
+    if(!line.trim()){ y+=9; return; }
+    const heading=/^[A-Z][A-Z .]+$/.test(line.trim());
+    doc.setFontSize(heading?9:11).setTextColor(heading?110:20);
+    doc.splitTextToSize(line,W).forEach(l=>{
+      if(y>doc.internal.pageSize.getHeight()-M){ doc.addPage(); y=M; }
+      doc.text(l,M,y); y+=heading?16:15.5; });
+  });
+  if(!DL) return notice('#cbNotice','warn','Downloads aren’t available in this view',[]);
+  try{ await DL.save({filename:`${(CB.address||'report').replace(/[^\w]+/g,'-').toLowerCase()}-analysis.pdf`,data:doc.output('blob')});
+       notice('#cbNotice','ok','Saved',[]); }
+  catch(err){ if(err?.code!=='cancelled') notice('#cbNotice','warn','Couldn’t save',[esc(err?.message||'')]); }
+};
+
+/* mode switch */
+$$('.modesw .mode').forEach(b=>b.onclick=()=>{
+  $$('.modesw .mode').forEach(x=>x.classList.remove('on')); b.classList.add('on');
+  const cannon=b.dataset.mode==='cannon';
+  $('#cb').hidden=!cannon;
+  [1,2,3,4].forEach(i=>{ if(cannon) $('#s'+i).hidden=true; });
+  $$('.rail button').forEach(x=>x.style.display=cannon?'none':'');
+  if(cannon) paintExpired(); else go(step);
+});
+
+/* ═══════ boot ═══════ */
+function setStatus(){
+  $('#status').innerHTML=
+    `${PARCELS.length.toLocaleString()} parcels ${USING_OWN
+      ? '<span class="tag live">YOUR DATA</span>'
+      : '<span class="tag">SAMPLE DATA</span>'}${EXCLUDE.size?` · ${EXCLUDE.size} listed excluded`:''}<br>`+
+    `<span style="opacity:.85">${SAMPLE?'Claude writes the copy':'templates — Claude unavailable here'}</span>`;
+}
+restore(); setStatus(); go(1); $('#sentence').focus();
+
+(async()=>{
+  if(!window.claude?.use) return;
+  [DB,SAMPLE,DL]=await Promise.all([
+    claude.use('db').catch(()=>null),
+    claude.use('sample').catch(()=>null),
+    claude.use('downloads').catch(()=>null)]);
+  setStatus();
+  $('#writeNote').textContent = SAMPLE
+    ? 'Claude writes these in your voice, using the letter as the master.'
+    : 'Written from templates. The letter is still the master the rest follow.';
+  $('#dlLetters').hidden = S.ch!=='letter';
+})();
+</script>
