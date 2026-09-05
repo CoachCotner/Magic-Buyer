@@ -299,7 +299,13 @@ td select{font:12px var(--sans);padding:2px 5px;background:var(--card);color:var
           <label class="field"><span>Price max</span><input id="f_price_max" inputmode="numeric"></label>
           <label class="field"><span>Sq ft min</span><input id="f_sqft_min" inputmode="numeric"></label>
           <label class="field"><span>Sq ft max</span><input id="f_sqft_max" inputmode="numeric"></label>
-        </div></fieldset>
+        </div>
+        <label class="field" style="margin-top:8px"><span>Max price gap</span>
+          <input id="f_price_gap" inputmode="numeric" placeholder="e.g. 600000"></label>
+        <p style="font-size:11.5px;color:var(--ink-3);margin:4px 0 0">
+          A buyer’s stated budget is narrow; the homes worth writing to are not.
+          This reaches that much further below the budget minimum.</p>
+      </fieldset>
 
       <fieldset><div class="eyebrow">Property type</div><div class="pills" id="p_property_type"></div></fieldset>
       <fieldset><div class="eyebrow">Beds</div><div class="pills" id="p_beds"></div></fieldset>
@@ -558,7 +564,8 @@ function parseBuyer(sentence){
 function matches(p,c){
   const between=(v,lo,hi)=>{ const n=Number(v); if(!Number.isFinite(n)) return lo==null&&hi==null;
     if(lo!=null&&n<lo) return false; if(hi!=null&&n>hi) return false; return true; };
-  if(!between(p.value,c.price_min,c.price_max)) return false;
+  const lowEdge = c.price_min!=null && c.price_gap ? c.price_min - Number(c.price_gap) : c.price_min;
+  if(!between(p.value,lowEdge,c.price_max)) return false;
   if(!between(p.sqft,c.sqft_min,c.sqft_max)) return false;
   if(c.beds!=null&&Number(p.beds)<c.beds) return false;
   if(c.baths!=null&&Number(p.baths)<c.baths) return false;
@@ -692,13 +699,13 @@ let DB=null, SAMPLE=null, DL=null;
 const PILLS={
   property_type:['Any','Single Family','Multi-Family','Condo','Townhome','Mobile Home','Land'],
   beds:['Any',2,3,4,5], baths:['Any',1,2,3,4],
-  owner_status:['Any','Owner','Absentee'], years_owned:['Any','2+','5+','10+'],
+  owner_status:['Any','Owner','Absentee'], years_owned:['Any','3+','5+','10+','20+'],
   financing:['Pre-approved','Cash buyer','FHA','VA','Conventional'],
   closing:['Flexible','Quick close (21 days)','30 days','No rush','Open to rent-back'],
   condition:['Minor updates OK','As-is / no repairs','Move-in ready only','Major renos OK'],
 };
 const NARROWS=new Set(['property_type','beds','baths','owner_status','years_owned']);
-const FIELDS=['city','state','zip','price_min','price_max','sqft_min','sqft_max'];
+const FIELDS=['city','state','zip','price_min','price_max','price_gap','sqft_min','sqft_max'];
 
 /* ═══════ steps ═══════ */
 let step=1;
@@ -775,6 +782,7 @@ function recount(){
   S.list=PARCELS.filter(p=>matches(p,S.c));
   $('#count').textContent=`${S.list.length} ${S.list.length===1?'property':'properties'}`;
   const bits=[]; if(S.c.band) bits.push('inside your selected area');
+  if(S.c.price_gap && S.c.price_min) bits.push(`reaching down to ${money(S.c.price_min-Number(S.c.price_gap))}`);
   if(EXCLUDE.size) bits.push(`${EXCLUDE.size} listed excluded`);
   $('#countNote').textContent=bits.join(' · ')||'Adjust anything and this updates.';
   $$('.rail button').forEach(b=>{ if(+b.dataset.step>=3) b.disabled=!S.list.length; });

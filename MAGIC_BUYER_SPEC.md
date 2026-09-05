@@ -404,3 +404,26 @@ deliverability evasion, and the domain it burns would be Lauren's. Our email
 path stays: genuinely personal, sane volume, real opt-outs, honest headers — the
 version that keeps a sending reputation intact. Noted here so the omission is a
 decision on the record rather than an oversight.
+
+### The unread field, finally read: "Max price gap"
+
+A high-resolution frame (Otter screenshot 17 of 64) resolves the sub-field under
+the price range. It reads **"Max price gap"**, set to **$600,000**, beneath a
+budget of $900,000–$912,000.
+
+It is the answer to a real problem. A buyer states a narrow band — $12,000 wide
+in his demo — but the homes worth writing to are not that narrow. Without some
+reach, a literal reading of the budget returns almost nothing.
+
+**Implemented as reaching that far below the budget minimum.** In our data, a
+$2.2M–$2.4M buyer goes from 8 matches to 23 with a $600K gap, and the count note
+says "reaching down to $1.6M" so a widened search never passes for a plain one.
+
+**This reading is inferred, not confirmed.** It could equally be an absolute
+floor, or a reach upward toward owners who might accept under asking. Worth a
+minute of the transcript to settle; it is a one-line change either way.
+
+The same frame corrected the Years-owned options to **Any · 3+ · 5+ · 10+ · 20+**
+(previously read as 2+, and missing 20+), and confirmed the "Anything else?"
+placeholder verbatim: *"e.g. relocating from NYC, first-time buyer, growing
+family…"* — familial status, in the tool's own example text.
