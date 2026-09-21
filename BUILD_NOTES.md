@@ -489,11 +489,18 @@ before mailing. Kathryn Ave is struck.
 Lauren was right: one web search per address surfaces active listings. Ran all
 123 of the 90503 10–100-unit buildings. Yield:
 
-- **3 active** — 5326 Lorna St ($3.99M, SB26098719), 3536 Garnet St ($4.4M,
-  SB25162583, 14 months on), 21110 Wood Ave (MLS 26636011, eXp)
-- **5 sold in the last 4 years** whose listing pages are still indexed
-- **5 dropped** — apartment sites state 7–8 units, under the buyer's floor
-- **110 mailable**
+- **2 active** — 5326 Lorna St ($3.99M, SB26098719), 21110 Wood Ave (MLS
+  26636011, eXp)
+- **6 sold recently** whose listing pages are still indexed — including 3536
+  Garnet St, which search showed as a live $4.4M listing and the **title file
+  already showed sold 10/28/2025 for $4,000,500**. Lauren caught it.
+- **4 dropped** — apartment sites state 7–8 units, under the buyer's floor
+- **112 mailable**
+
+**Rule, from the Garnet miss:** a title-recorded sale inside 18 months overrides
+anything a search result says. Listing pages outlive the listing; the recorder
+does not. Search is for finding what is *on* the market; title is the authority
+on what has *left* it. Apply title first, search second.
 
 Two things the search gave that the title data does not: the **building name**
 (Olive Tree, Casa Grande, Bavarian Village — which is how the owner refers to it
