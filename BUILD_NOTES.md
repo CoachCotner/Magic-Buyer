@@ -513,3 +513,25 @@ those. This should be the app's Deal-of-the-Week and multi-unit rule-out path,
 one query per address, run against the recipient list before the letter goes.
 
 Costs money: nothing.
+
+## Sept 21 — first real mailing, and agent defaults
+
+Merged the 90503 apartment letter: 76 buildings → **56 envelopes**, because
+grouping by mailing address found 13 owners holding more than one building.
+Each gets one letter naming all of them. PDFs and labels in `lists/out/`
+(gitignored — owner data).
+
+Agent header, now the default for every generated letter — do not ask again:
+
+    Lauren Cotner
+    eXp Realty of California, Inc. · DRE #01242185
+    310-508-5957 · Lauren@laurencotner.com
+
+Salutation rule that shipped: portfolio → "To the owners of the {streets}
+buildings"; entity or trust → "To the owners of {building name}"; a person →
+"Dear {Last} Family". Anything with "Redacted", "Builders", "Properties",
+"Management" in the name is treated as an entity even if title calls it an
+individual.
+
+Open: the rent-roll close (offered, not yet swapped in); the artifact's letter
+generator still shows [phone] · [email] — hardwire these there too.
