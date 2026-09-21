@@ -483,3 +483,26 @@ and nothing else requires a human before the mail goes out:**
 
 Verification of live status against the recorder happens **on response**, not
 before mailing. Kathryn Ave is struck.
+
+## Sept 21 — on-market rule-out by address search works, and it beats the MLS for this tier
+
+Lauren was right: one web search per address surfaces active listings. Ran all
+123 of the 90503 10–100-unit buildings. Yield:
+
+- **3 active** — 5326 Lorna St ($3.99M, SB26098719), 3536 Garnet St ($4.4M,
+  SB25162583, 14 months on), 21110 Wood Ave (MLS 26636011, eXp)
+- **5 sold in the last 4 years** whose listing pages are still indexed
+- **5 dropped** — apartment sites state 7–8 units, under the buyer's floor
+- **110 mailable**
+
+Two things the search gave that the title data does not: the **building name**
+(Olive Tree, Casa Grande, Bavarian Village — which is how the owner refers to it
+and belongs in the letter) and a **stated unit count** on 57 of 123, which
+replaces the bedroom-derived estimate.
+
+For 10+ unit product the MLS is the wrong rule-out anyway — much of it trades
+through LoopNet/CoStar and broker-to-broker. Address search catches all of
+those. This should be the app's Deal-of-the-Week and multi-unit rule-out path,
+one query per address, run against the recipient list before the letter goes.
+
+Costs money: nothing.
