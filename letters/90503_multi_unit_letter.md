@@ -6,9 +6,9 @@ the buyer, not the building. It asks one question and permits "no."
 **Merge fields:** `{owner_salutation}` · `{building_name}` · `{address}` ·
 `{units}` · `{years_held}`
 
-**Two blanks for Lauren:** `[PRICE CEILING]` · `[CLOSING TERMS]` — e.g. "up to
-about $12 million" and "can close in 45 days, all cash or with financing already
-arranged." Leave either out if you'd rather not say.
+**Buyer, as given 09/21:** South Bay family, owns and holds buildings here,
+1031 exchange, 15–40 units in West Torrance, up to $12M, closes in 45 days,
+will take deferred maintenance.
 
 **Salutation rule:** entity or trust owner → "To the owners of {building_name}";
 individual → "Dear Mr. / Ms. {last name}". Never the trust's legal name.
@@ -22,8 +22,11 @@ individual → "Dear Mr. / Ms. {last name}". Never the trust's legal name.
 >
 > I represent a family here in the South Bay. They live here, they own apartment
 > buildings here, and they keep them — they are not buying to flip. They are
-> looking for their next building, between ten and one hundred units, in West
-> Torrance. [They are able to go up to about PRICE CEILING, and CLOSING TERMS.]
+> looking for their next building, between fifteen and forty units, in West
+> Torrance. They are in a 1031 exchange, which means they have a deadline and
+> the money is already in hand — they can close in forty-five days, up to about
+> twelve million dollars. And they are not looking for something polished: a
+> building that needs work is fine with them.
 >
 > Your building on {address} is the kind of property they're asking me about. I
 > would rather ask you directly than wonder, so my question is simple: is there
@@ -47,6 +50,10 @@ individual → "Dear Mr. / Ms. {last name}". Never the trust's legal name.
 
 ## Why this letter and not the usual one
 
+- **"They have a deadline and the money is in hand"** — a 1031 is the one
+  buyer story every apartment owner already understands and believes.
+- **"A building that needs work is fine"** removes the reason most 1960s
+  owners never list: they think they'd have to fix it first.
 - **"They keep them"** is the whole pitch. Long-held owners fear the buyer, not
   the sale. Naming a local family that holds answers the fear before it's asked.
 - **"Is there any price"** is a different question than "do you want to sell."
