@@ -7,7 +7,7 @@ the buyer, not the building. It asks one question and permits "no."
 `{units}` · `{years_held}`
 
 **Buyer, as given 09/21:** South Bay family, owns and holds buildings here,
-1031 exchange, 15–40 units in West Torrance, up to $12M, closes in 45 days,
+1031 exchange, 15–50 units in West Torrance, up to $12M, closes in 45 days,
 will take deferred maintenance.
 
 **Salutation rule:** entity or trust owner → "To the owners of {building_name}";
@@ -23,7 +23,7 @@ individual → "Dear Mr. / Ms. {last name}". Never the trust's legal name.
 > There is a family here in the South Bay — they live here, they own apartment
 > buildings here, and they keep them. They are in a 1031 exchange, which means
 > they have a deadline and the money is already in hand. They are looking for
-> fifteen to forty units in West Torrance, up to about twelve million dollars,
+> fifteen to fifty units in West Torrance, up to about twelve million dollars,
 > and they can close in forty-five days. A building that needs work is fine
 > with them.
 >
