@@ -535,3 +535,30 @@ individual.
 
 Open: the rent-roll close (offered, not yet swapped in); the artifact's letter
 generator still shows [phone] · [email] — hardwire these there too.
+
+## Sept 22 — naming the person behind the LLC
+
+Envelopes addressed "Owner / Anza 20700 LLC" get opened less. Two sources put a
+person on the envelope, and both are free:
+
+1. **Title record, for trusts.** The trustee is already in the owner string
+   ("Lupo Paul & Kay Trs"). Parse it; no lookup needed. 20 of 20 resolved.
+2. **CA Secretary of State filing, for LLCs.** One search per entity name
+   surfaces the manager via bizprofile / b2bhint / city-data mirrors. 15 of 33
+   resolved. When the manager is itself an LLC "c/o" an operator, search the
+   operator — that is how 3316 W Carson went from "Owner LLC" to Steven Ludwig.
+
+Result on the 90503 mailing: **39 of 55 envelopes** to a named person.
+
+What does not resolve, and why it is fine: institutional funds (the Dallas
+five), buildings run by a management company (Mabry, Western National), and
+owners who opted out of the public record ("Redacted Upon Request"). "To the
+owners of Barcelona Apartments" is the right envelope for those.
+
+Lauren's addition: the recorded grant deed is signed by a human, and for an
+LLC it names the managing member. Worth pulling only where the last transfer
+is inside ~15 years — an older deed gives you a signature from someone who may
+be gone. The notary block also names the county of signing, which catches an
+owner who doesn't live at the mailing address.
+
+Costs money: nothing.
