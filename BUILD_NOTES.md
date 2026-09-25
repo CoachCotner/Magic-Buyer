@@ -562,3 +562,13 @@ be gone. The notary block also names the county of signing, which catches an
 owner who doesn't live at the mailing address.
 
 Costs money: nothing.
+
+## Sept 25 — the Article 16 footer, on every letter from now on
+
+Added to the merge: a small footer, "If your property is currently listed with
+another broker, this is not intended as a solicitation of that listing." It is
+REALTOR Code of Ethics Article 16 / SOP 16-2 practice, applies to commercial
+as much as residential, and is a courtesy rather than a statute. The mailing
+that went out without it was clean anyway — every recipient was verified
+off-market on the day and the one active listing was pulled — which is the
+substance the footer stands in for. Now it is both.
