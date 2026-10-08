@@ -572,3 +572,17 @@ as much as residential, and is a courtesy rather than a statute. The mailing
 that went out without it was clean anyway — every recipient was verified
 off-market on the day and the one active listing was pulled — which is the
 substance the footer stands in for. Now it is both.
+
+## Oct 8 — the container was recycled; mailings now also go to Drive
+
+Two weeks idle and the machine was wiped. Code survived on GitHub; the 90503
+title files, letters and labels did not, because `lists/` is gitignored. The
+labels CSV survived only as a chat attachment, which Lauren re-uploaded.
+The title rep's originals are retrievable from Gmail (Ben Hsu, First American,
+09/18 thread) but attachments cannot be pulled through the Gmail connector —
+only read about — so she has to save them to Drive by hand once.
+
+**Rule:** every mailing's recipient CSV, letters PDF and labels PDF get written
+to the Drive folder **Magic Buyer** (`1dD8Vfw9qxb8owKbeQZtsYKegoDoHwg9F`) at the
+time they are made. The merge and label scripts live in `tools/` now, not the
+scratchpad.
