@@ -18,7 +18,9 @@ rows.forEach((r,i)=>{
   const x=LEFT+col*(W+GAP)+PAD, y=TOP+row*H+PAD;
   const lines=[name(r), r.address, r.city_state_zip].filter(Boolean);
   let size=9.5; if(lines[0].length>34) size=8.5; if(lines[0].length>42) size=7.5;
-  doc.fontSize(size).text(lines.join('\n'),x,y,{width:W-2*PAD,height:H-2*PAD,lineGap:1});
+  doc.fillColor('#111').fontSize(size).text(lines.join('\n'),x,y,{width:W-2*PAD,height:H-2*PAD,lineGap:0});
+  if(r.re){ const re=String(r.re).split(';')[0].trim()+(String(r.re).includes(';')?' +':'');
+    doc.fillColor('#555').fontSize(6.5).text('Re: '+re,x,y+H-2*PAD-7,{width:W-2*PAD,height:8,lineBreak:false}); }
 });
 doc.end();
 console.log('labels:',rows.length,'| sheets:',Math.ceil(rows.length/30));
