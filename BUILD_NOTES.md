@@ -586,3 +586,13 @@ only read about — so she has to save them to Drive by hand once.
 to the Drive folder **Magic Buyer** (`1dD8Vfw9qxb8owKbeQZtsYKegoDoHwg9F`) at the
 time they are made. The merge and label scripts live in `tools/` now, not the
 scratchpad.
+
+## Oct 9 — return address
+
+Mailings go out under a mailbox address, no name, no brokerage:
+
+    21143 Hawthorne Blvd #198
+    Torrance, CA 90503
+
+`tools/return-labels.mjs` prints a sheet of 30. Keep this as the default
+return address for every mailing unless Lauren says otherwise.
