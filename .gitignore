@@ -7,8 +7,9 @@ phase1/frames/**
 !phase1/frames/.gitkeep
 phase1/audio.wav
 
-# Working lists may contain owner PII — keep out of git
-lists/*.csv
+# Working lists may contain owner PII — keep out of git (everything under lists/)
+lists/**
+!lists/README.md
 data/*.csv
 !data/sample-parcels.csv
 !data/README.md

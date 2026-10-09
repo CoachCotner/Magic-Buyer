@@ -596,3 +596,23 @@ Mailings go out under a mailbox address, no name, no brokerage:
 
 `tools/return-labels.mjs` prints a sheet of 30. Keep this as the default
 return address for every mailing unless Lauren says otherwise.
+
+## Oct 9 — area 128 (the Riviera), and the merge is a tool now
+
+The merge script died with the container, so it lives in the repo now:
+`tools/merge-letters.mjs <campaign.json>`. The campaign file names the MAIL
+csv, the owners map, the output paths and the three phrases that change per
+buyer (units, area, price). It writes one PDF per envelope, one combined PDF
+for printing, and the labels csv that `tools/labels-avery.mjs` turns into a
+sheet. Everything under `lists/` is now gitignored, not just the csvs.
+
+Owner map additions: an entry keyed `@<MAILING ADDRESS>` overrides the whole
+envelope (used where three different owners share one office suite), and
+`person:false` lets an entry name a building or an LLC without counting as a
+named person. `buildings` in the campaign file maps an address to its name.
+
+Buyer update: 10–100 units, so the cut is tiers 10-14 / 15-50 / 51-100.
+Area 128: 132 parcels → 41 at 10+ units → 40 off-market (1905 Camino De La
+Costa sold 6/2026) → 31 envelopes, 23 to a named person. 300 Palos Verdes
+traded 11/2024 at $14.4M; 343 Palos Verdes was marketed on LoopNet ~2021 and
+is not listed now.
