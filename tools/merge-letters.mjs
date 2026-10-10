@@ -93,7 +93,8 @@ function render(doc, g, i) {
   doc.moveDown(.6).font('Times-Italic').text('Re: ' + re).font('Times-Roman');
   doc.moveDown(1.2).text(salutation(g) + ',');
   for (const p of body(g)) doc.moveDown(.8).text(p, { align: 'left', lineGap: 2.5 });
-  doc.moveDown(1.2).text(agent.name);
+  doc.moveDown(1.2).text(C.sign_off || 'Warm regards,');
+  doc.moveDown(3).text(agent.name);           // three blank lines for a hand signature
   const mb = doc.page.margins.bottom; doc.page.margins.bottom = 0;   // footer sits inside the bottom margin; don't let pdfkit start a new page
   doc.fontSize(8.5).fillColor('#777').text(FOOTER, 81, 728, { width: 450, align: 'left', lineBreak: false });
   doc.page.margins.bottom = mb;
