@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pick the perfect list price</title>
+<meta name="description" content="A calm, free pricing tool for homeowners. Real recent sales near you, a sweet spot price range, and a price you can test.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+:root{
+  --cream:#F8F4EA; --card:#FFFFFF; --ink:#1F2A2E; --muted:#6A7478; --line:#E9E2D3;
+  --yellow:#FFE9A8; --yellow-soft:#FFF5D6; --teal:#0E7C7B; --teal-ink:#0A5F5E; --teal-soft:#E3F1F0;
+  --red:#B3463B; --shadow:0 1px 2px rgba(31,42,46,.06),0 8px 24px rgba(31,42,46,.06);
+  --r:16px; --font:"Geist",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box} html,body{margin:0}
+body{background:var(--cream);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--teal)}
+.wrap{max-width:1080px;margin:0 auto;padding:16px 16px 96px}
+header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0 20px}
+.brand{font-weight:600;letter-spacing:-.01em} .brand small{display:block;font-weight:400;color:var(--muted);font-size:13px}
+.label{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:16px}
+@media(min-width:860px){.grid.two{grid-template-columns:1.1fr .9fr}}
+h1,h2,h3{margin:0;letter-spacing:-.015em;line-height:1.2} h2{font-size:18px;font-weight:600} h3{font-size:15px;font-weight:600}
+.muted{color:var(--muted)} .small{font-size:13.5px}
+.big{font-size:clamp(34px,6vw,52px);font-weight:700;letter-spacing:-.03em;line-height:1.05;font-variant-numeric:tabular-nums}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+button,.btn{font:inherit;border:0;border-radius:12px;padding:12px 18px;cursor:pointer;background:var(--teal);color:#fff;font-weight:600}
+button.ghost{background:transparent;color:var(--teal);border:1px solid var(--line)}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+input[type=text],input[type=number]{font:inherit;width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink)}
+input[type=number]{font-family:var(--mono)}
+.hl{background:var(--yellow);border-radius:6px;padding:0 6px}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px} @media(max-width:560px){.facts{grid-template-columns:repeat(2,1fr)}}
+.facts label{display:block} .facts .label{margin-bottom:4px}
+.chips{display:flex;flex-wrap:wrap;gap:8px} .chip{border:1px solid var(--line);background:#fff;color:var(--ink);padding:6px 12px;border-radius:999px;font-size:13.5px;font-weight:500}
+.chip[aria-pressed=true]{background:var(--teal-soft);border-color:var(--teal);color:var(--teal-ink)}
+/* blur gate */
+#tool{transition:filter .5s ease} body.gated #tool{filter:blur(10px);pointer-events:none;user-select:none;height:100vh;overflow:hidden}
+#gate{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;padding:16px;z-index:50;background:rgba(248,244,234,.35)}
+body:not(.gated) #gate{display:none}
+#gate .card{width:min(520px,100%);padding:28px}
+#gate h1{font-size:clamp(26px,5vw,34px);font-weight:700;margin-bottom:6px}
+.sugg{position:relative} .sugg ul{position:absolute;left:0;right:0;top:calc(100% + 6px);margin:0;padding:6px;list-style:none;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);max-height:260px;overflow:auto;z-index:5}
+.sugg li{padding:10px 12px;border-radius:8px;cursor:pointer} .sugg li:hover,.sugg li[aria-selected=true]{background:var(--yellow-soft)}
+.sugg li small{display:block;color:var(--muted);font-size:12.5px}
+/* price line */
+.line{position:relative;height:92px;margin:18px 0 6px}
+.line .axis{position:absolute;left:0;right:0;top:56px;height:2px;background:var(--line)}
+.line .band{position:absolute;top:36px;height:42px;background:var(--yellow);border-radius:8px;opacity:.9}
+.line .dot{position:absolute;top:44px;width:26px;height:26px;border-radius:50%;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.18);transform:translateX(-50%);background:#ccc center/cover;cursor:pointer;transition:transform .15s}
+.line .dot.lit,.line .dot:hover{transform:translateX(-50%) scale(1.25);z-index:3}
+.line .you{position:absolute;top:8px;transform:translateX(-50%);text-align:center;z-index:4}
+.line .you .pin{width:2px;height:70px;background:var(--teal);margin:0 auto}
+.line .you .tag{position:absolute;top:-4px;left:50%;transform:translate(-50%,-100%);background:var(--teal);color:#fff;font-size:12px;font-weight:600;padding:3px 8px;border-radius:999px;white-space:nowrap}
+.ticks{display:flex;justify-content:space-between} .ticks span{font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+input[type=range]{width:100%;accent-color:var(--teal);margin:10px 0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px} @media(max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--cream);border-radius:12px;padding:12px} .stat b{display:block;font-size:22px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.expect{margin-top:14px;border-left:4px solid var(--yellow);background:var(--yellow-soft);padding:12px 14px;border-radius:0 12px 12px 0}
+.expect ul{margin:8px 0 0;padding-left:18px} .expect li{margin:2px 0}
+#map{height:360px;border-radius:12px;border:1px solid var(--line);overflow:hidden}
+.pin-price{background:#fff;border:1.5px solid var(--ink);border-radius:999px;padding:3px 8px;font:500 12px var(--mono);white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.15);transition:transform .12s;transform-origin:center bottom}
+.pin-price.lit{background:var(--yellow);transform:scale(1.15);z-index:999!important}
+.pin-you{background:var(--teal);color:#fff;border-radius:999px;padding:4px 10px;font:600 12px var(--font);white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.leaflet-popup-content{font-family:var(--font);font-size:13.5px;margin:12px 14px} .leaflet-popup-content img{width:100%;height:120px;object-fit:cover;border-radius:8px;margin-bottom:6px;display:block}
+/* table */
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px} .tbl th{text-align:left;font:500 11.5px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:8px 8px;border-bottom:1px solid var(--line)}
+.tbl td{padding:9px 8px;border-bottom:1px solid var(--line);vertical-align:middle;font-variant-numeric:tabular-nums} .tbl tr:hover td,.tbl tr.lit td{background:var(--yellow-soft)}
+.tbl .num{text-align:right;font-family:var(--mono);white-space:nowrap} .tbl img,.tbl .ph{width:36px;height:36px;border-radius:50%;object-fit:cover;background:#ddd;display:inline-block;vertical-align:middle}
+.tbl .x{background:transparent;color:var(--muted);padding:4px 8px;border-radius:8px;font-size:16px;line-height:1} .tbl .x:hover{color:var(--red);background:#fff}
+.tblwrap{overflow:auto;-webkit-overflow-scrolling:touch}
+@media(max-width:700px){.tbl .hide-m{display:none}.tbl{font-size:12.5px}.tbl td{padding:8px 5px}.tbl th{padding:6px 5px}.tbl .dist{display:none}}
+/* drawer */
+.fab{position:fixed;right:16px;bottom:16px;z-index:40;box-shadow:0 6px 20px rgba(14,124,123,.35)}
+#drawer{position:fixed;top:0;right:0;height:100%;width:min(440px,100%);background:#fff;border-left:1px solid var(--line);box-shadow:-12px 0 40px rgba(31,42,46,.12);transform:translateX(105%);transition:transform .35s cubic-bezier(.2,.8,.2,1);z-index:60;padding:22px;overflow:auto}
+#drawer.open{transform:none} #scrim{position:fixed;inset:0;background:rgba(31,42,46,.25);z-index:55;display:none} #scrim.open{display:block}
+.report{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--cream);margin:14px 0}
+.report .row{display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px dashed var(--line);font-size:14px} .report .row:last-child{border:0}
+footer{margin-top:28px;color:var(--muted);font-size:12.5px;line-height:1.6}
+.banner{background:var(--red);color:#fff;text-align:center;padding:8px;font-weight:600;font-size:13px}
+.sr{position:absolute;left:-9999px}
+</style>
+</head>
+<body class="gated">
+<!--SAMPLE_BANNER-->
+<div id="gate" role="dialog" aria-labelledby="gate-h">
+  <div class="card">
+    <div class="label">Free, no sign up</div>
+    <h1 id="gate-h">Pick the perfect list price.</h1>
+    <p class="muted" style="margin:0 0 14px">Type your address. You get real recent sales near you and a price range you can trust. Nothing is saved.</p>
+    <div class="sugg">
+      <label class="sr" for="addr">Your address</label>
+      <input id="addr" type="text" autocomplete="off" placeholder="Start typing your street" inputmode="text">
+      <ul id="sugg-list" hidden></ul>
+    </div>
+    <p class="small muted" style="margin:10px 0 0">House numbers never show. Only streets and sold prices.</p>
+  </div>
+</div>
+
+<div id="tool">
+<div class="wrap">
+  <header class="top">
+    <div class="brand">Pick the perfect list price <small id="agent-line"></small></div>
+    <button class="ghost" id="change-addr" type="button">Change address</button>
+  </header>
+
+  <div class="grid two">
+    <section class="card" aria-labelledby="ss-h">
+      <div class="label">Your sweet spot</div>
+      <div class="big" id="sweet">&nbsp;</div>
+      <p class="muted small" id="sweet-why" style="margin:6px 0 0"></p>
+      <div class="line" id="line" aria-label="Price line of recent sales"></div>
+      <div class="ticks" id="ticks"></div>
+      <h3 style="margin-top:18px">Your price</h3>
+      <div style="display:flex;gap:10px;align-items:center;margin-top:8px">
+        <span class="mono muted">$</span><input id="price" type="text" inputmode="numeric" class="mono" aria-label="Your price">
+      </div>
+      <input id="slider" type="range" aria-label="Slide your price">
+      <div class="stats" id="stats"></div>
+      <div class="expect" id="expect" hidden></div>
+    </section>
+
+    <section class="card" aria-labelledby="home-h">
+      <div class="label">Your home</div>
+      <h2 id="home-h" style="margin-top:4px">
+        <span id="home-street"></span></h2>
+      <p class="muted small" style="margin:4px 0 12px">We guessed from homes near you. Fix anything that is off.</p>
+      <div class="chips" id="type-chips" role="group" aria-label="Home type"></div>
+      <div class="facts" style="margin-top:12px">
+        <label><span class="label">Sq ft</span><input id="f-sqft" type="number" min="300" step="10"></label>
+        <label><span class="label">Beds</span><input id="f-beds" type="number" min="0" step="1"></label>
+        <label><span class="label">Baths</span><input id="f-baths" type="number" min="0" step="0.5"></label>
+        <label><span class="label">Built</span><input id="f-year" type="number" min="1850" step="1"></label>
+      </div>
+      <div id="map" style="margin-top:16px" aria-label="Map of recent sales"></div>
+      <p class="muted small" style="margin:8px 0 0">Pins sit on the street, not the exact house. Tap a pin for the sale.</p>
+    </section>
+  </div>
+
+  <section class="card" style="margin-top:16px" aria-labelledby="comps-h">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap">
+      <div><div class="label">Your comps</div><h2 id="comps-h">Homes like yours that sold recently</h2></div>
+      <span class="muted small" id="comps-note"></span>
+    </div>
+    <div class="tblwrap">
+    <table class="tbl" id="tbl">
+      <thead><tr><th></th><th>Street</th><th class="hide-m">Area</th><th class="num">Bd / Ba</th><th class="num">Sq ft</th><th class="num hide-m">Built</th><th class="num">Sold</th><th class="num">$ / sq ft</th><th class="num hide-m">Days</th><th class="num hide-m">When</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table>
+    </div>
+    <p class="small muted" id="removed-note" style="margin:10px 0 0" hidden></p>
+  </section>
+
+  <footer id="foot"></footer>
+</div>
+</div>
+
+<button class="fab" id="open-drawer" type="button">Get your home value report</button>
+<div id="scrim"></div>
+<aside id="drawer" aria-labelledby="dr-h" aria-hidden="true">
+  <div style="display:flex;justify-content:space-between;align-items:center"><div class="label">Your report</div><button class="ghost" id="close-drawer" type="button" aria-label="Close">Close</button></div>
+  <h2 id="dr-h" style="margin-top:8px">Get your home value report</h2>
+  <p class="muted small" style="margin:6px 0 0">A short, written version of this page with the comps checked by hand, and the two or three things that would move your price. Free, no obligation.</p>
+  <div class="report" id="report"></div>
+  <a class="btn" id="text-btn" href="#" style="display:block;text-align:center;text-decoration:none">Text me the request</a>
+  <p class="small muted" id="text-fallback" style="margin:10px 0 0"></p>
+</aside>
+
+<script id="comps-data" type="application/json">/*COMPS_JSON*/</script>
+<script id="agent-data" type="application/json">/*AGENT_JSON*/</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(function(){
+'use strict';
+const COMPS = JSON.parse(document.getElementById('comps-data').textContent || '[]');
+const AGENT = JSON.parse(document.getElementById('agent-data').textContent || '{}');
+const $ = s => document.querySelector(s);
+const fmt$ = n => '$' + Math.round(n).toLocaleString('en-US');
+const fmtShort = n => n >= 1e6 ? '$' + (n/1e6).toFixed(2).replace(/0$/,'') + 'M' : '$' + Math.round(n/1e3) + 'K';
+const median = a => { if(!a.length) return 0; const s=[...a].sort((x,y)=>x-y); const m=s.length>>1; return s.length%2? s[m] : (s[m-1]+s[m])/2; };
+const quantile = (a,q) => { if(!a.length) return 0; const s=[...a].sort((x,y)=>x-y); const p=(s.length-1)*q, b=Math.floor(p), r=p-b; return s[b+1]!==undefined ? s[b]+r*(s[b+1]-s[b]) : s[b]; };
+const mean = a => a.length ? a.reduce((x,y)=>x+y,0)/a.length : 0;
+const km = (a,b) => { if(!a||!b||a.lat==null||b.lat==null) return null; const R=6371, dLat=(b.lat-a.lat)*Math.PI/180, dLng=(b.lng-a.lng)*Math.PI/180; const h=Math.sin(dLat/2)**2+Math.cos(a.lat*Math.PI/180)*Math.cos(b.lat*Math.PI/180)*Math.sin(dLng/2)**2; return 2*R*Math.asin(Math.sqrt(h)); };
+const monthsAgo = iso => { const d=new Date(iso); return (Date.now()-d.getTime())/2629800000; };
+const norm = s => String(s||'').toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+
+COMPS.forEach((c,i)=>{ c.id = i; c.ppsf = c.sqft ? c.sold/c.sqft : 0; });
+
+// ---------- agent / footer ----------
+$('#agent-line').textContent = AGENT.name ? `with ${AGENT.name}` : '';
+$('#foot').innerHTML = `${AGENT.name||''}${AGENT.brokerage? ' · '+AGENT.brokerage:''}${AGENT.dre? ' · DRE #'+AGENT.dre:''}${AGENT.phone? ' · '+AGENT.phone:''}<br>
+Sales are from the MLS, last six months. Street names only. This is a pricing guide, not an appraisal. If your home is listed with another broker, this is not a solicitation of that listing.`;
+
+// ---------- subject ----------
+const S = { street:'', typed:'', lat:null, lng:null, type:'', sqft:0, beds:0, baths:0, year:0 };
+let removed = new Set();
+let picked = [];
+
+// ---------- address suggestions ----------
+const streets = [...new Set(COMPS.map(c=>c.street).filter(Boolean))].sort();
+const subs = [...new Set(COMPS.map(c=>c.subdivision).filter(Boolean))].sort();
+const addr = $('#addr'), list = $('#sugg-list');
+let sel = -1, items = [];
+function suggest(q){
+  const n = norm(q).replace(/^\d+[a-z]?\s*/,'');       // ignore the house number they typed
+  items = [];
+  if(n.length){
+    for(const st of streets) if(norm(st).includes(n)) items.push({t:st, s:`${COMPS.filter(c=>c.street===st).length} recent sale${COMPS.filter(c=>c.street===st).length===1?'':'s'} on this street`, street:st});
+    for(const sb of subs) if(norm(sb).includes(n) && !items.some(i=>i.t===sb)) items.push({t:sb, s:'neighborhood', sub:sb});
+  }
+  items = items.slice(0,8);
+  list.innerHTML = items.map((i,k)=>`<li role="option" data-k="${k}">${i.t}<small>${i.s}</small></li>`).join('');
+  list.hidden = !items.length; sel = -1;
+}
+addr.addEventListener('input', e=>suggest(e.target.value));
+addr.addEventListener('keydown', e=>{
+  if(e.key==='ArrowDown'){ sel=Math.min(sel+1,items.length-1); paint(); e.preventDefault(); }
+  else if(e.key==='ArrowUp'){ sel=Math.max(sel-1,0); paint(); e.preventDefault(); }
+  else if(e.key==='Enter'){ e.preventDefault(); if(sel>=0) choose(items[sel]); else if(items.length) choose(items[0]); else choose({t:addr.value, free:true}); }
+});
+function paint(){ [...list.children].forEach((li,k)=>li.setAttribute('aria-selected', k===sel)); }
+list.addEventListener('click', e=>{ const li=e.target.closest('li'); if(li) choose(items[+li.dataset.k]); });
+async function choose(it){
+  S.typed = /\d/.test(addr.value) ? addr.value.trim() : it.t;
+  S.street = it.street || '';
+  S.sub = it.sub || '';
+  list.hidden = true;
+  // location: centroid of same-street sales, else neighborhood, else free lookup
+  let near = COMPS.filter(c=>c.lat!=null && (S.street ? c.street===S.street : S.sub ? c.subdivision===S.sub : false));
+  if(near.length){ S.lat = mean(near.map(c=>c.lat)); S.lng = mean(near.map(c=>c.lng)); }
+  else { S.lat = null; S.lng = null; geocodeFree(S.typed); }
+  // defaults from the nearest homes
+  const pool = (S.street ? COMPS.filter(c=>c.street===S.street) : []).length >= 2 ? COMPS.filter(c=>c.street===S.street) : (S.sub ? COMPS.filter(c=>c.subdivision===S.sub) : COMPS);
+  const typeCounts = {}; pool.forEach(c=>typeCounts[c.type]=(typeCounts[c.type]||0)+1);
+  S.type = Object.keys(typeCounts).sort((a,b)=>typeCounts[b]-typeCounts[a])[0] || COMPS[0].type;
+  const tp = pool.filter(c=>c.type===S.type);
+  S.sqft = Math.round(median(tp.map(c=>c.sqft))/10)*10; S.beds = Math.round(median(tp.map(c=>c.beds))); S.baths = Math.round(median(tp.map(c=>c.baths))*2)/2; S.year = Math.round(median(tp.map(c=>c.year)));
+  $('#home-street').textContent = S.street || S.sub || S.typed;
+  $('#f-sqft').value=S.sqft; $('#f-beds').value=S.beds; $('#f-baths').value=S.baths; $('#f-year').value=S.year;
+  removed = new Set(); userPrice = null;
+  document.body.classList.remove('gated');
+  recompute(); setTimeout(()=>{ if(map) map.invalidateSize(); },400);
+}
+async function geocodeFree(q){
+  try{
+    const r = await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&q='+encodeURIComponent(q + (AGENT.region? ', '+AGENT.region:'')), {headers:{'Accept':'application/json'}});
+    const j = await r.json(); if(j[0]){ S.lat=+j[0].lat; S.lng=+j[0].lon; recompute(); }
+  }catch(e){}
+}
+$('#change-addr').addEventListener('click', ()=>{ document.body.classList.add('gated'); addr.focus(); addr.select(); });
+addr.addEventListener('focus', ()=>suggest(addr.value));
+
+// ---------- type chips ----------
+const types = [...new Set(COMPS.map(c=>c.type))];
+$('#type-chips').innerHTML = types.map(t=>`<button type="button" class="chip" data-t="${t}" aria-pressed="false">${t}</button>`).join('');
+$('#type-chips').addEventListener('click', e=>{ const b=e.target.closest('.chip'); if(!b) return; S.type=b.dataset.t; removed=new Set(); userPrice=null; recompute(); });
+['sqft','beds','baths','year'].forEach(k=>$('#f-'+k).addEventListener('change', e=>{ S[k]=+e.target.value||0; removed=new Set(); userPrice=null; recompute(); }));
+
+// ---------- comps selection ----------
+function pickComps(){
+  let pool = COMPS.filter(c=>!removed.has(c.id) && c.type===S.type && c.sqft>0 && c.sold>0);
+  const bySize = (tol,bd) => pool.filter(c=>Math.abs(c.sqft-S.sqft)/S.sqft<=tol && Math.abs(c.beds-S.beds)<=bd);
+  let cand = bySize(.25,1); if(cand.length<6) cand = bySize(.4,2); if(cand.length<4) cand = pool;
+  const score = c => {
+    const d = km(S,c); const dist = d==null ? (c.street===S.street?0.2 : c.subdivision===S.sub?0.8 : 2.5) : d;
+    return dist*1.0 + monthsAgo(c.soldDate)*0.25 + Math.abs(c.sqft-S.sqft)/S.sqft*4 + Math.abs(c.beds-S.beds)*0.5;
+  };
+  cand.forEach(c=>{ c._score=score(c); c._km=km(S,c); });
+  return cand.sort((a,b)=>a._score-b._score).slice(0,12).sort((a,b)=>a.sold-b.sold);
+}
+
+// ---------- compute + render ----------
+let userPrice = null, map, markers = {}, youMarker;
+function recompute(){
+  picked = pickComps();
+  types.forEach(t=>{ const b=$(`.chip[data-t="${t}"]`); if(b) b.setAttribute('aria-pressed', t===S.type); });
+  if(!picked.length){ $('#sweet').textContent='No close sales'; $('#sweet-why').textContent='Try another home type or size.'; $('#tbl tbody').innerHTML=''; return; }
+  const pp = picked.map(c=>c.ppsf);
+  const q1=quantile(pp,.25), q3=quantile(pp,.75), md=median(pp);
+  const low = Math.round(q1*S.sqft/1000)*1000, high = Math.round(q3*S.sqft/1000)*1000;
+  $('#sweet').textContent = `${fmtShort(low)} to ${fmtShort(high)}`;
+  $('#sweet-why').textContent = `The middle half of ${picked.length} nearby sales, ${fmt$(q1)} to ${fmt$(q3)} per sq ft, times your ${S.sqft.toLocaleString()} sq ft.`;
+  if(userPrice==null) userPrice = Math.round(md*S.sqft/1000)*1000;
+  const minP = Math.min(picked[0].sold, low)*0.92, maxP = Math.max(picked[picked.length-1].sold, high)*1.08;
+  const sl=$('#slider'); sl.min=Math.floor(minP/1000)*1000; sl.max=Math.ceil(maxP/1000)*1000; sl.step=1000; sl.value=userPrice; $('#price').value=userPrice.toLocaleString('en-US');
+  renderLine(minP,maxP,low,high);
+  renderStats(low,high);
+  renderTable();
+  renderMap();
+  renderReport(low,high);
+}
+function x(v,minP,maxP){ return Math.max(1,Math.min(99,(v-minP)/(maxP-minP)*100)); }
+function renderLine(minP,maxP,low,high){
+  const L=$('#line');
+  L.innerHTML = `<div class="axis"></div><div class="band" style="left:${x(low,minP,maxP)}%;width:${x(high,minP,maxP)-x(low,minP,maxP)}%"></div>` +
+    picked.map(c=>`<div class="dot" data-id="${c.id}" title="${c.street} · ${fmt$(c.sold)}" style="left:${x(c.sold,minP,maxP)}%;${c.photo?`background-image:url('${c.photo}')`:`background:${tint(c)}`}"></div>`).join('') +
+    `<div class="you" style="left:${x(userPrice,minP,maxP)}%"><span class="tag">You ${fmtShort(userPrice)}</span><div class="pin"></div></div>`;
+  $('#ticks').innerHTML = [0,.25,.5,.75,1].map(t=>`<span>${fmtShort(minP+(maxP-minP)*t)}</span>`).join('');
+  L.querySelectorAll('.dot').forEach(d=>{ d.addEventListener('mouseenter',()=>lit(+d.dataset.id,true)); d.addEventListener('mouseleave',()=>lit(+d.dataset.id,false)); d.addEventListener('click',()=>{ const m=markers[d.dataset.id]; if(m) m.openPopup(); }); });
+}
+function tint(c){ const h = (norm(c.street).split('').reduce((a,ch)=>a+ch.charCodeAt(0),0)*37)%360; return `hsl(${h} 35% 62%)`; }
+function renderStats(low,high){
+  const p = userPrice;
+  const above = picked.filter(c=>c.sold>=p);
+  const medDom = median(picked.map(c=>c.dom));
+  const fast = above.filter(c=>c.dom<=medDom && c.sold>c.list);
+  const dom = above.length ? median(above.map(c=>c.dom)) : medDom;
+  $('#stats').innerHTML = `
+    <div class="stat"><span class="label">$ per sq ft</span><b>${fmt$(p/S.sqft)}</b></div>
+    <div class="stat"><span class="label">Sold for this or more</span><b>${above.length} <span class="muted small">of ${picked.length}</span></b></div>
+    <div class="stat"><span class="label">Of those, fast and over asking</span><b>${fast.length} <span class="muted small">of ${above.length}</span></b></div>
+    <div class="stat"><span class="label">Middle days to sell</span><b>${Math.round(dom)}</b></div>`;
+  const E=$('#expect');
+  if(p>high && above.length){
+    const facts=[];
+    const rest = picked.filter(c=>c.sold<p);
+    const yrs = mean(above.map(c=>c.year)) - (S.year || mean(rest.map(c=>c.year)));
+    const sq = mean(above.map(c=>c.sqft)) - S.sqft;
+    if(Math.abs(yrs)>=3) facts.push(`The homes that sold for ${fmtShort(p)} or more were built about ${Math.round(Math.abs(yrs))} years ${yrs>0?'later':'earlier'} than yours.`);
+    if(Math.abs(sq)>=100) facts.push(`They were about ${Math.round(Math.abs(sq)).toLocaleString()} sq ft ${sq>0?'bigger':'smaller'}.`);
+    const over = above.filter(c=>c.sold>c.list).length;
+    if(above.length) facts.push(`${over} of the ${above.length} went over asking, in a middle of ${Math.round(median(above.map(c=>c.dom)))} days.`);
+    E.innerHTML = `<b>Buyers will expect these at ${fmtShort(p)}</b><ul>
+      <li>Updated kitchen and baths</li><li>Newer roof, windows, or systems</li><li>Finished extra space: ADU, bonus room, or basement</li><li>A view, a larger lot, or a quiet street</li><li>Move in ready, nothing on the inspection list</li></ul>
+      <p class="small" style="margin:8px 0 0">${facts.slice(0,2).join(' ')}</p>`;
+    E.hidden=false;
+  } else if(p>high){
+    E.innerHTML = `<b>Nothing nearby has sold for ${fmtShort(p)}</b><p class="small" style="margin:6px 0 0">Buyers will expect an updated kitchen, newer roof and systems, finished extra space, or a view to get there.</p>`; E.hidden=false;
+  } else E.hidden=true;
+}
+$('#price').addEventListener('input', e=>{ const v=+String(e.target.value).replace(/[^0-9]/g,'')||0; if(v<1000) return; userPrice=v; $('#slider').value=userPrice; softLine(); });
+$('#price').addEventListener('blur', e=>{ e.target.value=userPrice.toLocaleString('en-US'); });
+$('#slider').addEventListener('input', e=>{ userPrice=+e.target.value; $('#price').value=userPrice.toLocaleString('en-US'); softLine(); });
+function softLine(){ const pp=picked.map(c=>c.ppsf); const low=Math.round(quantile(pp,.25)*S.sqft/1000)*1000, high=Math.round(quantile(pp,.75)*S.sqft/1000)*1000; const minP=+$('#slider').min, maxP=+$('#slider').max; const y=$('#line .you'); if(y){ y.style.left=x(userPrice,minP,maxP)+'%'; y.querySelector('.tag').textContent=`You ${fmtShort(userPrice)}`; } renderStats(low,high); renderReport(low,high); }
+
+function renderTable(){
+  $('#tbl tbody').innerHTML = picked.map(c=>`<tr data-id="${c.id}">
+    <td>${c.photo?`<img src="${c.photo}" alt="">`:`<span class="ph" style="background:${tint(c)}"></span>`}</td>
+    <td>${c.street}${c._km!=null?`<div class="muted small dist">${c._km<1?Math.round(c._km*1000)+' m':c._km.toFixed(1)+' km'} away</div>`:''}</td>
+    <td class="hide-m">${c.subdivision||''}</td>
+    <td class="num">${c.beds} / ${c.baths}</td><td class="num">${c.sqft.toLocaleString()}</td><td class="num hide-m">${c.year||''}</td>
+    <td class="num">${fmt$(c.sold)}${c.sold>c.list?'<div class="muted small">over asking</div>':''}</td><td class="num">${fmt$(c.ppsf)}</td>
+    <td class="num hide-m">${c.dom}</td><td class="num hide-m">${new Date(c.soldDate).toLocaleDateString('en-US',{month:'short',year:'2-digit'})}</td>
+    <td><button class="x" type="button" aria-label="Remove ${c.street}" data-rm="${c.id}">×</button></td></tr>`).join('');
+  $('#comps-note').textContent = `${picked.length} of up to 12. Newer and closer sales first.`;
+  $('#tbl tbody').querySelectorAll('tr').forEach(tr=>{ tr.addEventListener('mouseenter',()=>lit(+tr.dataset.id,true)); tr.addEventListener('mouseleave',()=>lit(+tr.dataset.id,false)); });
+  $('#removed-note').hidden = !removed.size; $('#removed-note').innerHTML = removed.size ? `${removed.size} removed. <a href="#" id="restore">Put them back</a>` : '';
+  const r=$('#restore'); if(r) r.addEventListener('click',e=>{e.preventDefault(); removed=new Set(); recompute();});
+}
+$('#tbl').addEventListener('click', e=>{ const b=e.target.closest('[data-rm]'); if(!b) return; removed.add(+b.dataset.rm); recompute(); });
+
+function lit(id,on){
+  document.querySelectorAll(`[data-id="${id}"]`).forEach(el=>el.classList.toggle('lit',on));
+  const m=markers[id]; if(m && m._icon){ m._icon.firstChild.classList.toggle('lit',on); }
+}
+
+// ---------- map ----------
+function renderMap(){
+  if(typeof L==='undefined'){ document.getElementById('map').innerHTML='<p class="muted small" style="padding:12px">The map could not load. Everything else works.</p>'; return; }
+  if(!map){
+    map = L.map('map',{scrollWheelZoom:false, attributionControl:true});
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19, attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>'}).addTo(map);
+  }
+  Object.values(markers).forEach(m=>map.removeLayer(m)); markers={};
+  if(youMarker){ map.removeLayer(youMarker); youMarker=null; }
+  const pts=[];
+  picked.filter(c=>c.lat!=null).forEach(c=>{
+    const m = L.marker([c.lat,c.lng],{icon:L.divIcon({className:'', html:`<div class="pin-price">${fmtShort(c.sold)}</div>`, iconAnchor:[22,12]})}).addTo(map);
+    m.bindPopup(`${c.photo?`<img src="${c.photo}" alt="">`:''}<b>${c.street}</b><br>${fmt$(c.sold)} · ${c.beds} bd ${c.baths} ba · ${c.sqft.toLocaleString()} sq ft<br><span style="color:#6A7478">${c.dom} days · sold ${new Date(c.soldDate).toLocaleDateString('en-US',{month:'short',day:'numeric'})}</span>`);
+    m.on('mouseover',()=>lit(c.id,true)); m.on('mouseout',()=>lit(c.id,false));
+    markers[c.id]=m; pts.push([c.lat,c.lng]);
+  });
+  if(S.lat!=null){ youMarker = L.marker([S.lat,S.lng],{icon:L.divIcon({className:'', html:`<div class="pin-you">You · ${S.street||S.sub||'your street'}</div>`, iconAnchor:[30,12]}), zIndexOffset:1000}).addTo(map); pts.push([S.lat,S.lng]); }
+  if(pts.length) map.fitBounds(pts,{padding:[30,30], maxZoom:15});
+}
+
+// ---------- drawer / report ----------
+function renderReport(low,high){
+  const top = [...picked].sort((a,b)=>a._score-b._score).slice(0,3);
+  $('#report').innerHTML = `<div class="label">Preview</div>
+    <div class="row"><span>Home</span><b>${S.typed||S.street}</b></div>
+    <div class="row"><span>Sweet spot</span><b>${fmtShort(low)} to ${fmtShort(high)}</b></div>
+    <div class="row"><span>Your price</span><b>${fmt$(userPrice)}</b></div>
+    <div class="row"><span>Best comps</span><b style="text-align:right">${top.map(c=>`${c.street} ${fmtShort(c.sold)}`).join('<br>')}</b></div>
+    <div class="row"><span>Comps used</span><b>${picked.length}</b></div>`;
+  const body = `Hi ${AGENT.first||AGENT.name||''}, I'd like my home value report for ${S.typed||S.street}. The tool shows ${fmtShort(low)} to ${fmtShort(high)}. I was thinking ${fmt$(userPrice)}.`;
+  const tel = (AGENT.sms||AGENT.phone||'').replace(/[^\d+]/g,'');
+  $('#text-btn').href = `sms:${tel}?&body=${encodeURIComponent(body)}`;
+  $('#text-fallback').textContent = tel ? `Or text ${AGENT.phone} with your address.` : '';
+}
+const dr=$('#drawer'), sc=$('#scrim');
+function openDr(){ dr.classList.add('open'); sc.classList.add('open'); dr.setAttribute('aria-hidden','false'); }
+function closeDr(){ dr.classList.remove('open'); sc.classList.remove('open'); dr.setAttribute('aria-hidden','true'); }
+$('#open-drawer').addEventListener('click',openDr); $('#close-drawer').addEventListener('click',closeDr); sc.addEventListener('click',closeDr);
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeDr(); });
+
+// ---------- gated preview: render something calm under the blur ----------
+(function preview(){
+  if(!COMPS.length) return;
+  const c = COMPS.slice().sort((a,b)=>a.sold-b.sold)[COMPS.length>>1];
+  S.street=c.street; S.type=c.type; S.sqft=c.sqft; S.beds=c.beds; S.baths=c.baths; S.year=c.year; S.lat=c.lat; S.lng=c.lng;
+  $('#home-street').textContent = c.street; $('#f-sqft').value=S.sqft; $('#f-beds').value=S.beds; $('#f-baths').value=S.baths; $('#f-year').value=S.year;
+  recompute();
+})();
+setTimeout(()=>addr.focus(),300);
+})();
+</script>
+</body>
+</html>
